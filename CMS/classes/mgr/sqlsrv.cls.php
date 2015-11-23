@@ -151,7 +151,7 @@ class DbSqlsrv
 	{
 		if(!($query = @sqlsrv_query($this->conn,$sql)))
 		{
-			$this->halt($sql.sqlsrv_errors(),, $sql);
+			$this->halt($sql.sqlsrv_errors(), $sql);
 		}
 		$this->querynum++;
 		return $query;
