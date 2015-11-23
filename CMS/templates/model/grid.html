@@ -1,0 +1,61 @@
+
+<thead>
+    <tr>
+        {{foreach from=$ModelData.fields.field item=rs}}
+        {{if $rs.displayinlist=="1"}}
+        <th>{{$rs.name}}</th>
+        {{/if}}
+        {{/foreach}}
+    </tr>
+</thead>
+<tbody>
+    {{foreach from=$result item=row}}
+    <tr>
+        {{foreach from=$row item=col key=key}}
+            {{if $key!="id"}}
+            {{foreach from=$ModelData.fields.field item=rs}}
+                {{if $key==$rs.key && $rs.displayinlist=="1"}}
+                    {{if $rs.gotodetail=="1"}}
+                    <td class="result_{{$rs.key}}"><a href="{{$PageName}}?action=edit&id={{$row.id}}&parenturl={{$parenturl}}">{{$col}}</a></td>
+                    {{else}}
+                    <td class="result_{{$rs.key}}">{{$col}}</td>
+                    {{/if}}
+                {{/if}}
+            {{/foreach}}
+            {{/if}}
+        {{/foreach}}
+    </tr>
+    {{/foreach}}
+</tbody>
+<script>
+    {{foreach from=$FListArr item=rs}}
+    flistarr{{$rs.key}} = new Array();
+    {{foreach from=$rs.value item=rsvalue}}
+    flistarr{{$rs.key}}[{{$rsvalue.id}}] = "{{$rsvalue.name}}";
+    {{/foreach}}
+        {{/foreach}}
+    
+            $(function () {
+                {{foreach from=$ModelData.fields.field item=rs}}
+                {{if $rs.type=="flist"}}
+                $(".result_{{$rs.key}}").each(function () {
+                    var str = $(this).text();
+                    var arr = str.split(",");
+                    var nstr = "";
+                    var isFirst = true;
+                    for (var i = 0; i < arr.length; i++) {
+                        if ($.trim(arr[i]) !="" ) {
+                            if (isFirst == false) {
+                                nstr = nstr + ",";
+                            }
+                            var id=Number(arr[i]);
+                            isFirst = false;
+                            nstr = nstr + flistarr{{$rs.key}}[id];
+                        }
+                    }
+                    $(this).text(nstr);
+                });
+                {{/if}}
+                {{/foreach}}
+            });
+</script>

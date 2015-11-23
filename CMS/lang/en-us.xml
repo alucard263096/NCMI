@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <index>
+    <logincannotbenull>Login name can not be empty</logincannotbenull>
+    <pswcannotbenull>Password can not be empty</pswcannotbenull>
+    <invaliduser>Invalid login name</invaliduser>
+    <incorrectpsw>Password incorrect</incorrectpsw>
+    <submittips>Press enter key or click the Submit button</submittips>
+    <systemlogin>CMS Login</systemlogin>
+  </index>
+  <model>
+    <list>List</list>
+    <add>Add</add>
+    <edit>Edit</edit>
+    <condition>Condition</condition>
+    <result>Result</result>
+    <search>Search</search>
+    <select>Select</select>
+    <deletesure>Do you want to delete?</deletesure>
+    <atleastselectone>Please select the item in result at least one</atleastselectone>
+    <contentedit>Content</contentedit>
+    <required>Required</required>
+    <from>From</from>
+    <to>To</to>
+    <viewupload>View Upload</viewupload>
+    <save>Save</save>
+    <savesuccess>Saved successfully</savesuccess>
+    <back>Back</back>
+    <backtolist>Back to List</backtolist>
+    <pleaseenter>Please enter or select </pleaseenter>
+    <uploaderror>Upload failed, please contact administrator </uploaderror>
+    <updateotherlang>Updte other language</updateotherlang>
+</model>
+  <common>
+    <login>Login</login>
+    <loginname>Login Name</loginname>
+    <password>Password</password>
+    <welcome>Welcome</welcome>
+    <gotofrontend>Go to frontend</gotofrontend>
+    <logout>Logout</logout>
+    <notice>Notice</notice>
+    <warning>Warning</warning>
+    <error>Error</error>
+    <ok>Ok</ok>
+    <close>close</close>
+    <cmsname>Footer Context Management System </cmsname>
+    <version>v1.0 </version>
+    <madeby>made by</madeby>
+    <detail>Details</detail>
+    <source>Source</source>
+  </common>
+  <user>
+    <loginnameduplicate>Login name has been used</loginnameduplicate>
+  </user>
+  <about>
+    <detail>
+      <i>A very easy used Context management system</i>
+      <i>Free for personal study and License for commercial use</i>
+      <i>The UI is based on Bootstrap 3.0</i>
+      <i>Welcome to contribute your idea to me</i>
+    </detail>
+    <source>
+      <i>&lt;a href="https://github.com/alucard263096/FooterCMS" target="_blank"&gt;Github Repository&lt;/a&gt;</i>
+      <i>License: GNU GPLv3 </i>
+    </source>
+    <welcomeuse>Welcome to use</welcomeuse>
+    <welcome>
+      <i>The Footer Context Management System v1.0 is made by Steve Cai, Copyright</i>
+      <i>Copyright 2014 - helpfooter.com </i>
+      <i>This is a very ease to use for that any developer want to deploy a CMS(Context Management System) for backend to do the context management.</i>
+      <i>
+        Why I said it is very ease? Because you just need to modify the configuration for the CMS in your apache service, add the Xml model just to finish the CMS.
+        Everything displayed in this is cms based on Xml. Such as the menu is just need to config the /model/menu.xml, the managed object is need to config the Xml like test.xml or user.xml.
+        You may get a prefect display in the browser. And I keep some interface for you can replace the JS script and other funtion in PHP. Please go to see the /Admin/user.php and /classes/modelmgr/UserXmlModel.cls.php for example.
+      </i>
+      <i>If you are an experienced developer, I think you can see the Xml and know what I do. Go ahead to contribute your idea to me in GitHub.</i>
+    </welcome>
+  </about>
+  <general>
+    <keyduplicate>Uni Key has been used</keyduplicate>
+  </general>
+</root>

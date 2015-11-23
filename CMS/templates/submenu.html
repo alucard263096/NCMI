@@ -1,0 +1,19 @@
+
+                <!-- left, vertical navbar -->
+                <div class="col-md-2 bootstrap-admin-col-left">
+                    <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
+                        {{foreach from=$SystemMenu.mainmenus.mainmenu item=rs}}
+                        {{if $rs.module==$MyModule}}
+                            {{foreach from=$rs.submenus.submenu item=sub}}
+                            {{if $sub.onlyadmin!="1"||$SysUser.is_admin=="Y"}}
+                        <li {{if $sub.id==$MyMenuId}}class ="active" {{/if}}>
+                            <a href="{{$rootpath}}{{$sub.url}}"><i class="glyphicon glyphicon-chevron-right"></i> {{$sub.name}}</a>
+                        </li>
+                            {{/if}}
+                            {{/foreach}}
+                        {{/if}}
+                        {{/foreach}}
+                    </ul>
+                </div>
+
+                

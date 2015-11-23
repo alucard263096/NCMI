@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <name>网站设置</name>
+  <tablename>tb_website_base</tablename>
+  <nolist>1</nolist>
+  <fields>
+    <field>
+      <name>网站名称</name>
+      <key>website_name</key>
+      <type>text</type>
+    </field>
+    <field>
+      <name>网页图标</name>
+      <key>favfile</key>
+      <type>upload</type>
+      <filetype>image</filetype>
+      <uploadmodule>fav</uploadmodule>
+    </field>
+    <field>
+      <name>联系人姓名</name>
+      <key>contacter</key>
+      <type>text</type>
+    </field>
+    <field>
+      <name>QQ</name>
+      <key>qq</key>
+      <type>text</type>
+    </field>
+    <field>
+      <name>邮箱</name>
+      <key>email</key>
+      <type>text</type>
+    </field>
+    <field>
+      <name>手机号码</name>
+      <key>mobile</key>
+      <type>text</type>
+    </field>
+    <field>
+      <name>电话</name>
+      <key>phone</key>
+      <type>text</type>
+    </field>
+    <field>
+      <name>Seo 标题</name>
+      <key>seo_title</key>
+      <type>longtext</type>
+    </field>
+    <field>
+      <name>Seo 关键字</name>
+      <key>seo_keywords</key>
+      <type>longtext</type>
+    </field>
+    <field>
+      <name>Seo 详情</name>
+      <key>seo_description</key>
+      <type>longtext</type>
+    </field>
+  </fields>
+</root>

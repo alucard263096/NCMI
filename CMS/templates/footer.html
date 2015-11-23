@@ -1,0 +1,173 @@
+</div>
+        </div>
+
+<!-- footer -->
+<div class="navbar navbar-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <footer role="contentinfo">
+                    <p class="left">{{$SysLang.common.cmsname}}{{$SysLang.common.version}}{{$SysLang.common.madeby}} <a href="mailto:alucrd263096@126.com">Steve Cai</a></p>
+                    <p class="right">&copy; 2014 <a href="http://www.helpfooter.com" target="_blank">Helpfooter.com</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="dialog_box" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog_boxtitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 id="dialog_boxtitle" class="modal-title">{{$SysLang.common.notice}}</h4>
+            </div>
+            <div class="modal-body">
+                <p id="dialog_boxmsg"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="dialog_boxBtnConfirm" class="btn btn-success">{{$SysLang.common.ok}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{$SysLang.common.close}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    $(function () {
+
+        $('.datepicker').datepicker({ format: "yyyy-mm-dd" });
+        $('.uniform_on').uniform();
+        $('.chzn-select').chosen();
+        $('.selectize-select').selectize();
+        $('.textarea-wysihtml5').wysihtml5({
+            stylesheets: [
+                'vendors/bootstrap-wysihtml5-rails-b3/vendor/assets/stylesheets/bootstrap-wysihtml5/wysiwyg-color.css'
+            ]
+        });
+
+        $('#rootwizard').bootstrapWizard({
+            'nextSelector': '.next',
+            'previousSelector': '.previous',
+            onNext: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                $('#rootwizard').find('.progress-bar').css('width', $percent + '%');
+                // If it's the last tab then hide the last button and show the finish instead
+                if ($current >= $total) {
+                    $('#rootwizard').find('.pager .next').hide();
+                    $('#rootwizard').find('.pager .finish').show();
+                    $('#rootwizard').find('.pager .finish').removeClass('disabled');
+                } else {
+                    $('#rootwizard').find('.pager .next').show();
+                    $('#rootwizard').find('.pager .finish').hide();
+                }
+            },
+            onPrevious: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                $('#rootwizard').find('.progress-bar').css('width', $percent + '%');
+                // If it's the last tab then hide the last button and show the finish instead
+                if ($current >= $total) {
+                    $('#rootwizard').find('.pager .next').hide();
+                    $('#rootwizard').find('.pager .finish').show();
+                    $('#rootwizard').find('.pager .finish').removeClass('disabled');
+                } else {
+                    $('#rootwizard').find('.pager .next').show();
+                    $('#rootwizard').find('.pager .finish').hide();
+                }
+            },
+            onTabShow: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                $('#rootwizard').find('.bar').css({ width: $percent + '%' });
+            }
+        });
+        $('#rootwizard .finish').click(function () {
+            alert('Finished!, Starting over!');
+            $('#rootwizard').find('a[href*=\'tab1\']').trigger('click');
+        });
+
+       
+    });
+
+    function infoDialog(msg) {
+        $("#dialog_boxtitle").text("{{$SysLang.common.notice}}");
+        showDialog(msg);
+    }
+
+    function warningDialog(msg) {
+        $("#dialog_boxtitle").text("{{$SysLang.common.warning}}");
+        showDialog(msg);
+    }
+
+    function errorDialog(msg) {
+        $("#dialog_boxtitle").text("{{$SysLang.common.error}}");
+        showDialog(msg);
+    }
+    function showDialog(msg) {
+        $("#dialog_boxBtnConfirm").hide();
+        $("#dialog_boxmsg").html(msg);
+        $("#dialog_box").modal('show');
+    }
+
+    function displayMutilLangPop(name, key) {
+        $("#dialog_boxtitle").text(name);
+        str = "<div class='row form-horizontal'>";
+        {{foreach from=$SysLangConfig.langs.lang item=rslang}}
+        str=str+"<div class='form-group col-md-12'>";
+        str=str+"<label class='col-md-2 control-label' >{{$rslang.name}}</label>";
+        str=str+"<div class='col-md-8'>";
+        str=str+"<textarea    class='form-control'  id='lang_"+key+"_{{$rslang.code}}' row='3' ></textarea>";
+        
+        str=str+"        </div>";
+        str=str+"    </div>    ";
+        {{/foreach}}
+            str = str+"</div>";
+
+        $("#dialog_boxmsg").html(str);
+            
+        {{foreach from=$SysLangConfig.langs.lang item=rslang}}
+        $("#lang_"+key+"_{{$rslang.code}}").val($("#content_"+key+"_{{$rslang.code}}").val());
+        {{/foreach}}
+
+            $("#dialog_boxBtnConfirm").unbind("click").click(function () {
+
+                {{foreach from=$SysLangConfig.langs.lang item=rslang}}
+                $("#content_"+key+"_{{$rslang.code}}").val($("#lang_"+key+"_{{$rslang.code}}").val());
+                {{/foreach}}
+
+                $("#dialog_box").modal('hide');
+                
+            });
+            $("#dialog_boxBtnConfirm").show();
+            $("#dialog_box").modal("show");
+
+    }
+
+    function confirmDialog(title, msg, confirmFunction) {
+
+        $("#dialog_boxtitle").text(title);
+        $("#dialog_boxmsg").html(msg);
+        $("#dialog_boxBtnConfirm").unbind("click").click(function () {
+
+            $("#dialog_box").modal('hide');
+            confirmFunction();
+        });
+        $("#dialog_boxBtnConfirm").show();
+        $("#dialog_box").modal("show");
+
+    }
+
+</script>
+
+    </body>
+</html>

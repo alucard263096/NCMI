@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <index>
+    <logincannotbenull>用户名不能为空</logincannotbenull>
+    <pswcannotbenull>密码不能为空</pswcannotbenull>
+    <invaliduser>无效用户</invaliduser>
+    <incorrectpsw>密码不正确</incorrectpsw>
+    <submittips>请输入回车键或者点击登录按钮进行登录</submittips>
+    <systemlogin>文本管理系统登录</systemlogin>
+  </index>
+  <model>
+    <list>列表</list>
+    <add>新增</add>
+    <edit>修改</edit>
+    <condition>搜索条件</condition>
+    <result>搜索结果</result>
+    <search>搜索</search>
+    <select>请选择</select>
+    <deletesure>是否确定删除？</deletesure>
+    <atleastselectone>请至少在搜索结果中选择一项</atleastselectone>
+    <contentedit>编辑内容</contentedit>
+    <required>必填项</required>
+    <from>起始日期</from>
+    <to>结束日期</to>
+    <viewupload>查看上传</viewupload>
+    <save>保存</save>
+    <savesuccess>保存成功</savesuccess>
+    <back>返回</back>
+    <backtolist>返回列表</backtolist>
+    <pleaseenter>请输入或选择</pleaseenter>
+    <uploaderror>上传失败，请联系管理员</uploaderror>
+    <updateotherlang>更新其它语言</updateotherlang>
+  </model>
+  <common>
+    <login>登录</login>
+    <loginname>用户名</loginname>
+    <password>密码</password>
+    <welcome>欢迎</welcome>
+    <gotofrontend>回到前台页面</gotofrontend>
+    <logout>退出系统</logout>
+    <notice>系统通知</notice>
+    <warning>系统警告</warning>
+    <error>系统错误</error>
+    <ok>确定</ok>
+    <close>关闭</close>
+    <cmsname>Footer 后台文本管理系统 </cmsname>
+    <version>v1.0 </version>
+    <madeby>开发者</madeby>
+    <detail>详情</detail>
+    <source>来源</source>
+  </common>
+  <user>
+    <loginnameduplicate>用户名已经被使用</loginnameduplicate>
+  </user>
+  <about>
+    <detail>
+      <i>一个非常容易使用的后台文本管理系统</i>
+      <i>免费供个人学习及授权的商业应用</i>
+      <i>基于Bootstrap 3.0的前端设计</i>
+      <i>欢迎开发者参与贡献</i>
+    </detail>
+    <source>
+      <i>&lt;a href="https://github.com/alucard263096/FooterCMS" target="_blank"&gt;Github Repository&lt;/a&gt;</i>
+      <i>授权协议: GNU GPLv3 </i>
+    </source>
+    <welcomeuse>欢迎使用</welcomeuse>
+    <welcome>
+      <i>Footer后台文本管理v1.0是由Steve Cai开发。</i>
+      <i>版权所有 2014 - helpfooter.com </i>
+      <i>这是一个对任何开发来说非常容易使用的CMS，我们可以轻松的利用Footer CMS进行后台文本管理系统的部署。</i>
+      <i>
+        为何我会说非常容易使用呢？因为你只需要配置一下系统配置文件并且配置XML数据模型文件即可完成整个CMS系统的部署。
+        任何显示在这个后台管理系统的事物都配置在XML文件中，例如菜单只需配置/model/menu.xml则可，前端数据管理对象则需要配置模型XML，你可以参考test.xml或者user.xml是如何配置一个Xml作为模型驱动。
+        另外在/lang中配置多语言的XML。然后，CMS系统就会自动完美的显示到你面前。同时，我保留了一些简单的接口，改写JS接口就可以针对每个模型特殊定制事件。同时，对于增删查改的后台PHP响应服务，则参考/Admin/user.php和/classes/modelmgr/UserXmlModel.cls.php作为例子研究吧。 
+      </i>
+      <i>我相信，只要你是一个有经验的开发者，那么应该很容易明白我做的事情。请立刻点击右上角参与你的贡献吧。</i>
+    </welcome>
+  </about>
+  <general>
+    <keyduplicate>唯一键已经被使用</keyduplicate>
+  </general>
+</root>

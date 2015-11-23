@@ -1,0 +1,65 @@
+<thead>
+    <tr>
+        <th></th>
+        {{foreach from=$ModelData.fields.field item=rs}}
+        {{if $rs.displayinlist=="1"}}
+        <th>{{$rs.name}}</th>
+        {{/if}}
+        {{/foreach}}
+    </tr>
+</thead>
+<tbody>
+    {{foreach from=$result item=row}}
+    <tr>
+        <td><input type="checkbox" class="RowSelect result_id" value="{{$row.id}}" /></td>
+        {{foreach from=$row item=col key=key}}
+            {{if $key!="id"}}
+            {{foreach from=$ModelData.fields.field item=rs}}
+                {{if $key==$rs.key && $rs.displayinlist=="1"}}
+                    <td class="result_{{$rs.key}}">                        
+                    {{if $rs.gotodetail=="1"}}
+                    <a href="{{$PageName}}?action=edit&id={{$row.id}}">                        
+                    {{/if}}
+
+                    {{if $rs.type=="upload" && $rs.filetype=="image"}}
+                    <img src="{{$uploadpath}}/{{$rs.uploadmodule}}/{{$col}}" alt="ÔÝÎÞÍ¼Æ¬" style="height:50px;" />
+                    {{else}}
+                    {{$col}}
+                    {{/if}}
+                    {{if $rs.gotodetail=="1"}}
+                    </a>
+                    {{/if}}
+                    </td>
+                {{/if}}
+            {{/foreach}}
+            {{/if}}
+        {{/foreach}}
+    </tr>
+    {{/foreach}}
+</tbody>
+
+<script>
+            $(function () {
+                {{foreach from=$ModelData.fields.field item=rs}}
+                {{if $rs.type=="flist"}}
+                $(".result_{{$rs.key}}").each(function () {
+                    var str = $(this).text();
+                    var arr = str.split(",");
+                    var nstr = "";
+                    var isFirst = true;
+                    for (var i = 0; i < arr.length; i++) {
+                        if ($.trim(arr[i]) !="" ) {
+                            if (isFirst == false) {
+                                nstr = nstr + ",";
+                            }
+                            var id=Number(arr[i]);
+                            isFirst = false;
+                            nstr = nstr + flistarr{{$rs.key}}[id];
+                        }
+                    }
+                    $(this).text(nstr);
+                });
+                {{/if}}
+                {{/foreach}}
+            });
+</script>

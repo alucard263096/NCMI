@@ -1,0 +1,257 @@
+{{include  file="$smarty_root/header.html" }}
+
+                <!-- content -->
+                <div class="col-md-10">
+
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="page-header bootstrap-admin-content-title">
+                                <h1>{{$ModelData.name}} - {{$SysLang.model.list}}</h1>
+                                {{foreach from=$ModelData.options.option item=rs}}
+                                    {{if $rs.search=="1"}}
+                                        {{if $rs.type=="link"}}    
+                                    <a href="{{$rs.link}}" class="action">
+                                        <button {{if $rs.id!=""}}id="{{$rs.id}}"{{/if}} class="btn btn-success">{{$rs.name}}</button>
+                                    </a>
+                                        {{elseif $rs.type=="function"}}
+                                    <a href="javascript:{{$rs.function}}" class="action">
+                                        <button {{if $rs.id!=""}}id="{{$rs.id}}"{{/if}} class="btn btn-success">{{$rs.name}}</button>
+                                    </a>
+                                        {{/if}}                                 
+                                    {{/if}} 
+                                {{/foreach}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="text-muted bootstrap-admin-box-title">{{$SysLang.model.condition}}</div>
+                                </div>
+                                <div class="bootstrap-admin-panel-content">
+                                    <div class="row form-horizontal">
+                                        {{foreach from=$ModelData.fields.field item=rs}}
+                                        {{if $rs.search=="1"}}
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-4 control-label" >{{$rs.name}}</label>
+                                            {{if $rs.type=="text" || $rs.type=="longtext" || $rs.type=="html"}}
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="condition_{{$rs.key}}">
+                                            </div>
+                                            {{elseif $rs.type=="datetime"}}
+                                            <div class="col-md-8">
+                                                <div class="col-md-5" style="padding:0"><input type="text" class="form-control datepicker" id="condition_{{$rs.key}}_from" placeholder="{{$SysLang.model.from}}"></div>
+                                                <div class="col-md-2" style="padding:3px;text-align:center">-</div>
+                                                <div class="col-md-5" style="padding:0"><input type="text" class="form-control datepicker" id="condition_{{$rs.key}}_to" placeholder="{{$SysLang.model.to}}"></div>
+                                            </div>                                                     
+                                            {{elseif $rs.type=="fkey"}}
+                                            <div class="col-md-8">
+                                                <select id="condition_{{$rs.key}}" class="form-control selectize-select">
+                                                    <option value="0">--{{$SysLang.model.select}}--</option>
+                                                    {{foreach from=$rs.options item=rsoption}}
+                                                    <option value="{{$rsoption.id}}">{{$rsoption.name}}</option>
+                                                    {{/foreach}}
+                                                </select>
+                                            </div>                                       
+                                            {{elseif $rs.type=="select" }}
+                                            <div class="col-md-8">
+                                                <select id="condition_{{$rs.key}}" class="form-control selectize-select">
+                                                    <option value="no-value">--{{$SysLang.model.select}}--</option>
+                                                    {{foreach from=$rs.options.option item=rsoption}}
+                                                    <option value="{{$rsoption.value}}">{{$rsoption.name}}</option>
+                                                    {{/foreach}}
+                                                </select>
+                                            </div>
+                                            {{/if}}
+                                        </div>
+                                        {{/if}}
+                                        {{/foreach}}
+                                    </div>
+                                    <hr />
+                                    <div class="text-right">
+                                        <button class="btn btn-info" id="btnSearch"><i class="glyphicon glyphicon-refresh glyphicon-white"></i> {{$SysLang.model.search}}</button>
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="text-muted bootstrap-admin-box-title">{{$SysLang.model.result}}</div>
+                                </div>
+                                <div class="bootstrap-admin-panel-content">
+                                    <table class="datatable table table-striped table-bordered" id="searchResult">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                {{foreach from=$ModelData.fields.field item=rs}}
+                                                    {{if $rs.displayinlist=="1"}}
+                                                    <th>{{$rs.name}}</th>
+                                                    {{/if}}
+                                                {{/foreach}}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+<script type="text/javascript" src="{{$rootpath}}/js/myjs.js"></script>
+{{foreach from=$ModelData.javascripts.javascript item=rs}}
+{{if $rs.search=="1"}}
+<script type="text/javascript" src="{{$rootpath}}/js/myjs/{{$rs.filename}}"></script>
+{{/if}}
+{{/foreach}}
+{{foreach from=$ModelData.csss.css item=rs}}
+{{if $rs.search=="1"}}
+<link href="{{$rootpath}}/js/myjs/{{$rs.filename}}" rel='stylesheet' />
+{{/if}}
+{{/foreach}}
+<script>
+    var ds=null;
+    $(document).ready(function(){
+        myjs_listPageLoad();
+    });
+    
+    {{foreach from=$FListArr item=rs}}
+    flistarr{{$rs.key}} = new Array();
+    {{foreach from=$rs.value item=rsvalue}}
+    flistarr{{$rs.key}}[{{$rsvalue.id}}] = "{{$rsvalue.name}}";
+    {{/foreach}}
+    {{/foreach}}
+
+    
+    $(function () {
+
+
+
+        $("#btnSearch").click(function () {
+            
+            $("#btnSearch").prop("disabled","disabled");
+            var json={
+                "action":"search"
+                {{foreach from=$ModelData.fields.field item=rs}}
+                    {{if $rs.search=="1"}}
+                        {{if $rs.type=="datetime" }}
+                        ,"{{$rs.key}}_from":$("#condition_{{$rs.key}}_from").val()
+                        ,"{{$rs.key}}_to":$("#condition_{{$rs.key}}_to").val()
+                        {{else}}
+                        ,"{{$rs.key}}":$("#condition_{{$rs.key}}").val()
+                        {{/if}}
+                    {{/if}}
+                {{/foreach}}
+                };
+                 json= myjs_searchClick(json);
+
+        $("#searchResult").load("{{$PageName}}",json,function(data){
+
+            myjs_afterResultLoad();
+            
+            $("#btnSearch").prop("disabled","");
+            if(ds!=null){
+                var oldwidth=$("#searchResult").width();
+                ds.fnDestroy();
+                ds=$('#searchResult').dataTable({"bRetrieve": true,
+                    "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
+                    "sPaginationType": "bootstrap",
+                    "oLanguage": {
+                        "sLengthMenu": "_MENU_ records per page"
+                    }
+                });
+                ds.fnAdjustColumnSizing(); 
+                $("#searchResult").width(oldwidth);
+            }else{
+                ds=$('#searchResult').dataTable({"bRetrieve": true,
+                    "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
+                    "sPaginationType": "bootstrap",
+                    "oLanguage": {
+                        "sLengthMenu": "_MENU_ records per page"
+                    }
+                });
+                ds.fnAdjustColumnSizing();
+            }
+            });
+        });
+    });
+    function addNew(){
+        self.location='{{$PageName}}?action=add';
+    }
+
+    function btnDeleteInList(){
+       
+        var isGo=deleteValidate();
+        if(isGo==false){
+            return;
+        }
+
+        confirmDialog("{{$SysLang.common.notice}}","{{$SysLang.model.deletesure}}",function(){
+                var idlist="0";
+                $("#searchResult input:checkbox:checked.RowSelect").each(function(){
+                    idlist+=","+$(this).val();
+                });
+                if(idlist!="0"){
+                    $.post("{{$PageName}}",{"action":"delete","idlist":idlist},function(data){
+                        
+                        if(myjs_afterdelete(data)==false){
+                            return;
+                        }
+
+                        if(data=="success")
+                        {
+                            $("#btnSearch").click();
+                        }
+                        else
+                        {
+                            errorDialog(data);
+                        }
+			
+                    });
+                }
+            });
+    }
+    function deleteValidate(){
+        var message="";
+
+        var idlist="0";
+        $("#searchResult input:checkbox:checked.RowSelect").each(function(){
+            idlist+=","+$(this).val();
+        });
+        if(idlist=="0"){
+            message+="<p>{{$SysLang.model.atleastselectone}}</p>";
+        }
+        message+myjs_delevalidate();
+
+        if(message!=""){
+            //infoDialog(message);
+            warningDialog(message);
+            return false;
+        }
+
+
+        return true;
+
+    }
+
+     
+
+   
+
+</script>
+
+ {{include  file="$smarty_root/footer.html" }}

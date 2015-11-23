@@ -1,0 +1,68 @@
+{{include  file="$smarty_root/header.html" }}
+
+                <!-- content -->
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="page-header bootstrap-admin-content-title">
+                                <h1>{{$SysLang.common.cmsname}}{{$SysLang.common.version}}</h1>
+                                <a href="https://github.com/alucard263096/FooterCMS" class="action btn">
+                                    Go to GitHub &raquo;
+                                </a>
+                                <!--<a href="https://github.com/alucard263096/FooterCMS" class="action">
+                                    <button class="btn btn-success">Contribute Now</button>
+                                </a>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="text-muted bootstrap-admin-box-title">{{$SysLang.common.detail}}</div>
+                                </div>
+                                <div class="bootstrap-admin-panel-content">
+                                    <ul>
+                                        {{foreach from=$SysLang.about.detail.i item=rs}}
+                                        <li>{{$rs}}</li>
+                                        {{/foreach}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="text-muted bootstrap-admin-box-title">{{$SysLang.common.source}}</div>
+                                </div>
+                                <div class="bootstrap-admin-panel-content">
+                                    <ul>                                        
+                                        {{foreach from=$SysLang.about.source.i item=rs}}
+                                        <li>{{$rs}}</li>
+                                        {{/foreach}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="text-muted bootstrap-admin-box-title">{{$SysLang.about.welcomeuse}} {{$SysLang.common.cmsname}}{{$SysLang.common.version}}</div>
+                                </div>
+                                <div class="bootstrap-admin-panel-content">
+                                    {{foreach from=$SysLang.about.welcome.i item=rs}}
+                                    <p>{{$rs}}</p>
+                                    {{/foreach}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                </div>
+
+ {{include  file="$smarty_root/footer.html" }}

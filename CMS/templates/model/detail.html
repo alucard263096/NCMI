@@ -1,0 +1,392 @@
+{{include  file="$smarty_root/header.html" }}
+
+                <!-- content -->
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="page-header bootstrap-admin-content-title">
+                                <h1>{{$ModelData.name}} - {{if $action=="add"}}{{$SysLang.model.add}}{{else}}{{$SysLang.model.edit}}{{/if}}</h1>                                
+                                {{if $parenturl==""}}
+                                {{foreach from=$ModelData.options.option item=rs}}                                
+                                    {{if $rs.detail=="1"}}
+                                        {{if $rs.type=="link"}}    
+                                    <a href="{{$rs.link}}" class="action">
+                                        <button {{if $rs.id!=""}}id="{{$rs.id}}"{{/if}} class="btn btn-success">{{$rs.name}}</button>
+                                    </a>
+                                        {{elseif $rs.type=="function"}}
+                                    <a href="javascript:{{$rs.function}}" class="action">
+                                        <button {{if $rs.id!=""}}id="{{$rs.id}}"{{/if}} class="btn btn-success">{{$rs.name}}</button>
+                                    </a>
+                                        {{/if}}                                 
+                                    {{/if}} 
+                                {{/foreach}}
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="text-muted bootstrap-admin-box-title">{{$SysLang.model.contentedit}}</div>
+                                </div>
+                                <div class="bootstrap-admin-panel-content">
+                                    <div class="row form-horizontal">
+                                        {{foreach from=$ModelData.fields.field item=rs}}                                        
+                                        {{if $rs.type=="text"  }}
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-4 control-label" >{{$rs.name}}</label>
+                                            <div class="col-md-6">
+                                                {{if $rs.ismutillang=="1"}}
+                                                {{foreach from=$SysLangConfig.langs.lang item=rslang}}
+                                                <input type="{{if $rslang.code==$SysLangCode}}text{{else}}hidden{{/if}}" {{if $action!="add" and $rs.disableindetail=="1" }}disabled="disabled" {{/if}} class="form-control" value="{{foreach from=$rs.value item=rsval}}{{if $rslang.code==$rsval.code}}{{$rsval.value}}{{/if}}{{/foreach}}" id="content_{{$rs.key}}_{{$rslang.code}}" {{if $rs.notnull=="1" }} placeholder="{{$SysLang.model.required}}" {{/if}} />
+                                                {{/foreach}}
+                                                <button {{if $action!="add" and $rs.disableindetail=="1" }}disabled="disabled" {{/if}} onclick="displayMutilLangPop('{{$rs.name}}','{{$rs.key}}')" class="btn btn-xs btn-link">{{$SysLang.model.updateotherlang}}</button>
+                                                {{else}}
+                                                <input type="text" {{if $action!="add" and $rs.disableindetail=="1"}}disabled="disabled"{{/if}} class="form-control" value="{{$rs.value}}" id="content_{{$rs.key}}" {{if $rs.notnull=="1" }} placeholder="{{$SysLang.model.required}}" {{/if}} />
+                                                {{/if}}
+                                            </div>
+                                        </div>                                            
+                                        {{elseif $rs.type=="password"}}
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-4 control-label">{{$rs.name}}</label>
+                                            <div class="col-md-8">
+                                                <input type="password" class="form-control" value="{{$rs.value}}" id="content_{{$rs.key}}" {{if $rs.notnull=="1" }} placeholder="必填项" {{/if}} />
+                                            </div>
+                                        </div>                
+                                        {{elseif $rs.type=="longtext"}}
+                                        <div class="form-group col-md-12">
+                                            <label class="col-md-2 control-label" >{{$rs.name}}</label>
+                                            <div class="col-md-10">                                                
+                                                {{if $rs.ismutillang=="1"}}
+                                                {{foreach from=$SysLangConfig.langs.lang item=rslang}}
+                                                <textarea rows="5" {{if $action!="add" and $rs.disableindetail=="1" }}disabled="disabled" {{/if}} class="form-control {{if $rslang.code!=$SysLangCode}}hide{{/if}}"  id="content_{{$rs.key}}_{{$rslang.code}}" {{if $rs.notnull=="1" }} placeholder="{{$SysLang.model.required}}" {{/if}} >{{foreach from=$rs.value item=rsval}}{{if $rslang.code==$rsval.code}}{{$rsval.value}}{{/if}}{{/foreach}}</textarea>
+                                                {{/foreach}}
+                                                <button {{if $action!="add" and $rs.disableindetail=="1" }}disabled="disabled" {{/if}} onclick="displayMutilLangPop('{{$rs.name}}','{{$rs.key}}')" class="btn btn-xs btn-link">{{$SysLang.model.updateotherlang}}</button>
+                                                {{else}}
+                                                <textarea rows="5" class="form-control" {{if $action!="add" and $rs.disableindetail=="1" }}disabled="disabled" {{/if}} id="content_{{$rs.key}}"  {{if $rs.notnull=="1" }} placeholder="{{$SysLang.model.required}}" {{/if}} >{{$rs.value}}</textarea>
+                                                {{/if}}
+                                            </div>
+                                        </div>                                            
+                                        {{elseif $rs.type=="html"}}
+                                        <div class="form-group col-md-12">
+                                            <label class="col-md-2 control-label" >{{$rs.name}}</label>
+                                            <div class="col-md-10">
+                                                <textarea id="content_{{$rs.key}}" class="ckeditor">{{$rs.value}}</textarea>
+                                            </div>
+                                        </div>                                            
+                                        {{elseif $rs.type=="datetime"}}
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-4 control-label" >{{$rs.name}}</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control datepicker" {{if $action!="add" and $rs.disableindetail=="1"}}disabled="disabled"{{/if}} id="content_{{$rs.key}}" value="{{$rs.value}}" {{if $rs.notnull=="1" }} placeholder="{{$SysLang.model.required}}" {{/if}} />
+                                            </div>
+                                        </div>                                            
+                                        {{elseif $rs.type=="number"}}
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-4 control-label" >{{$rs.name}}</label>
+                                            <div class="col-md-8">
+                                                <input type="number" class="form-control" {{if $action!="add" and $rs.disableindetail=="1"}}disabled="disabled"{{/if}} value="{{$rs.value}}" id="content_{{$rs.key}}"  {{if $rs.notnull=="1" }} placeholder="{{$SysLang.model.required}}" {{/if}} />
+                                            </div>
+                                        </div>                                            
+                                        {{elseif $rs.type=="check"}}
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-4 control-label" >{{$rs.name}}</label>
+                                            <div class="col-md-8">
+                                                <input id="content_{{$rs.key}}" type="checkbox" {{if $action!="add" and $rs.disableindetail=="1"}}disabled="disabled"{{/if}}  {{if $rs.value=="Y"}}checked{{/if}} data-on-label="<i class='glyphicon glyphicon-ok glyphicon-white'></i>" data-offlabel="<i class='glyphicon glyphicon-remove'></i>" />
+                                            </div>
+                                        </div>                                                      
+                                        {{elseif $rs.type=="upload"}}
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-4 control-label" >{{$rs.name}}</label>
+                                            <div class="col-md-8">
+                                                <input  {{if $action!="add" and $rs.disableindetail=="1"}}disabled="disabled"{{/if}}  class="form-control uniform_on" name="file_{{$rs.key}}" id="file_{{$rs.key}}" onchange="upload('{{$rs.key}}', '{{$rs.uploadmodule}}')" type="file" />
+                                                {{if $rs.filetype=="image"}}
+                                                <br />
+                                                <img id="view_{{$rs.key}}" {{if $rs.value=="" }}style="display:none;height:100px;" {{else}}style="height:100px;" src="{{$uploadpath}}/{{$rs.uploadmodule}}/{{$rs.value}}" {{/if}} />
+                                                {{else}}
+                                                <a id="view_{{$rs.key}}" target="_blank" {{if $rs.value==""}}style="display:none;"{{else}}href="{{$uploadpath}}/{{$rs.uploadmodule}}/{{$rs.value}}"{{/if}} >{{$SysLang.model.viewupload}}</a>
+                                                {{/if}}
+                                                <input class="uniform_on" type="hidden" id="content_{{$rs.key}}" value="{{$rs.value}}" />
+                                            </div>
+                                        </div>                                                 
+                                        {{elseif $rs.type=="fkey"}}
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-4 control-label">{{$rs.name}}</label>
+                                            <div class="col-md-8">
+                                                <select {{if $action!="add" and $rs.disableindetail=="1"}}disabled="disabled"{{/if}}  id="content_{{$rs.key}}" class="form-control selectize-select">
+                                                    <option value="0">--{{$SysLang.model.select}}--</option>
+                                                    {{foreach from=$rs.options item=rsoption}}
+                                                    <option {{if $rs.value==$rsoption.id}}selected{{/if}} value="{{$rsoption.id}}">{{$rsoption.name}}</option>
+                                                    {{/foreach}}
+                                                </select>
+                                            </div>
+                                        </div>                                              
+                                        {{elseif $rs.type=="flist"}}
+                                        <div class="form-group col-md-12">
+                                            <label class="col-md-2 control-label">
+                                            {{$rs.name}}
+                                                <input class="uniform_on multicheckbox flist_all" type="checkbox" ref="flist_{{$rs.key}}" />
+                                            </label>
+                                            <div class="col-md-10">
+                                                {{foreach from=$FListArr item=flrs}}
+                                                {{if $rs.key==$flrs.key}}
+                                                {{foreach from=$flrs.value item=rsvalue}}
+                                                <div class="col-md-3">
+                                                    <input class='uniform_on multicheckbox flist_{{$rs.key}}' type='checkbox' id='flist_{{$rs.key}}_{{$rsvalue.id}}' value='{{$rsvalue.id}}'> {{$rsvalue.name}}
+                                                </div>
+                                                {{/foreach}}
+                                                {{/if}}
+                                                {{/foreach}}
+                                                <input type="hidden" class="form-control"  id="content_{{$rs.key}}" value="{{$rs.value}}"  />
+                                            </div>
+                                        </div>                            
+                                        {{elseif $rs.type=="select"}}
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-4 control-label" >{{$rs.name}}</label>
+                                            <div class="col-md-8">
+                                                <select {{if $action!="add" and $rs.disableindetail=="1"}}disabled="disabled"{{/if}}  id="content_{{$rs.key}}" class="form-control selectize-select">
+                                                    <option value="no-value">--{{$SysLang.model.select}}--</option>
+                                                    {{foreach from=$rs.options.option item=rsoption}}
+                                                <option {{if $rs.value==$rsoption.value or ($action=="add" and $rsoption.default=='1' )}}selected{{/if}} value="{{$rsoption.value}}">{{$rsoption.name}}</option>
+                                                    {{/foreach}}
+                                                </select>
+                                            </div>
+                                        </div>                                           
+                                        {{elseif $action!="add" and $rs.type=="grid"}}
+                                        <div class="form-group col-md-12">
+                                            <label class="col-md-2 control-label">{{$rs.name}}{{$SysLang.model.list}}</label>
+                                            <div class="col-md-10">
+                                                <button class="btn btn-primary btnGridAdd" onclick="window.location.href='{{$rootpath}}/{{$rs.newitemurl}}{{$id}}&parenturl={{$request_url_encode}}';"><i class="glyphicon glyphicon-plus  glyphicon-white"></i> {{$SysLang.model.add}}{{$rs.name}}</button>
+                                                <table class="table table-striped" id="content_{{$rs.key}}"></table>
+                                            </div>
+                                        </div>             
+                                        {{/if}}
+                                        {{/foreach}}
+                                    </div>
+                                    <hr />
+                                    <div class="text-center">
+                                        <input type="hidden" id="content_id" value="{{$id}}" />
+                                        <button class="btn btn-primary" id="btnSave"><i class="glyphicon glyphicon-pencil  glyphicon-white"></i> {{$SysLang.model.save}}</button>
+                                        {{if $parenturl!=""}}
+                                        <button class="btn btn-primary" onclick="window.location.href='{{$parenturl}}';"><i class="glyphicon glyphicon-list  glyphicon-white"></i> {{$SysLang.model.back}}</button>
+                                        {{elseif $ModelData.nolist!="1"}}<button class="btn btn-primary" id="btnReturnToList"><i class="glyphicon glyphicon-list  glyphicon-white"></i> {{$SysLang.model.backtolist}}</button>
+                                        {{/if}}
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+<script type="text/javascript" src="{{$rootpath}}/js/myjs.js"></script>
+{{foreach from=$ModelData.javascripts.javascript item=rs}}
+{{if $rs.detail=="1"}}
+<script type="text/javascript" src="{{$rootpath}}/js/myjs/{{$rs.filename}}"></script>
+{{/if}}
+{{/foreach}}
+{{foreach from=$ModelData.csss.css item=rs}}
+{{if $rs.detail=="1"}}
+<link href="{{$rootpath}}/js/myjs/{{$rs.filename}}" rel='stylesheet' />
+{{/if}}
+{{/foreach}}
+<script>
+
+    {{foreach from=$FListArr item=rs}}
+    flistarr{{$rs.key}} = new Array();
+    {{foreach from=$rs.value item=rsvalue}}
+    flistarr{{$rs.key}}[{{$rsvalue.id}}] = "{{$rsvalue.name}}";
+    {{/foreach}}
+    {{/foreach}}
+
+    $(document).ready(function(){
+        myjs_detailPageLoad();
+    });
+    $(function () {
+        // CKEditor Full
+        $('textarea.ckeditor').ckeditor({
+            height: '200px',
+            allowedContent: true,
+            filebrowserBrowseUrl : '{{$rootpath}}/vendors/ckeditor/ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl : '{{$rootpath}}/vendors/ckeditor/ckfinder/ckfinder.html?Type=Images',
+            filebrowserFlashBrowseUrl : '{{$rootpath}}/vendors/ckeditor/ckfinder/ckfinder.html?Type=Flash',
+            filebrowserUploadUrl : '{{$rootpath}}/vendors/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl : '{{$rootpath}}/vendors/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : '{{$rootpath}}/vendors/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+        });
+        $(".flist_all").change(function(){
+            var check=$(this).prop("checked");
+            var fck=$(this).attr("ref");
+            $("."+fck).prop("checked",check);
+            if(check){
+                $("."+fck).parent().addClass("checked");
+            }else{
+                $("."+fck).parent().removeClass("checked");
+            }
+        });
+
+        $('input[type="checkbox"],[type="radio"]').not('#create-switch').not('.multicheckbox').bootstrapSwitch();
+        $('#btnSave').click(save);
+        $("#btnReturnToList").click(function(){
+            self.location="{{$PageName}}";
+        });
+        {{foreach from=$ModelData.fields.field item=rs}}
+        {{if $action!="add" and $rs.type=="grid"}}
+        var json_{{$rs.key}}={"parenturl":"{{$request_url_encode}}"};
+        $("#content_{{$rs.key}}").load("{{$rootpath}}/{{$rs.api}}{{$id}}",json_{{$rs.key}},function(data){
+        });
+        {{elseif $action!="add" and $rs.type=="flist"}}
+        var fliststr{{$rs.key}} = $("#content_{{$rs.key}}").val();
+        var arr = fliststr{{$rs.key}}.split(",");
+        for (var i = 0; i < arr.length; i++) {
+            if ($.trim(arr[i]) != "") {
+                $("#flist_{{$rs.key}}_" + $.trim(arr[i])).prop("checked", "checked");
+            }
+        }
+        {{/if}}
+        {{/foreach}}
+
+            {{if $ParentKey!=""}}
+            $("#content_{{$ParentKey}}").val({{$ParentId}});
+            {{/if}}
+
+
+    });
+
+    function save(){
+
+        {{foreach from=$ModelData.fields.field item=rs}}
+        {{if  $rs.type=="flist"}}
+        var isfirst = true;
+        var fliststr{{$rs.key}} ="";
+        $(".flist_{{$rs.key}}:checked").each(function () {
+            if (isfirst == false) {
+                fliststr{{$rs.key}} = fliststr{{$rs.key}} + ",";
+            }
+            isfirst = false;
+            fliststr{{$rs.key}} = fliststr{{$rs.key}} + $(this).val();
+        });
+        $("#content_{{$rs.key}}").val(fliststr{{$rs.key}});
+        {{/if}}
+        {{/foreach}}
+
+            myjs_beforeSave();
+
+        var isGo=saveValidate();
+        if(isGo==false){
+            return;
+        }
+        $("#btnSave").prop("disabled","disabled");
+        var json={action:"save"
+        ,"primary_id":"{{$id}}"
+        {{foreach from=$ModelData.fields.field item=rs}}
+        {{if $rs.type!="grid"}}
+            {{if $rs.type=="check"}}
+            ,"{{$rs.key}}":$("#content_{{$rs.key}}").prop("checked")?"Y":"N"
+            {{elseif $rs.ismutillang=="1"}}
+            {{foreach from=$SysLangConfig.langs.lang item=rslang}}
+            ,"{{$rs.key}}_{{$rslang.code}}":$("#content_{{$rs.key}}_{{$rslang.code}}").val()
+            {{/foreach}}
+            {{else}}
+            ,"{{$rs.key}}":$("#content_{{$rs.key}}").val()=="no-value"?"":$("#content_{{$rs.key}}").val()
+            {{/if}}
+        {{/if}}
+        {{/foreach}}
+        };
+            json=myjs_saveClick(json);
+
+            $.post("{{$PageName}}",json,function(data){
+                
+                $("#btnSave").prop("disabled","");
+                if(myjs_aftersave(data)==false){
+                    return;
+                }
+                if(data.substring(0,5)=="right"){
+                    id=data.substring(5,data.length);
+                    infoDialog("{{$SysLang.model.savesuccess}}");
+                    {{if $parenturl!=""}}
+                    self.location='{{$parenturl}}';
+                    {{elseif $action=="add"}}
+                    self.location='{{$PageName}}?action=edit&id='+id;
+                    {{/if}}
+                }else{
+                        errorDialog(data);
+                }
+        });
+
+            
+    }
+
+            
+
+    function saveValidate() {
+
+        var message="";
+        {{foreach from=$ModelData.fields.field item=rs}}
+        {{if $rs.notnull=="1" }}
+            {{if $rs.type=="fkey"}}
+            if($("#content_{{$rs.key}}").val()=="0"){
+                message+="<p>{{$SysLang.model.pleaseenter}}<span style='color:red;'>{{$rs.name}}</span></p>";
+            }
+            {{elseif $rs.ismutillang=="1"}}
+            {{foreach from=$SysLangConfig.langs.lang item=rslang}}
+            if($("#content_{{$rs.key}}_{{$rslang.code}}").val()==""){
+                message+="<p>{{$SysLang.model.pleaseenter}}<span style='color:red;'>{{$rs.name}}（{{$rslang.name}}）</span></p>";
+            }    
+            {{/foreach}}
+            {{else}}
+            if($("#content_{{$rs.key}}").val()=="no-value"
+                ||$("#content_{{$rs.key}}").val()==""){
+                message+="<p>{{$SysLang.model.pleaseenter}}<span style='color:red;'>{{$rs.name}}</span></p>";
+            }
+            {{/if}}
+        {{/if}}
+        {{/foreach}}
+
+       message+=myjs_savevalidate();
+
+       if(message!=""){
+           //infoDialog(message);
+           warningDialog(message);
+           return false;
+       }
+       return true;
+    }
+
+
+    function upload(key,module) {
+        
+        $.ajaxFileUpload
+		(
+			{
+			    "url": '{{$rootpath}}/fileupload.php?module=' + module+"&field=file_" + key,
+			    "secureuri": false,
+			    "fileElementId": "file_" + key,
+			    "dataType": 'text',
+			    "success": function (data, status) {
+			        if (data.substring(0, 7) == "success") {
+			            str = data.substring(7, data.length);
+			            $("#content_" + key).val(str.split('|~~|')[1]);
+
+			            $("#view_" + key).attr("href", "{{$uploadpath}}/"+module+"/" + str.split('|~~|')[1])
+                            .attr("src", "{{$uploadpath}}/"+module+"/" + str.split('|~~|')[1])
+                            .show();
+                        
+			        } else {
+			            errorDialog("{{$SysLang.model.uploaderror}}");
+			        }
+			    },
+			    "error": function (data, status, e) {
+			        errorDialog("{{$SysLang.model.uploaderror}}");
+			    }
+			}
+		);
+    }
+    function addNew(){
+        self.location='{{$PageName}}?action=add';
+    }
+
+</script>
+
+ {{include  file="$smarty_root/footer.html" }}

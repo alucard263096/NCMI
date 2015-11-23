@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{$Title}}</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap Docs -->
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/css/bootstrap.min.css">
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/css/bootstrap-theme.min.css">
+
+        <!-- Bootstrap Admin Theme -->
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/css/bootstrap-admin-theme.css">
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/css/bootstrap-admin-theme-change-size.css">
+
+        <!-- Custom styles -->
+        <style type="text/css">
+            @font-face {
+                font-family: Ubuntu;
+                src: url('fonts/Ubuntu-Regular.ttf');
+            }
+            .bs-docs-masthead{
+                background-color: #6f5499;
+                background-image: linear-gradient(to bottom, #563d7c 0px, #6f5499 100%);
+                background-repeat: repeat-x;
+            }
+            .bs-docs-masthead{
+                padding: 0;
+            }
+            .bs-docs-masthead h1{
+                color: #fff;
+                font-size: 40px;
+                margin: 0;
+                padding: 34px 0;
+                text-align: center;
+            }
+            .bs-docs-masthead a:hover{
+                text-decoration: none;
+            }
+            .meritoo-logo a{
+                background-color: #fff;
+                border: 1px solid rgba(66, 139, 202, 0.4);
+                display: block;
+                font-family: Ubuntu;
+                padding: 22px 0;
+                text-align: center;
+            }
+            .meritoo-logo a,
+            .meritoo-logo a:hover,
+            .meritoo-logo a:focus{
+                text-decoration: none;
+            }
+            .meritoo-logo a img{
+                display: block;
+                margin: 0 auto;
+            }
+            .meritoo-logo a span{
+                color: #4e4b4b;
+                font-size: 18px;
+            }
+            .row-urls{
+                margin-top: 4px;
+            }
+            .row-urls .col-md-6{
+                text-align: center;
+            }
+            .row-urls .col-md-6 a{
+                font-size: 14px;
+            }
+            .panel-bootstrap-switch,
+            .panel-bootstrap-switch .bootstrap-admin-panel-content{
+                float: left;
+            }
+            .panel-bootstrap-switch .buttons-group{
+                margin-top: 0;
+            }
+            .panel-bootstrap-switch .buttons-group .has-switch{
+                margin-top: 10px;
+            }
+            .panel-bootstrap-switch #btn-destroy-switch,
+            .panel-bootstrap-switch #btn-create{
+                margin-top: 5px;
+            }
+            .panel-bootstrap-switch #btn-destroy-switch{
+                margin-bottom: 10px;
+            }
+            .panel-bootstrap-switch .bootstrap-switch-footer{
+                margin-top: 20px;
+            }
+        </style>
+        <!-- Vendors -->
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/vendors/bootstrap-datepicker/css/datepicker.css">
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/css/datepicker.fixes.css">
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/vendors/uniform/themes/default/css/uniform.default.min.css">
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/css/uniform.default.fixes.css">
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/vendors/chosen.min.css">
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/vendors/selectize/dist/css/selectize.bootstrap3.css">
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/vendors/bootstrap-wysihtml5-rails-b3/vendor/assets/stylesheets/bootstrap-wysihtml5/core-b3.css">
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/css/DT_bootstrap.css">        
+        
+        <!-- Bootstrap Switch (the On-Off buttons) -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <link rel="stylesheet" href="{{$rootpath}}/vendors/bootstrap-switch/build/css/bootstrap3/bootstrap-switch.min.css">
+        <link rel="stylesheet" href="{{$rootpath}}/css/bootstrap-switch-small.css">
+
+        <!-- Bootstrap Switch (the On-Off buttons). Theme's styles. -->
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/css/bootstrap-theme-switch.min.css">
+
+        
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="js/html5shiv.js"></script>
+        <script type="text/javascript" src="js/respond.min.js"></script>
+        <![endif]-->
+
+
+
+        <script type="text/javascript" src="{{$rootpath}}/js/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/js/twitter-bootstrap-hover-dropdown.min.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/js/bootstrap-admin-theme-change-size.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/vendors/uniform/jquery.uniform.min.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/vendors/chosen.jquery.min.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/vendors/selectize/dist/js/standalone/selectize.min.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/vendors/bootstrap-wysihtml5-rails-b3/vendor/assets/javascripts/bootstrap-wysihtml5/wysihtml5.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/vendors/bootstrap-wysihtml5-rails-b3/vendor/assets/javascripts/bootstrap-wysihtml5/core-b3.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/vendors/twitter-bootstrap-wizard/jquery.bootstrap.wizard-for.bootstrap3.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/vendors/boostrap3-typeahead/bootstrap3-typeahead.min.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/vendors/datatables/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/js/DT_bootstrap.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/vendors/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/vendors/ckeditor/adapters/jquery.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/vendors/ckeditor/ckfinder/ckfinder.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/js/ajaxfileupload.js"></script>
+        <script type="text/javascript" src="{{$rootpath}}/vendors/bootstrap-switch/build/js/bootstrap-switch.min.js"></script>
+
+    </head>
+    <body class="bootstrap-admin-with-small-navbar">
+
+
+
+        {{include  file="$smarty_root/navbar.html" }}
+
+        {{include  file="$smarty_root/mainmenu.html" }}
+
+        <div class="container">            
+            <!-- left, vertical navbar & content -->
+            <div class="row">
+                {{include  file="$smarty_root/submenu.html" }}
