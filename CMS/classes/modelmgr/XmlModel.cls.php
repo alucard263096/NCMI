@@ -209,7 +209,9 @@ class XmlModel
 	
 	$sql=$this->GetSearchSql($request);
 	$query = $dbMgr->query($sql);
-	$result = $dbMgr->fetch_array_all($query); 
+	$result = $dbMgr->fetch_array_all($query);
+
+	$result=ClearData($result);
 
     $smartyMgr->assign("ModelData",$this->XmlData);
     $smartyMgr->assign("PageName",$this->PageName);
@@ -217,11 +219,26 @@ class XmlModel
     $smartyMgr->display(ROOT.'/templates/model/result.html');
 
   }
+
+  public function ClearData($result){
+	$count=count($result);
+	for($i=0;$i<$count;$i++){
+		for($j=0;$j<count($result[$i]);$j++){
+			$value=$result[$i][$j];
+			if($value instanceof DateTime){
+				$result[$i][$j]= $value->format('Y-m-d H:i:s');
+			}
+		}
+	}
+	return $result;
+  }
+
   public function ShowGridResult($dbMgr,$smartyMgr,$request,$parenturl){
 	$sql=$this->GetSearchSql($request);
 
 	$query = $dbMgr->query($sql);
 	$result = $dbMgr->fetch_array_all($query); 
+	$result=ClearData($result);
 	
 	$this->GetFListData($dbMgr,$smartyMgr);
     $smartyMgr->assign("ModelData",$this->XmlData);
@@ -314,6 +331,9 @@ class XmlModel
 			if($value["type"]=="grid"){
 				continue;
 			}
+			if($value["nosave"]=="1"){
+				continue;
+			}
 			$sql=$sql.",".$value["key"]."";
 		}
 		$sql=$sql.",created_date,created_user,updated_date,updated_user ) values (";
@@ -323,6 +343,9 @@ class XmlModel
 			
 			if($value["type"]=="grid"
 			||$value["ismutillang"]){
+				continue;
+			}
+			if($value["nosave"]=="1"){
 				continue;
 			}
 
@@ -349,7 +372,10 @@ class XmlModel
 			||$value["type"]=="password"){
 				continue;
 			}
-			$sql=$sql.", ".$value["key"]."='".parameter_filter($request[$value["key"]])."'";
+			if($value["nosave"]=="1"){
+				continue;
+			}
+			$sql=$sql.", ".$value["key"]."='".mysql_real_escape_string($request[$value["key"]])."'";
 		}
 		$sql=$sql." where id=$id";
 		$query = $dbMgr->query($sql);
