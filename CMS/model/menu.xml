@@ -54,5 +54,23 @@
         </submenu>
       </submenus>
     </mainmenu>
+    <mainmenu>
+      <module>baseinfo</module>
+      <name>基础数据管理</name>
+      <submenus>
+        <submenu>
+          <id>hospital_list</id>
+          <name>医院列表</name>
+          <url>/BaseInfo/hospital.php</url>
+        </submenu>
+        <submenu>
+          <id>hospital_add</id>
+          <name>医院新增</name>
+          <url>/BaseInfo/hospital.php?action=add</url>
+          <onlyadmin>1</onlyadmin>
+        </submenu>
+      </submenus>
+    </mainmenu>
+    
   </mainmenus>
 </root>
