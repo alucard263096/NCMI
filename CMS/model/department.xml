@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <root>
-  <name>医院</name>
-  <tablename>tb_hospital</tablename>
+  <name>科室</name>
+  <tablename>tb_department</tablename>
   <searchcondition>r_main.status&lt;&gt;'D'</searchcondition>
   <fields>
     <field>
@@ -20,62 +20,26 @@
       <displayinlist>1</displayinlist>
     </field>
     <field>
-      <name>简称</name>
-      <key>shortname</key>
-      <type>text</type>
-      <notnull>1</notnull>
-    </field>
-    <field>
-      <name>排序</name>
-      <key>seq</key>
-      <type>text</type>
-      <displayinlist>1</displayinlist>
-    </field>
-    <field>
-      <name>图标</name>
-      <key>photo</key>
-      <type>upload</type>
-      <filetype>image</filetype>
-      <uploadmodule>hospital</uploadmodule>
-      <displayinlist>1</displayinlist>
-      <gotodetail>1</gotodetail>
-      <notnull>1</notnull>
-    </field>
-    <field>
-      <name>地址</name>
-      <key>address</key>
+      <name>描述</name>
+      <key>description</key>
       <type>longtext</type>
-      <notnull>1</notnull>
     </field>
     <field>
-      <name>邮政编码</name>
-      <key>postcode</key>
-      <type>text</type>
-      <notnull>1</notnull>
-    </field>
-    <field>
-      <name>网址</name>
-      <key>website</key>
-      <type>longtext</type>
-      <notnull>1</notnull>
-    </field>
-    <field>
-      <name>邮箱</name>
-      <key>email</key>
-      <type>longtext</type>
-      <notnull>1</notnull>
-    </field>
-    <field>
-      <name>介绍</name>
-      <key>content</key>
-      <type>html</type>
-    </field>
-    <field>
-      <name>点击数</name>
-      <key>count</key>
-      <type>text</type>
+      <name>相关科目</name>
+      <key>subcategory_list</key>
+      <type>fkey</type>
+      <fmutillang>1</fmutillang>
+      <displayfield>name</displayfield>
+      <tablename>
+        (select b.id,a.name+'-'+b.name from tb_category a
+        inner join tb_subcategory b on a.id=b.category_id
+        where a.status&lt;&gt;'D' 
+        and b.status&lt;&gt;'D')</tablename>
+      <ntbname>r_subcategory</ntbname>
+      <condition>1=1 </condition>
+      <search>1</search>
       <displayinlist>1</displayinlist>
-      <nosave>1</nosave>
+      <notnull>1</notnull>
     </field>
     <field>
       <name>备注</name>

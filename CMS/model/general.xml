@@ -15,6 +15,12 @@
       <disableindetail>1</disableindetail>
     </field>
     <field>
+      <name>排序</name>
+      <key>seq</key>
+      <type>text</type>
+      <displayinlist>1</displayinlist>
+    </field>
+    <field>
       <name>名称</name>
       <key>name</key>
       <type>text</type>

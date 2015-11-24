@@ -69,6 +69,50 @@
           <url>/BaseInfo/hospital.php?action=add</url>
           <onlyadmin>1</onlyadmin>
         </submenu>
+        <submenu>
+          <id>college_list</id>
+          <name>专科列表</name>
+          <url>/BaseInfo/college.php</url>
+        </submenu>
+        <submenu>
+          <id>college_add</id>
+          <name>专科新增</name>
+          <url>/BaseInfo/college.php?action=add</url>
+          <onlyadmin>1</onlyadmin>
+        </submenu>
+        <submenu>
+          <id>department_list</id>
+          <name>科室列表</name>
+          <url>/BaseInfo/department.php</url>
+        </submenu>
+        <submenu>
+          <id>department_add</id>
+          <name>科室新增</name>
+          <url>/BaseInfo/department.php?action=add</url>
+          <onlyadmin>1</onlyadmin>
+        </submenu>
+        <submenu>
+          <id>category_list</id>
+          <name>疾病大类列表</name>
+          <url>/BaseInfo/category.php</url>
+        </submenu>
+        <submenu>
+          <id>category_add</id>
+          <name>疾病大类新增</name>
+          <url>/BaseInfo/category.php?action=add</url>
+          <onlyadmin>1</onlyadmin>
+        </submenu>
+        <submenu>
+          <id>subcategory_list</id>
+          <name>疾病小类列表</name>
+          <url>/BaseInfo/subcategory.php</url>
+        </submenu>
+        <submenu>
+          <id>subcategory_add</id>
+          <name>疾病小类新增</name>
+          <url>/BaseInfo/subcategory.php?action=add</url>
+          <onlyadmin>1</onlyadmin>
+        </submenu>
       </submenus>
     </mainmenu>
     
