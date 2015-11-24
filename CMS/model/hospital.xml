@@ -14,12 +14,6 @@
       <search>1</search>
     </field>
     <field>
-      <name>排序</name>
-      <key>seq</key>
-      <type>text</type>
-      <displayinlist>1</displayinlist>
-    </field>
-    <field>
       <name>简称</name>
       <key>shortname</key>
       <type>text</type>

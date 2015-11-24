@@ -5,6 +5,18 @@
   <searchcondition>r_main.status&lt;&gt;'D'</searchcondition>
   <fields>
     <field>
+      <name>疾病大类</name>
+      <key>category_id</key>
+      <type>fkey</type>
+      <displayfield>name</displayfield>
+      <notnull>1</notnull>
+      <tablename>tb_category</tablename>
+      <ntbname>r_category</ntbname>
+      <condition>r_category.status='A'  </condition>
+      <displayinlist>1</displayinlist>
+      <search>1</search>
+    </field>
+    <field>
       <name>名称</name>
       <key>name</key>
       <type>text</type>

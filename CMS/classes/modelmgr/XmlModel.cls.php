@@ -211,7 +211,7 @@ class XmlModel
 	$query = $dbMgr->query($sql);
 	$result = $dbMgr->fetch_array_all($query);
 
-	$result=ClearData($result);
+	$result=$this->ClearData($result);
 
     $smartyMgr->assign("ModelData",$this->XmlData);
     $smartyMgr->assign("PageName",$this->PageName);
@@ -238,7 +238,7 @@ class XmlModel
 
 	$query = $dbMgr->query($sql);
 	$result = $dbMgr->fetch_array_all($query); 
-	$result=ClearData($result);
+	$result=$this->ClearData($result);
 	
 	$this->GetFListData($dbMgr,$smartyMgr);
     $smartyMgr->assign("ModelData",$this->XmlData);

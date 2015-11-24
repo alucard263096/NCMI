@@ -34,7 +34,7 @@
 			if($_REQUEST["language"]!=""){
 				$_SESSION[SESSIONNAME]["LangCode"]=$_REQUEST["language"];
 			}
-			WindowRedirect($CONFIG['smarty']['rootpath']."/Admin/dashboard.php");
+			WindowRedirect($CONFIG['smarty']['rootpath']."/Admin/about.php");
 			exit();
 		}
 	}

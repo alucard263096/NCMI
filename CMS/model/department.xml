@@ -5,6 +5,18 @@
   <searchcondition>r_main.status&lt;&gt;'D'</searchcondition>
   <fields>
     <field>
+      <name>专科</name>
+      <key>college_id</key>
+      <type>fkey</type>
+      <displayfield>name</displayfield>
+      <notnull>1</notnull>
+      <tablename>tb_college</tablename>
+      <ntbname>r_college</ntbname>
+      <condition>r_college.status='A'  </condition>
+      <displayinlist>1</displayinlist>
+      <search>1</search>
+    </field>
+    <field>
       <name>名称</name>
       <key>name</key>
       <type>text</type>
@@ -25,19 +37,17 @@
       <type>longtext</type>
     </field>
     <field>
-      <name>相关科目</name>
+      <name>相关疾病科目</name>
       <key>subcategory_list</key>
-      <type>fkey</type>
-      <fmutillang>1</fmutillang>
+      <type>flist</type>
       <displayfield>name</displayfield>
       <tablename>
-        (select b.id,a.name+'-'+b.name from tb_category a
+        (select b.id,a.name+'-'+b.name name from tb_category a
         inner join tb_subcategory b on a.id=b.category_id
         where a.status&lt;&gt;'D' 
         and b.status&lt;&gt;'D')</tablename>
       <ntbname>r_subcategory</ntbname>
       <condition>1=1 </condition>
-      <search>1</search>
       <displayinlist>1</displayinlist>
       <notnull>1</notnull>
     </field>
