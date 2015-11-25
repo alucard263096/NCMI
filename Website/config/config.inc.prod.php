@@ -1,15 +1,12 @@
 <?php
 
 #[Root]
-$CONFIG['rootpath']		= '/NCMI/CMS';  
+$CONFIG['rootpath']		= '/NCMI';  
 //$CONFIG['charset']		= 'utf-8'; 
-$CONFIG['Title']             = '家庭医生服务系统';
-$CONFIG['URL']="http://www.myhkdoc.com/NCMI/CMS";
-$CONFIG['lang']="zh-cn";//en-us
-$CONFIG["frontendurl"]="http://www.myhkdoc.com/NCMI/";
-$CONFIG["SessionName"]="NCMICMS";
+$CONFIG['URL']="http://www.myhkdoc.com/NCMI";
+$CONFIG["SessionName"]="NCMI";
 
-$CONFIG['smarty']['rootpath']		= '/NCMI/CMS'; 
+$CONFIG['smarty']['rootpath']		= '/NCMI'; 
 $CONFIG['solution_configuration']='debug';
 $CONFIG['server']		= 'windows';   //windows or linux
 
@@ -36,7 +33,7 @@ $CONFIG['database']['psw']		= 'hack2rpc';
 
 
 #[File upload]
-$CONFIG['fileupload']['upload_path']	= "../upload";
+$CONFIG['fileupload']['upload_path']	= "upload";
 $CONFIG['fileupload']['nt_check']		= false;
 $CONFIG['fileupload']['ftp_url']		= "127.0.0.1";
 $CONFIG['fileupload']['ftp_user']		= "anonymous";

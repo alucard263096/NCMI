@@ -6,7 +6,7 @@ $CONFIG['rootpath']		= '/NCMI/CMS';
 $CONFIG['Title']             = '家庭医生服务系统';
 $CONFIG['URL']="http://localhost/NCMI/CMS";
 $CONFIG['lang']="zh-cn";//en-us
-$CONFIG["frontendurl"]="http://localhost/NCMI/";
+$CONFIG["frontendurl"]="http://localhost/NCMI/Website";
 $CONFIG["SessionName"]="NCMICMS";
 
 $CONFIG['smarty']['rootpath']		= '/NCMI/CMS'; 

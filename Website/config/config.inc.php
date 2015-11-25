@@ -1,15 +1,12 @@
 <?php
 
 #[Root]
-$CONFIG['rootpath']		= '/NCMI/CMS';  
+$CONFIG['rootpath']		= '/NCMI/Website';  
 //$CONFIG['charset']		= 'utf-8'; 
-$CONFIG['Title']             = '家庭医生服务系统';
-$CONFIG['URL']="http://localhost/NCMI/CMS";
-$CONFIG['lang']="zh-cn";//en-us
-$CONFIG["frontendurl"]="http://localhost/NCMI/";
-$CONFIG["SessionName"]="NCMICMS";
+$CONFIG['URL']="http://localhost/NCMI/Website";
+$CONFIG["SessionName"]="NCMI";
 
-$CONFIG['smarty']['rootpath']		= '/NCMI/CMS'; 
+$CONFIG['smarty']['rootpath']		= '/NCMI/Website'; 
 $CONFIG['solution_configuration']='debug';
 $CONFIG['server']		= 'windows';   //windows or linux
 
