@@ -11,6 +11,7 @@ class DoctorRecomXmlModel extends XmlModel{
 			$sql="insert into tb_doctor_recom (id) value (1) ";
 			$dbMgr->query($sql);
 		}
+		$_REQUEST["id"]=1;
 	}
 
 	public function Save($dbMgr,$request,$sysuser){
