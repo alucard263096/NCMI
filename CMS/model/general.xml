@@ -48,11 +48,14 @@
       <name>新增</name>
       <type>function</type>
       <function>addNew()</function>
+      <search>1</search>
+      <detail>1</detail>
     </option>
     <option>
       <name>删除</name>
       <type>function</type>
       <function>btnDeleteInList()</function>
+      <search>1</search>
     </option>
   </options>
 </root>
