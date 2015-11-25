@@ -21,3 +21,6 @@ nytprof.out
 *.suo
 logs/
 templates_c/
+upload/
+
+
