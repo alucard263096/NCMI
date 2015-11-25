@@ -52,7 +52,7 @@
     </field>
     <field>
       <name>性别</name>
-      <key>status</key>
+      <key>sextual</key>
       <type>select</type>
       <displayinlist>1</displayinlist>
       <options>
@@ -70,7 +70,7 @@
     </field>
     <field>
       <name>职位</name>
-      <key>name</key>
+      <key>position</key>
       <type>text</type>
       <displayinlist>1</displayinlist>
       <notnull>1</notnull>
@@ -78,7 +78,7 @@
     </field>
     <field>
       <name>特长</name>
-      <key>name</key>
+      <key>expert</key>
       <type>text</type>
       <displayinlist>1</displayinlist>
       <notnull>1</notnull>

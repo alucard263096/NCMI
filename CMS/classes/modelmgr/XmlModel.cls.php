@@ -375,7 +375,7 @@ class XmlModel
 			if($value["nosave"]=="1"){
 				continue;
 			}
-			$sql=$sql.", ".$value["key"]."='".mysql_real_escape_string($request[$value["key"]])."'";
+			$sql=$sql.", ".$value["key"]."='".parameter_filter($request[$value["key"]])."'";
 		}
 		$sql=$sql." where id=$id";
 		$query = $dbMgr->query($sql);
