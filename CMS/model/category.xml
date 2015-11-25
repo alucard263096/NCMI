@@ -29,7 +29,7 @@
       <key>subcategorylist</key>
       <type>grid</type>
       <api>BaseInfo/subcategory.php?action=getgrid&amp;category_id=</api>
-      <newitemurl>BaseInfo/subcategory.php?action=add</newitemurl>
+      <newitemurl>BaseInfo/subcategory.php?action=add&amp;key=category_id&amp;id=</newitemurl>
     </field>
     <field>
       <name>备注</name>

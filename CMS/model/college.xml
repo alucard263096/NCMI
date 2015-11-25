@@ -29,7 +29,7 @@
       <key>departmentlist</key>
       <type>grid</type>
       <api>BaseInfo/department.php?action=getgrid&amp;college_id=</api>
-      <newitemurl>BaseInfo/department.php?action=add</newitemurl>
+      <newitemurl>BaseInfo/department.php?action=add&amp;key=college_id&amp;id=</newitemurl>
     </field>
     <field>
       <name>备注</name>
