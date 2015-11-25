@@ -115,6 +115,28 @@
         </submenu>
       </submenus>
     </mainmenu>
-    
+    <mainmenu>
+      <module>doctor</module>
+      <name>医生管理</name>
+      <submenus>
+        <submenu>
+          <id>doctor_list</id>
+          <name>医生列表</name>
+          <url>/Doctor/doctor.php</url>
+        </submenu>
+        <submenu>
+          <id>doctor_add</id>
+          <name>医生新增</name>
+          <url>/Doctor/doctor.php?action=add</url>
+          <onlyadmin>1</onlyadmin>
+        </submenu>
+        <submenu>
+          <id>doctor_add</id>
+          <name>推荐医生管理</name>
+          <url>/Doctor/recomdoctor.php?action=edit&amp;id=1</url>
+          <onlyadmin>1</onlyadmin>
+        </submenu>
+      </submenus>
+    </mainmenu>
   </mainmenus>
 </root>
