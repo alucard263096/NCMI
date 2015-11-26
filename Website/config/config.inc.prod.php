@@ -25,11 +25,11 @@ $CONFIG['error_handler'] ="E_ALL";
 
 
 #[Database]
-$CONFIG['database']['provider']	= 'sqlsrv';  //mssql,sqlsrv
+$CONFIG['database']['provider']	= 'mysql';  //mssql,sqlsrv
 $CONFIG['database']['host']		= '120.24.239.49';  
 $CONFIG['database']['database']	= 'NCMI151123';  
-$CONFIG['database']['user']		= 'sa';  
-$CONFIG['database']['psw']		= 'hack2rpc'; 
+$CONFIG['database']['user']		= 'root';  
+$CONFIG['database']['psw']		= 'root'; 
 
 
 #[File upload]

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <root>
   <name>广告</name>
-  <tablename>tb_website_banner</tablename>
+  <tablename>tb_banner</tablename>
   <nolist>0</nolist>
   <searchcondition>r_main.status&lt;&gt;'D'</searchcondition>
   <fields>
