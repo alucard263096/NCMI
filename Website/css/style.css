@@ -5,6 +5,17 @@
     font-family:'Microsoft YaHei';
 }
 
+#loginnav {
+    margin-top:30px;
+}
+
+#loginnav .navitem{
+    color:#2E6995;
+    font-weight:bold;
+}
+#loginnav .navitem img{
+    width:27px;
+}
 #mainbody{
     width:932px;
     margin-left:auto;
@@ -18,16 +29,39 @@
     border-radius:4px;
     margin-top:30px;
     padding-top:5px;
-    padding-bottom:2px;
+    padding-bottom:5px;
 }
 #menucenter{
     margin-left:80px;
+}
+#logo{
+    text-align:right;
+}
+#logo img{
+    width:80px;
+}
+#title img{
+    height:75px;
 }
 #menucenter .menuitem{
     width:96px;
     color:#2E6995;
     font-weight:bold;
     font-size:115%;
+}
+#menucenter .menuitem img{
+    width:40px;
+}
+#contentbody{
+    min-height:400px;
+}
+#footer{
+    background-color:#CBE6E7;
+    border: 1px solid transparent;
+    border-color:#D7D7D7;
+    border-radius:4px;
+    padding-top:20px;
+    padding-bottom:20px;
 }
 .test{
 

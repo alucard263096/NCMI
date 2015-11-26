@@ -53,10 +53,20 @@
           <onlyadmin>1</onlyadmin>
         </submenu>
         <submenu>
+          <id>banner_list</id>
+          <name>广告列表</name>
+          <url>/Website/banner.php</url>
+        </submenu>
+        <submenu>
+          <id>general_add</id>
+          <name>广告新增</name>
+          <url>/Website/banner.php?action=add</url>
+          <onlyadmin>1</onlyadmin>
+        </submenu>
+        <submenu>
           <id>notice_add</id>
           <name>最新动态</name>
           <url>/Website/notice.php?action=edit</url>
-          <onlyadmin>1</onlyadmin>
         </submenu>
       </submenus>
     </mainmenu>
@@ -73,7 +83,6 @@
           <id>hospital_add</id>
           <name>医院新增</name>
           <url>/BaseInfo/hospital.php?action=add</url>
-          <onlyadmin>1</onlyadmin>
         </submenu>
         <submenu>
           <id>college_list</id>
@@ -84,7 +93,6 @@
           <id>college_add</id>
           <name>专科新增</name>
           <url>/BaseInfo/college.php?action=add</url>
-          <onlyadmin>1</onlyadmin>
         </submenu>
         <submenu>
           <id>department_list</id>
@@ -95,7 +103,6 @@
           <id>department_add</id>
           <name>科室新增</name>
           <url>/BaseInfo/department.php?action=add</url>
-          <onlyadmin>1</onlyadmin>
         </submenu>
         <submenu>
           <id>category_list</id>
@@ -106,7 +113,6 @@
           <id>category_add</id>
           <name>疾病大类新增</name>
           <url>/BaseInfo/category.php?action=add</url>
-          <onlyadmin>1</onlyadmin>
         </submenu>
         <submenu>
           <id>subcategory_list</id>
@@ -117,7 +123,6 @@
           <id>subcategory_add</id>
           <name>疾病小类新增</name>
           <url>/BaseInfo/subcategory.php?action=add</url>
-          <onlyadmin>1</onlyadmin>
         </submenu>
       </submenus>
     </mainmenu>
@@ -134,13 +139,11 @@
           <id>doctor_add</id>
           <name>医生新增</name>
           <url>/Doctor/doctor.php?action=add</url>
-          <onlyadmin>1</onlyadmin>
         </submenu>
         <submenu>
           <id>doctorrecom_add</id>
           <name>推荐医生管理</name>
           <url>/Doctor/doctorrecom.php?action=edit</url>
-          <onlyadmin>1</onlyadmin>
         </submenu>
       </submenus>
     </mainmenu>
