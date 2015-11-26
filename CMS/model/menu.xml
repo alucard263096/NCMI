@@ -52,6 +52,12 @@
           <url>/Website/general.php?action=add</url>
           <onlyadmin>1</onlyadmin>
         </submenu>
+        <submenu>
+          <id>notice_add</id>
+          <name>最新动态</name>
+          <url>/Website/notice.php?action=edit</url>
+          <onlyadmin>1</onlyadmin>
+        </submenu>
       </submenus>
     </mainmenu>
     <mainmenu>

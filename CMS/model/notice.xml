@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <name>最新动态</name>
+  <tablename>tb_notice</tablename>
+  <searchcondition>r_main.status&lt;&gt;'D'</searchcondition>
+  <fields>
+    <field>
+      <name>公告内容</name>
+      <key>content</key>
+      <type>html</type>
+      <notnull>1</notnull>
+    </field>
+    <field>
+      <name>备注</name>
+      <key>remarks</key>
+      <type>longtext</type>
+    </field>
+    <field>
+      <name>状态</name>
+      <key>status</key>
+      <type>select</type>
+      <displayinlist>1</displayinlist>
+      <options>
+        <option>
+          <name>启用</name>
+          <value>A</value>
+          <default>1</default>
+        </option>
+        <option>
+          <name>禁用</name>
+          <value>I</value>
+        </option>
+      </options>
+      <search>1</search>
+      <notnull>1</notnull>
+    </field>
+  </fields>
+  <javascripts>
+    <javascript>
+      <filename>doctorrecom.js</filename>
+      <detail>1</detail>
+    </javascript>
+    <javascript>
+    </javascript>
+  </javascripts>
+</root>
