@@ -42,7 +42,7 @@
       <displayfield>name</displayfield>
       <notnull>1</notnull>
       <tablename>
-        (select b.id,a.name+'-'+b.name name from tb_college a
+        (select b.id,concat(a.name,'-',b.name) name from tb_college a
         inner join tb_department b on a.id=b.college_id
         where a.status='A' and b.status='A')</tablename>
       <ntbname>r_department</ntbname>

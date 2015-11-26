@@ -42,7 +42,7 @@
       <type>flist</type>
       <displayfield>name</displayfield>
       <tablename>
-        (select b.id,a.name+'-'+b.name name from tb_category a
+        (select b.id,concat(a.name,'-',b.name) name from tb_category a
         inner join tb_subcategory b on a.id=b.category_id
         where a.status='A'
         and b.status='A')</tablename>
