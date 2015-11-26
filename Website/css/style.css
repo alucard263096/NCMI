@@ -1,0 +1,34 @@
+﻿body {
+    background-image:url(../images/bg.png);
+    background-repeat:no-repeat;
+    background-position-x:center;
+    font-family:'Microsoft YaHei';
+}
+
+#mainbody{
+    width:932px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#menu{
+    background-color:#9DCDD2;
+    border: 1px solid transparent;
+    border-color:#FFFFFF;
+    border-radius:4px;
+    margin-top:30px;
+    padding-top:5px;
+    padding-bottom:2px;
+}
+#menucenter{
+    margin-left:80px;
+}
+#menucenter .menuitem{
+    width:96px;
+    color:#2E6995;
+    font-weight:bold;
+    font-size:115%;
+}
+.test{
+
+}

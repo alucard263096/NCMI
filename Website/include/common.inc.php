@@ -58,7 +58,7 @@ $errortype=array(1=>"Error",2=>"Warning",4=>"Parsing Error",8=>"Notice",
 
 require ROOT.'/classes/mgr/common_function.php';
 
-include ROOT.'/classes/mgr/'.$CONFIG['database']['provider'].'.cls.php';
+//include ROOT.'/classes/mgr/'.$CONFIG['database']['provider'].'.cls.php';
 
 include ROOT.'/classes/mgr/smarty.cls.php';
 
