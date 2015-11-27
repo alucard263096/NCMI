@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <title>{{$Title}}</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/css/bootstrap.min.css">
+        <script type="text/javascript" src="{{$rootpath}}/js/jquery-2.0.3.min.js"></script>
+        <link rel="stylesheet" media="screen" href="{{$rootpath}}/css/style.css">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+           <script type="text/javascript" src="js/html5shiv.js"></script>
+           <script type="text/javascript" src="js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body >
+        <div id="mainbody">
+
+
+            {{include  file="$smarty_root/nav.html" }}
+
+
+            <div class="row" id="logobar">
+                <div class="col-md-2" id="logo" >
+                    <img src="{{$rootpath}}/images/logo.png" />
+                </div>
+                <div class="col-md-10" id="title">
+                    <img src="{{$rootpath}}/images/title.png" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    {{include  file="$smarty_root/menu.html" }}
+
+                </div>
+            </div>
+            <div class="row" id="contentbody" >
+
+        

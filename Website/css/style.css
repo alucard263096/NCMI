@@ -4,7 +4,18 @@
     background-position-x:center;
     font-family:'Microsoft YaHei';
 }
-
+a:link {
+text-decoration: none;
+}
+a:visited {
+text-decoration: none;
+}
+a:hover {
+text-decoration: none;
+}
+a:active {
+text-decoration: none;
+}
 #loginnav {
     margin-top:30px;
 }
@@ -48,6 +59,9 @@
     color:#2E6995;
     font-weight:bold;
     font-size:115%;
+}
+#menucenter .menuitem div{
+    color:#2E6995;
 }
 #menucenter .menuitem img{
     width:40px;
