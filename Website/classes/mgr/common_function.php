@@ -139,4 +139,26 @@ function outResult($num,$message,$return=""){
 	$array[]=$arr;
 	return $array;
 }
+function spliteArray($array,$count){
+	$ret=array();
+	$group=0;
+	for($i=0;$i<count($array);$i++){
+		if($i>0&&$i%$count==0){
+			$group++;
+		}
+		$ret[$group][]=$array[$i];
+	}
+	return $ret;
+}
+function randArray($array,$count){
+	if(count($array)<$count){
+		return $array;
+	}
+	$res=array_rand($array,$count);
+	$arr=array();
+	foreach($res as  $value){
+		$arr[]=$array[$value];
+	}
+	return $arr;
+}
 ?>

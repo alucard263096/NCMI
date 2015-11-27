@@ -1,7 +1,6 @@
 ﻿body {
     background-image:url(../images/bg.png);
     background-repeat:no-repeat;
-    background-position-x:center;
     font-family:'Microsoft YaHei';
 }
 a:link {
@@ -15,6 +14,28 @@ text-decoration: none;
 }
 a:active {
 text-decoration: none;
+}
+input::-webkit-input-placeholder {
+color: #aaa !important; 
+}
+input:-moz-placeholder {
+color: #aaa !important;
+}
+input::-moz-placeholder {
+color: #aaa !important; 
+}
+input:-ms-input-placeholder {
+color: #aaa !important;
+}
+.hr{
+  display: block;
+  height:1px;
+  width: 100%;
+  padding: 0;
+  line-height: inherit;
+  color: #333;
+  border: 0;
+  border-bottom: 1px solid #e5e5e5;
 }
 #loginnav {
     margin-top:30px;
@@ -88,4 +109,5 @@ text-decoration: none;
 }
 
 .test{
+    background-color:#ffd800;
 }

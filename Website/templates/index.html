@@ -17,120 +17,120 @@
         overflow: hidden;
     }
 </style>
-
-<div class="col-md-3">
-    <div class="col-md-12 frame" id="notice">
-        <h4 class="text-center">最新动态</h4>
-        <p>{{$notice}}</p>
+<div class="row">
+    <div class="col-md-3">
+        <div class="col-md-12 frame" id="notice">
+            <h4 class="text-center">最新动态</h4>
+            <p>{{$notice}}</p>
+        </div>
     </div>
-</div>
-<div class="col-md-9" >
-    <div id="slider1_container" class="row silder" style="position: relative;  ">
-        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
-            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+    <div class="col-md-9">
+        <div id="slider1_container" class="row silder" style="position: relative;  ">
+            <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+                <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
                 background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
-            </div>
-            <div style="position: absolute; display: block; background: url({{$rootpath}}/vendors/Jssor.Slider.FullPack/img/loading.gif) no-repeat center center;
+                </div>
+                <div style="position: absolute; display: block; background: url({{$rootpath}}/vendors/Jssor.Slider.FullPack/img/loading.gif) no-repeat center center;
                 top: 0px; left: 0px;width: 100%;height:100%;">
-            </div>
-        </div>
-        <div u="slides" class="silder" style="cursor: move; position: absolute; ">
-            {{foreach from=$bannerlist item=rs}}
-            <div>
-                <img u="image" src="{{$uploadpath}}/banner/{{$rs.pic}}" />
-                <div u="thumb"><a href="{{if $rs.link==" "}}#{{else}}{{$rs.link}}{{/if}}">{{$rs.title}}</a></div>
-            </div>
-            {{/foreach}}
-        </div>
-        <div u="thumbnavigator" style="position: absolute; bottom: 0px; left: 15px; height:60px; width:705px;">
-            <div style="filter: alpha(opacity=40); opacity:0.4; position: absolute; display: block;
-                background-color: #000000; top: 0px; left: 0px; width: 100%; height: 100%;">
-            </div>
-            <!-- Thumbnail Item Skin Begin -->
-            <div u="slides">
-                <div u="prototype" style="position: absolute; width: 720px; height: 60px; top: 0; left: 0;">
-                    <div u="thumbnailtemplate" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; font-family: verdana; font-weight: normal; color:#fff; line-height: 45px; font-size:20px; padding-left:10px;"></div>
                 </div>
             </div>
-            <!-- Thumbnail Item Skin End -->
-        </div>
+            <div u="slides" class="silder" style="cursor: move; position: absolute; ">
+                {{foreach from=$bannerlist item=rs}}
+                <div>
+                    <img u="image" src="{{$uploadpath}}/banner/{{$rs.pic}}" />
+                    <div u="thumb"><a style="color:#fff;font-weight:bold;" href="{{if $rs.link==" "}}#{{else}}{{$rs.link}}{{/if}}">{{$rs.title}}</a></div>
+                </div>
+                {{/foreach}}
+            </div>
+            <div u="thumbnavigator" style="position: absolute; bottom: 0px; left: 15px; height:60px; width:705px;">
+                <div style="filter: alpha(opacity=40); opacity:0.4; position: absolute; display: block;
+                background-color: #000000; top: 0px; left: 0px; width: 100%; height: 100%;">
+                </div>
+                <!-- Thumbnail Item Skin Begin -->
+                <div u="slides">
+                    <div u="prototype" style="position: absolute; width: 720px; height: 60px; top: 0; left: 0;">
+                        <div u="thumbnailtemplate" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; font-family: verdana; font-weight: normal; color:#fff; line-height: 45px; font-size:20px; padding-left:10px;"></div>
+                    </div>
+                </div>
+                <!-- Thumbnail Item Skin End -->
+            </div>
 
-        <style>
-            .jssorb05 {
-                position: absolute;
-            }
-
-                .jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
+            <style>
+                .jssorb05 {
                     position: absolute;
-                    /* size of bullet elment */
-                    width: 16px;
-                    height: 16px;
-                    background: url({{$rootpath}}/vendors/Jssor.Slider.FullPack/img/b05.png) no-repeat;
-                    overflow: hidden;
-                    cursor: pointer;
                 }
 
-                .jssorb05 div {
-                    background-position: -7px -7px;
-                }
-
-                    .jssorb05 div:hover, .jssorb05 .av:hover {
-                        background-position: -37px -7px;
+                    .jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
+                        position: absolute;
+                        /* size of bullet elment */
+                        width: 16px;
+                        height: 16px;
+                        background: url({{$rootpath}}/vendors/Jssor.Slider.FullPack/img/b05.png) no-repeat;
+                        overflow: hidden;
+                        cursor: pointer;
                     }
 
-                .jssorb05 .av {
-                    background-position: -67px -7px;
+                    .jssorb05 div {
+                        background-position: -7px -7px;
+                    }
+
+                        .jssorb05 div:hover, .jssorb05 .av:hover {
+                            background-position: -37px -7px;
+                        }
+
+                    .jssorb05 .av {
+                        background-position: -67px -7px;
+                    }
+
+                    .jssorb05 .dn, .jssorb05 .dn:hover {
+                        background-position: -97px -7px;
+                    }
+            </style>
+            <div u="navigator" class="jssorb05" style="bottom : 5px; right: 6px;">
+                <div u="prototype"></div>
+            </div>
+            <style>
+                .jssora12l, .jssora12r {
+                    display: block;
+                    position: absolute;
+                    width: 30px;
+                    height: 46px;
+                    cursor: pointer;
+                    background: url({{$rootpath}}/vendors/Jssor.Slider.FullPack/img/a12.png) no-repeat;
+                    overflow: hidden;
                 }
 
-                .jssorb05 .dn, .jssorb05 .dn:hover {
-                    background-position: -97px -7px;
+                .jssora12l {
+                    background-position: -16px -37px;
                 }
-        </style>
-        <div u="navigator" class="jssorb05" style="bottom : 5px; right: 6px;">
-            <div u="prototype"></div>
+
+                .jssora12r {
+                    background-position: -75px -37px;
+                }
+
+                .jssora12l:hover {
+                    background-position: -136px -37px;
+                }
+
+                .jssora12r:hover {
+                    background-position: -195px -37px;
+                }
+
+                .jssora12l.jssora12ldn {
+                    background-position: -256px -37px;
+                }
+
+                .jssora12r.jssora12rdn {
+                    background-position: -315px -37px;
+                }
+            </style>
+            <span u="arrowleft" class="jssora12l" style="top: 100px; left: 15px;">
+            </span>
+            <span u="arrowright" class="jssora12r" style="top: 100px; right: 0px;">
+            </span>
         </div>
-        <style>
-            .jssora12l, .jssora12r {
-                display: block;
-                position: absolute;
-                width: 30px;
-                height: 46px;
-                cursor: pointer;
-                background: url({{$rootpath}}/vendors/Jssor.Slider.FullPack/img/a12.png) no-repeat;
-                overflow: hidden;
-            }
-
-            .jssora12l {
-                background-position: -16px -37px;
-            }
-
-            .jssora12r {
-                background-position: -75px -37px;
-            }
-
-            .jssora12l:hover {
-                background-position: -136px -37px;
-            }
-
-            .jssora12r:hover {
-                background-position: -195px -37px;
-            }
-
-            .jssora12l.jssora12ldn {
-                background-position: -256px -37px;
-            }
-
-            .jssora12r.jssora12rdn {
-                background-position: -315px -37px;
-            }
-        </style>
-        <span u="arrowleft" class="jssora12l" style="top: 100px; left: 15px;">
-        </span>
-        <span u="arrowright" class="jssora12r" style="top: 100px; right: 0px;">
-        </span>
     </div>
 </div>
-
 
 
 <script>
@@ -202,10 +202,114 @@
 
     });
 </script>
+<style>
+    #dieasesearch h3 {
+        color: #2468BF;
+    }
+    #dieasesearch .itemup {
+        padding-left: 0;
+        padding-right: 0;
+    } 
+    #dieasesearch .item {
+        text-align: center;
+        background-image: url({{$rootpath}}/images/indexitem.png);
+        height: 26px;
+        margin-left: 3px;
+        margin-right: 3px;
+        line-height:26px;
+    }
+</style>
+<div class="row" style="margin-top:10px;">
+    <div class="col-lg-12 ">
+        <div class="col-lg-12 frame" id="dieasesearch">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 style="margin-top:5px;">按科室找医生</h3>
+                </div>
+                <div class="col-md-5 col-md-offset-1" style="padding-top:5px;">
+                    <input type="text" class="col-md-10"  placeholder="输入疾病或科室,在千名执业医生专家中搜" >
+                    <button class="btn btn-default col-md-2" style="height:25px;padding-top:1px;width:50px;margin-left:9px;">搜索</button>
+                </div>
+            </div>
+            <div class="hr"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    {{foreach from=$collegelistgroup item=rs}}
+                    <div class="col-lg-3" style="margin-top:5px;">
+                        <div class="row">
+                            {{if $rs.0.name!=""}}
+                            <div class="col-md-6 itemup">
+                                <a href="{{$rootpath}}/college.php?college_id={{$rs.0.id}}">
+                                    <div class="item">{{$rs.0.name}}</div>
+                                </a>
+                            </div>
+                            {{/if}}
+                            {{if $rs.1.name!=""}}
+                            <div class="col-md-6 itemup ">
+                                <a href="{{$rootpath}}/college.php?college_id={{$rs.1.id}}">
+                                    <div class="item">{{$rs.1.name}}</div>
+                                </a>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{/foreach}}
+                </div>
+            </div>
+            <div style="height:10px;display:block;"></div>
+        </div>
+    </div>
+</div>
 
 
+<style>
+    #doctorsearch h3 {
+        color: #2468BF;
+    }
 
-
+</style>
+<div class="row" style="margin-top:10px;">
+    <div class="col-lg-12 ">
+        <div class="col-lg-12 frame" id="doctorsearch">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 style="margin-top:5px;">签约专家推荐</h3>
+                </div>
+                <div class="col-md-5 col-md-offset-1" style="padding-top:5px;">
+                    <input type="text" class="col-md-10" placeholder="输入医生名字,在千名执业医生专家中搜">
+                    <button class="btn btn-default col-md-2" style="height:25px;padding-top:1px;width:50px;margin-left:9px;">搜索</button>
+                </div>
+            </div>
+            <div class="hr"></div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-md-12">
+                    {{foreach from=$doctor_list item=rs}}
+                    <div class="col-md-4">
+                        <div class="row">
+                            <img class="col-md-4" src="{{$uploadpath}}/doctor/{{$rs.photo}}" />
+                            <div class="col-md-8">
+                                <span>{{$rs.name}}</span>
+                                <p>{{$rs.content}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{/foreach}}
+                </div>
+                <div class="col-md-12" >
+                    {{foreach from=$doctor_list item=rs}}
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-4">
+                                <p class="text-right"><a href="{{$rootpath}}/doctorinfo.php?id={{$rs.id}}">>>详细信息</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    {{/foreach}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
