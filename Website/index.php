@@ -10,6 +10,7 @@
   require ROOT.'/classes/datamgr/banner.cls.php';
   require ROOT.'/classes/datamgr/college.cls.php';
   require ROOT.'/classes/datamgr/doctor.cls.php';
+  require ROOT.'/classes/datamgr/hospital.cls.php';
   
 
   $notice=$noticeMgr->getNoticeContent();
@@ -35,6 +36,10 @@
   $doctor_list=randArray($doctor_list,3);
   //print_r($doctor_list);
   $smarty->assign("doctor_list",$doctor_list);
+
+  
+  $hospital_list=$hospitalMgr->getHospital();
+  $smarty->assign("hospital_list",$hospital_list);
   
   
   $smarty->display(ROOT.'/templates/index.html');
