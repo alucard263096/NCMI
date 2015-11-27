@@ -68,6 +68,8 @@ text-decoration: none;
 }
 #contentbody{
     min-height:400px;
+    margin-top:10px;
+
 }
 #footer{
     background-color:#CBE6E7;
@@ -77,6 +79,13 @@ text-decoration: none;
     padding-top:20px;
     padding-bottom:20px;
 }
-.test{
 
+.frame{
+    background-color:#EEF5FF;
+    border: 1px solid transparent;
+    border-color:#D7D7D7;
+    border-radius:2px;
+}
+
+.test{
 }

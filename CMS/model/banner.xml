@@ -6,37 +6,40 @@
   <searchcondition>r_main.status&lt;&gt;'D'</searchcondition>
   <fields>
     <field>
-      <name>序号</name>
-      <key>seq</key>
-      <type>number</type>
+      <name>标识符</name>
+      <key>index_key</key>
+      <type>text</type>
       <displayinlist>1</displayinlist>
       <gotodetail>1</gotodetail>
       <notnull>1</notnull>
-      <disableindetail>0</disableindetail>
+      <search>1</search>
+      <disableindetail>1</disableindetail>
     </field>
     <field>
-      <name>口号</name>
-      <key>slogan</key>
-      <type>longtext</type>
+      <name>名称</name>
+      <key>name</key>
+      <type>text</type>
       <displayinlist>1</displayinlist>
       <gotodetail>1</gotodetail>
       <search>1</search>
       <notnull>1</notnull>
     </field>
     <field>
-      <name>标签</name>
-      <key>label</key>
+      <name>位置</name>
+      <key>position</key>
       <type>longtext</type>
+      <displayinlist>1</displayinlist>
+      <search>1</search>
       <notnull>1</notnull>
     </field>
     <field>
-      <name>信息标题</name>
+      <name>广告标题</name>
       <key>title</key>
       <type>longtext</type>
       <notnull>1</notnull>
     </field>
     <field>
-      <name>信息内容</name>
+      <name>广告内容</name>
       <key>cont</key>
       <type>html</type>
     </field>
@@ -50,6 +53,8 @@
       <key>pic</key>
       <type>upload</type>
       <uploadmodule>banner</uploadmodule>
+      <filetype>image</filetype>
+      <displayinlist>1</displayinlist>
     </field>
     <field>
       <name>状态</name>
