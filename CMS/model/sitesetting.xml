@@ -17,42 +17,37 @@
       <uploadmodule>fav</uploadmodule>
     </field>
     <field>
-      <name>联系人姓名</name>
-      <key>contacter</key>
+      <name>主管部门</name>
+      <key>department</key>
       <type>text</type>
     </field>
     <field>
-      <name>QQ</name>
-      <key>qq</key>
+      <name>技术支持</name>
+      <key>techsupport</key>
       <type>text</type>
     </field>
     <field>
-      <name>邮箱</name>
-      <key>email</key>
-      <type>text</type>
-    </field>
-    <field>
-      <name>手机号码</name>
-      <key>mobile</key>
+      <name>地址</name>
+      <key>address</key>
       <type>text</type>
     </field>
     <field>
       <name>电话</name>
-      <key>phone</key>
+      <key>tel</key>
       <type>text</type>
     </field>
     <field>
-      <name>Seo 标题</name>
-      <key>seo_title</key>
-      <type>longtext</type>
+      <name>备案号</name>
+      <key>icp</key>
+      <type>text</type>
     </field>
     <field>
-      <name>Seo 关键字</name>
+      <name>网站关键字</name>
       <key>seo_keywords</key>
       <type>longtext</type>
     </field>
     <field>
-      <name>Seo 详情</name>
+      <name>网站介绍</name>
       <key>seo_description</key>
       <type>longtext</type>
     </field>

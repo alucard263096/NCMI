@@ -4,7 +4,10 @@
         <title>{{$Title}}</title>
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+        <title>{{$SITEINFO.website_name}}</title>
+        <meta name="keywords" content="{{$SITEINFO.seo_keywords}}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{$uploadpath}}/fav/{{$SITEINFO.favfile}}">
+        <meta name="description" content="{{$SITEINFO.seo_description}}">
         <!-- Bootstrap -->
         <link rel="stylesheet" media="screen" href="{{$rootpath}}/css/bootstrap.min.css">
         <script type="text/javascript" src="{{$rootpath}}/js/jquery-2.0.3.min.js"></script>

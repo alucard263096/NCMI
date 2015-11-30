@@ -6,6 +6,7 @@
  * Window - Preferences - PHPeclipse - PHP - Code Templates
  */
   require 'include/common.inc.php';
+  include ROOT.'/include/init.inc.php';
   require ROOT.'/classes/datamgr/notice.cls.php';
   require ROOT.'/classes/datamgr/banner.cls.php';
   require ROOT.'/classes/datamgr/college.cls.php';

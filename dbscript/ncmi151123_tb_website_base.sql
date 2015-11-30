@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `ncmi151123` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `ncmi151123`;
--- MySQL dump 10.13  Distrib 5.6.19, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.19, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ncmi151123
 -- ------------------------------------------------------
@@ -32,12 +32,11 @@ CREATE TABLE `tb_website_base` (
   `updated_user` int(11) DEFAULT NULL,
   `website_name` varchar(100) DEFAULT NULL,
   `favfile` varchar(255) DEFAULT NULL,
-  `contacter` varchar(100) DEFAULT NULL,
-  `qq` varchar(100) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `mobile` varchar(100) DEFAULT NULL,
-  `phone` varchar(100) DEFAULT NULL,
-  `seo_title` varchar(500) DEFAULT NULL,
+  `department` varchar(100) DEFAULT NULL,
+  `techsupport` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `tel` varchar(100) DEFAULT NULL,
+  `icp` varchar(100) DEFAULT NULL,
   `seo_keywords` varchar(500) DEFAULT NULL,
   `seo_description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -50,7 +49,7 @@ CREATE TABLE `tb_website_base` (
 
 LOCK TABLES `tb_website_base` WRITE;
 /*!40000 ALTER TABLE `tb_website_base` DISABLE KEYS */;
-INSERT INTO `tb_website_base` VALUES (1,'2015-11-11 00:00:00',1,'2015-11-24 21:52:08',1,'','','','','','','','','','');
+INSERT INTO `tb_website_base` VALUES (1,'2015-11-11 00:00:00',1,'2015-11-30 11:57:02',1,'家庭医生服务管理中心','0aa70c6421b16aa4c528e2b8bcd0cbe7.png','国家科学数据共享平台','国家人口健康科学数据共享平台（地方服务中心）','北京市海淀区太平路27号网格中心(100850)','010-68277769','京ICP备09012887号','','');
 /*!40000 ALTER TABLE `tb_website_base` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -63,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-26 23:58:59
+-- Dump completed on 2015-11-30 12:08:24
