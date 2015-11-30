@@ -51,7 +51,7 @@
 		inner join tb_category on tb_category.id=tb_subcategory.category_id and tb_category.status='A' 
 		where tb_subcategory.status='A' order by tb_subcategory.seq ";
 		$query = $this->dbmgr->query($sql);
-		$result = $this->dbmgr->fetch_array_all($query); 
+		$result = $this->dbmgr->fetch_array_all($query);
 		
 		return $result;
 	}
