@@ -161,4 +161,50 @@ function randArray($array,$count){
 	}
 	return $arr;
 }
+function getPageNumber(){
+	$page=$_REQUEST["page"];
+	$page=$page+0;
+	if($page==0){
+		$page=1;	
+	}
+	return $page;
+}
+function getPageNumberCodeArray($sum,$curpage,$eachincount){
+	$pagecount=$sum/$eachincount;
+	$pagecount=intval($pagecount);
+	if($eachincount*$pagecount<$sum){
+		$pagecount++;
+	}
+	$ret=array();
+	$ret["pagecount"]=$pagecount;
+	$arr=array();
+	if($pagecount<=5){
+		for($i=1;$i<=5&&$i<=$pagecount;$i++){
+			$arr[]=$i;
+		}
+	}else{
+		if($pagecount-$curpage<=2){
+			$arr[]=$pagecount-4;
+			$arr[]=$pagecount-3;
+			$arr[]=$pagecount-2;
+			$arr[]=$pagecount-1;
+			$arr[]=$pagecount;
+		}else if($curpage<=3){
+			$arr[]=1;
+			$arr[]=2;
+			$arr[]=3;
+			$arr[]=4;
+			$arr[]=5;
+		}else{
+			$arr[]=$curpage-2;
+			$arr[]=$curpage-1;
+			$arr[]=$curpage;
+			$arr[]=$curpage+1;
+			$arr[]=$curpage+2;
+		}
+	}
+	$ret["pages"]=$arr;
+	return $ret;
+}
+
 ?>

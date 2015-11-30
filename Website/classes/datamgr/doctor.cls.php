@@ -41,6 +41,30 @@
 		return $result;
 	}
 
+	public function getDoctorList($page){
+		
+		$startrow=($page-1)*18;
+		if($startrow>0){
+			$startrow=$startrow-1;
+		}
+		$sql="select * from tb_doctor where 
+		status='A' 
+		order by seq
+		limit $startrow,18";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
+	}
+
+	public function getDoctorListPageCount(){
+		$sql="select sum(1) doctor_count from tb_doctor where 
+		status='A' ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+		return $result["doctor_count"];
+	}
+
+
  }
  
  $doctorMgr=DoctorMgr::getInstance();

@@ -107,6 +107,21 @@ color: #aaa !important;
     border-color:#D7D7D7;
     border-radius:2px;
 }
+.frame2{
+    border: 1px solid transparent;
+    border-color:#D7D7D7;
+    border-radius:2px;
+}
+
+#pageer span{
+    padding:5px;
+}
+#pageer .selected{
+    padding:1px;
+    border: 1px solid transparent;
+    border-color:#D7D7D7;
+    border-radius:2px;
+}
 
 .test{
     background-color:#ffd800;

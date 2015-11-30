@@ -1,0 +1,98 @@
+{{include  file="$smarty_root/header.html" }}
+
+<style >
+    #doctorlist div {
+        color: #000000;
+        font-weight:bold;
+    }
+    #category{
+
+        padding-top:25px;
+        padding-bottom:25px;
+
+    }
+    #category div {
+        color: #346C98;
+        font-weight:bold;
+    }
+    .categoryitem{
+        cursor:pointer;
+    }
+    .subcategory{
+        cursor:pointer;
+        font-weight:normal;
+        font-size:85%;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $(".categoryitem").click(function () {
+            var category_id = $(this).attr("category_id");
+            $(".subcategory").addClass("hide");
+            $(".categoryitem_" + category_id).removeClass("hide");
+        });
+    });
+</script>
+<div class="row">
+    <div class="col-md-3 ">
+        <div class="frame" id="category">
+            {{foreach from=$category item=rs}}
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 categoryitem" category_id="{{$rs.id}}"><span class="spango">+</span> {{$rs.name}}</div>
+                {{foreach from=$rs.subcategory item=subrs}}
+                    <div class="col-md-7 col-md-offset-3 categoryitem_{{$rs.id}} subcategory hide"> {{$subrs.name}}</div>
+                {{/foreach}}
+            </div>
+            {{/foreach}}
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="col-md-9">
+        <div class="row">
+            <input type="text" class="col-md-3" placeholder="输入关键词搜索">
+            <button class="btn btn-default col-md-1" style="height:27px;padding-top:2px;width:50px;margin-left:9px;">搜索</button>
+            {{if $searchkeyword!=""}}
+            <span class="col-md-8" style="padding-top:2px;">当前搜索："{{$searchkeyword}}"</span>
+            {{/if}}
+        </div>
+        <div class="row" id="doctorlist">
+            {{foreach from=$list item=rs}}
+            <a href="{{$rootpath}}/Doctor/doctor.php?id={{$rs.id}}">
+                <div class="col-md-2 text-center small Bold" style="margin-top:25px;">
+                    <div class="row">
+                        <img class="col-lg-12" src="{{$uploadpath}}/doctor/{{$rs.photo}}" />
+                    </div>
+                    <div class="row">{{$rs.name}}</div>
+                    <div class="row">{{$rs.position}}</div>
+                </div>
+            </a>
+            {{/foreach}}
+        </div>
+        {{if $doctor_count>18 }}
+        <div class="row " style="margin-top:25px;" id="pageer">
+            <div class="col-md-6 col-md-offset-3 frame2 text-center ">
+                <div class="row">
+                    <span class="col-md-3"><a href="{{$rootpath}}/Doctor/doctorlist.php?page=1">首页</a></span>
+                    <span class="col-md-6">
+                        {{foreach from=$page_arr.pages item=rs}}
+                        <span ><a {{if $rs==$current_page}}class='selected'{{/if}} href="{{$rootpath}}/Doctor/doctorlist.php?page={{$rs}}">{{$rs}}</a></span>
+                        {{/foreach}}
+                    </span>
+                    <span class="col-md-3"><a href="{{$rootpath}}/Doctor/doctorlist.php?page={{$page_arr.pagecount}}">末页</a></span>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>
+<div class="row">&nbsp;</div>
+
+
+
+
+{{include  file="$smarty_root/footer.html" }}
