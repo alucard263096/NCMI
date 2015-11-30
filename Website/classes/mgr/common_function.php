@@ -207,4 +207,17 @@ function getPageNumberCodeArray($sum,$curpage,$eachincount){
 	return $ret;
 }
 
+function splitCodition($cols,$keyword){
+	$ret="(1=2 ";
+	$condition=explode(" ",$keyword);
+	foreach($cols as $col){
+		foreach($condition as $v){
+			$ret=$ret." or $col like '%".parameter_filter($v)."%' 
+			";
+		}
+	}
+	$ret.=" )";
+	return $ret;
+}
+
 ?>

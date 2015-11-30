@@ -9,13 +9,15 @@
   include ROOT.'/include/init.inc.php';
   require ROOT.'/classes/datamgr/doctor.cls.php';
   require ROOT.'/classes/datamgr/category.cls.php';
+
+  $search=$_REQUEST["search"];
   
   $currentpage=getPageNumber();
-  $doctorlist=$doctorMgr->getDoctorList($currentpage);
+  $doctorlist=$doctorMgr->getDoctorList($search,$currentpage);
   $smarty->assign("list",$doctorlist);
 
   
-  $doctorsum=$doctorMgr->getDoctorListPageCount($currentpage);
+  $doctorsum=$doctorMgr->getDoctorListPageCount($search,$currentpage);
   $smarty->assign("doctor_count",$doctorsum);
   $smarty->assign("current_page",$currentpage);
   $smarty->assign("lastpage",$currentpage);

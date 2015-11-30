@@ -41,24 +41,47 @@
 		return $result;
 	}
 
-	public function getDoctorList($page){
+	public function getDoctorList($search,$page){
 		
 		$startrow=($page-1)*18;
 		if($startrow>0){
 			$startrow=$startrow-1;
 		}
-		$sql="select * from tb_doctor where 
-		status='A' 
-		order by seq
+		
+		$arrcol=array();
+		$arrcol[]="d.name";
+		$arrcol[]="h.name";
+		$arrcol[]="dp.name";
+		$arrcol[]="c.name";
+		$searchsql=splitCodition($arrcol,$search);
+		$sql="select d.id,d.name,d.photo,d.photo,
+h.name hospital,dp.name department,c.name college 
+from tb_doctor d
+inner join tb_hospital h on d.hospital_id=h.id and h.status='A'
+inner join tb_department dp on d.department_id=dp.id and dp.status='A'
+inner join tb_college c on dp.college_id=c.id and c.status='A'
+ where d.status='A' 
+ and $searchsql
+  order by d.seq
 		limit $startrow,18";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
 		return $result;
 	}
 
-	public function getDoctorListPageCount(){
-		$sql="select sum(1) doctor_count from tb_doctor where 
-		status='A' ";
+	public function getDoctorListPageCount($search){
+		$arrcol=array();
+		$arrcol[]="d.name";
+		$arrcol[]="h.name";
+		$arrcol[]="dp.name";
+		$arrcol[]="c.name";
+		$searchsql=splitCodition($arrcol,$search);
+		$sql="select sum(1) doctor_count from tb_doctor d
+inner join tb_hospital h on d.hospital_id=h.id and h.status='A'
+inner join tb_department dp on d.department_id=dp.id and dp.status='A'
+inner join tb_college c on dp.college_id=c.id and c.status='A'
+ where d.status='A'  
+ and $searchsql";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array($query); 
 		return $result["doctor_count"];
