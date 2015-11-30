@@ -11,6 +11,7 @@
   require ROOT.'/classes/datamgr/category.cls.php';
 
   $search=$_REQUEST["search"];
+  $smarty->assign("searchkeyword",$search);
   
   $currentpage=getPageNumber();
   $doctorlist=$doctorMgr->getDoctorList($search,$currentpage);

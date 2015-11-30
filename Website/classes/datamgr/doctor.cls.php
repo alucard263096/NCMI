@@ -50,11 +50,14 @@
 		
 		$arrcol=array();
 		$arrcol[]="d.name";
+		$arrcol[]="d.position";
+		$arrcol[]="d.content";
 		$arrcol[]="h.name";
 		$arrcol[]="dp.name";
+		$arrcol[]="dp.subcategory_str";
 		$arrcol[]="c.name";
 		$searchsql=splitCodition($arrcol,$search);
-		$sql="select d.id,d.name,d.photo,d.photo,
+		$sql="select d.id,d.name,d.photo,d.photo,d.position,
 h.name hospital,dp.name department,c.name college 
 from tb_doctor d
 inner join tb_hospital h on d.hospital_id=h.id and h.status='A'
@@ -72,8 +75,11 @@ inner join tb_college c on dp.college_id=c.id and c.status='A'
 	public function getDoctorListPageCount($search){
 		$arrcol=array();
 		$arrcol[]="d.name";
+		$arrcol[]="d.position";
+		$arrcol[]="d.content";
 		$arrcol[]="h.name";
 		$arrcol[]="dp.name";
+		$arrcol[]="dp.subcategory_str";
 		$arrcol[]="c.name";
 		$searchsql=splitCodition($arrcol,$search);
 		$sql="select sum(1) doctor_count from tb_doctor d
