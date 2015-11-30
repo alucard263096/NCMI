@@ -1,0 +1,170 @@
+{{include  file="$smarty_root/header.html" }}
+
+<style>
+    #info .bar {
+        background-color: #7EBDC5;
+        height: 10px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-top:7px;
+    }
+    $info .body {
+        background-color: #7EBDC5;
+        height: 10px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-top: 7px;
+    }
+    #info .split {
+        border: 1px dashed transparent;
+        border-bottom-color: #cccccc;
+        margin-top: 17px;
+        margin-bottom: 17px;
+    }
+    #info h5{
+        font-weight:bold;
+    }
+    #info td {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    #info table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border-left: 1px solid #888;
+        border-top: 1px solid #888;
+        background: #efefef;
+    }
+
+    #info th, td {
+        border-right: 1px solid #888;
+        border-bottom: 1px solid #888;
+    }
+    #info .btn-success {
+        background-color: #6386AE;
+        border-color: #6386AE;
+    }
+</style>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1" >
+        <div class="frame3" id="info">
+            <div class="row">
+                <div class="col-md-12" >
+                    <div class="bar" ></div>
+                </div>
+            </div>
+            <div class="row body" style="padding-top:10px;padding-bottom:10px;">
+                <div class="col-md-12 ">
+                    <div class="row bar" style="background-color:transparent;">
+                        <img class="col-md-2" src="{{$uploadpath}}/doctor/{{$info.photo}}" />
+                        <div class="col-md-10 small">
+                            <div class="row ">
+                                <p>
+                                    专家姓名：{{$info.name}}<br />
+                                    性别：{{if $info.sextual =='M'}}男{{else}}女{{/if}}<br />
+                                    专家职位：{{$info.position}}<br />
+                                    专业特长：{{$info.expert}}<br />
+                                    工作单位：{{$info.hospital}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 small">
+                            <p>{{$info.content}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="split"></div>
+                </div>
+            </div>
+            <div class="row body" style="padding-bottom:10px;">
+                <div class="col-md-12 ">
+                    <div class="row bar" style="background-color:transparent;">
+                        <div class="col-md-12 small">
+                            <h5>出诊时间安排</h5>
+                            <table class="col-md-12 text-center">
+                                <tr>
+                                    <td>工作日</td>
+                                    <td>周一</td>
+                                    <td>周二</td>
+                                    <td>周三</td>
+                                    <td>周四</td>
+                                    <td>周五</td>
+                                    <td>周六</td>
+                                    <td>周日</td>
+                                </tr>
+                                <tr>
+                                    <td>上午</td>
+                                    <td>{{$info.duty_mon_m}}</td>
+                                    <td>{{$info.duty_tue_m}}</td>
+                                    <td>{{$info.duty_wed_m}}</td>
+                                    <td>{{$info.duty_thu_m}}</td>
+                                    <td>{{$info.duty_fri_m}}</td>
+                                    <td>{{$info.duty_sat_m}}</td>
+                                    <td>{{$info.duty_sun_m}}</td>
+                                </tr>
+                                <tr>
+                                    <td>下午</td>
+                                    <td>{{$info.duty_mon_a}}</td>
+                                    <td>{{$info.duty_tue_a}}</td>
+                                    <td>{{$info.duty_wed_a}}</td>
+                                    <td>{{$info.duty_thu_a}}</td>
+                                    <td>{{$info.duty_fri_a}}</td>
+                                    <td>{{$info.duty_sat_a}}</td>
+                                    <td>{{$info.duty_sun_a}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="split"></div>
+                </div>
+            </div>
+            <div class="row body" style="padding-bottom:10px;">
+                <div class="col-md-12 ">
+                    <div class="row bar" style="background-color:transparent;">
+                        <div class="col-md-12 small">
+                            <h5>出诊日期调整通知</h5>
+                            <p>
+                                {{if $info.duty_notice!=""}}
+                                {{$info.duty_notice}}
+                                {{else}}
+                                暂无调整。
+                                {{/if}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row body" style="padding-bottom:30px;">
+                <div class="col-md-12 ">
+                    <div class="row bar" style="background-color:transparent;">
+                        <div class="col-md-12 ">
+                            <button class="btn btn-success" id="btnGoBooking">预约该专家</button>
+                            <button class="btn btn-success" id="btnBack">后退</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnGoBooking").click(function () {
+            document.location.href = "{{$rootpath}}/Contract/order.php?doctor_id={{$info.id}}";
+        });
+        $("#btnBack").click(function () {
+            history.go(-1);
+        });
+    });
+</script>
+
+
+{{include  file="$smarty_root/footer.html" }}

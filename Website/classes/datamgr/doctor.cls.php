@@ -41,6 +41,16 @@
 		return $result;
 	}
 
+	public function getDoctor($id){
+		$id=parameter_filter($id);
+		$sql="select d.*,h.name hospital from tb_doctor d
+inner join tb_hospital h on d.hospital_id=h.id 
+		where d.status='A' and d.id=$id ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+		return $result;
+	}
+
 	public function getDoctorList($search,$page){
 		
 		$startrow=($page-1)*18;
