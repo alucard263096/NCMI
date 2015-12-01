@@ -1,52 +1,14 @@
 {{include  file="$smarty_root/header.html" }}
 
 <style >
-    #doctorlist div {
+    #list div {
         color: #000000;
-        font-weight:bold;
-    }
-    #category{
-
-        padding-top:25px;
-        padding-bottom:25px;
-
-    }
-    #category div {
-        color: #346C98;
-        font-weight:bold;
-    }
-    .categoryitem{
-        cursor:pointer;
-    }
-    .subcategory{
-        cursor:pointer;
-        font-weight:normal;
-        font-size:85%;
+        font-weight: bold;
     }
 </style>
-<script>
-    $(document).ready(function () {
-        $(".categoryitem").click(function () {
-            var category_id = $(this).attr("category_id");
-            $(".subcategory").addClass("hide");
-            $(".categoryitem_" + category_id).removeClass("hide");
-        });
-    });
-</script>
 <div class="row">
     <div class="col-md-3 ">
-        <div class="frame" id="category">
-            {{foreach from=$category item=rs}}
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2 categoryitem" category_id="{{$rs.id}}"><span class="spango">+</span> {{$rs.name}}</div>
-                {{foreach from=$rs.subcategory item=subrs}}
-                    <div class="col-md-7 col-md-offset-3 categoryitem_{{$rs.id}} subcategory hide"> 
-                        <a href="{{$rootpath}}/Hospital/hospitallist.php?search={{$subrs.name}}">{{$subrs.name}}</a>
-                    </div>
-                {{/foreach}}
-            </div>
-            {{/foreach}}
-        </div>
+        {{include  file="$smarty_root/subcatsearch.html" }}
     </div>
 
     <div class="col-md-9">
@@ -65,9 +27,9 @@
             <a href="{{$rootpath}}/Hospital/hospital.php?id={{$rs.id}}">
                 <div class="col-md-4 text-center small Bold" style="margin-top:25px;">
                     <div class="row">
-                        <img class="col-lg-12" src="{{$uploadpath}}/hospital/{{$rs.photo}}" />
+                        <img class="col-lg-8 col-md-offset-2" src="{{$uploadpath}}/hospital/{{$rs.photo}}" />
                     </div>
-                    <div class="row">{{$rs.name}}</div>
+                    <div class="row">{{$rs.shortname}}</div>
                 </div>
             </a>
             {{/foreach}}

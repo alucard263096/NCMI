@@ -22,12 +22,27 @@
 		
 	}
 	
-	public function getHospital()
+	public function getHospitalAll()
 	{
 		$sql="select * from tb_hospital where status='A' order by seq";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
 		return $result;
+	}
+	
+	public function getHospital($id)
+	{
+		$id=parameter_filter($id);
+		$sql="select * from tb_hospital where status='A' and id=$id";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+		return $result;
+	}
+	public function upHospitalCount($id)
+	{
+		$id=parameter_filter($id);
+		$sql="update tb_hospital set count=ifnull(count,10000)+1 where  id=$id";
+		$query = $this->dbmgr->query($sql);
 	}
 
 	
@@ -40,6 +55,7 @@
 		
 		$arrcol=array();
 		$arrcol[]="h.name";
+		$arrcol[]="h.shortname";
 		$arrcol[]="h.content";
 		$arrcol[]="d.name";
 		$arrcol[]="dp.name";
@@ -47,7 +63,7 @@
 		$arrcol[]="s.name";
 		$arrcol[]="cat.name";
 		$searchsql=splitCodition($arrcol,$search);
-		$sql="select distinct h.id,h.name,h.photo
+		$sql="select distinct h.id,h.name,h.photo,h.shortname
 from  tb_hospital h 
 inner join rc_hospital_college rc_hc on h.id=rc_hc.pid
 inner join tb_college c on rc_hc.fid=c.id and c.status='A'
@@ -69,6 +85,7 @@ inner join tb_doctor d on h.id=d.hospital_id and d.status='A'
 	public function getHospitalListPageCount($search){
 		$arrcol=array();
 		$arrcol[]="h.name";
+		$arrcol[]="h.shortname";
 		$arrcol[]="h.content";
 		$arrcol[]="d.name";
 		$arrcol[]="dp.name";

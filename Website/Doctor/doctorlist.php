@@ -27,6 +27,7 @@
   $category=$categoryMgr->getCategoryWithSubCategory();
   //print_r($category);
   $smarty->assign("category",$category);
+  $smarty->assign("searchurl","/Doctor/doctorlist.php");
 
   
   $smarty->display(ROOT.'/templates/doctorlist.html');

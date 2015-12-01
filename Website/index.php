@@ -39,7 +39,7 @@
   $smarty->assign("doctor_list",$doctor_list);
 
   
-  $hospital_list=$hospitalMgr->getHospital();
+  $hospital_list=$hospitalMgr->getHospitalAll();
   $smarty->assign("hospital_list",$hospital_list);
   
   

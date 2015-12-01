@@ -1,0 +1,148 @@
+{{include  file="$smarty_root/header.html" }}
+
+<style>
+    #info{
+        margin-top:40px;
+    }
+    #info h3{
+        margin:0px;
+        font-weight:bold;
+    }
+        #info .detailinfo {
+            height:67px;
+            position: relative;
+            padding-left:0px;
+        }
+        #info .detailinfo p {
+            position: absolute;
+            bottom: 0px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+    #info .bar {
+        background-color: #7EBDC5;
+        height: 10px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-top: 7px;
+    }
+    $info .body {
+        background-color: #7EBDC5;
+        height: 10px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-top: 7px;
+    }
+    #info .split {
+        border: 1px dashed transparent;
+        border-bottom-color: #cccccc;
+        margin-top: 17px;
+        margin-bottom: 17px;
+    }
+    #info h5{
+        font-weight:bold;
+    }
+    #info td {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    #info table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border-left: 1px solid #888;
+        border-top: 1px solid #888;
+        background: #efefef;
+    }
+
+    #info th, td {
+        border-right: 1px solid #888;
+        border-bottom: 1px solid #888;
+    }
+    #info .btn-success {
+        background-color: #6386AE;
+        border-color: #6386AE;
+    }
+</style>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1" >
+        <div class="frame3" id="info">
+            <div class="row">
+                <div class="col-md-12" >
+                    <div class="bar" ></div>
+                </div>
+            </div>
+            <div class="row body" style="padding-top:10px;padding-bottom:10px;">
+                <div class="col-md-12 ">
+                    <div class="row bar" style="background-color:transparent;">
+                        <img class="col-md-2" src="{{$uploadpath}}/hospital/{{$info.photo}}" id="hospitalimg" />
+                        <div class="col-md-10 small">
+                            <div class="row " >
+                                <h3 id="hospitaltital">{{$info.name}}</h3>
+                                <div class="detailinfo col-lg-12" id="hospitalinfo" >
+                                    <p >
+                                        医院地址：{{$info.address}} 邮政编码：{{$info.postcode}} 点击数：{{$info.count}}<br />
+                                        网址：{{$info.website}} E-mail：{{$info.email}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            $(document).ready(function () {
+                                $("#hospitalinfo").height(67);
+                                var detailheight = $("#hospitalimg").height() - $("#hospitaltital").height();
+                                if (detailheight > 50) {
+                                    $("#hospitalinfo").height(detailheight);
+                                }
+
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="split"></div>
+                </div>
+            </div>
+            <div class="row body" style="padding-bottom:10px;">
+                <div class="col-md-12 ">
+                    <div class="row bar" style="background-color:transparent;">
+                        <div class="col-md-12 small">
+                            <p>{{$info.content}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="split"></div>
+                </div>
+            </div>
+            <div class="row body" style="padding-bottom:30px;">
+                <div class="col-md-12 ">
+                    <div class="row bar" style="background-color:transparent;">
+                        <div class="col-md-12 ">
+                            <button class="btn btn-success" id="btnGoCollege">查看科室</button>
+                            <button class="btn btn-success" id="btnBack">后退</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnGoCollege").click(function () {
+            document.location.href = "{{$rootpath}}/Hospital/college.php?hospital_id={{$info.id}}";
+        });
+        $("#btnBack").click(function () {
+            history.go(-1);
+        });
+    });
+</script>
+
+
+{{include  file="$smarty_root/footer.html" }}

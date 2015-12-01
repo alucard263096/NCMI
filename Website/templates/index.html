@@ -227,7 +227,7 @@
                     <h3 style="margin-top:5px;">按科室找医生</h3>
                 </div>
                 <div class="col-md-5 col-md-offset-1" style="padding-top:5px;">
-                    <form action="{{$rootpath}}/Doctor/doctorlist.php">
+                    <form action="{{$rootpath}}/Hospital/hospitallist.php">
                         <input type="text" name="search" class="col-md-10" placeholder="输入疾病或科室,在千名执业医生专家中搜">
                         <button class="btn btn-default col-md-2" style="height:25px;padding-top:1px;width:50px;margin-left:9px;">搜索</button>
                     </form>
@@ -340,7 +340,14 @@
             <div class="row" style="margin-top: 15px; margin-bottom: 15px;">
                 <div class="col-md-12">
                     {{foreach from=$hospital_list item=rs}}
-                    <img class="col-md-2" src="{{$uploadpath}}/hospital/{{$rs.photo}}" />
+                    <div class="col-md-2">
+                        <a href="{{$rootpath}}/Hospital/hospital.php?id={{$rs.id}}">
+                            <div class="row">
+                                <img class="col-md-12" src="{{$uploadpath}}/hospital/{{$rs.photo}}" />
+                            </div>
+                            <div class="row text-center">{{$rs.name}}</div>
+                        </a>
+                    </div>
                     {{/foreach}}
                 </div>
             </div>
