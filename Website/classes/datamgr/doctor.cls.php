@@ -64,21 +64,25 @@ inner join tb_hospital h on d.hospital_id=h.id
 		$arrcol[]="d.content";
 		$arrcol[]="h.name";
 		$arrcol[]="dp.name";
-		$arrcol[]="dp.subcategory_str";
 		$arrcol[]="c.name";
+		$arrcol[]="s.name";
+		$arrcol[]="cat.name";
 		$searchsql=splitCodition($arrcol,$search);
-		$sql="select d.id,d.name,d.photo,d.photo,d.position,
-h.name hospital,dp.name department,c.name college 
+		$sql="select distinct d.id,d.name,d.photo,d.position
 from tb_doctor d
 inner join tb_hospital h on d.hospital_id=h.id and h.status='A'
 inner join tb_department dp on d.department_id=dp.id and dp.status='A'
 inner join tb_college c on dp.college_id=c.id and c.status='A'
+inner join rc_department_subcategory rc_ds on dp.id=rc_ds.pid
+inner join tb_subcategory s on rc_ds.fid=s.id
+inner join tb_category cat on cat.id=s.category_id
  where d.status='A' 
  and $searchsql
   order by d.seq
 		limit $startrow,18";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
+
 		return $result;
 	}
 
@@ -89,15 +93,20 @@ inner join tb_college c on dp.college_id=c.id and c.status='A'
 		$arrcol[]="d.content";
 		$arrcol[]="h.name";
 		$arrcol[]="dp.name";
-		$arrcol[]="dp.subcategory_str";
 		$arrcol[]="c.name";
+		$arrcol[]="s.name";
+		$arrcol[]="cat.name";
 		$searchsql=splitCodition($arrcol,$search);
-		$sql="select sum(1) doctor_count from tb_doctor d
+		$sql="select sum(1) doctor_count from (select  distinct d.id
+from tb_doctor d
 inner join tb_hospital h on d.hospital_id=h.id and h.status='A'
 inner join tb_department dp on d.department_id=dp.id and dp.status='A'
 inner join tb_college c on dp.college_id=c.id and c.status='A'
+inner join rc_department_subcategory rc_ds on dp.id=rc_ds.pid
+inner join tb_subcategory s on rc_ds.fid=s.id
+inner join tb_category cat on cat.id=s.category_id
  where d.status='A'  
- and $searchsql";
+ and $searchsql ) a";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array($query); 
 		return $result["doctor_count"];

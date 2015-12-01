@@ -18,36 +18,26 @@ USE `ncmi151123`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tb_department`
+-- Table structure for table `rc_department_subcategory`
 --
 
-DROP TABLE IF EXISTS `tb_department`;
+DROP TABLE IF EXISTS `rc_department_subcategory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tb_department` (
-  `id` int(11) NOT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `created_user` int(11) DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL,
-  `updated_user` int(11) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `seq` varchar(100) DEFAULT NULL,
-  `description` varchar(500) DEFAULT NULL,
-  `remarks` varchar(500) DEFAULT NULL,
-  `status` varchar(10) DEFAULT NULL,
-  `college_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `rc_department_subcategory` (
+  `pid` int(11) DEFAULT '0',
+  `fid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tb_department`
+-- Dumping data for table `rc_department_subcategory`
 --
 
-LOCK TABLES `tb_department` WRITE;
-/*!40000 ALTER TABLE `tb_department` DISABLE KEYS */;
-INSERT INTO `tb_department` VALUES (1,'2015-11-25 22:58:57',1,'2015-12-01 15:48:12',1,'普通外科','','','','A',1),(2,'2015-11-25 22:59:14',1,'2015-12-01 15:48:23',1,'泌尿外科','','','','A',1),(3,'2015-11-25 22:59:52',1,'2015-12-01 15:48:30',1,'癌症内科','','','','A',2),(4,'2015-11-25 23:00:02',1,'2015-11-25 23:00:02',1,'肿瘤内科','','','','A',2),(5,'2015-11-25 23:00:31',1,'2015-11-25 23:00:31',1,'全科','','','','A',3);
-/*!40000 ALTER TABLE `tb_department` ENABLE KEYS */;
+LOCK TABLES `rc_department_subcategory` WRITE;
+/*!40000 ALTER TABLE `rc_department_subcategory` DISABLE KEYS */;
+INSERT INTO `rc_department_subcategory` VALUES (1,2),(1,3),(1,5),(2,1),(2,5),(3,3),(3,4);
+/*!40000 ALTER TABLE `rc_department_subcategory` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

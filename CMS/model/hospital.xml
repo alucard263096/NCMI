@@ -60,6 +60,18 @@
       <notnull>1</notnull>
     </field>
     <field>
+      <name>专科</name>
+      <key>college_list</key>
+      <type>flist</type>
+      <displayfield>name</displayfield>
+      <tablename>tb_college</tablename>
+      <ntbname>r_college</ntbname>
+      <condition> status='A' </condition>
+      <displayinlist>1</displayinlist>
+      <relatetable>rc_hospital_college</relatetable>
+      <notnull>1</notnull>
+    </field>
+    <field>
       <name>介绍</name>
       <key>content</key>
       <type>html</type>

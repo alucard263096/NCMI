@@ -41,7 +41,7 @@
                 <div class="col-md-8 col-md-offset-2 categoryitem" category_id="{{$rs.id}}"><span class="spango">+</span> {{$rs.name}}</div>
                 {{foreach from=$rs.subcategory item=subrs}}
                     <div class="col-md-7 col-md-offset-3 categoryitem_{{$rs.id}} subcategory hide"> 
-                        <a href="{{$rootpath}}/Doctor/doctorlist.php?search={{$subrs.name}}">{{$subrs.name}}</a>
+                        <a href="{{$rootpath}}/Hospital/hospitallist.php?search={{$subrs.name}}">{{$subrs.name}}</a>
                     </div>
                 {{/foreach}}
             </div>
@@ -51,7 +51,7 @@
 
     <div class="col-md-9">
         <div class="row">
-            <form action="{{$rootpath}}/Doctor/doctorlist.php">
+            <form action="{{$rootpath}}/Hospital/hospitallist.php">
                 <input type="text" class="col-md-3" name="search" placeholder="输入关键词搜索">
                 <button class="btn btn-default col-md-1" style="height:27px;padding-top:2px;width:50px;margin-left:9px;">搜索</button>
             </form>
@@ -59,36 +59,35 @@
             <span class="col-md-8" style="padding-top:2px;">当前搜索："{{$searchkeyword}}"</span>
             {{/if}}
         </div>
-        <div class="row" id="doctorlist">
-            {{if $doctor_count>0}}
+        <div class="row" id="list">
+            {{if $hospital_count>0}}
             {{foreach from=$list item=rs}}
-            <a href="{{$rootpath}}/Doctor/doctor.php?id={{$rs.id}}">
-                <div class="col-md-2 text-center small Bold" style="margin-top:25px;">
+            <a href="{{$rootpath}}/Hospital/hospital.php?id={{$rs.id}}">
+                <div class="col-md-4 text-center small Bold" style="margin-top:25px;">
                     <div class="row">
-                        <img class="col-lg-12" src="{{$uploadpath}}/doctor/{{$rs.photo}}" />
+                        <img class="col-lg-12" src="{{$uploadpath}}/hospital/{{$rs.photo}}" />
                     </div>
                     <div class="row">{{$rs.name}}</div>
-                    <div class="row">{{$rs.position}}</div>
                 </div>
             </a>
             {{/foreach}}
             {{else}}
             <div class="col-lg-12" style="margin-top:25px;">
-                没有找到相关的医生，请再准确您的关键字重新搜索。
+                没有找到相关的医院，请再准确您的关键字重新搜索。
             </div>
             {{/if}}
         </div>
-        {{if $doctor_count>18 }}
+        {{if $hospital_count>9 }}
         <div class="row " style="margin-top:25px;" id="pageer">
             <div class="col-md-6 col-md-offset-3 frame2 text-center ">
                 <div class="row">
-                    <span class="col-md-3"><a href="{{$rootpath}}/Doctor/doctorlist.php?search={{$searchkeyword}}&page=1">首页</a></span>
+                    <span class="col-md-3"><a href="{{$rootpath}}/Hospital/hospitallist.php?search={{$searchkeyword}}&page=1">首页</a></span>
                     <span class="col-md-6">
                         {{foreach from=$page_arr.pages item=rs}}
-                        <span ><a {{if $rs==$current_page}}class='selected'{{/if}} href="{{$rootpath}}/Doctor/doctorlist.php?search={{$searchkeyword}}&page={{$rs}}">{{$rs}}</a></span>
+                        <span ><a {{if $rs==$current_page}}class='selected'{{/if}} href="{{$rootpath}}/Hospital/hospitallist.php?search={{$searchkeyword}}&page={{$rs}}">{{$rs}}</a></span>
                         {{/foreach}}
                     </span>
-                    <span class="col-md-3"><a href="{{$rootpath}}/Doctor/doctorlist.php?search={{$searchkeyword}}&page={{$page_arr.pagecount}}">末页</a></span>
+                    <span class="col-md-3"><a href="{{$rootpath}}/Hospital/hospitallist.php?search={{$searchkeyword}}&page={{$page_arr.pagecount}}">末页</a></span>
                 </div>
             </div>
         </div>

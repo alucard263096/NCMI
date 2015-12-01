@@ -50,6 +50,8 @@ color: #aaa !important;
 }
 #mainbody{
     width:932px;
+    max-width:932px;
+    min-width:932px;
     margin-left:auto;
     margin-right:auto;
 }
