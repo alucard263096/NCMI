@@ -1,0 +1,93 @@
+{{include  file="$smarty_root/header.html" }}
+
+<style >
+    #list div {
+        color: #000000;
+        font-weight: bold;
+    }
+    #list .unselectbar {
+        margin-top: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background-color: #C6DDF0;
+        cursor:pointer;
+    }
+    #list .selectbar {
+        background-color: #FFCCCC;
+    }
+</style>
+<style>
+
+    .itemup {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .item {
+        text-align: center;
+        background-image: url({{$rootpath}}/images/indexitem.png);
+        height: 26px;
+        margin-left: 3px;
+        margin-right: 3px;
+        line-height: 26px;
+    }
+</style>
+<div class="row">
+    <div class="col-md-3 ">
+        {{include  file="$smarty_root/subcatsearch.html" }}
+    </div>
+
+    <div class="col-md-9">
+        <div class="row">
+            <form action="{{$rootpath}}/Hospital/hospitallist.php">
+                <input type="text" class="col-md-3" name="search" placeholder="输入关键词搜索">
+                <button class="btn btn-default col-md-1" style="height:27px;padding-top:2px;width:50px;margin-left:9px;">搜索</button>
+                <input type="hidden" name="hospital_id" value="{{$hospital.id}}" />
+            </form>
+            {{if $searchkeyword!=""}}
+            <span class="col-md-8" style="padding-top:2px;">当前搜索："{{$searchkeyword}}"</span>
+            {{/if}}
+        </div>
+        <div class="row" id="list">
+            {{if $count>0}}
+            {{foreach from=$list item=rs}}
+            <div class="col-md-12 unselectbar" college_id="{{$rs.id}}">
+                <i class="glyphicon glyphicon-chevron-down" style="color: white; "></i>
+                {{$rs.name}}
+            </div>
+            <div class="col-md-12 hide" id="college_{{$rs.id}}">
+                {{foreach from=$rs.departments item=dep}}
+                <div class="col-md-2 itemup" style="margin-top:10px;">
+                    <div class="item"><a href="{{$rootpath}}/Doctor/doctorlist.php?search={{$hospital.name}}%20{{$dep.name}}">{{$dep.name}}</a></div>
+                </div>
+                {{/foreach}}
+            </div>
+            {{/foreach}}
+            {{else}}
+            <div class="col-lg-12" style="margin-top:25px;">
+                没有找到相关的科室，请再准确您的关键字重新搜索。
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+<div class="row">&nbsp;</div>
+
+<script>
+    $(document).ready(function () {
+        $(".unselectbar").click(function () {
+            var college_id = $(this).attr("college_id");
+            if ($(this).hasClass("selectbar")) {
+                $("#college_" + college_id).addClass("hide");
+                $(this).removeClass("selectbar");
+            } else {
+
+                $("#college_" + college_id).removeClass("hide");
+                $(this).addClass("selectbar");
+            }
+        });
+    });
+</script>
+
+
+{{include  file="$smarty_root/footer.html" }}

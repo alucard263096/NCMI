@@ -21,7 +21,7 @@
   $bannerlist=$bannerMgr->getIndexBannerList();
   $smarty->assign("bannerlist",$bannerlist);
 
-  $collegelist=$collegeMgr->getCollegeList();
+  $collegelist=$collegeMgr->getCollegeAll();
   $collegelistgroup=spliteArray($collegelist,2);
   $smarty->assign("collegelistgroup",$collegelistgroup);
 
