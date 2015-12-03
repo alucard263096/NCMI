@@ -1,0 +1,224 @@
+{{include  file="$smarty_root/header.html" }}
+<style>
+    .tips{
+        color:red;
+    }
+    .righttips {
+        color: green;
+    }
+    #logininfo .field{
+        padding-left:0px;
+        padding-right:5px;
+    }
+    #logininfo input {
+        width:95%;
+    }
+    #logininfo .btn-success {
+        background-color: #71B3CC;
+    }
+</style>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2" style="margin-top:30px;">
+        <div class="frame4" style="margin-left:auto;margin-right:auto;" id="logininfo" >
+            <div class="row title">
+                <span>注&nbsp;&nbsp;&nbsp;册</span>
+            </div>
+            <div class="row" style="margin-top:20px;">
+                <div class="col-md-3 field text-right">用户名：</div>
+                <div class="col-md-4 field"><input type="text" id="loginname" size="20" autofocus /></div>
+                <div class="col-md-5 field tips small" id="loginnametips">6-20位英文字母与数字组合</div>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-md-3 field  text-right">密码：</div>
+                <div class="col-md-4 field "><input type="password" id="password" size="20" /></div>
+                <div class="col-md-5  field tips small" id="passwordtips"></div>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-md-3 field  text-right">确认密码：</div>
+                <div class="col-md-4 field "><input type="password" id="repassword" /></div>
+                <div class="col-md-5  field tips small" id="repasswordtips"></div>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-md-3 field  text-right">性别：</div>
+                <div class="col-md-4 field ">
+                    <div class="col-md-6"><input type="radio" value="M" style="width:20px;" name="sexual" checked="checked" />男</div>
+                    <div class="col-md-6"><input type="radio" value="N" style="width:20px;" name="sexual" />女</div>
+                </div>
+                <div class="col-md-5  field tips small" id="repasswordtips"></div>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-md-3 field  text-right">邮箱：</div>
+                <div class="col-md-4 field "><input type="email" id="email" /></div>
+                <div class="col-md-5  field tips small" id="emailtips"></div>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-md-3 field  text-right">验证码：</div>
+                <div class="col-md-2 field "><input type="text" id="verifycode" size="4" /></div>
+                <div class="col-md-2  field tips small" >
+                    <img src="{{$rootpath}}/verifycode.php" style="100%" />
+                </div>
+                <div class="col-md-5  field tips small" id="verifycodetips"></div>
+            </div>
+            <div class="row" style="margin-top:5px;">
+                <div class="col-md-3 field  text-right"></div>
+                <div class="col-md-5 field small"><input type="checkbox" id="read" style="width:20px;" checked="checked" />我已经阅读并同意《用户注册协议》</div>
+
+                <div class="col-md-4  field tips small" id="readtips"></div>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-md-3 field  text-right"></div>
+                <div class="col-md-2 field">
+                    <button class="btn btn-success" id="btnSubmit" >立即注册</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#btnSubmit").click(function () {
+                var valid = true;
+                if (checkEmail() == false) {
+                    valid = false;
+                }
+                if (checkLoginname() == false) {
+                    valid = false;
+                }
+                if (checkPassword() == false) {
+                    valid = false;
+                }
+                if (checkRead() == false) {
+                    valid = false;
+                }
+                if (checkRepassword() == false) {
+                    valid = false;
+                }
+                if (checkVerifyCode() == false) {
+                    valid = false;
+                }
+                if (valid == false) {
+                    return;
+                }
+                alert(1);
+        });
+        $("#loginname").blur(function () {
+            checkLoginname();
+        });
+        function checkLoginname(){
+            var loginname = $("#loginname").val();
+            if (loginname.length < 6) {
+                showErrorTips("loginnametips", "请输入至少六位字符");
+                return false;
+            } else {
+                var re = /^[a-zA-z]\w{5,20}$/;
+                if (re.test(loginname) == false) {
+                    showErrorTips("loginnametips", "请输入英文和数字组合的用户名");
+                    return false;
+                } else {
+                    showCorrectTips("loginnametips", "正确");
+                }
+            }
+            return true;
+        }
+        $("#password").blur(function () {
+            checkPassword();
+        });
+        function checkPassword() {
+            var password = $("#password").val();
+            if (password.length < 6) {
+                showErrorTips("passwordtips", "请输入至少六位字符");
+                return false;
+            } else {
+                var lv = 0;
+                if (password.match(/[a-z]/g)) { lv++; }
+                if (password.match(/[0-9]/g)) { lv++; }
+                if (password.match(/(.[^a-z0-9])/g)) { lv++; }
+                if (password.length < 6) { lv = 0; }
+                if (lv > 3) { lv = 3; }
+                if (lv <= 1) {
+                    showErrorTips("passwordtips", "密码强度弱");
+                } else if (lv == 2) {
+                    showErrorTips("passwordtips", "密码强度中等");
+                }
+                else {
+                    showCorrectTips("passwordtips", "密码强度强");
+                }
+            }
+            return true;
+        }
+        $("#repassword").blur(function () {
+            checkRepassword();
+        });
+        function checkRepassword() {
+            var password = $("#password").val();
+            var repassword = $("#repassword").val();
+            if (repassword.length < 6) {
+                showErrorTips("repasswordtips", "请输入确认密码");
+                return false;
+            } else {
+
+                if (password != repassword) {
+                    showErrorTips("repasswordtips", "请输入与密码相同的确认密码");
+                    return false;
+                } else {
+                    showCorrectTips("repasswordtips", "正确");
+                }
+            }
+            return true;
+        }
+
+        $("#email").blur(function () {
+            checkEmail();
+        });
+        function checkEmail() {
+            var email = $("#email").val();
+            if (email.length < 5) {
+                showErrorTips("emailtips", "请输入邮箱");
+                return false;
+            } else {
+                var re = /^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+                if (re.test(email) == false) {
+                    showErrorTips("emailtips", "请输入正确的邮箱格式");
+                    return false;
+                } else {
+                    showCorrectTips("emailtips", "正确");
+                }
+            }
+            return true;
+        }
+        $("#verifycodetips").blur(function () {
+            checkVerifyCode();
+        });
+        function checkVerifyCode() {
+            var verifycode = $("#verifycode").val();
+            if (verifycode.length < 4) {
+                showErrorTips("verifycodetips", "请输入验证码");
+                return false;
+            }
+            return true;
+        }
+        function checkRead() {
+            if ($("#readtips").prop("checked") == false) {
+                showErrorTips("readtips", "请先阅读用户注册协议并勾选同意");
+                return false;
+            } else {
+                showErrorTips("");
+            }
+            return true;
+            
+        }
+    });
+    function showErrorTips(id, msg) {
+        $("#" + id).removeClass("righttips");
+        $("#" + id).text(msg);
+    }
+    function showCorrectTips(id, msg) {
+        $("#" + id).addClass("righttips");
+        $("#" + id).text(msg);
+    }
+</script>
+
+
+
+
+{{include  file="$smarty_root/footer.html" }}

@@ -120,6 +120,36 @@ color: #aaa !important;
     border-color:#D7D7D7;
     border-radius:2px;
 }
+.frame4{
+    background-image:url(../images/lgbg.png);
+    background-repeat:no-repeat;
+    border: 0px solid transparent;
+    border-color:#ffffff;
+    border-radius:2px;
+    width:582px;
+    height:380px;
+    color:#3A506D;
+}
+.frame4 input{
+    
+    border: 1px solid transparent;
+    border-color:#9FCD9F;
+}
+.frame4 .title{
+    height:65px;
+    color:#cccccc;
+    padding-top:30px;
+    text-align:center;
+    border-bottom-color:#aaa;
+    border-bottom:1px dashed  ;
+    margin-left:20px;
+    margin-right:20px;
+}
+.frame4 .title span{
+    color:#2468BF;
+    font-weight:bold;
+    font-size:16px;
+}
 
 #pageer span{
     padding:5px;
