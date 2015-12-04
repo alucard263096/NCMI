@@ -23,39 +23,39 @@
             <div class="row title">
                 <span>注&nbsp;&nbsp;&nbsp;册</span>
             </div>
-            <div class="row" style="margin-top:20px;">
+            <div class="row" style="margin-top:15px;">
                 <div class="col-md-3 field text-right">用户名：</div>
                 <div class="col-md-4 field"><input type="text" id="loginname" size="20" autofocus /></div>
                 <div class="col-md-5 field tips small" id="loginnametips">6-20位英文字母与数字组合</div>
             </div>
-            <div class="row" style="margin-top:15px;">
+            <div class="row" style="margin-top:10px;">
                 <div class="col-md-3 field  text-right">密码：</div>
                 <div class="col-md-4 field "><input type="password" id="password" size="20" /></div>
                 <div class="col-md-5  field tips small" id="passwordtips"></div>
             </div>
-            <div class="row" style="margin-top:15px;">
+            <div class="row" style="margin-top:10px;">
                 <div class="col-md-3 field  text-right">确认密码：</div>
                 <div class="col-md-4 field "><input type="password" id="repassword" /></div>
                 <div class="col-md-5  field tips small" id="repasswordtips"></div>
             </div>
-            <div class="row" style="margin-top:15px;">
+            <div class="row" style="margin-top:10px;">
                 <div class="col-md-3 field  text-right">性别：</div>
                 <div class="col-md-4 field ">
-                    <div class="col-md-6"><input type="radio" value="M" style="width:20px;" name="sexual" checked="checked" />男</div>
+                    <div class="col-md-6"><input type="radio" value="M" style="width:20px;" id="sexual_m" name="sexual" checked="checked" />男</div>
                     <div class="col-md-6"><input type="radio" value="N" style="width:20px;" name="sexual" />女</div>
                 </div>
                 <div class="col-md-5  field tips small" id="repasswordtips"></div>
             </div>
-            <div class="row" style="margin-top:15px;">
+            <div class="row" style="margin-top:10px;">
                 <div class="col-md-3 field  text-right">邮箱：</div>
                 <div class="col-md-4 field "><input type="email" id="email" /></div>
                 <div class="col-md-5  field tips small" id="emailtips"></div>
             </div>
-            <div class="row" style="margin-top:15px;">
+            <div class="row" style="margin-top:10px;">
                 <div class="col-md-3 field  text-right">验证码：</div>
                 <div class="col-md-2 field "><input type="text" id="verifycode" size="4" /></div>
                 <div class="col-md-2  field tips small" >
-                    <img src="{{$rootpath}}/verifycode.php" style="100%" />
+                    <img src="{{$rootpath}}/verifycode.php" id="verifypic" style="100%" />
                 </div>
                 <div class="col-md-5  field tips small" id="verifycodetips"></div>
             </div>
@@ -76,6 +76,9 @@
 </div>
 <script>
     $(document).ready(function () {
+        $("#verifypic").click(function () {
+            $("#verifypic").attr("src", "{{$rootpath}}/verifycode.php");
+        });
         $("#btnSubmit").click(function () {
                 var valid = true;
                 if (checkEmail() == false) {
@@ -99,7 +102,22 @@
                 if (valid == false) {
                     return;
                 }
-                alert(1);
+                var loginname = $("#loginname").val();
+                var password = $("#password").val(); 
+                var sexual = $("#sexual_m").prop("checked")?"M":"F";
+                var email = $("#email").val();
+                var verifycode = $("#verifycode").val();
+                var json = {
+                    "action": "submit",
+                    "loginname": loginname,
+                    "password": password,
+                    "sexual": sexual,
+                    "email": email,
+                    "verifycode": verifycode
+                };
+                $.post("{{$rootpath}}/reg.php", json, function (data) {
+
+                });
         });
         $("#loginname").blur(function () {
             checkLoginname();

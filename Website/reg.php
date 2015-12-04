@@ -7,9 +7,31 @@
  */
   require 'include/common.inc.php';
   include ROOT.'/include/init.inc.php';
+  require ROOT.'/classes/datamgr/member.cls.php';
   
-  
-  
-  $smarty->display(ROOT.'/templates/reg.html');
-  
+  $action=$_REQUEST["action"];
+
+  if($action=="submit"){
+	$verifycode=$_REQUEST["verifycode"];
+	$loginname=$_REQUEST["loginname"];
+	$email=$_REQUEST["email"];
+	$password=$_REQUEST["password"];
+	$sexual=$_REQUEST["sexual"];
+	if($verifycode!=$_SESSION[SESSIONNAME]['verifycode']){
+		echo "INVALID_VERIFYCODE";
+		exit;
+	}elseif($memberMgr->checkLoginNameUsed($loginname)){
+		echo "DUPLIC_LOGINNAME";
+		exit;
+	}elseif($memberMgr->checkEmailUsed($email)){
+		echo "DUPLIC_EMAIL";
+		exit;
+	}else{
+		$memberMgr->insertMember($loginname,$password,$email,$sexual);
+		echo "RIGHT";
+		exit;
+	}
+  }else{
+	$smarty->display(ROOT.'/templates/reg.html');
+  }
 ?>
