@@ -51,5 +51,25 @@
       <key>seo_description</key>
       <type>longtext</type>
     </field>
+    <field>
+      <name>邮箱</name>
+      <key>email</key>
+      <type>text</type>
+    </field>
+    <field>
+      <name>邮箱服务器</name>
+      <key>emailserver</key>
+      <type>text</type>
+    </field>
+    <field>
+      <name>邮箱账号</name>
+      <key>emailaccount</key>
+      <type>text</type>
+    </field>
+    <field>
+      <name>邮箱密码</name>
+      <key>emailpassword</key>
+      <type>text</type>
+    </field>
   </fields>
 </root>

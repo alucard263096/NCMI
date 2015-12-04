@@ -46,8 +46,8 @@
 		$sexual=parameter_filter($sexual);
 		$id=$this->dbmgr->getNewId("tb_member");
 		$verify_code=md5($loginname.$password);
-		$sql="insert into tb_member (id,loginname,password,email,sexual,is_verify,verifycode,created_date) values 
-		($id,'$loginname','$password','$email','$sexual','N','$verify_code',now()) ";
+		$sql="insert into tb_member (id,loginname,password,email,sexual,created_date) values 
+		($id,'$loginname','$password','$email','$sexual',now()) ";
 		
 		$query = $this->dbmgr->query($sql);
 

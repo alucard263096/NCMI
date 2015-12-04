@@ -117,9 +117,10 @@
                     "sexual": sexual,
                     "email": email,
                     "verifycode": verifycode
-                };
+                }; 
                 $("#btnSubmit").addClass("disabled");
-                $.post("{{$rootpath}}/reg.php", json, function (data) {
+                $("#input").addClass("disabled");
+                $.post("{{$rootpath}}/Member/reg.php", json, function (data) {
                     if (data == "INVALID_VERIFYCODE") {
                         showErrorTips("verifycodetips", "验证码错误");
                     } else if (data == "DUPLIC_LOGINNAME") {
@@ -127,11 +128,12 @@
                     } else if (data == "DUPLIC_EMAIL") {
                         showErrorTips("emailtips", "此邮箱已经注册，立即<a href='{{$rootpath}}/find.php'>找回密码<a/>？");
                     } else if (data == "RIGHT") {
-                        alert(data);
+                        document.location.href = "{{$rootpath}}/Member/reg_sent.php?email=" + email;
                     } else {
-                        alert("未知错误");
+                        alert(data);
                     }
                     $("#btnSubmit").removeClass("disabled");
+                    $("#input").removeClass("disabled");
                 });
         });
         $("#loginname").blur(function () {
