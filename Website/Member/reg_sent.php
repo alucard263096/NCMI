@@ -21,6 +21,6 @@
 	}
 	$smarty->display(ROOT.'/templates/reg_sent.html');
   }else{
-	WindowRedirect("../reg.php");
+	WindowRedirect("reg.php");
   }
 ?>

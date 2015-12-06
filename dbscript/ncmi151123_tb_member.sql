@@ -1,8 +1,8 @@
 CREATE DATABASE  IF NOT EXISTS `ncmi151123` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `ncmi151123`;
--- MySQL dump 10.13  Distrib 5.6.19, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.19, for Win32 (x86)
 --
--- Host: localhost    Database: ncmi151123
+-- Host: 120.24.239.49    Database: ncmi151123
 -- ------------------------------------------------------
 -- Server version	5.6.21-enterprise-commercial-advanced-log
 
@@ -34,6 +34,8 @@ CREATE TABLE `tb_member` (
   `is_verify` varchar(45) DEFAULT NULL,
   `verifycode` varchar(45) DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
+  `verifysent_date` datetime DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -44,6 +46,7 @@ CREATE TABLE `tb_member` (
 
 LOCK TABLES `tb_member` WRITE;
 /*!40000 ALTER TABLE `tb_member` DISABLE KEYS */;
+INSERT INTO `tb_member` VALUES (1,'aaaaaa','fd1dfc816d947e535d370565db588d3f','M','alucard263096@126.com',NULL,'Y','495db3eaebf91772245b2ad3b9e84412','2015-12-04 23:17:38','2015-12-06 11:51:36','A');
 /*!40000 ALTER TABLE `tb_member` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-04 17:23:30
+-- Dump completed on 2015-12-06 23:10:55

@@ -56,7 +56,7 @@ class mail
 <p>此致</p>
 <p>$sitename 管理团队.</p>";
 
-		$this->mail->Subject    = $subject;                     // 设置邮件标题
+		$this->mail->Subject    = "=?utf-8?B?" . base64_encode($subject)."?=";                     // 设置邮件标题
 		$this->mail->AltBody    = "为了查看该邮件，请切换到支持 HTML 的邮件客户端"; 
 														// 可选项，向下兼容考虑
 		$this->mail->MsgHTML($body);                         // 设置邮件内容

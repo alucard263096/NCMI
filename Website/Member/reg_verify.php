@@ -12,6 +12,13 @@
   $email=$_REQUEST["email"];
   $verifycode=$_REQUEST["verifycode"];
 
+  $member=$memberMgr->verifyMember($email,$verifycode);
 
+  if($member!=null){
+	$_SESSION[SESSIONNAME]["member"]=$member;
+	WindowRedirect("info.php");
+  }else{
+	WindowRedirect("login.php");
+  }
   
 ?>

@@ -126,7 +126,7 @@
                     } else if (data == "DUPLIC_LOGINNAME") {
                         showErrorTips("loginnametips", "用户名已经被使用");
                     } else if (data == "DUPLIC_EMAIL") {
-                        showErrorTips("emailtips", "此邮箱已经注册，立即<a href='{{$rootpath}}/find.php'>找回密码<a/>？");
+                        showErrorTips("emailtips", "此邮箱已经注册，立即<a href='{{$rootpath}}/forget.php'>找回密码<a/>？");
                     } else if (data == "RIGHT") {
                         document.location.href = "{{$rootpath}}/Member/reg_sent.php?email=" + email;
                     } else {

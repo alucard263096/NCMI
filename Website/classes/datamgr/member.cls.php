@@ -79,7 +79,7 @@
 		$email=parameter_filter($email);
 		$verficode=parameter_filter($verficode);
 
-		$sql="select * from tb_member 
+		 $sql="select * from tb_member 
 		where is_verify='N' 
 		and verifycode='$verficode' 
 		and email='$email' ";
@@ -89,21 +89,18 @@
 		if(count($result)>0){
 				$id=$result[0]["id"];
 				$sql="update tb_member set is_verify='Y' where id=$id ";
-				$query = $this->dbmgr->query($sql);
+				$this->dbmgr->query($sql);
 
 				return $result[0];
 		}
 		return null;
 	}
 
-	public function loginMember($loginname,$password){
+	public function loginMember($loginname){
 		$loginname=parameter_filter($loginname);
-		$password=md5(parameter_filter($password));
 		$sql="select * from tb_member 
-		where loginname='$loginname' 
-		and password='$password' 
-		and status='A' ";
-		
+		where loginname='$loginname' ";
+
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array($query);
 
