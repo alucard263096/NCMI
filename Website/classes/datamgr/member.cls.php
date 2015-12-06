@@ -46,8 +46,8 @@
 		$sexual=parameter_filter($sexual);
 		$id=$this->dbmgr->getNewId("tb_member");
 		$verify_code=md5($loginname.$password);
-		$sql="insert into tb_member (id,loginname,password,email,sexual,created_date) values 
-		($id,'$loginname','$password','$email','$sexual',now()) ";
+		$sql="insert into tb_member (id,loginname,password,email,sexual,created_date,status) values 
+		($id,'$loginname','$password','$email','$sexual',now(),'A') ";
 		
 		$query = $this->dbmgr->query($sql);
 
@@ -73,6 +73,41 @@
 		}
 
 		return "";
+	}
+
+	public function verifyMember($email,$verficode){
+		$email=parameter_filter($email);
+		$verficode=parameter_filter($verficode);
+
+		$sql="select * from tb_member 
+		where is_verify='N' 
+		and verifycode='$verficode' 
+		and email='$email' ";
+		
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query);
+		if(count($result)>0){
+				$id=$result[0]["id"];
+				$sql="update tb_member set is_verify='Y' where id=$id ";
+				$query = $this->dbmgr->query($sql);
+
+				return $result[0];
+		}
+		return null;
+	}
+
+	public function loginMember($loginname,$password){
+		$loginname=parameter_filter($loginname);
+		$password=md5(parameter_filter($password));
+		$sql="select * from tb_member 
+		where loginname='$loginname' 
+		and password='$password' 
+		and status='A' ";
+		
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query);
+
+		return $result;
 	}
 
  }
