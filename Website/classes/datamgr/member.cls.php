@@ -53,6 +53,28 @@
 
 	}
 
+	public function sentRegVerifyCode($email){
+		$email=parameter_filter($email);
+		$sql="select * from tb_member where  email='$email' 
+		and ifnull(is_verify,'N')='N' 
+		and (ifnull(verifysent_date,'')='' or TO_DAYS(NOW()) - TO_DAYS(verifysent_date) > 5)";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query);
+
+		if(count($result)>0){
+			$verifycode=md5($email.date("Y-m-i"));
+			$sql="update tb_member set 
+			verifycode='$verifycode'
+			,is_verify='N'
+			,verifysent_date=now()
+			where id=".$result[0]["id"];
+			$this->dbmgr->query($sql);
+			return $verifycode;
+		}
+
+		return "";
+	}
+
  }
  
  $memberMgr=MemberMgr::getInstance();

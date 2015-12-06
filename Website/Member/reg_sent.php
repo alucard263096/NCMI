@@ -14,8 +14,11 @@
   if($memberMgr->checkEmailUsed($email))
   {
 	$smarty->assign("email",$email);
+	$verifycode=$memberMgr->sentRegVerifyCode($email);
 	//故意的
-	$mailMgr->sentVerifyEmail($email,"http://www.baidu.com");
+	if($verifycode!=""){
+		$mailMgr->sentVerifyEmail($email,$CONFIG['URL']."/Member/reg_virify.php?email=$email&verifycode=$verifycode");
+	}
 	$smarty->display(ROOT.'/templates/reg_sent.html');
   }else{
 	WindowRedirect("../reg.php");
