@@ -70,7 +70,7 @@ class mail
 	}
 
 } 
-$mailMgr=new mail($siteinfo["emailserver"],  465,false,$siteinfo["emailaccount"],$siteinfo["emailpassword"]);
+$mailMgr=new mail($siteinfo["emailserver"],  465,true,$siteinfo["emailaccount"],$siteinfo["emailpassword"]);
 
 $mailMgr->sitename=$siteinfo["website_name"];
 $mailMgr->from=$siteinfo["email"];
