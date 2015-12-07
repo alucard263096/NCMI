@@ -1,0 +1,66 @@
+<style>
+    #member_menu {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        color: #2A6593;
+    }
+        #member_menu .option {
+            background: #9DCDD2;
+            border-radius: 4px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            margin-bottom:10px;
+            font-weight:bold;
+        }
+        #member_menu .selected a {
+            color: #004800;
+        }
+</style>
+<div class="row ">
+    <div class="col-lg-12">
+        <div id="member_menu" class="frame" style="">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 text-center" >
+                    <span style="font-size:18px;font-weight:bold;">
+                        <i class="glyphicon glyphicon-info-sign"></i>&nbsp;&nbsp;个人中心
+                    </span>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+                <div class="col-md-8 col-md-offset-2 text-center option {{if $menuid=='info'}}selected{{/if}}"  >
+                    <a href="{{$rootpath}}/Member/info.php">我的信息</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center option {{if $menuid=='file'}}selected{{/if}}">
+                    <a href="{{$rootpath}}/Member/filelist.php">我的档案</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center option {{if $menuid=='case'}}selected{{/if}}">
+                    <a href="{{$rootpath}}/Member/caselist.php">我的病历</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center option {{if $menuid=='booking'}}selected{{/if}}">
+                    <a href="{{$rootpath}}/Member/bookinglist.php">我的预约</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center option {{if $menuid=='order'}}selected{{/if}}">
+                    <a href="{{$rootpath}}/Member/orderlist.php">我的服务</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center option {{if $menuid=='doctor'}}selected{{/if}}">
+                    <a href="{{$rootpath}}/Member/doctorlist.php">我的家庭医生</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center option {{if $menuid=='focus'}}selected{{/if}}">
+                    <a href="{{$rootpath}}/Member/focuslist.php">我的关注</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

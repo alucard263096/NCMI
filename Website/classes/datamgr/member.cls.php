@@ -143,6 +143,23 @@
 		forget_verifycode='' where id=$id";
 		$query = $this->dbmgr->query($sql);
 	}
+
+	public function getBaseInfo($id){
+		$id=parameter_filter($id);
+
+		$sql="select * from tb_member_base_info where member_id=$id ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query);
+
+		if($result["member_id"]==""){
+			$sql="insert into tb_member_base_info (member_id) values ($id)";
+			$this->dbmgr->query($sql);
+		}
+
+		return $result;
+
+	}
+
  }
  
  $memberMgr=MemberMgr::getInstance();
