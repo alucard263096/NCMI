@@ -74,7 +74,22 @@
 
 		return "";
 	}
-
+	public function sentForgetVerifyCode($email){
+		$email=parameter_filter($email);
+		$sql="select * from tb_member where  email='$email' ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query);
+		if($result["forget_verifycode"]==""){
+			$verifycode=md5($email.date("Y-m-i"));
+			$sql="update tb_member set 
+			forget_verifycode='$verifycode'
+			where id=".$result["id"];
+			$this->dbmgr->query($sql);
+			return $verifycode;
+		}else{
+			return $result["forget_verifycode"];
+		}
+	}
 	public function verifyMember($email,$verficode){
 		$email=parameter_filter($email);
 		$verficode=parameter_filter($verficode);
@@ -95,6 +110,21 @@
 		}
 		return null;
 	}
+	public function verifyForgetMember($email,$verficode){
+		$email=parameter_filter($email);
+		$verficode=parameter_filter($verficode);
+
+		 $sql="select * from tb_member 
+		where forget_verifycode='$verficode' 
+		and email='$email' ";
+		
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query);
+		if(count($result)>0){
+			return $result[0];
+		}
+		return null;
+	}
 
 	public function loginMember($loginname){
 		$loginname=parameter_filter($loginname);
@@ -106,7 +136,13 @@
 
 		return $result;
 	}
-
+	public function resetPassword($id,$password){
+		$password=md5(parameter_filter($password));
+		$id=parameter_filter($id);
+		$sql="update tb_member set password='$password',
+		forget_verifycode='' where id=$id";
+		$query = $this->dbmgr->query($sql);
+	}
  }
  
  $memberMgr=MemberMgr::getInstance();

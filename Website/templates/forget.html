@@ -1,0 +1,173 @@
+{{include  file="$smarty_root/header.html" }}
+<style>
+    .tips {
+        color: red;
+    }
+
+    .righttips {
+        color: green;
+    }
+
+    #logininfo .field {
+        padding-left: 0px;
+        padding-right: 5px;
+    }
+
+    #logininfo input {
+        width: 95%;
+        padding-left:5px;
+    }
+
+    #logininfo .btn-success {
+        background-color: #71B3CC;
+        border-color: #71B3CC;
+    }
+</style>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2" style="margin-top:30px;">
+        <div class="frame4" style="margin-left:auto;margin-right:auto;" id="logininfo">
+            <div class="row title">
+                <span>找回密码</span>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-md-3 field text-right">用户名：</div>
+                <div class="col-md-4 field"><input type="text" id="loginname" size="20" autofocus /></div>
+                <div class="col-md-5 field tips small" id="loginnametips"></div>
+            </div>
+            <div class="row" style="margin-top:10px;">
+                <div class="col-md-3 field  text-right">邮箱：</div>
+                <div class="col-md-4 field "><input type="email" id="email" /></div>
+                <div class="col-md-5  field tips small" id="emailtips"></div>
+            </div>
+            <div class="row" style="margin-top:10px;">
+                <div class="col-md-3 field  text-right">验证码：</div>
+                <div class="col-md-2 field "><input type="text" id="verifycode" size="4" /></div>
+                <div class="col-md-2  field tips small">
+                    <img src="{{$rootpath}}/verifycode.php" id="verifypic" style="" />
+                </div>
+                <div class="col-md-5  field tips small" id="verifycodetips"></div>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-md-3 field  text-right"></div>
+                <div class="col-md-2 field">
+                    <button class="btn btn-success" id="btnSubmit">立即找回</button>
+                </div>
+                <div class="col-md-2 field">
+                    <button class="btn btn-success" id="btnBack">返回</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#verifypic").click(function () {
+            $("#verifypic").attr("src", "{{$rootpath}}/verifycode.php?rn="+Math.random());
+        });
+        $("#btnBack").click(function () {
+            window.location.href = "{{$rootpath}}/Member/login.php";
+        });
+        $("#btnSubmit").click(function () {
+                var valid = true;
+                if (checkEmail() == false) {
+                    valid = false;
+                }
+                if (checkLoginname() == false) {
+                    valid = false;
+                }
+                if (checkVerifyCode() == false) {
+                    valid = false;
+                }
+                if (valid == false) {
+                    return;
+                }
+                var loginname = $("#loginname").val();
+                var verifycode = $("#verifycode").val();
+                var email = $("#email").val();
+                var json = {
+                    "action": "submit",
+                    "loginname": loginname,
+                    "email": email,
+                    "verifycode": verifycode
+                }; 
+                $("#btnSubmit").addClass("disabled");
+                $("#input").addClass("disabled");
+                $.post("{{$rootpath}}/Member/forget.php", json, function (data) {
+                    if (data == "INVALID_VERIFYCODE") {
+                        showErrorTips("verifycodetips", "验证码错误");
+                    } else if (data == "NO_MEMBER") {
+                        showErrorTips("loginnametips", "找不到此用户名");
+                    } else if (data == "INACTIVE_MEMBER") {
+                        showErrorTips("loginnametips", "用户已被禁用，请联系管理员");
+                    } else if (data == "EMAIL_INCORRECT") {
+                        showErrorTips("emailtips", "用户与注册的邮箱不匹配，请确认后重新找回");
+                    } else if (data == "RIGHT") {
+                        document.location.href = "{{$rootpath}}/Member/forget_sent.php?email=" + email;
+                    } else {
+                        alert(data);
+                    }
+                    $("#btnSubmit").removeClass("disabled");
+                    $("#input").removeClass("disabled");
+                });
+        });
+        $("#loginname").blur(function () {
+            checkLoginname();
+        });
+        function checkLoginname(){
+            var loginname = $("#loginname").val();
+            if (loginname.length < 6) {
+                showErrorTips("loginnametips", "请输入至少六位字符");
+                return false;
+            } else {
+                showCorrectTips("loginnametips", "");
+            }
+            return true;
+        }
+        
+
+        $("#email").blur(function () {
+            checkEmail();
+        });
+        function checkEmail() {
+            var email = $("#email").val();
+            if (email.length < 5) {
+                showErrorTips("emailtips", "请输入邮箱");
+                return false;
+            } else {
+                var re = /^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+                if (re.test(email) == false) {
+                    showErrorTips("emailtips", "请输入正确的邮箱格式");
+                    return false;
+                } else {
+                    showCorrectTips("emailtips", "");
+                }
+            }
+            return true;
+        }
+        $("#verifycodetips").blur(function () {
+            checkVerifyCode();
+        });
+        function checkVerifyCode() {
+            var verifycode = $("#verifycode").val();
+            if (verifycode.length < 4) {
+                showErrorTips("verifycodetips", "请输入验证码");
+                return false;
+            } else {
+                showErrorTips("verifycodetips", "");
+            }
+            return true;
+        }
+        
+    });
+    function showErrorTips(id, msg) {
+        $("#" + id).removeClass("righttips");
+        $("#" + id).html(msg);
+    }
+    function showCorrectTips(id, msg) {
+        $("#" + id).addClass("righttips");
+        $("#" + id).html(msg);
+    }
+</script>
+
+
+{{include  file="$smarty_root/footer.html" }}

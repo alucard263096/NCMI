@@ -1,0 +1,57 @@
+{{include  file="$smarty_root/header.html" }}
+<style>
+    #info{
+        color:#000;
+    }
+        #info .btn-success {
+            background-color: #71B3CC;
+            border-color: #71B3CC;
+        }
+</style>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2" style="margin-top:30px;">
+        <div class="frame4" style="margin-left:auto;margin-right:auto;" id="info">
+            <div class="row title">
+                <span>身份验证成功</span>
+            </div>
+            <div class="row" style="padding-top:20px;">
+                <div class="col-md-8 col-md-offset-2">
+                    <b>已发送密码重置邮件至</b> {{$email}}
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px;">
+                <div class="col-md-8 col-md-offset-2 small">
+                    请您尽快登录邮箱并使用此邮件中附带的链接找回密码
+                </div>
+            </div>
+            <div class="row" style="padding-top:40px;">
+                <div class="col-md-8 col-md-offset-2">
+                    <button class="btn btn-success" id="btnVerify">登录邮箱</button>
+                </div>
+            </div>
+            <div class="row title">
+            </div>
+            <div class="row" style="padding-top:10px;color:#333">
+                <div class="col-md-8 col-md-offset-2">
+                    <b>没有收到验证邮件？</b>
+                </div>
+            </div>
+            <div class="row" style="padding-top:10px;color:#333">
+                <div class="col-md-8 col-md-offset-2 small">
+                    请在您的垃圾邮箱中的垃圾邮件，广告邮件目录里面找找看。
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#btnVerify").click(function () {
+            var email = "{{$email}}";
+            var emailarray = email.split("@");
+            var website = emailarray[emailarray.length-1];
+            window.location.href = "http://www."+website;
+        });
+    });
+</script>
+{{include  file="$smarty_root/footer.html" }}
