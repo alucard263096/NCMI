@@ -31,6 +31,6 @@
 		echo "RIGHT";
 	}
   }else{
-	$smarty->display(ROOT.'/templates/login.html');
+	$smarty->display(ROOT.'/templates/Member/login.html');
   }
 ?>

@@ -31,6 +31,6 @@
   $smarty->assign("searchurl","/Hospital/college.php?hospital_id=$hospital_id&");
 
   
-  $smarty->display(ROOT.'/templates/college.html');
+  $smarty->display(ROOT.'/templates/Hospital/college.html');
   
 ?>

@@ -15,6 +15,6 @@
   }
   $smarty->assign("info",$info);
   
-  $smarty->display(ROOT.'/templates/hospital.html');
+  $smarty->display(ROOT.'/templates/Hospital/hospital.html');
   
 ?>

@@ -19,7 +19,7 @@
 	if($verifycode!=""){
 		$mailMgr->sentVerifyEmail($email,$CONFIG['URL']."/Member/reg_verify.php?email=$email&verifycode=$verifycode");
 	}
-	$smarty->display(ROOT.'/templates/reg_sent.html');
+	$smarty->display(ROOT.'/templates/Member/reg_sent.html');
   }else{
 	WindowRedirect("reg.php");
   }

@@ -30,6 +30,6 @@
   $smarty->assign("searchurl","/Hospital/hospitallist.php?");
 
   
-  $smarty->display(ROOT.'/templates/hospitallist.html');
+  $smarty->display(ROOT.'/templates/Hospital/hospitallist.html');
   
 ?>

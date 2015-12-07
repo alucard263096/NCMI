@@ -27,7 +27,7 @@
 		$smarty->assign("verifycode",$verifycode);
 		$smarty->assign("email",$email);
 		$smarty->assign("loginname",$member["loginname"]);
-		$smarty->display(ROOT.'/templates/reset_password.html');
+		$smarty->display(ROOT.'/templates/Member/reset_password.html');
 	}
   }else{
 	if($_SESSION[SESSIONNAME]["member"]["id"]==""){

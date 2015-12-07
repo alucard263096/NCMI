@@ -34,6 +34,6 @@
 		echo "RIGHT";
 	}
   }else{
-	$smarty->display(ROOT.'/templates/forget.html');
+	$smarty->display(ROOT.'/templates/Member/forget.html');
   }
 ?>

@@ -18,7 +18,7 @@
 	$url=$CONFIG['URL']."/Member/forget_verify.php?email=$email&verifycode=$verifycode";
 	$mailMgr->sentForgetEmail($email,$url);
 	
-	$smarty->display(ROOT.'/templates/forget_sent.html');
+	$smarty->display(ROOT.'/templates/Member/forget_sent.html');
   }else{
 	WindowRedirect("reg.php");
   }

@@ -12,6 +12,6 @@
   $info=$doctorMgr->getDoctor($_REQUEST["id"]);
   $smarty->assign("info",$info);
   
-  $smarty->display(ROOT.'/templates/doctor.html');
+  $smarty->display(ROOT.'/templates/Doctor/doctor.html');
   
 ?>

@@ -32,6 +32,6 @@
 		exit;
 	}
   }else{
-	$smarty->display(ROOT.'/templates/reg.html');
+	$smarty->display(ROOT.'/templates/Member/reg.html');
   }
 ?>
