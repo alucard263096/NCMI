@@ -160,6 +160,49 @@
 
 	}
 
+	public function updateBaseInfo($id,$request){
+		$mobile=parameter_filter($request["mobile"]);
+		$name=parameter_filter($request["name"]);
+		$identity=parameter_filter($request["identity"]);
+		$nation=parameter_filter($request["nation"]);
+		$birth=parameter_filter($request["birth"]);
+		$tel=parameter_filter($request["tel"]);
+		$address=parameter_filter($request["address"]);
+
+		$sql="update tb_member set mobile='$mobile' where id=$id ";
+		$this->dbmgr->query($sql);
+
+		$sql="update tb_member_base_info set name='$name'
+		,identity='$identity'
+		,nation='$nation'
+		,birth='$birth'
+		,tel='$tel'
+		,address='$address' 
+		where member_id=$id ";
+		$this->dbmgr->query($sql);
+	}
+
+	public function getFileList($member_id){
+		$sql="select * from tb_member_file where member_id=$member_id and status='A' ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query);
+		for($i=0;$i<count($result);$i++){
+			$fill=0;
+			$total=count($result[$i]);
+			for($j=0;$j<$total;$j++){
+				if(trim($result[$i][$j])!=""){
+					$fill++;
+				}
+			}
+			$result[$i]["finish"]=round($fill*100/($total/2),-1);
+		}
+		return $result;
+	}
+	public function deleteFileList($member_id,$filelist){
+		$filelist=parameter_filter($filelist);
+		$sql="update tb_member_file set status='D',updated_date=now() where id in ($filelist) and member_id=$member_id";
+		$this->dbmgr->query($sql);
+	}
  }
  
  $memberMgr=MemberMgr::getInstance();

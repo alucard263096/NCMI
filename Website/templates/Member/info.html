@@ -42,7 +42,7 @@
                 <div class="row">
                     <div class="col-md-2 fieldname">民族：</div>
                     <div class="col-md-10 field">
-                        <input id="member_nation" maxlength="10" type="text" value="{{if $base_info.nation!=""}}{{$base_info.nation}}汉{{else}}{{/if}}" />
+                        <input id="member_nation" maxlength="10" type="text" value="{{if $base_info.nation!=""}}{{$base_info.nation}}{{else}}汉{{/if}}" />
                     </div>
                 </div>
                 <div class="row">
@@ -77,7 +77,7 @@
                 </div>
                 <div class="row" style="margin-top:40px;">
                     <div class="col-md-2 fieldname">
-                        <button class="btn btn-success">保存</button>
+                        <button class="btn btn-success" id="btnSave">保存</button>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,27 @@
 </div>
 <script>
     $(document).ready(function () {
-
+        $("#btnSave").click(function () {
+            var json = {
+                action: "submit",
+                name: $("#member_name").val(),
+                identity: $("#member_identity").val(),
+                nation: $("#member_nation").val(),
+                birth: $("#member_birth").val(),
+                mobile: $("#member_mobile").val(),
+                tel: $("#member_tel").val(),
+                address: $("#member_address").val()
+            };
+            $("#btnSave").addClass("disabled");
+            $("#input").addClass("disabled");
+            $.post("{{$rootpath}}/Member/info.php", json, function (data) {
+                if (data != "RIGHT") {
+                    alert(data);
+                }
+                $("#btnSave").removeClass("disabled");
+                $("#input").removeClass("disabled");
+            });
+        });
     });
 </script>
 {{include  file="$smarty_root/footer.html" }}

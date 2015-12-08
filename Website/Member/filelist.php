@@ -9,19 +9,18 @@
   include ROOT.'/include/init.inc.php';
   include ROOT.'/include/member.inc.php';
   require ROOT.'/classes/datamgr/member.cls.php';
+
   $action=$_REQUEST["action"];
   if($action=="submit"){
-
-	$memberMgr->updateBaseInfo($member["id"],$_REQUEST);
-	$_SESSION[SESSIONNAME]["member"]["mobile"]=$_REQUEST["mobile"];
-	echo "RIGHT";
-	exit;
-
+  $filelist=$_REQUEST["filelist"];
+  $memberMgr->deleteFileList($member["id"],$filelist);
+  echo "RIGHT";
+  exit;
   }else{
   
-	  $base_info=$memberMgr->getBaseInfo($member["id"]);
-	  $smarty->assign("base_info",$base_info);
-	  $smarty->assign("menuid","info");
-	  $smarty->display(ROOT.'/templates/Member/info.html');
+   $filelist=$memberMgr->getFileList($member["id"]);
+   $smarty->assign("filelist",$filelist);
+	$smarty->assign("menuid","file");
+	$smarty->display(ROOT.'/templates/Member/filelist.html');
   }
 ?>
