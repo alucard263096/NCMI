@@ -160,7 +160,18 @@ color: #aaa !important;
     border-color:#D7D7D7;
     border-radius:2px;
 }
+.btn-success {
+        background-color: #71B3CC;
+        border-color: #71B3CC;
+    }
 
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active {
+        background-color: #2E6995;
+        border-color: #2E6995;
+    }
 .test{
     background-color:#ffd800;
 }
