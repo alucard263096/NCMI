@@ -1,0 +1,634 @@
+{{include  file="$smarty_root/header.html" }}
+<style>
+    #box {
+        margin-top: 10px;
+        min-height: 320px;
+    }
+    #box .fieldset{
+        margin-top:10px;
+    }
+        #box .fieldname,.field {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #box input,select {
+            padding-left: 5px;
+            width: 80%;
+            border: solid 1px #9DCDD2;
+        }
+</style>
+<div class="row">
+    <div class="col-md-3 ">
+        {{include  file="$smarty_root/Member/menu.html" }}
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12 " id="box">
+                <div class="row">
+                    <div class="col-md-10" style="margin-bottom:20px;">
+                        <div class="row fieldset">
+                            <div class="col-md-2  fieldname">档案标题:</div>
+                            <div class="col-md-10 field">
+                                <input id="title" value="{{if $info.id==""}}我的档案{{else}}{{$info.title}}{{/if}}" maxlength="50" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">姓名:</div>
+                            <div class="col-md-9 field">
+                                <input id="name" value="{{$info.name}}" maxlength="10"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">性别:</div>
+                            <div class="col-md-9 field">
+                                <select class="notnull" id="sexual">
+                                    <option value=''>--选择--</option>
+                                    <option value="M" {{if $info.sexual=="M"}}selected{{/if}}>男</option>
+                                    <option value="F" {{if $info.sexual=="F" }}selected{{/if}}>女</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">年龄:</div>
+                            <div class="col-md-9 field">
+                                <input id="age" type="number" value="{{$info.age}}" maxlength="3" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">生日:</div>
+                            <div class="col-md-9 field">
+                                <input id="birth" value="{{$info.birth}}" placeholder="例:1986-3-1" maxlength="15" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">国籍:</div>
+                            <div class="col-md-9 field">
+                                <input id="nation" value="{{if $info.id==""}}中国{{else}}{{$info.nation}}{{/if}}" maxlength="10" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">民族:</div>
+                            <div class="col-md-9 field">
+                                <input id="majority" value="{{if $info.id==""}}汉{{else}}{{$info.majority}}{{/if}}" maxlength="10" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">籍贯:</div>
+                            <div class="col-md-9 field">
+                                <input id="oriplace" value="{{$info.oriplace}}" maxlength="10" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">电话:</div>
+                            <div class="col-md-9 field">
+                                <input id="tel" value="{{$info.tel}}" maxlength="20" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">婚况:</div>
+                            <div class="col-md-9 field">
+                                <select class="notnull" id="marriaged">
+                                    <option value=''>--选择--</option>
+                                    <option value="S" {{if $info.marriaged=="S" }}selected{{/if}}>未婚</option>
+                                    <option value="M" {{if $info.marriaged=="M" }}selected{{/if}}>已婚</option>
+                                    <option value="D" {{if $info.marriaged=="D" }}selected{{/if}}>离异</option>
+                                    <option value="L" {{if $info.marriaged=="L" }}selected{{/if}}>丧偶</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">学历:</div>
+                            <div class="col-md-9 field">
+                                <select class="notnull" id="education">
+                                    <option value=''>--选择--</option>
+                                    <option value="N" {{if $info.education=="N" }}selected{{/if}}>初中</option>
+                                    <option value="H" {{if $info.education=="H" }}selected{{/if}}>高中</option>
+                                    <option value="P" {{if $info.education=="P" }}selected{{/if}}>大专</option>
+                                    <option value="B" {{if $info.education=="B" }}selected{{/if}}>本科</option>
+                                    <option value="M" {{if $info.education=="M" }}selected{{/if}}>硕士</option>
+                                    <option value="D" {{if $info.education=="D" }}selected{{/if}}>博士</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">身份证号:</div>
+                            <div class="col-md-9 field">
+                                <input id="identity" value="{{$info.identity}}" style="width:90%" maxlength="20" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">职业:</div>
+                            <div class="col-md-9 field">
+                                <input id="profession" value="{{$info.profession}}" maxlength="20" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row fieldset">
+                            <div class="col-md-2  fieldname">工作单位:</div>
+                            <div class="col-md-10 field">
+                                <input id="workspace" value="{{$info.workspace}}" style="width:94%" maxlength="50" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row fieldset">
+                            <div class="col-md-2  fieldname">家庭地址:</div>
+                            <div class="col-md-10 field">
+                                <input id="home_address" value="{{$info.home_address}}" style="width:94%" maxlength="50" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">邮编:</div>
+                            <div class="col-md-9 field">
+                                <input id="postcode" value="{{$info.postcode}}" maxlength="10" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">内部编码:</div>
+                            <div class="col-md-9 field">
+                                <input id="internal_code" value="{{$info.internal_code}}" style="width:90%" maxlength="20" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">诊断编码:</div>
+                            <div class="col-md-9 field">
+                                <input id="diagnosis_code" value="{{$info.diagnosis_code}}" style="width:90%" maxlength="20" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">联系人</div>
+                            <div class="col-md-9 field">
+                                <input id="postcode" value="{{$info.postcode}}" maxlength="10" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">关系:</div>
+                            <div class="col-md-9 field">
+                                <input id="contact_relationship" value="{{$info.contact_relationship}}" maxlength="10" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">联系电话</div>
+                            <div class="col-md-8 field">
+                                <input id="contact_tel" value="{{$info.contact_tel}}" maxlength="15" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">联系地址</div>
+                            <div class="col-md-8 field">
+                                <input id="contact_address" value="{{$info.contact_address}}" maxlength="50" style="width:77%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row fieldset">
+                            <div class="col-md-1  fieldname">主要诊断</div>
+                            <div class="col-md-11 field">
+                                <input id="diagnosis" value="{{$info.diagnosis}}" maxlength="500" style="width:96%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row fieldset">
+                            <div class="col-md-2  fieldname">月经史:</div>
+                            <div class="col-md-10 field">
+                                <input id="menstrual_history" value="{{$info.menstrual_history}}" maxlength="50" style="width:91%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row fieldset">
+                            <div class="col-md-2  fieldname">生育史:</div>
+                            <div class="col-md-10 field">
+                                <input id="childbearing_history" value="{{$info.childbearing_history}}" maxlength="50" style="width:91%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row fieldset">
+                            <div class="col-md-1  fieldname">过敏药物:</div>
+                            <div class="col-md-11 field">
+                                <input id="allergic_history" value="{{$info.allergic_history}}" maxlength="500" style="width:96%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row fieldset">
+                            <div class="col-md-1  fieldname">既往病史:</div>
+                            <div class="col-md-11 field">
+                                <input id="disease_history" value="{{$info.disease_history}}" maxlength="500" style="width:96%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row fieldset">
+                            <div class="col-md-2  fieldname">个人史:</div>
+                            <div class="col-md-10 field">
+                                <input id="person_history" value="{{$info.person_history}}" maxlength="50" style="width:91%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row fieldset">
+                            <div class="col-md-2  fieldname">家族史:</div>
+                            <div class="col-md-10 field">
+                                <input id="family_history" value="{{$info.family_history}}" maxlength="50" style="width:91%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">吸烟量:</div>
+                            <div class="col-md-4 field">
+                                <input id="smoke" type="number" value="{{$info.smoke}}" maxlength="3" />
+                            </div>
+                            <div class="col-md-4  fieldname">支/天</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">长达:</div>
+                            <div class="col-md-4 field">
+                                <input id="smoke_months" type="number" value="{{$info.smoke_months}}" maxlength="3" />
+                            </div>
+                            <div class="col-md-4  fieldname">年</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">饮酒量:</div>
+                            <div class="col-md-4 field">
+                                <input id="drink" type="number" value="{{$info.drink}}" maxlength="3" />
+                            </div>
+                            <div class="col-md-4  fieldname">克/天</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">长达:</div>
+                            <div class="col-md-4 field">
+                                <input id="drink_months" type="number" value="{{$info.drink_months}}" maxlength="3" />
+                            </div>
+                            <div class="col-md-4  fieldname">年</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">锻炼:</div>
+                            <div class="col-md-4 field">
+                                <input id="exercise" type="number" value="{{$info.exercise}}" maxlength="3" />
+                            </div>
+                            <div class="col-md-4  fieldname">年</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">每周:</div>
+                            <div class="col-md-4 field">
+                                <input id="exercise_inweek" type="number" value="{{$info.exercise_inweek}}" maxlength="3" />
+                            </div>
+                            <div class="col-md-4  fieldname">次</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">每次:</div>
+                            <div class="col-md-4 field">
+                                <input id="exercise_intime" type="number" value="{{$info.exercise_intime}}" maxlength="3" />
+                            </div>
+                            <div class="col-md-4  fieldname">小时</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">类型:</div>
+                            <div class="col-md-8 field">
+                                <input id="exercise_type" value="{{$info.exercise_type}}" maxlength="50" style="width:77%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-3  fieldname">血型:</div>
+                            <div class="col-md-9 field">
+                                <select class="notnull" id="blood_type">
+                                    <option value=''>--选择--</option>
+                                    <option value="A" {{if $info.blood_type=="A" }}selected{{/if}}>A型</option>
+                                    <option value="B" {{if $info.blood_type=="B" }}selected{{/if}}>B型</option>
+                                    <option value="AB" {{if $info.blood_type=="AB" }}selected{{/if}}>AB型</option>
+                                    <option value="O" {{if $info.blood_type=="O" }}selected{{/if}}>O型</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">饮食嗜好</div>
+                            <div class="col-md-8 field">
+                                <input id="diet" value="{{$info.diet}}" maxlength="20" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row fieldset">
+                            <div class="col-md-2  fieldname">生活事件</div>
+                            <div class="col-md-10 field">
+                                <input id="live" value="{{$info.live}}" maxlength="50" style="width:91%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row fieldset">
+                            <div class="col-md-2  fieldname">药物滥用</div>
+                            <div class="col-md-10 field">
+                                <input id="medical" value="{{$info.medical}}" maxlength="50" style="width:91%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row fieldset">
+                            <div class="col-md-2  fieldname">卫生习惯</div>
+                            <div class="col-md-10 field">
+                                <input id="health" value="{{$info.health}}" maxlength="50" style="width:91%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">隶属社区:</div>
+                            <div class="col-md-8 field">
+                                <input id="block" value="{{$info.block}}" maxlength="20" style="width:83%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">隶属派出所:</div>
+                            <div class="col-md-8 field">
+                                <input id="block_office" value="{{$info.block_office}}" maxlength="20" style="width:83%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">户籍类型:</div>
+                            <div class="col-md-8 field">
+                                <select class="notnull" id="identity_type" style="width:83%">
+                                    <option value=''>--选择--</option>
+                                    <option value="U" {{if $info.identity_type=="U" }}selected{{/if}}>城镇</option>
+                                    <option value="C" {{if $info.identity_type=="C" }}selected{{/if}}>农村</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">宗教信仰:</div>
+                            <div class="col-md-8 field">
+                                <input id="religion" value="{{$info.religion}}" maxlength="20" style="width:83%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">医保类型:</div>
+                            <div class="col-md-8 field">
+                                <select class="notnull" id="insurance" style="width:83%">
+                                    <option value=''>--选择--</option>
+                                    <option value="W" {{if $info.insurance=="W" }}selected{{/if}}>城镇职工</option>
+                                    <option value="R" {{if $info.insurance=="R" }}selected{{/if}}>城镇居民</option>
+                                    <option value="N" {{if $info.insurance=="N" }}selected{{/if}}>新农合</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">医保卡号:</div>
+                            <div class="col-md-8 field">
+                                <input id="insurance_no" value="{{$info.insurance_no}}" maxlength="20" style="width:83%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row fieldset">
+                            <div class="col-md-1  fieldname">健康状况:</div>
+                            <div class="col-md-11 field">
+                                <input id="health_level" value="{{$info.health_level}}" maxlength="500" style="width:96%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">身高:</div>
+                            <div class="col-md-5 field">
+                                <input id="height" value="{{$info.height}}" type="number" maxlength="3" />
+                            </div>
+                            <div class="col-md-3 field">
+                                厘米
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">体重:</div>
+                            <div class="col-md-5 field">
+                                <input id="weight" value="{{$info.weight}}" type="number" maxlength="3" />
+                            </div>
+                            <div class="col-md-3 field">
+                                公斤
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row fieldset">
+                            <div class="col-md-6  fieldname">BMI:</div>
+                            <div class="col-md-6 field">
+                                <input id="BMI" value="{{$info.BMI}}" type="number" maxlength="5" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">胸围:</div>
+                            <div class="col-md-5 field">
+                                <input id="bust" value="{{$info.bust}}" type="number" maxlength="3" />
+                            </div>
+                            <div class="col-md-3 field">
+                                厘米
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">臀围:</div>
+                            <div class="col-md-5 field">
+                                <input id="waistlines" value="{{$info.waistlines}}" type="number" maxlength="3" />
+                            </div>
+                            <div class="col-md-3 field">
+                                厘米
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">腰围:</div>
+                            <div class="col-md-5 field">
+                                <input id="hip" value="{{$info.hip}}" type="number" maxlength="3" />
+                            </div>
+                            <div class="col-md-3 field">
+                                厘米
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">收入来源:</div>
+                            <div class="col-md-5 field">
+                                <input id="income" value="{{$info.income}}"  maxlength="10" />
+                            </div>
+                            <div class="col-md-3 field">
+                                万元/年
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">拼音简写:</div>
+                            <div class="col-md-8 field">
+                                <input id="pingyin" value="{{$info.pingyin}}" maxlength="40" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row fieldset">
+                            <div class="col-md-4  fieldname">五笔简写:</div>
+                            <div class="col-md-8 field">
+                                <input id="wubi" value="{{$info.wubi}}" maxlength="40" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-md-1">
+                        <button class="btn btn-success" id="btnSave">保存</button>
+                    </div>
+                    {{if $info.id!=""}}
+                    <div class="col-md-1">
+                        <button class="btn btn-success" id="btnDelete">删除</button>
+                    </div>
+                    {{/if}}
+                    <div class="col-md-1">
+                        <button class="btn " id="btnReturn">返回</button>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-12" style="color:red" id="tips">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#btnReturn").click(function () {
+            window.location.href = "{{$rootpath}}/Member/filelist.php";
+        });
+        $("#btnDelete").click(function () {
+            var filelist = "{{$info.id}}";
+            
+            if (confirm("确定要删除当前档案吗？")) {
+                filelist = "0" + filelist;
+
+                var json = {
+                    "action": "submit",
+                    "filelist": filelist
+                };
+                $("#btnDelete").addClass("disabled");
+                $.post("{{$rootpath}}/Member/filelist.php", json, function (data) {
+                    if (data == "RIGHT") {
+                        window.location.href = "{{$rootpath}}/Member/filelist.php";
+                    } else {
+                        alert(data);
+                    }
+
+                    $("#btnDelete").removeClass("disabled");
+                });
+            }
+        });
+        $("#btnSave").click(function () {
+            var title = $("#box #title").val();
+            if ($.trim(title) == "") {
+                $("#tips").text("请输入档案标题");
+                return;
+            }
+            var json = {
+                "action": "submit",
+                "id":"{{$info.id}}"
+            };
+            $("#box .fieldset .field input,select").each(function (index) {
+                var key = $(this).attr("id");
+                var val = $(this).val();
+                json[key] = val;
+            });
+            $("#btnSave").addClass("disabled");
+            $("#input").addClass("disabled");
+            $.post("{{$rootpath}}/Member/file.php", json, function (data) {
+                if (data.substring(0, 5) == "RIGHT") {
+                    {{if $info.id==""}}
+                    var id=  data.substring(5);
+                    window.location.href="{{$rootpath}}/Member/file.php?id="+id;
+                    {{else}}
+                    location.reload();
+                    {{/if}}
+                } else {
+                    alert(data);
+                    }
+                    $("#btnSave").removeClass("disabled");
+                    $("#input").removeClass("disabled");
+            });
+        });
+    });
+</script>
+{{include  file="$smarty_root/footer.html" }}

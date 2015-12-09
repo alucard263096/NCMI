@@ -203,6 +203,290 @@
 		$sql="update tb_member_file set status='D',updated_date=now() where id in ($filelist) and member_id=$member_id";
 		$this->dbmgr->query($sql);
 	}
+	public function getFile($member_id,$id){
+		$id=parameter_filter($id);
+		$id=$id+0;
+		$member_id=parameter_filter($member_id);
+		
+		$sql="select * from tb_member_file where member_id=$member_id and id=$id ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query);
+		return $result;
+	}
+	public function saveFile($member_id,$request){
+		$id=parameter_filter($request["id"]);
+		$title=parameter_filter($request["title"]);
+		$name=parameter_filter($request["name"]);
+		$sexual=parameter_filter($request["sexual"]);
+		$age=parameter_filter($request["age"]);
+		$birth=parameter_filter($request["birth"]);
+		$country=parameter_filter($request["country"]);
+		$nation=parameter_filter($request["nation"]);
+		$majority=parameter_filter($request["majority"]);
+		$oriplace=parameter_filter($request["oriplace"]);
+		$tel=parameter_filter($request["tel"]);
+		$marriaged=parameter_filter($request["marriaged"]);
+		$education=parameter_filter($request["education"]);
+		$identity=parameter_filter($request["identity"]);
+		$profession=parameter_filter($request["profession"]);
+		$workspace=parameter_filter($request["workspace"]);
+		$home_address=parameter_filter($request["home_address"]);
+		$postcode=parameter_filter($request["postcode"]);
+		$internal_code=parameter_filter($request["internal_code"]);
+		$diagnosis_code=parameter_filter($request["diagnosis_code"]);
+		$contact_people=parameter_filter($request["contact_people"]);
+		$contact_relationship=parameter_filter($request["contact_relationship"]);
+		$contact_tel=parameter_filter($request["contact_tel"]);
+		$contact_address=parameter_filter($request["contact_address"]);
+		$diagnosis=parameter_filter($request["diagnosis"]);
+		$menstrual_history=parameter_filter($request["menstrual_history"]);
+		$childbearing_history=parameter_filter($request["childbearing_history"]);
+		$allergic_history=parameter_filter($request["allergic_history"]);
+		$disease_history=parameter_filter($request["disease_history"]);
+		$person_history=parameter_filter($request["person_history"]);
+		$family_history=parameter_filter($request["family_history"]);
+		$smoke=parameter_filter($request["smoke"]);
+		$smoke_months=parameter_filter($request["smoke_months"]);
+		$drink=parameter_filter($request["drink"]);
+		$drink_months=parameter_filter($request["drink_months"]);
+		$exercise=parameter_filter($request["exercise"]);
+		$exercise_inweek=parameter_filter($request["exercise_inweek"]);
+		$exercise_intime=parameter_filter($request["exercise_intime"]);
+		$exercise_type=parameter_filter($request["exercise_type"]);
+		$blood_type=parameter_filter($request["blood_type"]);
+		$diet=parameter_filter($request["diet"]);
+		$live=parameter_filter($request["live"]);
+		$medical=parameter_filter($request["medical"]);
+		$health=parameter_filter($request["health"]);
+		$religion=parameter_filter($request["religion"]);
+		$insurance=parameter_filter($request["insurance"]);
+		$household=parameter_filter($request["household"]);
+		$health_level=parameter_filter($request["health_level"]);
+		$height=parameter_filter($request["height"]);
+		$weight=parameter_filter($request["weight"]);
+		$BMI=parameter_filter($request["BMI"]);
+		$bust=parameter_filter($request["bust"]);
+		$waistlines=parameter_filter($request["waistlines"]);
+		$hip=parameter_filter($request["hip"]);
+		$income=parameter_filter($request["income"]);
+		$pingyin=parameter_filter($request["pingyin"]);
+		$wubi=parameter_filter($request["wubi"]);
+		$block=parameter_filter($request["block"]);
+		$block_office=parameter_filter($request["block_office"]);
+		$identity_type=parameter_filter($request["identity_type"]);
+		$insurance_no=parameter_filter($request["insurance_no"]);
+		$id=$id+0;
+		if($id==0){
+		
+		$id=$this->dbmgr->getNewId("tb_member_file");
+			$sql="
+			INSERT INTO `tb_member_file`
+(`id`,
+`member_id`,
+`title`,
+`name`,
+`sexual`,
+`age`,
+`birth`,
+`country`,
+`nation`,
+`majority`,
+`oriplace`,
+`tel`,
+`marriaged`,
+`education`,
+`identity`,
+`profession`,
+`workspace`,
+`home_address`,
+`postcode`,
+`internal_code`,
+`diagnosis_code`,
+`contact_people`,
+`contact_relationship`,
+`contact_tel`,
+`contact_address`,
+`diagnosis`,
+`menstrual_history`,
+`childbearing_history`,
+`allergic_history`,
+`disease_history`,
+`person_history`,
+`family_history`,
+`smoke`,
+`smoke_months`,
+`drink`,
+`drink_months`,
+`exercise`,
+`exercise_inweek`,
+`exercise_intime`,
+`exercise_type`,
+`blood_type`,
+`diet`,
+`live`,
+`medical`,
+`health`,
+`religion`,
+`insurance`,
+`household`,
+`health_level`,
+`height`,
+`weight`,
+`BMI`,
+`bust`,
+`waistlines`,
+`hip`,
+`income`,
+`pingyin`,
+`wubi`,
+`created_date`,
+`updated_date`,
+`status`,
+`block`,
+`block_office`,
+`identity_type`,
+`insurance_no`)
+VALUES
+($id,
+$member_id,
+'$title',
+'$name',
+'$sexual',
+'$age',
+'$birth',
+'$country',
+'$nation',
+'$majority',
+'$oriplace',
+'$tel',
+'$marriaged',
+'$education',
+'$identity',
+'$profession',
+'$workspace',
+'$home_address',
+'$postcode',
+'$internal_code',
+'$diagnosis_code',
+'$contact_people',
+'$contact_relationship',
+'$contact_tel',
+'$contact_address',
+'$diagnosis',
+'$menstrual_history',
+'$childbearing_history',
+'$allergic_history',
+'$disease_history',
+'$person_history',
+'$family_history',
+'$smoke',
+'$smoke_months',
+'$drink',
+'$drink_months',
+'$exercise',
+'$exercise_inweek',
+'$exercise_intime',
+'$exercise_type',
+'$blood_type',
+'$diet',
+'$live',
+'$medical',
+'$health',
+'$religion',
+'$insurance',
+'$household',
+'$health_level',
+'$height',
+'$weight',
+'$BMI',
+'$bust',
+'$waistlines',
+'$hip',
+'$income',
+'$pingyin',
+'$wubi',
+now(),
+now(),
+'A',
+'$block',
+'$block_office',
+'$identity_type',
+'$insurance_no');
+
+			";
+		}else{
+$sql="
+UPDATE `tb_member_file`
+SET
+`title` = '$title',
+`name` = '$name',
+`sexual` = '$sexual',
+`age` = '$age',
+`birth` = '$birth',
+`country` = '$country',
+`nation` = '$nation',
+`majority` = '$majority',
+`oriplace` = '$oriplace',
+`tel` = '$tel',
+`marriaged` = '$marriaged',
+`education` = '$education',
+`identity` = '$identity',
+`profession` = '$profession',
+`workspace` = '$workspace',
+`home_address` = '$home_address',
+`postcode` = '$postcode',
+`internal_code` = '$internal_code',
+`diagnosis_code` = '$diagnosis_code',
+`contact_people` = '$contact_people',
+`contact_relationship` = '$contact_relationship',
+`contact_tel` = '$contact_tel',
+`contact_address` = '$contact_address',
+`diagnosis` = '$diagnosis',
+`menstrual_history` = '$menstrual_history',
+`childbearing_history` = '$childbearing_history',
+`allergic_history` = '$allergic_history',
+`disease_history` = '$disease_history',
+`person_history` = '$person_history',
+`family_history` = '$family_history',
+`smoke` = '$smoke',
+`smoke_months` = '$smoke_months',
+`drink` = '$drink',
+`drink_months` = '$drink_months',
+`exercise` = '$exercise',
+`exercise_inweek` = '$exercise_inweek',
+`exercise_intime` = '$exercise_intime',
+`exercise_type` = '$exercise_type',
+`blood_type` = '$blood_type',
+`diet` = '$diet',
+`live` = '$live',
+`medical` = '$medical',
+`health` = '$health',
+`religion` = '$religion',
+`insurance` = '$insurance',
+`household` = '$household',
+`health_level` = '$health_level',
+`height` = '$height',
+`weight` = '$weight',
+`BMI` = '$BMI',
+`bust` = '$bust',
+`waistlines` = '$waistlines',
+`hip` = '$hip',
+`income` = '$income',
+`pingyin` = '$pingyin',
+`wubi` = '$wubi',
+`updated_date` = now(),
+`block` = '$block',
+`block_office` = '$block_office',
+`identity_type` = '$identity_type',
+`insurance_no` = '$insurance_no'
+WHERE 
+`id` = $id and 
+`member_id` = $member_id;
+";
+		}
+		$this->dbmgr->query($sql);
+		return $id;
+	}
  }
  
  $memberMgr=MemberMgr::getInstance();

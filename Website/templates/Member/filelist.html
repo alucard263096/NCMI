@@ -36,7 +36,7 @@
                 {{foreach from=$filelist item=rs}}
                 <div class="row" style="margin-top:5px;">
                     <div class="col-md-4">
-                        <input type="checkbox" class="filecheck" fileid="{{$rs.id}}" /><a href="{{$rootpath}}/Member/file.php?id={{$rs.id}}">{{$rs.title}}</a>
+                        <input type="checkbox" class="filecheck" fileid="{{$rs.id}}" /> <a href="{{$rootpath}}/Member/file.php?id={{$rs.id}}">{{$rs.title}}</a>
                     </div>
                     <div class="col-md-4">
                         {{$rs.finish}}%
@@ -88,22 +88,26 @@
             });
             if (filelist == "") {
                 $("#tips").text("请至少选择一个档案进行删除");
+                return;
             }
-            filelist = "0" + filelist;
-            var json = {
-                "action": "submit",
-                "filelist": filelist
-            };
-            $("#btnDelete").addClass("disabled");
-            $.post("{{$rootpath}}/Member/filelist.php",json, function (data) {
-                if (data == "RIGHT") {
-                    location.reload();
-                } else {
-                    alert(data);
-                }
+            if (confirm("确定要删除选中的档案吗？")) {
+                filelist = "0" + filelist;
 
-                $("#btnDelete").removeClass("disabled");
-            });
+                var json = {
+                    "action": "submit",
+                    "filelist": filelist
+                };
+                $("#btnDelete").addClass("disabled");
+                $.post("{{$rootpath}}/Member/filelist.php", json, function (data) {
+                    if (data == "RIGHT") {
+                        location.reload();
+                    } else {
+                        alert(data);
+                    }
+
+                    $("#btnDelete").removeClass("disabled");
+                });
+            }
         });
     });
 </script>

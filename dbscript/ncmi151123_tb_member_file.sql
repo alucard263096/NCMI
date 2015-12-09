@@ -34,6 +34,7 @@ CREATE TABLE `tb_member_file` (
   `birth` varchar(45) DEFAULT NULL,
   `country` varchar(45) DEFAULT NULL,
   `nation` varchar(45) DEFAULT NULL,
+  `majority` varchar(45) DEFAULT NULL,
   `oriplace` varchar(45) DEFAULT NULL,
   `tel` varchar(45) DEFAULT NULL,
   `marriaged` varchar(45) DEFAULT NULL,
@@ -72,7 +73,7 @@ CREATE TABLE `tb_member_file` (
   `religion` varchar(45) DEFAULT NULL,
   `insurance` varchar(45) DEFAULT NULL,
   `household` varchar(45) DEFAULT NULL,
-  `health_level` varchar(45) DEFAULT NULL,
+  `health_level` varchar(450) DEFAULT NULL,
   `height` varchar(45) DEFAULT NULL,
   `weight` varchar(45) DEFAULT NULL,
   `BMI` varchar(45) DEFAULT NULL,
@@ -85,6 +86,10 @@ CREATE TABLE `tb_member_file` (
   `created_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
+  `block` varchar(45) DEFAULT NULL,
+  `block_office` varchar(45) DEFAULT NULL,
+  `identity_type` varchar(45) DEFAULT NULL,
+  `insurance_no` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -95,7 +100,7 @@ CREATE TABLE `tb_member_file` (
 
 LOCK TABLES `tb_member_file` WRITE;
 /*!40000 ALTER TABLE `tb_member_file` DISABLE KEYS */;
-INSERT INTO `tb_member_file` VALUES (1,1,'测试1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2015-12-09 00:21:03','A'),(2,1,'测试2',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2015-12-09 00:21:03','A'),(3,1,'测试3',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2015-12-09 00:20:39','A');
+INSERT INTO `tb_member_file` VALUES (1,1,'测试1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2015-12-09 00:21:03','A',NULL,NULL,NULL,NULL),(2,1,'测试2','','','','','','','','','','','','家庭地址','','家庭地址','家庭地址','','家庭地址','日哦','','','','','日哦','家庭地址','','日哦','家庭地址','','','','','','','','','','','','','','家庭地址','家庭地址','','','','','','','','','','','','','',NULL,'2015-12-10 02:02:42','A','','','',''),(3,1,'测试3','','--选择--','','','','','','','','--选择--','--选择--','','','','','','','','','','','','','日','日','日','','','','','','','','','','','','--选择--','','','','','','--选择--','','','','','','','','','','','',NULL,'2015-12-10 01:58:57','A','','','--选择--',''),(4,1,'我的档案','蔡笋','M','18','1986-03-24','','中国','汉','广东','25547926','M','M','440301198603247514','工程师','深圳东海国际中心','龙岗怡龙枫景园1栋A座201','刘存','1234567','87954541','','夫妻','13622353259','西丽','没有什么主要诊断','男的没有月经','一个女儿','没有','脂溢性皮炎既往病史','脂溢性皮炎个人史','无家族史','0','0','0','0','5','1','2','足球','A','无饮食嗜好','无生活事件','药物滥用','卫生习惯','宗教信仰:','W','','健康状况','181','74','21.','38','49','50','10','ABC','GGD','2015-12-10 01:51:20','2015-12-10 01:57:49','A','隶属社区','隶属派出所','U','852');
 /*!40000 ALTER TABLE `tb_member_file` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -108,4 +113,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-09  0:23:33
+-- Dump completed on 2015-12-10  2:03:15
