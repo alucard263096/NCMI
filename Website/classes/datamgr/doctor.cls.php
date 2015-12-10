@@ -55,7 +55,7 @@ inner join tb_hospital h on d.hospital_id=h.id
 		
 		$startrow=($page-1)*18;
 		if($startrow>0){
-			$startrow=$startrow-1;
+			//$startrow=$startrow-1;
 		}
 		
 		$arrcol=array();

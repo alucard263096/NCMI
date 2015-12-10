@@ -1,0 +1,148 @@
+{{include  file="$smarty_root/header.html" }}
+<style>
+    #box{
+        min-height:540px;
+    }
+    #box .case{
+        height:150px;
+        background-color:#F2F2F2;
+        border:solid 1px #cccccc;
+        border-radius:4px;
+        width:95%;
+        margin-bottom:30px;
+    }
+    #box .case .logo{
+        margin-top:20px;
+    }
+    #box .case .fieldname{
+        color:#5587C6;
+        font-size:15px;
+        font-weight:bold;
+        padding-left:0px;
+        padding-right:0px;
+    }
+    #box .case .field{
+        padding-left:0px;
+        padding-right:0px;
+    }
+    #box .case .field input{
+         padding-left: 5px;
+         width: 80%;
+         border: solid 1px #9DCDD2;
+    }
+    #box .case .btn-success{
+        background-color:#6386AE;
+        border-color:#6386AE;
+        padding-left:30px;
+        padding-right:30px;
+    }
+</style>
+<div class="row">
+    <div class="col-md-3 ">
+        {{include  file="$smarty_root/Member/menu.html" }}
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12 " id="box">
+                {{foreach from=$list item=rs}}
+                <div class="case">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img class="col-md-10 col-md-offset-1 logo" src="{{$rootpath}}/Images/aidbox.png" />
+                        </div>
+                        <div class="col-md-6" style="padding-left:0px;">
+                            <div class="row logo">
+                                <div class="col-md-3 fieldname">会诊标题:</div>
+                                <div class="col-md-9 field">
+                                    <input type="text" value="{{$rs.title}}" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-md-3 fieldname">会诊医生:</div>
+                                <div class="col-md-9 field">
+                                    <input type="text" readonly="readonly" value="{{$rs.doctor_name}}" />
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-md-3 fieldname">会诊日期:</div>
+                                <div class="col-md-9 field">
+                                    <input type="text" readonly="readonly" value="{{$rs.meeting_date}}" />
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-md-3 fieldname">简要描述:</div>
+                                <div class="col-md-9 field">
+                                    <input type="text" readonly="readonly" value="{{$rs.summary}}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row logo">
+                                <button class="btn btn-xs btn-success btnFile" case_id="{{$rs.id}}">文件管理</button>
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <button class="btn btn-xs btn-success btnEdit" case_id="{{$rs.id}}">
+                                    {{if $rs.status=='T'}}修改内容{{else}}查看内容{{/if}}
+                                </button>
+                            </div>
+                            {{if $rs.status=='T'}}
+                            <div class="row" style="margin-top:10px;">
+                                <button class="btn btn-xs btn-success btnDelete" case_id="{{$rs.id}}">删除记录</button>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+                {{/foreach}}
+            </div>
+        {{if $count>3 }}
+        <div class="row " style="margin-top:25px;" id="pageer">
+            <div class="col-md-6 col-md-offset-3 frame2 text-center ">
+                <div class="row">
+                    <span class="col-md-3"><a href="{{$rootpath}}/Member/caselist.php?page=1">首页</a></span>
+                    <span class="col-md-6">
+                        {{foreach from=$page_arr.pages item=rs}}
+                        <span ><a {{if $rs==$current_page}}class='selected'{{/if}} href="{{$rootpath}}/Member/caselist.php?page={{$rs}}">{{$rs}}</a></span>
+                        {{/foreach}}
+                    </span>
+                    <span class="col-md-3"><a href="{{$rootpath}}/Member/caselist.php?page={{$page_arr.pagecount}}">末页</a></span>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".btnFile").click(function () {
+            var case_id = $(this).attr("case_id");
+            window.location.href = "{{$rootpath}}/Member/case_filelist.php?case_id=" + case_id;
+        });
+        $(".btnEdit").click(function () {
+            var case_id = $(this).attr("case_id");
+            window.location.href = "{{$rootpath}}/Member/case.php?id=" + case_id;
+        });
+        $(".btnDelete").click(function () {
+            var case_id = $(this).attr("case_id");
+
+            if (confirm("确定要删除病历吗？")) {
+                var json = {
+                    "action": "submit",
+                    "caselist": case_id
+                };
+                $("#btnDelete").addClass("disabled");
+                $.post("{{$rootpath}}/Member/caselist.php", json, function (data) {
+                    if (data == "RIGHT") {
+                        location.reload();
+                    } else {
+                        alert(data);
+                    }
+
+                    $("#btnDelete").removeClass("disabled");
+                });
+            }
+        });
+    });
+</script>
+{{include  file="$smarty_root/footer.html" }}

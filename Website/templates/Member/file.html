@@ -573,7 +573,7 @@
 <script>
     $(document).ready(function () {
         $("#btnReturn").click(function () {
-            window.location.href = "{{$rootpath}}/Member/filelist.php";
+            window.history.go(-1);
         });
         $("#btnDelete").click(function () {
             var filelist = "{{$info.id}}";

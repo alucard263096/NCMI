@@ -50,7 +50,7 @@
 		
 		$startrow=($page-1)*18;
 		if($startrow>0){
-			$startrow=$startrow-1;
+			//$startrow=$startrow-1;
 		}
 		
 		$arrcol=array();

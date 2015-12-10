@@ -1,0 +1,163 @@
+{{include  file="$smarty_root/header.html" }}
+<style>
+    #box {
+        min-height:320px;
+        background-color:#ffffff;
+        border:solid 1px #cccccc;
+        border-radius:4px;
+    }
+    #box .bar{
+        margin-top:5px;
+        margin-bottom:5px;
+        margin-left:15px;
+        margin-right:15px;
+        background-color:#89B0D8;
+        border:solid 1px #89B0D8;
+        border-radius:4px;
+        height:20px;
+        color:#ffffff
+    }
+    #box .bar .bartitle{
+        padding-left:25px;
+    }
+    #box .bar .dot{
+        background-color:#ffffff;
+        border:solid 1px #ffffff;
+        border-radius:10px;
+        height:10px;
+        width:10px;
+        color:#ffffff;
+        margin-top:4px;
+        margin-left:10px;
+        float:left;
+    }
+    #box .title{
+        font-size:20px;
+        font-weight:bold;
+        margin-top:20px;
+    }
+    #box #formtable{
+        margin-top:7px;
+        width:660px;
+        margin-left:15px;
+    }
+    #box #formtable input{
+        border:0px;
+    }
+    #box .fieldset{
+        margin-top:10px;
+    }
+        #box .fieldname,.field {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #box input,select {
+            padding-left: 5px;
+            width: 80%;
+            border: solid 1px #9DCDD2;
+        }
+</style>
+<div class="row">
+    <div class="col-md-3 ">
+        {{include  file="$smarty_root/Member/menu.html" }}
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div id="box">
+                    <div class="row bar">
+                        <div class="dot"></div>
+                        <div class="small bartitle">选择全部/取消全部</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center title">
+                            远程会诊报告单
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <table id="formtable" border="1">
+                                <tr>
+                                    <td>申请单位:</td>
+                                    <td colspan="3">{{$info.apply_hospital}}</td>
+                                    <td>申请日期:</td>
+                                    <td>{{$info.apply_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>患者姓名:</td>
+                                    <td><input type="text" value="{{$info.name}}" /></td>
+                                    <td>性别:</td>
+                                    <td>{{$info.apply_date}}</td>
+                                    <td>申请日期:</td>
+                                    <td>{{$info.apply_date}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#btnReturn").click(function () {
+            window.location.href = "{{$rootpath}}/Member/filelist.php";
+        });
+        $("#btnDelete").click(function () {
+            var filelist = "{{$info.id}}";
+            
+            if (confirm("确定要删除当前档案吗？")) {
+                filelist = "0" + filelist;
+
+                var json = {
+                    "action": "submit",
+                    "filelist": filelist
+                };
+                $("#btnDelete").addClass("disabled");
+                $.post("{{$rootpath}}/Member/filelist.php", json, function (data) {
+                    if (data == "RIGHT") {
+                        window.location.href = "{{$rootpath}}/Member/filelist.php";
+                    } else {
+                        alert(data);
+                    }
+
+                    $("#btnDelete").removeClass("disabled");
+                });
+            }
+        });
+        $("#btnSave").click(function () {
+            var title = $("#box #title").val();
+            if ($.trim(title) == "") {
+                $("#tips").text("请输入档案标题");
+                return;
+            }
+            var json = {
+                "action": "submit",
+                "id":"{{$info.id}}"
+            };
+            $("#box .fieldset .field input,select").each(function (index) {
+                var key = $(this).attr("id");
+                var val = $(this).val();
+                json[key] = val;
+            });
+            $("#btnSave").addClass("disabled");
+            $("#input").addClass("disabled");
+            $.post("{{$rootpath}}/Member/file.php", json, function (data) {
+                if (data.substring(0, 5) == "RIGHT") {
+                    {{if $info.id==""}}
+                    var id=  data.substring(5);
+                    window.location.href="{{$rootpath}}/Member/file.php?id="+id;
+                    {{else}}
+                    location.reload();
+                    {{/if}}
+                } else {
+                    alert(data);
+                    }
+                    $("#btnSave").removeClass("disabled");
+                    $("#input").removeClass("disabled");
+            });
+        });
+    });
+</script>
+{{include  file="$smarty_root/footer.html" }}

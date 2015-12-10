@@ -181,7 +181,56 @@
 		where member_id=$id ";
 		$this->dbmgr->query($sql);
 	}
+	
+	public function getCaseList($member_id,$page){
+		
+		$startrow=($page-1)*3;
+		if($startrow>0){
+			$startrow=$startrow;
+		}
+		$sql="select a.*,d.name doctor_name from tb_member_case a
+		inner join tb_doctor d on a.doctor_id=d.id
+		where a.member_id=$member_id and a.status<>'D'
+		order by a.meeting_date desc 
+		limit $startrow,3 ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query);
+		
+		return $result;
+	}
+	public function getCase($member_id,$id){
+		$id=parameter_filter($id);
+		$id=$id+0;
+		$member_id=parameter_filter($member_id);
+		
+		$sql="select c.*
+,d.name doc_name,h.name hospital_name,f.title file_name 
+from tb_member_case c
+inner join tb_doctor d on c.doctor_id=d.id
+inner join tb_hospital h on c.hospital_id=h.id
+inner join tb_member_file f on c.file_id=f.id
+ where c.member_id=$member_id and c.id=$id ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query);
 
+		return $result;
+	}
+	public function deleteCaseList($member_id,$caselist){
+		if($caselist!=""){
+			$caselist=parameter_filter($caselist);
+			$sql="update tb_member_case set status='D',updated_date=now() where id in ($caselist) and member_id=$member_id";
+			$this->dbmgr->query($sql);
+		}
+	}
+	public function getCaseListPageCount($member_id){
+	$searchsql=splitCodition($arrcol,$search);
+		$sql="select sum(1) count from (select a.* from tb_member_case a
+		inner join tb_doctor d on a.doctor_id=d.id
+		where a.member_id=$member_id and a.status<>'D' ) dc";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+		return $result["count"];
+	}
 	public function getFileList($member_id){
 		$sql="select * from tb_member_file where member_id=$member_id and status='A' ";
 		$query = $this->dbmgr->query($sql);
