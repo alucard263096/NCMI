@@ -12,8 +12,8 @@
 
   $action=$_REQUEST["action"];
   if($action=="submit"){
-  $id=$memberMgr->saveCase($member["id"],$_REQUEST);
-  echo "RIGHT$id";
+  $memberMgr->saveCaseInMember($member["id"],$_REQUEST);
+  echo "RIGHT";
   exit;
   }else{
   $id=$_REQUEST["id"];

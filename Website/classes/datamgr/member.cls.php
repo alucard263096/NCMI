@@ -188,7 +188,7 @@
 		if($startrow>0){
 			$startrow=$startrow;
 		}
-		$sql="select a.*,d.name doctor_name from tb_member_case a
+		$sql="select a.*,d.name d_name from tb_member_case a
 		inner join tb_doctor d on a.doctor_id=d.id
 		where a.member_id=$member_id and a.status<>'D'
 		order by a.meeting_date desc 
@@ -204,11 +204,12 @@
 		$member_id=parameter_filter($member_id);
 		
 		$sql="select c.*
-,d.name doc_name,h.name hospital_name,f.title file_name 
+,d.name doc_name,h.name hospital_name,f.title file_name,dp.name department_name
 from tb_member_case c
 inner join tb_doctor d on c.doctor_id=d.id
 inner join tb_hospital h on c.hospital_id=h.id
 inner join tb_member_file f on c.file_id=f.id
+inner join tb_department dp on c.department_id=dp.id
  where c.member_id=$member_id and c.id=$id ";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array($query);
@@ -533,6 +534,33 @@ WHERE
 `member_id` = $member_id;
 ";
 		}
+		$this->dbmgr->query($sql);
+		return $id;
+	}
+	
+	
+	public function saveCaseInMember($member_id,$request){
+		$id=parameter_filter($request["id"]);
+		$apply_hospital=parameter_filter($request["apply_hospital"]);
+		$apply_date=parameter_filter($request["apply_date"]);
+		$name=parameter_filter($request["name"]);
+		$sexual=parameter_filter($request["sexual"]);
+		$age=parameter_filter($request["age"]);
+		
+		$id=$id+0;
+		
+$sql="
+UPDATE `tb_member_case`
+SET
+apply_hospital='$apply_hospital',
+apply_date='$apply_date',
+name='$name',
+sexual='$sexual',
+age='$age'
+where 
+`id` = $id and 
+`member_id` = $member_id;
+";
 		$this->dbmgr->query($sql);
 		return $id;
 	}

@@ -1,4 +1,8 @@
 {{include  file="$smarty_root/header.html" }}
+<link rel="stylesheet" media="screen" href="{{$rootpath}}/vendors/bootstrap-datepicker/css/datepicker.css">
+<link rel="stylesheet" media="screen" href="{{$rootpath}}/css/datepicker.fixes.css">
+<script type="text/javascript" src="{{$rootpath}}/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{$rootpath}}/vendors/html2canvas/dist/html2canvas.js"></script>
 <style>
     #box {
         min-height:320px;
@@ -43,6 +47,17 @@
     }
     #box #formtable input{
         border:0px;
+        border-color:#ffffff;
+        text-align:center;
+    }
+        #box #formtable select {
+            border: 0px;
+            border-color: #ffffff;
+            text-align: center;
+        }
+    #box #formtable td{
+        width:110px;
+        height:30px;
     }
     #box .fieldset{
         margin-top:10px;
@@ -56,6 +71,18 @@
             width: 80%;
             border: solid 1px #9DCDD2;
         }
+        #box .result {
+            padding-left: 45px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        #box .content {
+            padding-left: 75px;
+            padding-right: 75px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
 </style>
 <div class="row">
     <div class="col-md-3 ">
@@ -67,7 +94,7 @@
                 <div id="box">
                     <div class="row bar">
                         <div class="dot"></div>
-                        <div class="small bartitle">选择全部/取消全部</div>
+                        <div class="small bartitle">家庭医生服务管理中心</div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-center title">
@@ -75,24 +102,120 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-12 text-right small" style="padding-right:30px;">
+                            * 请真实填写报告单中的信息
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-12 text-center">
                             <table id="formtable" border="1">
                                 <tr>
                                     <td>申请单位:</td>
-                                    <td colspan="3">{{$info.apply_hospital}}</td>
+                                    <td colspan="3"><input id="apply_hospital" class="notnull" type="text" value="{{$info.apply_hospital}}" /></td>
                                     <td>申请日期:</td>
-                                    <td>{{$info.apply_date}}</td>
+                                    <td><input type="text" class="datepicker notnull" id="apply_date" value="{{$info.apply_date}}" /></td>
                                 </tr>
                                 <tr>
                                     <td>患者姓名:</td>
-                                    <td><input type="text" value="{{$info.name}}" /></td>
+                                    <td><input type="text" class="notnull" id="name" value="{{$info.name}}" /></td>
                                     <td>性别:</td>
-                                    <td>{{$info.apply_date}}</td>
-                                    <td>申请日期:</td>
-                                    <td>{{$info.apply_date}}</td>
+                                    <td>
+                                        <select>
+                                            <option value="M" {{if $info.sexual=='M'}}selected="selected"{{/if}}>男</option>
+                                            <option value="F" {{if $info.sexual=='F'}}selected="selected" {{/if}}>女</option>
+                                        </select>
+                                    </td>
+                                    <td>申请年龄:</td>
+                                    <td><input type="number" class="notnull" id="age" value="{{$info.age}}" /></td>
+                                </tr>
+                                <tr>
+                                    <td>会诊类别：</td>
+                                    <td>{{$info.category}}</td>
+                                    <td>会诊方式：</td>
+                                    <td>{{$info.way}}</td>
+                                    <td>紧急程度：</td>
+                                    <td>{{$info.urgent}}</td>
+                                </tr>
+                                <tr>
+                                    <td>专家要求:</td>
+                                    <td colspan="3">{{$info.necessary}}</td>
+                                    <td>会诊日期:</td>
+                                    <td>{{$info.meeting_date}}</td>
+                                </tr>
+                                <tr style="height:60px;">
+                                    <td >初步诊断:</td>
+                                    <td colspan="5">{{$info.first_result}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="col-md-8 text-left">
+                                            服务方医院: {{$info.hospital_name}}
+                                        </div>
+                                        <div class="col-md-4 text-right">
+                                            服务方科室: {{$info.department_name}}
+                                        </div>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12 result" style="margin-top:20px;">
+                                病情分析
+                            </div>
+                            <div class="col-md-12  content">
+                                <p>{{$info.result}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 result" >
+                                临床诊断
+                            </div>
+                            <div class="col-md-12  content">
+                                <p>{{$info.checking}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 result" >
+                                治疗方案
+                            </div>
+                            <div class="col-md-12  content">
+                                <p>{{$info.solution}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 result">
+                                注意事项
+                            </div>
+                            <div class="col-md-12  content">
+                                <p>{{$info.caution}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" style="margin-top:20px;">
+                <div class="row text-center">                    
+                    {{if $info.status=='T'}}
+                    <button class="btn btn-success" id="btnUpload" >上传资料</button>                    
+                    {{/if}}
+                    {{if $info.status=='T'}}
+                    <button class="btn btn-success " id="btnSave">修改报告</button>
+                    {{/if}}                                        
+                    {{if $info.status=='T'}}
+                    <button class="btn btn-success " id="btnSubmit">提交报告</button>
+                    {{/if}}                                        
+                    {{if $info.status=='T'}}
+                    <button class="btn btn-success " id="btnAbandon">作废报告</button>
+                    {{/if}}                
+                    {{if $info.status=='F'}}
+                    <button class="btn btn-success " id="btnDownload">下载报告</button>                     
+                    {{/if}}                               
+                    {{if $info.status=='F'}}
+                    <button class="btn btn-success " id="btnPrint">打印报告</button>                    
+                    {{/if}}            
+                </div>
+                <div class="row  text-center" style="">
+                    <div class="col-md-12" style="color:red" id="tips">
                     </div>
                 </div>
             </div>
@@ -101,56 +224,64 @@
 </div>
 <script>
     $(document).ready(function () {
+        
+        
+        $('.datepicker').datepicker({ format: "yyyy-mm-dd" });
         $("#btnReturn").click(function () {
             window.location.href = "{{$rootpath}}/Member/filelist.php";
         });
-        $("#btnDelete").click(function () {
-            var filelist = "{{$info.id}}";
+        $("#btnAbandon").click(function () {
+            var caselist = "{{$info.id}}";
             
-            if (confirm("确定要删除当前档案吗？")) {
-                filelist = "0" + filelist;
-
+            if (confirm("确定要作废当前病历吗？")) {
                 var json = {
                     "action": "submit",
-                    "filelist": filelist
+                    "caselist": caselist
                 };
-                $("#btnDelete").addClass("disabled");
-                $.post("{{$rootpath}}/Member/filelist.php", json, function (data) {
+                $("#btnAbandon").addClass("disabled");
+                $.post("{{$rootpath}}/Member/caselist.php", json, function (data) {
                     if (data == "RIGHT") {
-                        window.location.href = "{{$rootpath}}/Member/filelist.php";
+                        window.history.go(-1);
                     } else {
                         alert(data);
                     }
 
-                    $("#btnDelete").removeClass("disabled");
+                    $("#btnAbandon").removeClass("disabled");
                 });
             }
         });
         $("#btnSave").click(function () {
-            var title = $("#box #title").val();
-            if ($.trim(title) == "") {
-                $("#tips").text("请输入档案标题");
+            var allnotnull=true;
+
+            $("#box .notnull").each(function (index) {
+                if($.trim($(this).val())==""){
+                    allnotnull=false;
+                    $(this).css("border-bottom","1px solid red");
+                }else{
+                    $(this).css("border-bottom","0px solid red");
+                }
+            });
+
+            if(allnotnull==false){
+                $("#tips").text("红色下划线处为必填项，请录入后再修改");
                 return;
             }
+
+            
             var json = {
                 "action": "submit",
                 "id":"{{$info.id}}"
             };
-            $("#box .fieldset .field input,select").each(function (index) {
+            $("#box input,select").each(function (index) {
                 var key = $(this).attr("id");
                 var val = $(this).val();
                 json[key] = val;
             });
             $("#btnSave").addClass("disabled");
             $("#input").addClass("disabled");
-            $.post("{{$rootpath}}/Member/file.php", json, function (data) {
-                if (data.substring(0, 5) == "RIGHT") {
-                    {{if $info.id==""}}
-                    var id=  data.substring(5);
-                    window.location.href="{{$rootpath}}/Member/file.php?id="+id;
-                    {{else}}
-                    location.reload();
-                    {{/if}}
+            $.post("{{$rootpath}}/Member/case.php", json, function (data) {
+                if (data == "RIGHT") {
+                    window.location.href = "{{$rootpath}}/Member/case.php?id={{$info.id}}";
                 } else {
                     alert(data);
                     }
