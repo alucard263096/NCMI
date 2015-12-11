@@ -1,0 +1,65 @@
+{{include  file="$smarty_root/header.html" }}
+
+<style >
+    #doctorlist div {
+        color: #000000;
+        font-weight:bold;
+    }
+</style>
+<div class="row">
+    <div class="col-md-3 ">        
+        {{include  file="$smarty_root/Member/menu.html" }}
+    </div>
+
+    <div class="col-md-9">
+        <div class="row">
+            <form action="{{$rootpath}}/Member/followdoctorlist.php">
+                <input type="text" class="col-md-3" name="search" placeholder="输入关键词搜索">
+                <button class="btn btn-default col-md-1" style="height:27px;padding-top:2px;width:50px;margin-left:9px;">搜索</button>
+            </form>
+            {{if $searchkeyword!=""}}
+            <span class="col-md-8" style="padding-top:2px;">当前搜索："{{$searchkeyword}}"</span>
+            {{/if}}
+        </div>
+        <div class="row" id="doctorlist">
+            {{if $doctor_count>0}}
+            {{foreach from=$list item=rs}}
+            <a href="{{$rootpath}}/Doctor/doctor.php?id={{$rs.id}}">
+                <div class="col-md-2 text-center small Bold" style="margin-top:25px;">
+                    <div class="row">
+                        <img class="col-lg-12" src="{{$uploadpath}}/doctor/{{$rs.photo}}" />
+                    </div>
+                    <div class="row">{{$rs.name}}</div>
+                    <div class="row">{{$rs.position}}</div>
+                </div>
+            </a>
+            {{/foreach}}
+            {{else}}
+            <div class="col-lg-12" style="margin-top:25px;">
+                没有找到相关的医生，请再准确您的关键字重新搜索。
+            </div>
+            {{/if}}
+        </div>
+        {{if $doctor_count>18 }}
+        <div class="row " style="margin-top:25px;" id="pageer">
+            <div class="col-md-6 col-md-offset-3 frame2 text-center ">
+                <div class="row">
+                    <span class="col-md-3"><a href="{{$rootpath}}/Member/followdoctorlist.php?search={{$searchkeyword}}&page=1">首页</a></span>
+                    <span class="col-md-6">
+                        {{foreach from=$page_arr.pages item=rs}}
+                        <span ><a {{if $rs==$current_page}}class='selected'{{/if}} href="{{$rootpath}}/Member/followdoctorlist.php?search={{$searchkeyword}}&page={{$rs}}">{{$rs}}</a></span>
+                        {{/foreach}}
+                    </span>
+                    <span class="col-md-3"><a href="{{$rootpath}}/Member/followdoctorlist.php?search={{$searchkeyword}}&page={{$page_arr.pagecount}}">末页</a></span>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>
+<div class="row">&nbsp;</div>
+
+
+
+
+{{include  file="$smarty_root/footer.html" }}
