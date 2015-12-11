@@ -110,6 +110,30 @@
 		}
 		return null;
 	}
+	public function isFollowDoctor($member_id,$doctor_id){
+		$member_id=parameter_filter($member_id);
+		$doctor_id=parameter_filter($doctor_id);
+
+		$sql="select 1 from tb_member_follow_doctor where member_id=$member_id and doctor_id=$doctor_id";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query);
+		return count($result)>0?"1":"0";
+	}
+	public function followDoctor($member_id,$doctor_id){
+		$member_id=parameter_filter($member_id);
+		$doctor_id=parameter_filter($doctor_id);
+
+		$sql="insert into tb_member_follow_doctor (member_id,doctor_id)
+		values ($member_id,$doctor_id)";
+		$this->dbmgr->query($sql);
+	}
+	public function unfollowDoctor($member_id,$doctor_id){
+		$member_id=parameter_filter($member_id);
+		$doctor_id=parameter_filter($doctor_id);
+
+		$sql="delete from tb_member_follow_doctor where member_id=$member_id and doctor_id=$doctor_id";
+		$this->dbmgr->query($sql);
+	}
 	public function verifyForgetMember($email,$verficode){
 		$email=parameter_filter($email);
 		$verficode=parameter_filter($verficode);

@@ -5,11 +5,19 @@
         margin-top:40px;
     } 
     #info .bar {
+        height: 10px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-top: 7px;
+    }
+    #info .bartoo {
         background-color: #7EBDC5;
         height: 10px;
         margin-left: 15px;
         margin-right: 15px;
         margin-top: 7px;
+        border:1px solid #ccc;
+        border-radius:#ccc;
     }
     $info .body {
         background-color: #7EBDC5;
@@ -18,6 +26,18 @@
         margin-right: 15px;
         margin-top: 7px;
     }
+    
+        #info .pybar {
+            height:34px;
+            position: relative;
+            padding-left:0px;
+        }
+        #info .pybar p {
+            position: absolute;
+            bottom: 0px;
+            padding: 0px;
+            margin: 0px;
+        }
     #info .split {
         border: 1px dashed transparent;
         border-bottom-color: #cccccc;
@@ -43,6 +63,10 @@
         border-right: 1px solid #888;
         border-bottom: 1px solid #888;
     }
+    #info .btn-warning {
+        background-color: #F8404E;
+        border-color: #D42E40;
+    }
     #info .btn-success {
         background-color: #6386AE;
         border-color: #6386AE;
@@ -53,24 +77,44 @@
         <div class="frame3" id="info">
             <div class="row">
                 <div class="col-md-12" >
-                    <div class="bar" ></div>
+                    <div class="bartoo"></div>
                 </div>
             </div>
             <div class="row body" style="padding-top:10px;padding-bottom:10px;">
                 <div class="col-md-12 ">
-                    <div class="row bar" style="background-color:transparent;">
-                        <img class="col-md-2" src="{{$uploadpath}}/doctor/{{$info.photo}}" />
+                    <div class="row bar" >
+                        <img class="col-md-2" src="{{$uploadpath}}/doctor/{{$info.photo}}" id="doctorimg" />
                         <div class="col-md-10 small">
                             <div class="row ">
-                                <p>
+                                <p id="doctortital">
                                     专家姓名：{{$info.name}}<br />
                                     性别：{{if $info.sextual =='M'}}男{{else}}女{{/if}}<br />
                                     专家职位：{{$info.position}}<br />
                                     专业特长：{{$info.expert}}<br />
                                     工作单位：{{$info.hospital}}
                                 </p>
+                                <div class="pybar" id="pybarinfo">
+                                    <p>
+                                        {{if $follow=="1"}}
+                                        <button class="btn btn-xs btn-success" id="btnFollow" act="unfollow">已关注</button>
+                                        {{else}}
+                                        <button class="btn btn-xs btn-warning" id="btnFollow" act="follow">+关注</button>
+                                        {{/if}}
+                                    </p>
+                                </div>
                             </div>
                         </div>
+                        <script>
+                            $(document).ready(function () {
+                                $("#pybarinfo").height(34);
+                                var detailheight = $("#doctorimg").height() - $("#doctortital").height();
+                                detailheight = detailheight - 10;
+                                if (detailheight > 20) {
+                                    $("#pybarinfo").height(detailheight);
+                                }
+
+                            });
+                        </script>
                         <div class="col-md-12 small">
                             <p>{{$info.content}}</p>
                         </div>
@@ -165,6 +209,33 @@
         });
         $("#btnBack").click(function () {
             history.go(-1);
+        });
+        $("#btnFollow").click(function () {
+            var json = {
+                "action": "submit",
+                "type":$("#btnFollow").attr("act"),
+                "id": "{{$info.id}}"
+            };
+            $.post("{{$rootpath}}/Doctor/doctor.php", json, function (data) {
+                if (data == "NO_MEMBER") {
+                    alert("请登录后再关注");
+                } else if(data=="RIGHT") {
+                    var act = $("#btnFollow").attr("act");
+                    if (act == "follow") {
+                        $("#btnFollow").removeClass("btn-warning");
+                        $("#btnFollow").addClass("btn-success");
+                        $("#btnFollow").text("已关注");
+                        $("#btnFollow").attr("act", "unfollow");
+                    } else {
+                        $("#btnFollow").removeClass("btn-success");
+                        $("#btnFollow").addClass("btn-warning");
+                        $("#btnFollow").text("+关注");
+                        $("#btnFollow").attr("act", "follow");
+                    }
+                } else {
+                    alert(data);
+                }
+            });
         });
     });
 </script>

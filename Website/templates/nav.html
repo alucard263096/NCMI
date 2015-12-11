@@ -11,7 +11,7 @@
             </div>
             {{else}}
             <div class="col-md-6 navitem text-center">
-                <a href="{{$rootpath}}/Member/login.php">
+                <a href="{{$rootpath}}/Member/login.php?parenturl={{$request_url_encode}}">
                     <img src="{{$rootpath}}/images/login.png" />
                     <div>用户登录</div>
                 </a>
