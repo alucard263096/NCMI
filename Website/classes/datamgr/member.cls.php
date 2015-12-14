@@ -228,12 +228,10 @@
 		$member_id=parameter_filter($member_id);
 		
 		$sql="select c.*
-,d.name doc_name,h.name hospital_name,f.title file_name,dp.name department_name
+,d.name doctor
 from tb_member_case c
 inner join tb_doctor d on c.doctor_id=d.id
-inner join tb_hospital h on c.hospital_id=h.id
 inner join tb_member_file f on c.file_id=f.id
-inner join tb_department dp on c.department_id=dp.id
  where c.member_id=$member_id and c.id=$id ";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array($query);
@@ -570,6 +568,17 @@ WHERE
 		$name=parameter_filter($request["name"]);
 		$sexual=parameter_filter($request["sexual"]);
 		$age=parameter_filter($request["age"]);
+		$tel=parameter_filter($request["tel"]);
+		$contact=parameter_filter($request["contact"]);
+		$contact_tel=parameter_filter($request["contact_tel"]);
+		$contact_address=parameter_filter($request["contact_address"]);
+		$apply_history=parameter_filter($request["apply_history"]);
+		$apply_situation=parameter_filter($request["apply_situation"]);
+		$apply_report=parameter_filter($request["apply_report"]);
+		$apply_procedure=parameter_filter($request["apply_procedure"]);
+		$apply_first_result=parameter_filter($request["apply_first_result"]);
+		$apply_department=parameter_filter($request["apply_department"]);
+		$apply_doctor=parameter_filter($request["apply_doctor"]);
 		
 		$id=$id+0;
 		
@@ -580,13 +589,144 @@ apply_hospital='$apply_hospital',
 apply_date='$apply_date',
 name='$name',
 sexual='$sexual',
-age='$age'
+age='$age',
+tel='$tel',
+contact='$contact',
+contact_tel='$contact_tel',
+contact_address='$contact_address',
+apply_history='$apply_history',
+apply_situation='$apply_situation',
+apply_report='$apply_report',
+apply_procedure='$apply_procedure',
+apply_first_result='$apply_first_result',
+apply_department='$apply_department',
+apply_doctor='$apply_doctor'
 where 
 `id` = $id and 
 `member_id` = $member_id;
 ";
 		$this->dbmgr->query($sql);
 		return $id;
+	}
+	public function createCase($member_id,$doctor_id,$file_id,$request){
+		$id=$this->dbmgr->getNewId("tb_member_case");
+$apply_hospital=parameter_filter($request["apply_hospital"]);
+$apply_date=parameter_filter($request["apply_date"]);
+$name=parameter_filter($request["name"]);
+$sexual=parameter_filter($request["sexual"]);
+$age=parameter_filter($request["age"]);
+$category=parameter_filter($request["category"]);
+$way=parameter_filter($request["way"]);
+$urgent=parameter_filter($request["urgent"]);
+$necessary=parameter_filter($request["necessary"]);
+$meeting_date=parameter_filter($request["meeting_date"]);
+$first_result=parameter_filter($request["first_result"]);
+$result=parameter_filter($request["result"]);
+$checking=parameter_filter($request["checking"]);
+$solution=parameter_filter($request["solution"]);
+$caution=parameter_filter($request["caution"]);
+$signature=parameter_filter($request["signature"]);
+$status=parameter_filter($request["status"]);
+$summary=parameter_filter($request["summary"]);
+$contact=parameter_filter($request["contact"]);
+$apply_department=parameter_filter($request["apply_department"]);
+$apply_doctor=parameter_filter($request["apply_doctor"]);
+$apply_history=parameter_filter($request["apply_history"]);
+$apply_situation=parameter_filter($request["apply_situation"]);
+$apply_report=parameter_filter($request["apply_report"]);
+$apply_procedure=parameter_filter($request["apply_procedure"]);
+$apply_first_result=parameter_filter($request["apply_first_result"]);
+$contact_tel=parameter_filter($request["contact_tel"]);
+$contact_address=parameter_filter($request["contact_address"]);
+$hospital=parameter_filter($request["hospital"]);
+$department=parameter_filter($request["department"]);
+$tel=parameter_filter($request["tel"]);
+		
+		$sql="INSERT INTO `tb_member_case`
+(`id`,
+`member_id`,
+`file_id`,
+`title`,
+`doctor_id`,
+`apply_hospital`,
+`apply_date`,
+`name`,
+`sexual`,
+`age`,
+`category`,
+`way`,
+`urgent`,
+`necessary`,
+`meeting_date`,
+`first_result`,
+`position`,
+`result`,
+`checking`,
+`solution`,
+`caution`,
+`signature`,
+`status`,
+`created_date`,
+`updated_date`,
+`summary`,
+`contact`,
+`apply_department`,
+`apply_doctor`,
+`apply_history`,
+`apply_situation`,
+`apply_report`,
+`apply_procedure`,
+`apply_first_result`,
+`contact_tel`,
+`contact_address`,
+`hospital`,
+`department`,
+`tel`)
+VALUES
+($id,
+$member_id,
+$file_id,
+'申请单$meeting_date',
+$doctor_id,
+'$apply_hospital',
+'$apply_date',
+'$name',
+'$sexual',
+'$age',
+'$category',
+'$way',
+'$urgent',
+'$necessary',
+'$meeting_date',
+'$first_result',
+'$position',
+'$result',
+'$checking',
+'$solution',
+'$caution',
+'$signature',
+'T',
+now(),
+now(),
+'$summary',
+'$contact',
+'$apply_department',
+'$apply_doctor',
+'$apply_history',
+'$apply_situation',
+'$apply_report',
+'$apply_procedure',
+'$apply_first_result',
+'$contact_tel',
+'$contact_address',
+'$hospital',
+'$department',
+'$tel');
+";
+		
+		$this->dbmgr->query($sql);
+		return $id;
+		
 	}
  }
  

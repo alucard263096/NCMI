@@ -11,9 +11,18 @@
   require ROOT.'/classes/datamgr/doctor.cls.php';
   require ROOT.'/classes/datamgr/member.cls.php';
   
-  $doctor_id=$_REQUEST["id"]+0;
+  $doctor_id=$_REQUEST["doctor_id"]+0;
+  $action=$_REQUEST["action"];
   if($action=="submit"){
-	
+	$file_id=$_REQUEST["file_id"]+0;
+	$caseid=$memberMgr->createCase($member["id"],$doctor_id,$file_id,$_REQUEST);
+	echo "RIGHT".$caseid;
+	exit;
+  }elseif($action=="loadfile"){
+	$file_id=$_REQUEST["file_id"]+0;
+	$file=$memberMgr->getFile($member["id"],$file_id);
+	echo $str=json_encode($file);
+	exit;
   }else{
 	  $doctor=$doctorMgr->getDoctor($doctor_id);
 	  $smarty->assign("doctor",$doctor);

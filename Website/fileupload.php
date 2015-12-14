@@ -21,7 +21,7 @@
  }
  $file=new Upload($file,$filename,$folder,true);
  echo $file->safetyUpload();
- echo "|~~|".$filename;
+ echo "|~~|".$filename."|~~|".$file["name"];
 
 
 

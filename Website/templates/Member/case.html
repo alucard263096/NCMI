@@ -66,9 +66,22 @@
             padding-left: 0px;
             padding-right: 0px;
         }
-        #box input,select {
+        #box input {
             padding-left: 5px;
-            width: 80%;
+            width: 95%;
+            border: solid 1px #9DCDD2;
+        }
+        #box select {
+            padding-left: 5px;
+            border: solid 1px #9DCDD2;
+        }
+        #box #formtable textarea {
+            border: 0px;
+            border-color: #ffffff;
+        }
+        #box textarea {
+            padding-left: 5px;
+            width: 95%;
             border: solid 1px #9DCDD2;
         }
         #box .result {
@@ -109,18 +122,27 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <table id="formtable" border="1">
+                                <tr style="height:20px;background:#ccc">
+                                    <td colspan="6" style="text-align:left;padding-left:15px;">申请信息</td>
+                                </tr>
                                 <tr>
                                     <td>申请单位:</td>
-                                    <td colspan="3"><input id="apply_hospital" class="notnull" type="text" value="{{$info.apply_hospital}}" /></td>
+                                    <td colspan="3">{{$info.hospital}}</td>
                                     <td>申请日期:</td>
-                                    <td><input type="text" class="datepicker notnull" id="apply_date" value="{{$info.apply_date}}" /></td>
+                                    <td>{{$info.meeting_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>申请科室:</td>
+                                    <td>{{$info.department}}</td>
+                                    <td>申请医生:</td>
+                                    <td colspan="3">{{$info.doctor}}</td>
                                 </tr>
                                 <tr>
                                     <td>患者姓名:</td>
                                     <td><input type="text" class="notnull" id="name" value="{{$info.name}}" /></td>
                                     <td>性别:</td>
                                     <td>
-                                        <select>
+                                        <select id="sexual">
                                             <option value="M" {{if $info.sexual=='M'}}selected="selected"{{/if}}>男</option>
                                             <option value="F" {{if $info.sexual=='F'}}selected="selected" {{/if}}>女</option>
                                         </select>
@@ -139,21 +161,62 @@
                                 <tr>
                                     <td>专家要求:</td>
                                     <td colspan="3">{{$info.necessary}}</td>
-                                    <td>会诊日期:</td>
-                                    <td>{{$info.meeting_date}}</td>
-                                </tr>
-                                <tr style="height:60px;">
-                                    <td >初步诊断:</td>
-                                    <td colspan="5">{{$info.first_result}}</td>
+                                    <td>联系电话:</td>
+                                    <td><input type="text" class="notnull" id="tel" value="{{$info.tel}}" /></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="6">
-                                        <div class="col-md-8 text-left">
-                                            服务方医院: {{$info.hospital_name}}
-                                        </div>
-                                        <div class="col-md-4 text-right">
-                                            服务方科室: {{$info.department_name}}
-                                        </div>
+                                    <td>紧急联系人:</td>
+                                    <td colspan="3"><input type="text" class="notnull" id="contact" value="{{$info.contact}}" /></td>
+                                    <td>联系人电话:</td>
+                                    <td><input type="text" class="notnull" id="contact_tel" value="{{$info.contact_tel}}" /></td>
+                                </tr>
+                                <tr>
+                                    <td>联系人地址:</td>
+                                    <td colspan="5"><input type="text" class="notnull" id="contact_address" value="{{$info.contact_address}}" /></td>
+                                </tr>
+                                <tr style="height:20px;background:#ccc">
+                                    <td colspan="6" style="text-align:left;padding-left:15px;">会诊状况</td>
+                                </tr>
+                                <tr>
+                                    <td>会诊医院:</td>
+                                    <td colspan="5"><input type="text" class="notnull" id="apply_hospital" value="{{$info.apply_hospital}}" /></td>
+                                </tr>
+                                <tr>
+                                    <td>会诊科室:</td>
+                                    <td><input type="text" class="notnull" id="apply_department" value="{{$info.apply_department}}" /></td>
+                                    <td>会诊医生:</td>
+                                    <td ><input type="text" class="notnull" id="apply_doctor" value="{{$info.apply_doctor}}" /></td>
+                                    <td>会诊日期:</td>
+                                    <td ><input type="text" class="notnull datepicker" id="apply_date" value="{{$info.apply_date}}" /></td>
+                                </tr>
+                                <tr style="height:60px;">
+                                    <td>既往史:</td>
+                                    <td colspan="5">
+                                        <textarea id="apply_history" rows="3">{{$info.apply_history}}</textarea>
+                                    </td>
+                                </tr>
+                                <tr style="height: 60px;">
+                                    <td>现病情:</td>
+                                    <td colspan="5">
+                                        <textarea id="apply_situation" rows="3">{{$info.apply_situation}}</textarea>
+                                    </td>
+                                </tr>
+                                <tr style="height: 60px;">
+                                    <td>化验结果:</td>
+                                    <td colspan="5">
+                                        <textarea id="apply_report" rows="3">{{$info.apply_report}}</textarea>
+                                    </td>
+                                </tr>
+                                <tr style="height: 60px;">
+                                    <td>治疗经过:</td>
+                                    <td colspan="5">
+                                        <textarea id="apply_procedure" rows="3">{{$info.apply_procedure}}</textarea>
+                                    </td>
+                                </tr>
+                                <tr style="height: 60px;">
+                                    <td>初步诊断:</td>
+                                    <td colspan="5">
+                                        <textarea id="apply_first_result" rows="3">{{$info.apply_first_result}}</textarea>
                                     </td>
                                 </tr>
                             </table>
@@ -272,7 +335,7 @@
                 "action": "submit",
                 "id":"{{$info.id}}"
             };
-            $("#box input,select").each(function (index) {
+            $("#box input,select,textarea").each(function (index) {
                 var key = $(this).attr("id");
                 var val = $(this).val();
                 json[key] = val;
