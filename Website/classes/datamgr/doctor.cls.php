@@ -43,8 +43,11 @@
 
 	public function getDoctor($id){
 		$id=parameter_filter($id);
-		$sql="select d.*,h.name hospital from tb_doctor d
+		$sql="select d.*,h.name hospital,c.name college,dp.name department 
+		from tb_doctor d
 inner join tb_hospital h on d.hospital_id=h.id 
+inner join tb_department dp on d.department_id=dp.id 
+inner join tb_college c on dp.college_id=c.id 
 		where d.status='A' and d.id=$id ";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array($query); 

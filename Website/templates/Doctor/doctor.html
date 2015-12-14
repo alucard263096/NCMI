@@ -205,7 +205,7 @@
 <script>
     $(document).ready(function () {
         $("#btnGoBooking").click(function () {
-            document.location.href = "{{$rootpath}}/Contract/order.php?doctor_id={{$info.id}}";
+            document.location.href = "{{$rootpath}}/Doctor/contract.php?doctor_id={{$info.id}}";
         });
         $("#btnBack").click(function () {
             history.go(-1);
