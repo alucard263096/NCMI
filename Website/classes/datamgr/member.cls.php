@@ -723,8 +723,24 @@ now(),
 '$department',
 '$tel');
 ";
-		
+		$this->dbmgr->begin_trans();
 		$this->dbmgr->query($sql);
+		
+		$uploadfiles=explode("<||>",$request["uploadfiles"]);
+		
+		$attid=$this->dbmgr->getNewId("tb_member_case_attachment");
+		foreach ($uploadfiles as $value){
+			if($value!=""){
+				$uploadfile=explode("<~>",$value);
+				$filesavename=parameter_filter($uploadfile[0]);
+				$filename=parameter_filter($uploadfile[1]);
+				$sql="insert into tb_member_case_attachment (id,case_id,filesavename,filename)
+				values ($attid,$id,'$filesavename','$filename')";
+				$this->dbmgr->query($sql);
+				$attid++;
+			}
+		}
+		$this->dbmgr->commit_trans();
 		return $id;
 		
 	}

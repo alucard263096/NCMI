@@ -95,6 +95,10 @@
             margin-top: 10px;
             margin-bottom: 10px;
         }
+        #box .uploadrow {
+            margin-left: 15px;
+            margin-top: 5px;
+        }
 </style>
 <div class="row">
     <div class="col-md-12">
@@ -130,7 +134,7 @@
                             * 请真实填写报告单中的信息
                         </div>
                     </div>
-                    <div class="row" style="margin-bottom: 20px;">
+                    <div class="row" style="margin-bottom: 10px;">
                         <div class="col-md-12 text-center">
                             <table id="formtable" border="1">
                                 <tr>
@@ -250,6 +254,12 @@
                             </table>
                         </div>
                     </div>
+                    <div class="row" style="margin-bottom: 20px; margin-left: 15px;">
+                        <div class="col-md-12" id="uploadlist">
+                            <div class="row" >上传的附件：</div>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-12" style="margin-top:20px;">
@@ -309,11 +319,17 @@
                 $("#tips").text("红色下划线处为必填项，请录入后再修改");
                 return;
             }
-
+            var uploadfiles = "";
+            $("#box .uploadrow").each(function (index) {
+                var filesavename = $(this).attr("filesavename");
+                var filename = $(this).attr("filename");
+                uploadfiles += "<||>" + filesavename + "<~>" + filename;
+            });
             var json = {
                 "action": "submit",
                 "doctor_id":"{{$doctor.id}}",
-                "file_id":$("#file_id").val()
+                "file_id": $("#file_id").val(),
+                "uploadfiles": uploadfiles
             };
             $("#box input,select,textarea").each(function (index) {
                 var key = $(this).attr("id");
@@ -332,6 +348,20 @@
                     $("#input").removeClass("disabled");
             });
         });
+        $("#btnUpload").click(function () {
+            callUpload("case");
+        });
     });
+</script>
+{{include  file="$smarty_root/upload.html" }}
+<script>
+    afterFileUpload = function (filesavename, filename) {
+        $("#uploadlist").append("<div class='row uploadrow' id='upload_" + filesavename.replace(".","")
+            + "' filesavename='" + filesavename + "' filename='" + filename + "'>"
+            + filename + " <a href='javascript:deleteuploadfile(\"" + filesavename.replace(".", "") + "\")')>删除</a>");
+    };
+    function deleteuploadfile(fileid) {
+        $("#upload_" + fileid).remove();
+    }
 </script>
 {{include  file="$smarty_root/footer.html" }}

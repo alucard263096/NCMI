@@ -69,20 +69,11 @@
                                     <input type="text" readonly="readonly" value="{{$rs.meeting_date}}" />
                                 </div>
                             </div>
-                            <div class="row" style="margin-top:10px;">
-                                <div class="col-md-3 fieldname">简要描述:</div>
-                                <div class="col-md-9 field">
-                                    <input type="text" readonly="readonly" value="{{$rs.summary}}" />
-                                </div>
-                            </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="row logo">
-                                <button class="btn btn-xs btn-success btnFile" case_id="{{$rs.id}}">文件管理</button>
-                            </div>
                             <div class="row" style="margin-top:10px;">
                                 <button class="btn btn-xs btn-success btnEdit" case_id="{{$rs.id}}">
-                                    {{if $rs.status=='T'}}修改内容{{else}}查看内容{{/if}}
+                                    查看报告
                                 </button>
                             </div>
                             {{if $rs.status=='T'}}

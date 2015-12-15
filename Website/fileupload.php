@@ -12,6 +12,7 @@
 	echo "Fils is empty";
 	exit;
  }
+ $orifilename=$file["name"];
  $filearr=explode(".",$file["name"]);
  $fileext=$filearr[count($filearr)-1];
  $filename=md5(date('ymdHIs').$file["name"]).".".$fileext;
@@ -21,9 +22,7 @@
  }
  $file=new Upload($file,$filename,$folder,true);
  echo $file->safetyUpload();
- echo "|~~|".$filename."|~~|".$file["name"];
-
-
+ echo "|~~|".$filename."|~~|".$orifilename;
 
 
 

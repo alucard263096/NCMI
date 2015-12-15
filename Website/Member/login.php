@@ -31,7 +31,9 @@
 		echo "RIGHT";
 	}
   }else{
-	$_SESSION[SESSIONNAME]["url_request"]=base64_decode($_REQUEST["parenturl"]);
+	if($_REQUEST["parenturl"]!=""){
+		$_SESSION[SESSIONNAME]["url_request"]=base64_decode($_REQUEST["parenturl"]);
+	}
 	$smarty->display(ROOT.'/templates/Member/login.html');
   }
 ?>

@@ -1,0 +1,40 @@
+<input name="fileupload" id="fileupload" onchange="upload()" type="file" class="hide" />
+<input id="fileuploadmodel" value="" type="hidden" />
+<script type="text/javascript" src="{{$rootpath}}/js/ajaxfileupload.js"></script>
+<script>
+    function callUpload(module) {
+        $("#fileuploadmodel").val(module);
+        $("#fileupload").click();
+    }
+    function upload() {
+
+        var key = "fileupload";
+        var module = $("#fileuploadmodel").val();
+        $.ajaxFileUpload
+		(
+			{
+			    "url": '{{$rootpath}}/fileupload.php?module=' + module + "&field=" + key,
+			    "secureuri": false,
+			    "fileElementId":  key,
+			    "dataType": 'text',
+			    "success": function (data, status) {
+
+			        if (data.substring(0, 7) == "success") {
+			            str = data.substring(7, data.length);
+			            $("#content_" + key).val(str.split('|~~|')[1]);
+			            afterFileUpload(str.split('|~~|')[1], str.split('|~~|')[2]);
+
+			        } else {
+			            alert("上传失败，请联系管理员");
+			        }
+			    },
+			    "error": function (data, status, e) {
+			        alert("上传失败，请联系管理员");
+			    }
+			}
+		);
+    }
+    var afterFileUpload = function (filesavename, filename) {
+
+    };
+</script>
