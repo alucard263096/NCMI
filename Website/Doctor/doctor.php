@@ -38,8 +38,16 @@
 	  $info=$doctorMgr->getDoctor($doctor_id);
 	  $smarty->assign("info",$info);
 
-	  $reserve=$doctorMgr->getDoctorReserve($doctor_id,'2015-12-18');
-	  print_r($reserve);
+
+	  $schedultarr=array();
+	  $time=time();
+	  for($i=0;$i<4;$i++){
+		$schedultarr[]=getmonsun($time+$i*86400*7);
+	  }
+	  $smarty->assign("schedule",$schedultarr);
+
+	  
+	  $reserve=$doctorMgr->getDoctorReserve($doctor_id,$schedultarr[0]["first_day"]);
 	  $smarty->assign("reserve",$reserve);
 
 	  $smarty->display(ROOT.'/templates/Doctor/doctor.html');

@@ -159,7 +159,7 @@ inner join tb_member_follow_doctor mfd on mfd.doctor_id=d.id and mfd.member_id=$
 	public function getDoctorReserve($doctor_id,$first_day){
 		$first_day=parameter_filter($first_day);
 		$doctor_id=parameter_filter($doctor_id);
-	echo $sql="select d.duty_mon_m,d.duty_mon_a, 
+	 $sql="select d.duty_mon_m,d.duty_mon_a, 
 d.duty_tue_m,d.duty_tue_a, 
 d.duty_wed_m,d.duty_wed_a,
 d.duty_thu_m,d.duty_thu_a, 
@@ -199,8 +199,8 @@ where id=$doctor_id and status='A'
 			$tac= Array();
 			foreach($d_arr as $val){
 				$arr=Array();
-				$arr["dut"]=$result["duty_".$val."_$t"];
-				$arr["use"]=$result[$val."_$t"];
+				$arr["dut"]=$result["duty_".$val."_$t"]+0;
+				$arr["use"]=$result[$val."_$t"]+0;
 				$arr["day"]=$result[$val."_date"];
 				$arr["tac"]=$t;
 				$tac[]=$arr;

@@ -26,6 +26,10 @@
   }else{
 	  $doctor=$doctorMgr->getDoctor($doctor_id);
 	  $smarty->assign("doctor",$doctor);
+	  $smarty->assign("date",$_REQUEST["date"]);
+	  $tac=$_REQUEST["tac"];
+	  $smarty->assign("tac",$tac);
+	  $smarty->assign("tac_str",$tac=="m"?"上午":"下午");
 
 	  $files=$memberMgr->getFileList($member["id"]);
 	  $smarty->assign("files",$files);

@@ -219,5 +219,17 @@ function splitCodition($cols,$keyword){
 	$ret.=" )";
 	return $ret;
 }
-
+function getmonsun($curtime){
+$curweekday = date('w');
+//为0是 就是 星期七
+$curweekday = $curweekday?$curweekday:7;
+$curmon = $curtime - ($curweekday-1)*86400;
+$cursun = $curtime + (7 - $curweekday)*86400;
+$cur['mon'] = $curmon;
+$cur['mon_str'] =date('Y年m月d日',$curmon);
+$cur['first_day'] =date('Y-m-d-',$curmon);
+$cur['sun'] = $cursun;
+$cur['sun_str'] = date('Y年m月d日',$cursun);;
+return $cur;
+}
 ?>

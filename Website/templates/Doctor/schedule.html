@@ -1,0 +1,50 @@
+<tr>
+    <td>工作日</td>
+    <td>周一</td>
+    <td>周二</td>
+    <td>周三</td>
+    <td>周四</td>
+    <td>周五</td>
+    <td>周六</td>
+    <td>周日</td>
+</tr>
+<tr>
+    <td>上午</td>
+    {{foreach from=$reserve.0 item=rs}}
+    {{if $rs.dut>0&& $rs.dut<=$rs.use}}
+    <td style="color:red;">已约满</td>
+    {{elseif $rs.dut>0&&$rs.dut>$rs.use}}
+    <td class="canselectact" date="{{$rs.day}}" tac="{{$rs.tac}}"><b>{{$rs.use}}/{{$rs.dut}}人</b></td>
+    {{else}}
+    <td></td>
+    {{/if}}
+    {{/foreach}}
+</tr>
+<tr>
+    <td>下午</td>        
+    {{foreach from=$reserve.1 item=rs}}
+    {{if $rs.dut>0&& $rs.dut<=$rs.use}}
+    <td style="color:red;">已约满</td>
+    {{elseif $rs.dut>0&&$rs.dut>$rs.use}}
+    <td class="canselectact" date="{{$rs.day}}" tac="{{$rs.tac}}"><b>{{$rs.use}}/{{$rs.dut}}人</b></td>
+    {{else}}
+    <td></td>
+    {{/if}}
+    {{/foreach}}
+</tr>
+<style>
+    .selected{
+        background-color:#dcce81;
+    }
+    .canselectact{
+        cursor:pointer;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $(".canselectact").click(function () {
+            $(".canselectact").removeClass("selected");
+            $(this).addClass("selected");
+        });
+    });
+</script>

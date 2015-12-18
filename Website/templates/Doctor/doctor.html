@@ -131,37 +131,13 @@
                     <div class="row bar" style="background-color:transparent;">
                         <div class="col-md-12 small">
                             <h5>出诊时间安排</h5>
-                            <table class="col-md-12 text-center">
-                                <tr>
-                                    <td>工作日</td>
-                                    <td>周一</td>
-                                    <td>周二</td>
-                                    <td>周三</td>
-                                    <td>周四</td>
-                                    <td>周五</td>
-                                    <td>周六</td>
-                                    <td>周日</td>
-                                </tr>
-                                <tr>
-                                    <td>上午</td>
-                                    <td>{{if $info.duty_mon_m>0}}{{$info.duty_mon_m}}{{/if}}</td>
-                                    <td>{{$info.duty_tue_m}}</td>
-                                    <td>{{$info.duty_wed_m}}</td>
-                                    <td>{{$info.duty_thu_m}}</td>
-                                    <td>{{$info.duty_fri_m}}</td>
-                                    <td>{{$info.duty_sat_m}}</td>
-                                    <td>{{$info.duty_sun_m}}</td>
-                                </tr>
-                                <tr>
-                                    <td>下午</td>
-                                    <td>{{$info.duty_mon_a}}</td>
-                                    <td>{{$info.duty_tue_a}}</td>
-                                    <td>{{$info.duty_wed_a}}</td>
-                                    <td>{{$info.duty_thu_a}}</td>
-                                    <td>{{$info.duty_fri_a}}</td>
-                                    <td>{{$info.duty_sat_a}}</td>
-                                    <td>{{$info.duty_sun_a}}</td>
-                                </tr>
+                            <select style="margin-bottom:20px;margin-top:10px;" id="scheduleday">
+                                {{foreach from=$schedule item=rs }}
+                                <option value="{{$rs.first_day}}">{{$rs.mon_str}}-{{$rs.sun_str}}</option>
+                                {{/foreach}}
+                            </select>
+                            <table class="col-md-12 text-center" id="tableSchedule">
+                                {{include  file="$smarty_root/Doctor/schedule.html" }}
                             </table>
                         </div>
                     </div>
@@ -204,8 +180,21 @@
 
 <script>
     $(document).ready(function () {
+        $("#scheduleday").change(function () {
+            var json = {
+                doctor_id: "{{$info.id}}",
+                first_day: $("#scheduleday").val()
+            };
+            $("#tableSchedule").load("{{$rootpath}}/Doctor/schedule.php", json);
+        });
         $("#btnGoBooking").click(function () {
-            document.location.href = "{{$rootpath}}/Doctor/contract.php?doctor_id={{$info.id}}";
+            if ($(".selected").length == 0) {
+                alert("请选择一个预约时间进行预约");
+                return;
+            }
+            var date = $(".selected").attr("date");
+            var tac = $(".selected").attr("tac");
+            document.location.href = "{{$rootpath}}/Doctor/contract.php?doctor_id={{$info.id}}&date=" + date+"&tac="+tac;
         });
         $("#btnBack").click(function () {
             history.go(-1);
