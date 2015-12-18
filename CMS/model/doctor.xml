@@ -85,6 +85,14 @@
       <search>1</search>
     </field>
     <field>
+      <name>预约价格</name>
+      <key>price</key>
+      <type>number</type>
+      <displayinlist>1</displayinlist>
+      <notnull>1</notnull>
+      <search>1</search>
+    </field>
+    <field>
       <name>排序</name>
       <key>seq</key>
       <type>text</type>
@@ -105,73 +113,73 @@
     <field>
       <name>周一上午</name>
       <key>duty_mon_m</key>
-      <type>text</type>
-      <spilthr>出诊时间安排</spilthr>
+      <type>number</type>
+      <spilthr>出诊时间与可预约人数安排</spilthr>
     </field>
     <field>
       <name>周一下午</name>
       <key>duty_mon_a</key>
-      <type>text</type>
+      <type>number</type>
     </field>
     <field>
       <name>周二上午</name>
       <key>duty_tue_m</key>
-      <type>text</type>
+      <type>number</type>
     </field>
     <field>
       <name>周二下午</name>
       <key>duty_tue_a</key>
-      <type>text</type>
+      <type>number</type>
     </field>
     <field>
       <name>周三上午</name>
       <key>duty_wed_m</key>
-      <type>text</type>
+      <type>number</type>
     </field>
     <field>
       <name>周三下午</name>
       <key>duty_wed_a</key>
-      <type>text</type>
+      <type>number</type>
     </field>
     <field>
       <name>周四上午</name>
       <key>duty_thu_m</key>
-      <type>text</type>
+      <type>number</type>
     </field>
     <field>
       <name>周四下午</name>
       <key>duty_thu_a</key>
-      <type>text</type>
+      <type>number</type>
     </field>
     <field>
       <name>周五上午</name>
       <key>duty_fri_m</key>
-      <type>text</type>
+      <type>number</type>
     </field>
     <field>
       <name>周五下午</name>
       <key>duty_fri_a</key>
-      <type>text</type>
+      <type>number</type>
     </field>
     <field>
       <name>周六上午</name>
       <key>duty_sat_m</key>
-      <type>text</type>
+      <type>number</type>
     </field>
     <field>
       <name>周六下午</name>
       <key>duty_sat_a</key>
-      <type>text</type>
+      <type>number</type>
     </field>
     <field>
       <name>周日上午</name>
       <key>duty_sun_m</key>
-      <type>text</type>
+      <type>number</type>
     </field>
     <field>
       <name>周日下午</name>
       <key>duty_sun_a</key>
-      <type>text</type>
+      <type>number</type>
     </field>
     <field>
       <name>出诊日期调整通知</name>

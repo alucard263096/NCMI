@@ -265,7 +265,7 @@
             <div class="col-md-12" style="margin-top:20px;">
                 <div class="row text-center">              
                     <button class="btn btn-success" id="btnUpload">上传资料</button>    
-                    <button class="btn btn-success " id="btnSave">提交预约</button>       
+                    <button class="btn btn-success " id="btnSave">提交病历并预约</button>       
                     <button class="btn btn-warning " id="btnReturn">&nbsp;返回&nbsp;</button>      
                 </div>
                 <div class="row  text-center" style="">
@@ -340,7 +340,8 @@
             $("#input").addClass("disabled");
             $.post("{{$rootpath}}/Doctor/contract.php", json, function (data) {
                 if (data.substring(0, 5) == "RIGHT") {
-                    alert("跳转支付");
+                    var id = data.substring(5);
+                    window.location.href = "{{$rootpath}}/Order/payment.php?id=" + id;
                 } else {
                     alert(data);
                     }

@@ -156,6 +156,60 @@ inner join tb_member_follow_doctor mfd on mfd.doctor_id=d.id and mfd.member_id=$
 		return $result["doctor_count"];
 	}
 
+	public function getDoctorReserve($doctor_id,$first_day){
+		$first_day=parameter_filter($first_day);
+		$doctor_id=parameter_filter($doctor_id);
+	echo $sql="select d.duty_mon_m,d.duty_mon_a, 
+d.duty_tue_m,d.duty_tue_a, 
+d.duty_wed_m,d.duty_wed_a,
+d.duty_thu_m,d.duty_thu_a, 
+d.duty_fri_m,d.duty_fri_a, 
+d.duty_sat_m,d.duty_sat_a,
+d.duty_sun_m,d.duty_sun_a,
+dr.mon_m,dr.mon_a, DATE_ADD('$first_day',INTERVAL 0 DAY) mon_date,
+dr.tue_m,dr.tue_a, DATE_ADD('$first_day',INTERVAL 1 DAY) tue_date, 
+dr.wed_m,dr.wed_a, DATE_ADD('$first_day',INTERVAL 2 DAY) wed_date,
+dr.thu_m,dr.thu_a, DATE_ADD('$first_day',INTERVAL 3 DAY) thu_date, 
+dr.fri_m,dr.fri_a, DATE_ADD('$first_day',INTERVAL 4 DAY) fri_date, 
+dr.sat_m,dr.sat_a, DATE_ADD('$first_day',INTERVAL 5 DAY) sat_date,
+dr.sun_m,dr.sun_a, DATE_ADD('$first_day',INTERVAL 6 DAY) sun_date from tb_doctor d
+left join tb_doctor_reserve dr on d.id=dr.doctor_id and dr.first_day='$first_day'
+where id=$doctor_id and status='A'
+";
+
+
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+
+		$t_arr= Array();
+		$t_arr[]="m";
+		$t_arr[]="a";
+
+		$d_arr= Array();
+		$d_arr[]="mon";
+		$d_arr[]="tue";
+		$d_arr[]="wed";
+		$d_arr[]="thu";
+		$d_arr[]="fri";
+		$d_arr[]="sat";
+		$d_arr[]="sun";
+
+		$ret=Array();
+		foreach($t_arr as $t){
+			$tac= Array();
+			foreach($d_arr as $val){
+				$arr=Array();
+				$arr["dut"]=$result["duty_".$val."_$t"];
+				$arr["use"]=$result[$val."_$t"];
+				$arr["day"]=$result[$val."_date"];
+				$arr["tac"]=$t;
+				$tac[]=$arr;
+			}
+			$ret[]=$tac;
+		}
+		return $ret;
+	}
+
  }
  
  $doctorMgr=DoctorMgr::getInstance();

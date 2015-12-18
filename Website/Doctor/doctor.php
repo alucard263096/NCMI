@@ -38,6 +38,10 @@
 	  $info=$doctorMgr->getDoctor($doctor_id);
 	  $smarty->assign("info",$info);
 
+	  $reserve=$doctorMgr->getDoctorReserve($doctor_id,'2015-12-18');
+	  print_r($reserve);
+	  $smarty->assign("reserve",$reserve);
+
 	  $smarty->display(ROOT.'/templates/Doctor/doctor.html');
   }
 ?>
