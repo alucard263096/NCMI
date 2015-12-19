@@ -37,6 +37,14 @@ color: #aaa !important;
   border: 0;
   border-bottom: 1px solid #e5e5e5;
 }
+.dothr{
+  height:1px;
+  padding: 0;
+  line-height: inherit;
+  color: #333;
+  border: 0;
+  border-bottom: 1px dashed #aaa;
+}
 #loginnav {
     margin-top:30px;
 }

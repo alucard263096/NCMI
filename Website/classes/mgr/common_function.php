@@ -220,16 +220,39 @@ function splitCodition($cols,$keyword){
 	return $ret;
 }
 function getmonsun($curtime){
-$curweekday = date('w');
+$curweekday = date('w',$curtime);
 //为0是 就是 星期七
 $curweekday = $curweekday?$curweekday:7;
 $curmon = $curtime - ($curweekday-1)*86400;
 $cursun = $curtime + (7 - $curweekday)*86400;
 $cur['mon'] = $curmon;
 $cur['mon_str'] =date('Y年m月d日',$curmon);
-$cur['first_day'] =date('Y-m-d-',$curmon);
+$cur['mon_str_t'] =date('Y-m-d',$curmon);
+$cur['first_day'] =date('Y-m-d',$curmon);
 $cur['sun'] = $cursun;
 $cur['sun_str'] = date('Y年m月d日',$cursun);;
+$cur['sun_str_t'] = date('Y-m-d',$cursun);;
 return $cur;
+}
+function getmon($curtime){
+$curweekday = $curweekday?$curweekday:7;
+$curmon = $curtime - ($curweekday-1)*86400;
+$curmon = $curtime - ($curweekday-1)*86400;
+return date('Y-m-d',$curmon);;
+}
+function getDayShortName($str){
+	$time=strtotime($meeting_date);
+	$curweekday = date('w',$curtime);
+	$curweekday = $curweekday?$curweekday:7;
+	switch($curweekday){
+		case 1:return "mon";
+		case 2:return "tue";
+		case 3:return "wed";
+		case 4:return "thu";
+		case 5:return "fri";
+		case 6:return "sat";
+		case 7:return "sun";
+	}
+
 }
 ?>

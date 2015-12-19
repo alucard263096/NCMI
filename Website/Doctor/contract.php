@@ -16,7 +16,7 @@
   if($action=="submit"){
 	$file_id=$_REQUEST["file_id"]+0;
 	$caseid=$memberMgr->createCase($member["id"],$doctor_id,$file_id,$_REQUEST);
-	echo "RIGHT".$caseid;
+	echo $caseid;
 	exit;
   }elseif($action=="loadfile"){
 	$file_id=$_REQUEST["file_id"]+0;

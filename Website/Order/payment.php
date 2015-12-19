@@ -8,6 +8,7 @@
   require '../include/common.inc.php';
   include ROOT.'/include/init.inc.php';
   include ROOT.'/include/member.inc.php';
+  require ROOT.'/classes/datamgr/order.cls.php';
   
   $action=$_REQUEST["action"];
 
@@ -16,6 +17,9 @@
   echo "RIGHT";
   exit;
   }else{
+	  $id=$_REQUEST["id"];
+	  $info=$orderMgr->getOrder($id);
+	  $smarty->assign("info",$info);
 	  $smarty->display(ROOT.'/templates/Order/payment.html');
   }
 ?>

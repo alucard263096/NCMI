@@ -621,7 +621,7 @@ $urgent=parameter_filter($request["urgent"]);
 $necessary=parameter_filter($request["necessary"]);
 $meeting_date=parameter_filter($request["meeting_date"]);
 $first_result=parameter_filter($request["first_result"]);
-$result=parameter_filter($request["result"]);
+$acresult=parameter_filter($request["result"]);
 $checking=parameter_filter($request["checking"]);
 $solution=parameter_filter($request["solution"]);
 $caution=parameter_filter($request["caution"]);
@@ -641,87 +641,50 @@ $contact_address=parameter_filter($request["contact_address"]);
 $hospital=parameter_filter($request["hospital"]);
 $department=parameter_filter($request["department"]);
 $tel=parameter_filter($request["tel"]);
+$tac=parameter_filter($request["tac"]);
+
+		$meeting_date_mon=getmon(strtotime($meeting_date));
+		$dayshort=getDayShortName($meeting_date);
+		$dayshorttac=$dayshort."_".$tac;
+		$sql="select d.duty_$dayshorttac duty,ifnull(dr.$dayshorttac,0) `use`  from tb_doctor d
+left join tb_doctor_reserve dr on d.id=dr.doctor_id and dr.first_day='$meeting_date_mon'
+where d.id=$doctor_id ";
+
+
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query);
+		if($result["duty"]<=$result["use"]){
+			return "FULLRESERVE";
+		}
+
+		$meetweek=getmonsun(strtotime($meeting_date));
+		$mon=$meetweek["mon_str_t"];
+		$sun=$meetweek["sun_str_t"];
+		$sql="select * from tb_order
+where status='T' and meeting_date>='$mon 0:0:0' and meeting_date<='$sun 23:59:59'";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query);
+		if(count($result)>0){
+			return "RESERVEINWEEK";
+		}
+
+
 		
 		$sql="INSERT INTO `tb_member_case`
 (`id`,
-`member_id`,
-`file_id`,
-`title`,
-`doctor_id`,
-`apply_hospital`,
-`apply_date`,
-`name`,
-`sexual`,
-`age`,
-`category`,
-`way`,
-`urgent`,
-`necessary`,
-`meeting_date`,
-`first_result`,
-`position`,
-`result`,
-`checking`,
-`solution`,
-`caution`,
-`signature`,
-`status`,
-`created_date`,
-`updated_date`,
-`summary`,
-`contact`,
-`apply_department`,
-`apply_doctor`,
-`apply_history`,
-`apply_situation`,
-`apply_report`,
-`apply_procedure`,
-`apply_first_result`,
-`contact_tel`,
-`contact_address`,
-`hospital`,
-`department`,
-`tel`)
+`member_id`,`file_id`,`title`,`doctor_id`,`apply_hospital`,`apply_date`,
+`name`,`sexual`,`age`,`category`,`way`,`urgent`,`necessary`,`meeting_date`,
+`first_result`,`position`,`result`,`checking`,`solution`,`caution`,`signature`,`status`,`created_date`,
+`updated_date`,`summary`,`contact`,`apply_department`,`apply_doctor`,`apply_history`,`apply_situation`,
+`apply_report`,`apply_procedure`,`apply_first_result`,`contact_tel`,`contact_address`,`hospital`,`department`,`tel`)
 VALUES
 ($id,
-$member_id,
-$file_id,
-'申请单$meeting_date',
-$doctor_id,
-'$apply_hospital',
-'$apply_date',
-'$name',
-'$sexual',
-'$age',
-'$category',
-'$way',
-'$urgent',
-'$necessary',
-'$meeting_date',
-'$first_result',
-'$position',
-'$result',
-'$checking',
-'$solution',
-'$caution',
-'$signature',
-'T',
-now(),
-now(),
-'$summary',
-'$contact',
-'$apply_department',
-'$apply_doctor',
-'$apply_history',
-'$apply_situation',
-'$apply_report',
-'$apply_procedure',
-'$apply_first_result',
-'$contact_tel',
-'$contact_address',
-'$hospital',
-'$department',
-'$tel');
+$member_id,$file_id,'申请单$meeting_date',$doctor_id,'$apply_hospital',
+'$apply_date','$name','$sexual','$age','$category','$way','$urgent','$necessary',
+'$meeting_date','$first_result','$position','$acresult','$checking','$solution','$caution','$signature','T',
+now(),now(),'$summary','$contact','$apply_department','$apply_doctor','$apply_history',
+'$apply_situation','$apply_report','$apply_procedure','$apply_first_result',
+'$contact_tel','$contact_address','$hospital','$department','$tel');
 ";
 		$this->dbmgr->begin_trans();
 		$this->dbmgr->query($sql);
@@ -740,9 +703,61 @@ now(),
 				$attid++;
 			}
 		}
-		$this->dbmgr->commit_trans();
-		return $id;
+		$case_id=$id;
+
+		$sql="select 1 from tb_doctor_reserve where doctor_id=$doctor_id and first_day='$meeting_date_mon'";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query);
+		if(count($result)>0){
+			$sql="insert into tb_doctor_reserve (doctor_id,first_day) values ($doctor,'$meeting_date_mon')";
+			$this->dbmgr->query($sql);
+		}
+
+		$sql="select price from tb_doctor where id=$doctor_id ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query);
+		$price=$result["price"];
+
 		
+		$id=$this->dbmgr->getNewId("tb_order");
+		$order_no=$this->genOrderNo("PT");
+		$sql="insert into tb_order 
+		(id,case_id,price,submit_date,meeting_date,tac,status,
+		created_date,created_user,updated_date,updated_user,
+		order_no,doctor_id) values 
+		($id,$case_id,$price,now(),'$meeting_date','$tac','T',
+		now(),1,now(),1,
+		'$order_no',$doctor_id )";
+		$this->dbmgr->query($sql);
+
+		$sql="update tb_doctor_reserve set $dayshorttac=ifnull($dayshorttac,0)+1 
+		where doctor_id=$doctor_id and first_day='$meeting_date_mon' ";
+		$this->dbmgr->query($sql);
+
+		$this->dbmgr->commit_trans();
+		return "RIGHT".$id;
+		
+	}
+
+	
+	public function genOrderNo($prefix){
+		
+		$d=date('Ym',time());
+		$sql="select seq from tb_order_no_gen
+		where prefix='$prefix' and datemark='$d' ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+		$seq= $result[0];
+		if($seq==""){
+			$sql="insert into tb_order_no_gen (prefix,datemark,seq) values ('$prefix','$d',2)";
+			$query = $this->dbmgr->query($sql);
+			$seq= 1;
+		}else{
+			$sql="update tb_order_no_gen set seq=seq+1 where prefix='$prefix' and datemark='$d' ";
+			$query = $this->dbmgr->query($sql);
+		}
+		return $prefix.$d.sprintf("%06d", $seq);
+
 	}
  }
  

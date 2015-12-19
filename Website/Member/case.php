@@ -18,6 +18,7 @@
   }else{
   $id=$_REQUEST["id"];
    $info=$memberMgr->getCase($member["id"],$id);
+
    $smarty->assign("info",$info);
 	$smarty->assign("menuid","case");
 	$smarty->display(ROOT.'/templates/Member/case.html');

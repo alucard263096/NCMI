@@ -197,8 +197,8 @@
                                         <input type="text" class="notnull" readonly="readonly" id="doctor" value="{{$doctor.name}}" />
                                     </td>
                                     <td>申请日期:</td>
-                                    <td>
-                                        <input type="text" class="notnull datepicker small" readonly="readonly" id="meeting_date" value="{{$date}} {{$tac_str}}" />
+                                    <td class="small">
+                                        {{$date}} {{$tac_str}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -329,6 +329,8 @@
                 "action": "submit",
                 "doctor_id":"{{$doctor.id}}",
                 "file_id": $("#file_id").val(),
+                "meeting_date": "{{$date}}",
+                "tac":"{{$tac}}",
                 "uploadfiles": uploadfiles
             };
             $("#box input,select,textarea").each(function (index) {
@@ -339,7 +341,12 @@
             $("#btnSave").addClass("disabled");
             $("#input").addClass("disabled");
             $.post("{{$rootpath}}/Doctor/contract.php", json, function (data) {
-                if (data.substring(0, 5) == "RIGHT") {
+                if (data == "FULLRESERVE") {
+                    alert("您选择的预约时间已经约满，请返回重新选择");
+                } else if (data == "RESERVEINWEEK") {
+                    alert("您在预约时间的周期内已经进行了预约，请返回重新选择或者先对预约进行付款");
+                }
+                else if (data.substring(0, 5) == "RIGHT") {
                     var id = data.substring(5);
                     window.location.href = "{{$rootpath}}/Order/payment.php?id=" + id;
                 } else {

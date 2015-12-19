@@ -1,11 +1,78 @@
 {{include  file="$smarty_root/header.html" }}
 <style>
+    #box{
+        border:2px solid #808080;
+        background-color:#ffffff;
+        min-height:200px;
+    }
+        #box #title {
+            background-color: #5574A0;
+            color: white;
+            padding-top: 1px;
+            padding-bottom: 1px;
+            padding-left:20px;
+            margin-top:7px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        #box .titleinfo {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
 </style>
 <div class="row">
     <div class="col-md-12">
         <div class="row">
 
+            <div class="col-md-8 col-md-offset-2">
+                <div id="box">
+                    <div id="title">
+                        <h4 style="font-weight: bold;">预约提示</h4>
+                    </div>
+                    <div class="row " style="font-size: 120%;">
+                        <div class="col-md-1 titleinfo text-right" style="padding-right:0px;">
+                            <i style="color: #639A3C" class="glyphicon glyphicon-exclamation-sign"></i>
+                        </div>
+                        <div class="col-md-11 titleinfo">
+                            &nbsp;确认预约信息
+                        </div>
+                        <div class="dothr col-md-12" style="width:94%;margin-left:3%;margin-right:3%" ></div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-11 titleinfo col-md-offset-1">
+                            <p>预约号：{{$info.order_no}}</p>
+                            <p>预约时间：{{$info.meeting_date}} {{if $info.tac=="m"}}上午{{else}}下午{{/if}}</p>
+                            <p>预约金额：<span style="color: #FE9D0B; ">人民币{{$info.price}}元</span></p>
+                        </div>
+                        <div class="dothr col-md-12" style="width:94%;margin-left:3%;margin-right:3%"></div>
+                    </div>
+                    <div class="row titleinfo">
+                        <div class="col-md-12 text-center" style="color: #43A043">
+                            <h4 style="font-weight: bold;">预约成功！</h4>
+                        </div>
+                        <div class="col-md-12 text-center titleinfo">
+                            成功付款后，预约具体时间将会以邮件和短信的方式通知到你的邮箱，届时请保持联系畅通。
+                        </div>
+                        <div class="col-md-1 col-md-offset-4 ">
+                            <button class="btn btn-success" id="btnSubmit">立即支付</button>
+                        </div>
+                        <div class="col-md-1 col-md-offset-1">
+                            <button class="btn btn-warning" id="btnGoCase">查看病例</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#btnSubmit").click(function () {
+            window.location.href = "{{$rootpath}}/Order/success.php?id={{$info.case_id}}";
+        });
+        $("#btnGoCase").click(function () {
+            window.location.href = "{{$rootpath}}/Member/case.php?id={{$info.case_id}}";
+        });
+    });
+</script>
 {{include  file="$smarty_root/footer.html" }}
