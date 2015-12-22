@@ -1,6 +1,6 @@
 ﻿body {
     background-image:url(../images/bg.png);
-    background-repeat:no-repeat;
+    background-repeat:repeat-x;
     font-family:'Microsoft YaHei';
 }
 a:link {

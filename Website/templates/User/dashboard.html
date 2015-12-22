@@ -87,6 +87,18 @@
                     }
                     LoadSchedule(year, month);
                 });
+                $("#schedule .meeting").click(function () {
+
+                    $("#schedule .meeting").removeClass("selected");
+                    $(this).addClass("selected");
+
+                    var year = $("#schedule").attr("year");
+                    var month = $("#schedule").attr("month");
+                    var day = $(this).text();
+                    var date = year + "-" + month + "-" + day;
+
+
+                });
             });
         }
         LoadSchedule();
