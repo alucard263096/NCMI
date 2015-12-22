@@ -241,8 +241,8 @@ $curmon = $curtime - ($curweekday-1)*86400;
 return date('Y-m-d',$curmon);;
 }
 function getDayShortName($str){
-	$time=strtotime($meeting_date);
-	$curweekday = date('w',$curtime);
+	$time=strtotime($str);
+	$curweekday = date('w',$time);
 	$curweekday = $curweekday?$curweekday:7;
 	switch($curweekday){
 		case 1:return "mon";
@@ -254,5 +254,13 @@ function getDayShortName($str){
 		case 7:return "sun";
 	}
 
+}
+function checkDataInList($arr,$val){
+	foreach($arr as $v){
+		if($v[0]==$val){
+			return true;
+		}
+	}
+	return false;
 }
 ?>

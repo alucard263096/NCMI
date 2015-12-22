@@ -82,7 +82,7 @@
                         <br />
                         <br />
                         <button id="btnUploadImage">上传</button>
-                        <input id="member_photo" maxlength="50" type="hidden" value="{{$base_info.address}}" />
+                        <input id="member_photo" maxlength="50" type="hidden" value="{{$base_info.photo}}" />
                     </div>
                 </div>
                 <div class="row" style="margin-top:40px;">
@@ -122,13 +122,18 @@
 </script>
 {{include  file="$smarty_root/upload.html" }}
 <script>
-    $("#btnUploadImage").click(function () {
-        callUpload("member");
+    $(document).ready(function () {
+        $("#btnUploadImage").click(function () {
+            callUpload("member");
+        });
+        if ($("#member_photo").val() == "") {
+            $("#member_photo_img").hide();
+        }
     });
     afterFileUpload = function (filesavename, filename) {
-        alert(filesavename);
         $("#member_photo").val(filesavename);
         $("#member_photo_img").attr("src", "{{$uploadpath}}/member/" + filesavename);
+        $("#member_photo_img").show();
     };
 </script>
 {{include  file="$smarty_root/footer.html" }}

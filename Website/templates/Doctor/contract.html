@@ -198,7 +198,13 @@
                                     </td>
                                     <td>申请日期:</td>
                                     <td class="small">
-                                        {{$date}} {{$tac_str}}
+                                        {{$date}} <br />
+                                        <select id="meeting_time" class="notnull">
+                                            <option value="">选择时间段</option>
+                                            {{foreach from=$meetingtime item=rs}}
+                                            <option value="{{$rs.str}}">{{$rs.str}}</option>
+                                            {{/foreach}}
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
@@ -342,9 +348,11 @@
             $("#input").addClass("disabled");
             $.post("{{$rootpath}}/Doctor/contract.php", json, function (data) {
                 if (data == "FULLRESERVE") {
-                    alert("您选择的预约时间已经约满，请返回重新选择");
+                    alert("您选择的预约时间已经约满，请返回重新选择"); 
                 } else if (data == "RESERVEINWEEK") {
                     alert("您在预约时间的周期内已经进行了预约，请返回重新选择或者先对预约进行付款");
+                } else if (data == "RESERVED") {
+                    alert("您预约时间的已经被其他用户使用，请刷新页面重新获取申请时间。");
                 }
                 else if (data.substring(0, 5) == "RIGHT") {
                     var id = data.substring(5);

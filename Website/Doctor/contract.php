@@ -33,6 +33,11 @@
 
 	  $files=$memberMgr->getFileList($member["id"]);
 	  $smarty->assign("files",$files);
+
+	  $meetingtime=$doctorMgr->getMeetingTime($doctor_id,$_REQUEST["date"],$tac);
+	  $smarty->assign("meetingtime",$meetingtime);
+
+
 	  $smarty->display(ROOT.'/templates/Doctor/contract.html');
   }
 ?>

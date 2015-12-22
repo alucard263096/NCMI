@@ -644,9 +644,11 @@ $hospital=parameter_filter($request["hospital"]);
 $department=parameter_filter($request["department"]);
 $tel=parameter_filter($request["tel"]);
 $tac=parameter_filter($request["tac"]);
+$meeting_time=parameter_filter($request["meeting_time"]);
 
 		$meeting_date_mon=getmon(strtotime($meeting_date));
 		$dayshort=getDayShortName($meeting_date);
+
 		$dayshorttac=$dayshort."_".$tac;
 		$sql="select d.duty_$dayshorttac duty,ifnull(dr.$dayshorttac,0) `use`  from tb_doctor d
 left join tb_doctor_reserve dr on d.id=dr.doctor_id and dr.first_day='$meeting_date_mon'
@@ -670,6 +672,13 @@ where doctor_id=$doctor_id and status='T' and meeting_date>='$mon 0:0:0' and mee
 			return "RESERVEINWEEK";
 		}
 
+		$sql="select 1 from tb_order where doctor_id=$doctor_id and meeting_date='$meeting_date' and meeting_time='$meeting_time'";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query);
+		if(count($result)>0){
+			return "RESERVED";
+		}
+
 
 		
 		$sql="INSERT INTO `tb_member_case`
@@ -678,7 +687,7 @@ where doctor_id=$doctor_id and status='T' and meeting_date>='$mon 0:0:0' and mee
 `name`,`sexual`,`age`,`category`,`way`,`urgent`,`necessary`,`meeting_date`,
 `first_result`,`position`,`result`,`checking`,`solution`,`caution`,`signature`,`status`,`created_date`,
 `updated_date`,`summary`,`contact`,`apply_department`,`apply_doctor`,`apply_history`,`apply_situation`,
-`apply_report`,`apply_procedure`,`apply_first_result`,`contact_tel`,`contact_address`,`hospital`,`department`,`tel`)
+`apply_report`,`apply_procedure`,`apply_first_result`,`contact_tel`,`contact_address`,`hospital`,`department`,`tel`,`meeting_time`)
 VALUES
 ($id,
 $member_id,$file_id,'申请单$meeting_date',$doctor_id,'$apply_hospital',
@@ -686,7 +695,7 @@ $member_id,$file_id,'申请单$meeting_date',$doctor_id,'$apply_hospital',
 '$meeting_date','$first_result','$position','$acresult','$checking','$solution','$caution','$signature','T',
 now(),now(),'$summary','$contact','$apply_department','$apply_doctor','$apply_history',
 '$apply_situation','$apply_report','$apply_procedure','$apply_first_result',
-'$contact_tel','$contact_address','$hospital','$department','$tel');
+'$contact_tel','$contact_address','$hospital','$department','$tel','$meeting_time');
 ";
 		$this->dbmgr->begin_trans();
 		$this->dbmgr->query($sql);
@@ -726,10 +735,10 @@ now(),now(),'$summary','$contact','$apply_department','$apply_doctor','$apply_hi
 		$sql="insert into tb_order 
 		(id,case_id,price,submit_date,meeting_date,tac,status,
 		created_date,created_user,updated_date,updated_user,
-		order_no,doctor_id) values 
+		order_no,doctor_id,meeting_time) values 
 		($id,$case_id,$price,now(),'$meeting_date','$tac','T',
 		now(),1,now(),1,
-		'$order_no',$doctor_id )";
+		'$order_no',$doctor_id,'$meeting_time' )";
 		$this->dbmgr->query($sql);
 
 		$sql="update tb_doctor_reserve set $dayshorttac=ifnull($dayshorttac,0)+1 

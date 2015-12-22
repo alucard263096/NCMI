@@ -202,10 +202,52 @@ where id=$doctor_id and status='A'
 				$arr["dut"]=$result["duty_".$val."_$t"]+0;
 				$arr["use"]=$result[$val."_$t"]+0;
 				$arr["day"]=$result[$val."_date"];
+				if(date("Y-m-d")<date("Y-m-d",strtotime($arr["day"]))){
+					$arr["active"]="Y";
+				}
 				$arr["tac"]=$t;
 				$tac[]=$arr;
 			}
 			$ret[]=$tac;
+		}
+		return $ret;
+	}
+	public function getMeetingTime($doctor_id,$date,$tac){
+		
+		$minute=0;
+		$start="";
+		if($tac=="m"){
+			$minute=240;
+			$start="08:00";
+		}else{
+			$minute=180;
+			$start="14:00";
+		}
+
+		$ret=array();
+		$shortday=getDayShortName($date);
+
+		$sql="select duty_".$shortday."_$tac count from tb_doctor where id=$doctor_id";
+		
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+		$count=$result["count"];
+
+		$interval=$minute/$count;
+
+
+		$sql="select meeting_time from tb_order where doctor_id=$doctor_id and meeting_date='$date' ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+
+		for($i=0;$i<$count;$i++){
+			$item=array();
+			$str=date("H:i",strtotime("2015-1-1 $start:00")+$i*$interval*60)."-".date("H:i",strtotime("2015-1-1 $start:00")+($i+1)*$interval*60);
+			if(!checkDataInList($result,$str)){
+				$item["val"]=date("H:i",strtotime("2015-1-1 $start:00")+$i*$interval*60);
+				$item["str"]=$str;
+				$ret[]=$item;
+			}
 		}
 		return $ret;
 	}

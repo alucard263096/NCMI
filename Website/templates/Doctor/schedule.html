@@ -14,7 +14,11 @@
     {{if $rs.dut>0&& $rs.dut<=$rs.use}}
     <td style="color:red;">已约满</td>
     {{elseif $rs.dut>0&&$rs.dut>$rs.use}}
+        {{if $rs.active=="Y"}}
     <td class="canselectact" date="{{$rs.day}}" tac="{{$rs.tac}}"><b>{{$rs.use}}/{{$rs.dut}}人</b></td>
+        {{else}}
+    <td class="expired" >{{$rs.use}}/{{$rs.dut}}人</td>
+        {{/if}}
     {{else}}
     <td></td>
     {{/if}}
@@ -25,8 +29,12 @@
     {{foreach from=$reserve.1 item=rs}}
     {{if $rs.dut>0&& $rs.dut<=$rs.use}}
     <td style="color:red;">已约满</td>
-    {{elseif $rs.dut>0&&$rs.dut>$rs.use}}
+    {{elseif $rs.dut>0&&$rs.dut>$rs.use}}   
+        {{if $rs.active=="Y"}}
     <td class="canselectact" date="{{$rs.day}}" tac="{{$rs.tac}}"><b>{{$rs.use}}/{{$rs.dut}}人</b></td>
+        {{else}}
+    <td class="expired">{{$rs.use}}/{{$rs.dut}}人</td>
+        {{/if}}
     {{else}}
     <td></td>
     {{/if}}
@@ -38,6 +46,9 @@
     }
     .canselectact{
         cursor:pointer;
+    }
+    .expired{
+        color:#818181;
     }
 </style>
 <script>

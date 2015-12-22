@@ -41,7 +41,7 @@
                     <div class="row ">
                         <div class="col-md-11 titleinfo col-md-offset-1">
                             <p>预约号：{{$info.order_no}}</p>
-                            <p>预约时间：{{$info.meeting_date}} {{if $info.tac=="m"}}上午{{else}}下午{{/if}}</p>
+                            <p>预约时间：{{$info.meeting_date}} {{if $info.tac=="m"}}上午{{else}}下午{{/if}} {{$info.meeting_time}}</p>
                             <p>预约金额：<span style="color: #FE9D0B; ">人民币{{$info.price}}元</span></p>
                         </div>
                         <div class="dothr col-md-12" style="width:94%;margin-left:3%;margin-right:3%"></div>
@@ -51,7 +51,7 @@
                             <h4 style="font-weight: bold;">支付成功！</h4>
                         </div>
                         <div class="col-md-12 text-center titleinfo">
-                            具体预约时间我们将会后续安排，请保持邮件和手机号码畅通。
+                            请在预约时间段内登陆系统并进入视频模式，同时请保持邮件和手机号码畅通。
                         </div>
                         <div class="col-md-1 col-md-offset-4 ">
                             <button class="btn btn-success" id="btnHome">返回首页</button>
