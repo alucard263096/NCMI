@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `ncmi151123` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `ncmi151123`;
--- MySQL dump 10.13  Distrib 5.6.19, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
--- Host: localhost    Database: ncmi151123
+-- Host: www.myhkdoc.com    Database: ncmi151123
 -- ------------------------------------------------------
 -- Server version	5.6.21-enterprise-commercial-advanced-log
 
@@ -55,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-26 23:58:57
+-- Dump completed on 2015-12-22 23:36:50

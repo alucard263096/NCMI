@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `ncmi151123` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `ncmi151123`;
--- MySQL dump 10.13  Distrib 5.6.19, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
--- Host: localhost    Database: ncmi151123
+-- Host: www.myhkdoc.com    Database: ncmi151123
 -- ------------------------------------------------------
 -- Server version	5.6.21-enterprise-commercial-advanced-log
 
@@ -43,7 +41,7 @@ CREATE TABLE `tb_doctor_recom` (
 
 LOCK TABLES `tb_doctor_recom` WRITE;
 /*!40000 ALTER TABLE `tb_doctor_recom` DISABLE KEYS */;
-INSERT INTO `tb_doctor_recom` VALUES (1,NULL,NULL,'2015-11-25 23:24:54',1,'2,3','','A');
+INSERT INTO `tb_doctor_recom` VALUES (1,NULL,NULL,'2015-11-28 00:46:14',1,'1,2,3','','A');
 /*!40000 ALTER TABLE `tb_doctor_recom` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-26 23:58:56
+-- Dump completed on 2015-12-22 23:36:46

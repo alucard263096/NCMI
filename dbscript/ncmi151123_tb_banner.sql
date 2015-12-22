@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `ncmi151123` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `ncmi151123`;
--- MySQL dump 10.13  Distrib 5.6.19, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
--- Host: localhost    Database: ncmi151123
+-- Host: www.myhkdoc.com    Database: ncmi151123
 -- ------------------------------------------------------
 -- Server version	5.6.21-enterprise-commercial-advanced-log
 
@@ -48,7 +46,7 @@ CREATE TABLE `tb_banner` (
 
 LOCK TABLES `tb_banner` WRITE;
 /*!40000 ALTER TABLE `tb_banner` DISABLE KEYS */;
-INSERT INTO `tb_banner` VALUES (1,'2015-11-27 16:47:44',1,'2015-11-27 16:47:44',1,'index_banner_1','首页广告大图1测试','首页广告大图1','首页广告大图1','','http://www.baidu.com','4466710c8f59198779a95e8105960564.jpg','A'),(2,'2015-11-27 16:51:10',1,'2015-11-27 16:51:10',1,'index_banner_2','首页广告大图2测试','首页广告大图2','首页广告大图2','','http://www.baidu.com','4466710c8f59198779a95e8105960564.jpg','A'),(3,'2015-11-27 16:51:10',1,'2015-11-27 16:51:10',1,'index_banner_3','首页广告大图3测试','首页广告大图3','首页广告大图3','','http://www.baidu.com','4466710c8f59198779a95e8105960564.jpg','A'),(4,'2015-11-27 16:51:10',1,'2015-11-27 16:51:10',1,'index_banner_4','首页广告大图4测试','首页广告大图4','首页广告大图4','','http://www.baidu.com','4466710c8f59198779a95e8105960564.jpg','A'),(5,'2015-11-27 16:51:10',1,'2015-11-27 16:51:10',1,'index_banner_5','首页广告大图5测试','首页广告大图5','首页广告大图5','','http://www.baidu.com','4466710c8f59198779a95e8105960564.jpg','A'),(6,'2015-11-27 16:51:10',1,'2015-11-27 16:51:10',1,'index_banner_6','首页广告大图6测试','首页广告大图6','首页广告大图6','','http://www.baidu.com','4466710c8f59198779a95e8105960564.jpg','A'),(7,'2015-11-27 16:51:10',1,'2015-11-27 16:51:10',1,'index_banner_7','首页广告大图7测试','首页广告大图7','首页广告大图7','','http://www.baidu.com','4466710c8f59198779a95e8105960564.jpg','A'),(8,'2015-11-27 16:51:10',1,'2015-11-27 16:51:10',1,'index_banner_8','首页广告大图8测试','首页广告大图8','首页广告大图8','','http://www.baidu.com','4466710c8f59198779a95e8105960564.jpg','A');
+INSERT INTO `tb_banner` VALUES (1,'2015-11-27 16:47:44',1,'2015-11-27 21:39:21',1,'index_banner_1','首页广告大图1测试','首页广告大图1','首页广告大图1','','http://www.baidu.com','945759faefa942432e2e42b7777c58e3.jpg','A'),(2,'2015-11-27 16:51:10',1,'2015-11-27 21:39:32',1,'index_banner_2','首页广告大图2测试','首页广告大图2','首页广告大图2','','http://www.baidu.com','cfb71fe21a034334977d92586813353b.jpg','A'),(3,'2015-11-27 16:51:10',1,'2015-11-27 21:39:40',1,'index_banner_3','首页广告大图3测试','首页广告大图3','首页广告大图3','','http://www.baidu.com','cbe4e99305826484d514c67767f5d1cf.jpg','A'),(4,'2015-11-27 16:51:10',1,'2015-11-27 21:39:49',1,'index_banner_4','首页广告大图4测试','首页广告大图4','首页广告大图4','','http://www.baidu.com','fc42a9254d5439f1803e5b7a4a59510e.jpg','A'),(5,'2015-11-27 16:51:10',1,'2015-11-27 21:39:57',1,'index_banner_5','首页广告大图5测试','首页广告大图5','首页广告大图5','','http://www.baidu.com','2be6b3998ecba1534de7de8ba036ce79.jpg','A'),(6,'2015-11-27 16:51:10',1,'2015-11-27 21:40:06',1,'index_banner_6','首页广告大图6测试','首页广告大图6','首页广告大图6','','http://www.baidu.com','5e8829a818a872e8fc932bbec7b4a44c.jpg','A'),(7,'2015-11-27 16:51:10',1,'2015-11-27 21:40:14',1,'index_banner_7','首页广告大图7测试','首页广告大图7','首页广告大图7','','http://www.baidu.com','067e60f3d5189e485132ecf78297a3a7.jpg','A'),(8,'2015-11-27 16:51:10',1,'2015-11-27 21:40:22',1,'index_banner_8','首页广告大图8测试','首页广告大图8','首页广告大图8','','http://www.baidu.com','48030ba1af38e1b22fbeab55c4327803.jpg','A');
 /*!40000 ALTER TABLE `tb_banner` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-27 16:51:52
+-- Dump completed on 2015-12-22 23:36:51

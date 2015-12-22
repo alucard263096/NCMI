@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `ncmi151123` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `ncmi151123`;
--- MySQL dump 10.13  Distrib 5.6.19, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
--- Host: localhost    Database: ncmi151123
+-- Host: www.myhkdoc.com    Database: ncmi151123
 -- ------------------------------------------------------
 -- Server version	5.6.21-enterprise-commercial-advanced-log
 
@@ -32,6 +30,7 @@ CREATE TABLE `tb_member_base_info` (
   `birth` varchar(45) DEFAULT NULL,
   `tel` varchar(45) DEFAULT NULL,
   `address` varchar(200) DEFAULT NULL,
+  `photo` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -42,6 +41,7 @@ CREATE TABLE `tb_member_base_info` (
 
 LOCK TABLES `tb_member_base_info` WRITE;
 /*!40000 ALTER TABLE `tb_member_base_info` DISABLE KEYS */;
+INSERT INTO `tb_member_base_info` VALUES (1,'蔡笋','440301198603247514','汉','1986-03-24','25547926','暗杀教室看的哈快睡觉的哈萨克接电话','53b4f5e091fcb8e1d28f17b30a4dc464.jpg');
 /*!40000 ALTER TABLE `tb_member_base_info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-03 17:15:35
+-- Dump completed on 2015-12-22 23:36:48

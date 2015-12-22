@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `ncmi151123` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `ncmi151123`;
--- MySQL dump 10.13  Distrib 5.6.19, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
--- Host: localhost    Database: ncmi151123
+-- Host: www.myhkdoc.com    Database: ncmi151123
 -- ------------------------------------------------------
 -- Server version	5.6.21-enterprise-commercial-advanced-log
 
@@ -29,7 +27,7 @@ CREATE TABLE `tb_order` (
   `case_id` int(11) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   `submit_date` datetime DEFAULT NULL,
-  `meeting_date` datetime DEFAULT NULL,
+  `meeting_date` date DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   `created_user` int(11) DEFAULT NULL,
@@ -37,6 +35,7 @@ CREATE TABLE `tb_order` (
   `updated_user` int(11) DEFAULT NULL,
   `order_no` varchar(45) DEFAULT NULL,
   `doctor_id` int(11) DEFAULT NULL,
+  `tac` varchar(45) DEFAULT NULL,
   `meeting_time` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -48,6 +47,7 @@ CREATE TABLE `tb_order` (
 
 LOCK TABLES `tb_order` WRITE;
 /*!40000 ALTER TABLE `tb_order` DISABLE KEYS */;
+INSERT INTO `tb_order` VALUES (1,10,100,'2015-12-19 15:45:25','2015-12-14','T','2015-12-19 15:45:25',1,'2015-12-19 15:45:25',1,'PT201512000001',1,'m',NULL),(2,11,100,'2015-12-22 22:06:31','2015-12-25','A','2015-12-22 22:06:31',1,'2015-12-22 22:06:31',1,'PT201512000002',1,'m',NULL),(3,12,100,'2015-12-22 23:07:05','2015-12-23','A','2015-12-22 23:07:05',1,'2015-12-22 23:07:05',1,'PT201512000003',1,'a','14:00-14:18'),(4,13,100,'2015-12-22 23:08:23','2015-12-23','A','2015-12-22 23:08:23',1,'2015-12-22 23:08:23',1,'PT201512000004',1,'a','16:42-17:00'),(5,14,100,'2015-12-22 23:18:03','2015-12-23','A','2015-12-22 23:18:03',1,'2015-12-22 23:18:03',1,'PT201512000005',1,'a','14:18-14:36'),(6,15,100,'2015-12-22 23:25:04','2015-12-23','A','2015-12-22 23:25:04',1,'2015-12-22 23:25:04',1,'PT201512000006',1,'a','14:54-15:12');
 /*!40000 ALTER TABLE `tb_order` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-18 17:53:08
+-- Dump completed on 2015-12-22 23:36:45

@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `ncmi151123` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `ncmi151123`;
--- MySQL dump 10.13  Distrib 5.6.19, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
--- Host: localhost    Database: ncmi151123
+-- Host: www.myhkdoc.com    Database: ncmi151123
 -- ------------------------------------------------------
 -- Server version	5.6.21-enterprise-commercial-advanced-log
 
@@ -40,7 +38,7 @@ CREATE TABLE `tb_doctor_reserve` (
   `sat_a` int(11) DEFAULT NULL,
   `sun_m` int(11) DEFAULT NULL,
   `sun_a` int(11) DEFAULT NULL,
-  `first_day` datetime DEFAULT NULL,
+  `first_day` date DEFAULT NULL,
   PRIMARY KEY (`doctor_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -51,6 +49,7 @@ CREATE TABLE `tb_doctor_reserve` (
 
 LOCK TABLES `tb_doctor_reserve` WRITE;
 /*!40000 ALTER TABLE `tb_doctor_reserve` DISABLE KEYS */;
+INSERT INTO `tb_doctor_reserve` VALUES (1,NULL,NULL,NULL,NULL,NULL,1,1,3,NULL,NULL,NULL,NULL,NULL,NULL,'2015-12-21');
 /*!40000 ALTER TABLE `tb_doctor_reserve` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -63,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-18 17:53:08
+-- Dump completed on 2015-12-22 23:36:45

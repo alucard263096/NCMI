@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `ncmi151123` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `ncmi151123`;
--- MySQL dump 10.13  Distrib 5.6.19, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
--- Host: localhost    Database: ncmi151123
+-- Host: www.myhkdoc.com    Database: ncmi151123
 -- ------------------------------------------------------
 -- Server version	5.6.21-enterprise-commercial-advanced-log
 
@@ -45,7 +43,7 @@ CREATE TABLE `tb_category` (
 
 LOCK TABLES `tb_category` WRITE;
 /*!40000 ALTER TABLE `tb_category` DISABLE KEYS */;
-INSERT INTO `tb_category` VALUES (1,'2015-11-25 22:56:14',1,'2015-11-25 22:56:14',1,'癌症肿瘤','','','','A'),(2,'2015-11-25 22:57:07',1,'2015-11-25 22:57:07',1,'心脏外科疾病','','','','A'),(3,'2015-11-25 22:57:36',1,'2015-11-25 22:57:36',1,'普通外科','','','','A');
+INSERT INTO `tb_category` VALUES (1,'2015-11-25 22:56:14',1,'2015-11-30 22:10:25',1,'癌症肿瘤','','','','A'),(2,'2015-11-25 22:57:07',1,'2015-11-25 22:57:07',1,'心脏外科疾病','','','','A'),(3,'2015-11-25 22:57:36',1,'2015-11-25 22:57:36',1,'普通外科','','','','A');
 /*!40000 ALTER TABLE `tb_category` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-26 23:58:54
+-- Dump completed on 2015-12-22 23:36:49
