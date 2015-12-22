@@ -75,6 +75,16 @@
                         <input id="member_address" maxlength="50" type="text" value="{{$base_info.address}}" />
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-2 fieldname">个人头像：</div>
+                    <div class="col-md-10 field">
+                        <img id="member_photo_img" style="height:100px;" src="{{$uploadpath}}/Member/{{$base_info.photo}}" alt="暂无图片" />
+                        <br />
+                        <br />
+                        <button id="btnUploadImage">上传</button>
+                        <input id="member_photo" maxlength="50" type="hidden" value="{{$base_info.address}}" />
+                    </div>
+                </div>
                 <div class="row" style="margin-top:40px;">
                     <div class="col-md-2 fieldname">
                         <button class="btn btn-success" id="btnSave">保存</button>
@@ -95,7 +105,8 @@
                 birth: $("#member_birth").val(),
                 mobile: $("#member_mobile").val(),
                 tel: $("#member_tel").val(),
-                address: $("#member_address").val()
+                address: $("#member_address").val(),
+                photo: $("#member_photo").val()
             };
             $("#btnSave").addClass("disabled");
             $("#input").addClass("disabled");
@@ -108,5 +119,16 @@
             });
         });
     });
+</script>
+{{include  file="$smarty_root/upload.html" }}
+<script>
+    $("#btnUploadImage").click(function () {
+        callUpload("member");
+    });
+    afterFileUpload = function (filesavename, filename) {
+        alert(filesavename);
+        $("#member_photo").val(filesavename);
+        $("#member_photo_img").attr("src", "{{$uploadpath}}/member/" + filesavename);
+    };
 </script>
 {{include  file="$smarty_root/footer.html" }}

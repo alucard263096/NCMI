@@ -27,14 +27,14 @@
             <div class="col-md-8 col-md-offset-2">
                 <div id="box">
                     <div id="title">
-                        <h4 style="font-weight: bold;">预约提示</h4>
+                        <h4 style="font-weight: bold;">支付信息</h4>
                     </div>
                     <div class="row " style="font-size: 120%;">
                         <div class="col-md-1 titleinfo text-right" style="padding-right:0px;">
                             <i style="color: #639A3C" class="glyphicon glyphicon-exclamation-sign"></i>
                         </div>
                         <div class="col-md-11 titleinfo">
-                            &nbsp;确认预约信息
+                            &nbsp;预约信息
                         </div>
                         <div class="dothr col-md-12" style="width:94%;margin-left:3%;margin-right:3%" ></div>
                     </div>
@@ -48,13 +48,13 @@
                     </div>
                     <div class="row titleinfo">
                         <div class="col-md-12 text-center" style="color: #43A043">
-                            <h4 style="font-weight: bold;">预约成功！</h4>
+                            <h4 style="font-weight: bold;">支付成功！</h4>
                         </div>
                         <div class="col-md-12 text-center titleinfo">
-                            成功付款后，预约具体时间将会以邮件和短信的方式通知到你的邮箱，届时请保持联系畅通。
+                            具体预约时间我们将会后续安排，请保持邮件和手机号码畅通。
                         </div>
                         <div class="col-md-1 col-md-offset-4 ">
-                            <button class="btn btn-success" id="btnSubmit">立即支付</button>
+                            <button class="btn btn-success" id="btnHome">返回首页</button>
                         </div>
                         <div class="col-md-1 col-md-offset-1">
                             <button class="btn btn-warning" id="btnGoCase">查看病例</button>
@@ -67,8 +67,8 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#btnSubmit").click(function () {
-            window.location.href = "{{$rootpath}}/Order/success.php?id={{$info.id}}";
+        $("#btnHome").click(function () {
+            window.location.href = "{{$rootpath}}/index.php";
         });
         $("#btnGoCase").click(function () {
             window.location.href = "{{$rootpath}}/Member/case.php?id={{$info.case_id}}";

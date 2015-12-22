@@ -1,0 +1,40 @@
+<style>
+    #schedule .trspace{
+        height:5px;
+    }
+    #schedule .today{
+        background:#5E8160;
+    }
+    #schedule .meeting{
+        background:#FEE666;
+    }
+    #schedule .point{
+        cursor:pointer;
+    }
+</style>
+<table style="width:100%;text-align:center; " id="schedule" year="{{$year}}" month="{{$month}}">
+    <tr>
+        <td class="point" style="background-color:#C6D2DE;" id="prev_month">&lt;</td>
+        <td colspan="5">{{$month}}月 {{$year}}</td>
+        <td class="point" style="background-color:#C6D2DE;" id="next_month">&gt;</td>
+    </tr>
+    <tr class="trspace"></tr>
+    <tr style="background-color:#C6D2DE;">
+        <td>一</td>
+        <td>二</td>
+        <td>三</td>
+        <td>四</td>
+        <td>五</td>
+        <td>六</td>
+        <td>日</td>
+    </tr>
+    <tr class="trspace"></tr>
+    {{foreach from=$table item=rs}}
+    <tr class="trspace"></tr>
+    <tr>
+        {{foreach from=$rs item=day}}
+        <td class="{{$day.today}} {{$day.meeting}} {{$day.isday}} point">{{$day.day}}</td>
+        {{/foreach}}
+    </tr>
+    {{/foreach}}
+</table>

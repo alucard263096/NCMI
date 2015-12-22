@@ -192,6 +192,7 @@
 		$birth=parameter_filter($request["birth"]);
 		$tel=parameter_filter($request["tel"]);
 		$address=parameter_filter($request["address"]);
+		$photo=parameter_filter($request["photo"]);
 
 		$sql="update tb_member set mobile='$mobile' where id=$id ";
 		$this->dbmgr->query($sql);
@@ -202,6 +203,7 @@
 		,birth='$birth'
 		,tel='$tel'
 		,address='$address' 
+		,photo='$photo' 
 		where member_id=$id ";
 		$this->dbmgr->query($sql);
 	}
@@ -661,7 +663,7 @@ where d.id=$doctor_id ";
 		$mon=$meetweek["mon_str_t"];
 		$sun=$meetweek["sun_str_t"];
 		$sql="select * from tb_order
-where status='T' and meeting_date>='$mon 0:0:0' and meeting_date<='$sun 23:59:59'";
+where doctor_id=$doctor_id and status='T' and meeting_date>='$mon 0:0:0' and meeting_date<='$sun 23:59:59'";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query);
 		if(count($result)>0){
@@ -708,8 +710,8 @@ now(),now(),'$summary','$contact','$apply_department','$apply_doctor','$apply_hi
 		$sql="select 1 from tb_doctor_reserve where doctor_id=$doctor_id and first_day='$meeting_date_mon'";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query);
-		if(count($result)>0){
-			$sql="insert into tb_doctor_reserve (doctor_id,first_day) values ($doctor,'$meeting_date_mon')";
+		if(count($result)==0){
+			$sql="insert into tb_doctor_reserve (doctor_id,first_day) values ($doctor_id,'$meeting_date_mon')";
 			$this->dbmgr->query($sql);
 		}
 

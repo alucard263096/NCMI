@@ -235,8 +235,8 @@ $cur['sun_str_t'] = date('Y-m-d',$cursun);;
 return $cur;
 }
 function getmon($curtime){
+$curweekday = date('w',$curtime);
 $curweekday = $curweekday?$curweekday:7;
-$curmon = $curtime - ($curweekday-1)*86400;
 $curmon = $curtime - ($curweekday-1)*86400;
 return date('Y-m-d',$curmon);;
 }

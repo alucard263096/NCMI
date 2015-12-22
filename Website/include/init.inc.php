@@ -13,5 +13,10 @@
 		WindowRedirect($CONFIG['URL']."/Member/reg_sent.php?email=$email");
 	}
   }
+  $user=$_SESSION[SESSIONNAME]["user"];
+  if($user!=null&&$user["id"]!=""){
+	$smarty->assign("USER",$user);
+	$smarty->assign("USERLOGINED","Y");
+  }
 
 ?>

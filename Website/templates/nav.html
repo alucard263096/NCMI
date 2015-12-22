@@ -1,9 +1,17 @@
 
 <div class="row" id="loginnav">
     <div class="col-md-2 col-md-push-10 text-right small">
-        <div class="row">            
+        <div class="row">                         
             {{if $LOGINED=="Y"}}
-            <div class="col-md-6 col-md-offset-6 navitem text-center">
+            <div class="col-md-6 navitem text-center">
+                <a href="{{$rootpath}}/User/dashboard.php">
+                    <img src="{{$rootpath}}/images/reg.png" />
+                    <div>进入控制面板</div>
+                </a>
+            </div>
+            {{/if}}
+            {{if $LOGINED=="Y"}}
+            <div class="col-md-6 navitem text-center">
                 <a href="{{$rootpath}}/Member/logout.php">
                     <img src="{{$rootpath}}/images/reg.png" />
                     <div>退出登录</div>

@@ -34,7 +34,12 @@
 
 	}
 
+	public function updateOrderPayment($id){
+		$id=parameter_filter($id);
 
+		$sql="update tb_order set status='A' where id=$id";
+		$query = $this->dbmgr->query($sql);
+	}
  }
  
  $orderMgr=OrderMgr::getInstance();

@@ -1,0 +1,96 @@
+{{include  file="$smarty_root/header.html" }}
+<style>
+    .title{
+        background-color:#4E719B;
+            color:white;
+    }
+        .title .welcome {
+            padding-left:40px;
+            margin-top:10px;
+            margin-bottom:10px;
+        }
+</style>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="title">
+            <div class="row">
+                <div class="col-md-8 welcome" >
+                    欢迎您， {{$USER.name}}医师！
+                </div>
+                <div class="col-md-2 welcome">
+                    <button class="btn btn-xs btn-default">更新时间表/Update</button>
+                </div>
+                <div class="col-md-2 welcome">
+                    <button class="btn btn-xs btn-default">退出/Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div style="margin-top:10px;" id="scheduletable">
+            
+        </div>
+        <div style="margin-top:50px;">
+            <div id="scheduledescrib" class="frame2 small" style="font-weight:bold;">
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-md-1 col-md-offset-1" style="background-color:#5E8160">&nbsp;</div>
+                    <div class="col-md-9">                    
+                        当前日期<br />
+                        Today
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px;">
+                    <div class="col-md-1 col-md-offset-1" style="background-color:#96DA8D">&nbsp;</div>
+                    <div class="col-md-9">
+                        选中的日期<br />
+                        Selected Date
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px;margin-bottom:20px;">
+                    <div class="col-md-1 col-md-offset-1" style="background-color:#FEE666">&nbsp;</div>
+                    <div class="col-md-9">
+                        此日期有预约<br />
+                        Reserved Date
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        function LoadSchedule(year,month) {
+            var json = {
+                year: year,
+                month: month
+            };
+            $("#scheduletable").load("{{$rootpath}}/User/schedule.php",json, function () {
+                $("#schedule #prev_month").click(function () {
+                    var year = $("#schedule").attr("year");
+                    var month = $("#schedule").attr("month");
+                    if (month == 1) {
+                        month = 12;
+                        year--;
+                    } else {
+                        month--;
+                    }
+                    LoadSchedule(year, month);
+                });
+                $("#schedule #next_month").click(function () {
+                    var year = $("#schedule").attr("year");
+                    var month = $("#schedule").attr("month");
+                    if (month == 12) {
+                        month = 1;
+                        year++;
+                    } else {
+                        month++;
+                    }
+                    LoadSchedule(year, month);
+                });
+            });
+        }
+        LoadSchedule();
+    });
+</script>
+
+{{include  file="$smarty_root/footer.html" }}
