@@ -1,0 +1,39 @@
+
+<style>
+    #meetinginfo .title h4, h5 {
+        color: #818181;
+        font-weight: bold;
+    }
+</style>
+<div class="row title">
+    <div class="col-md-3 col-md-offset-1">
+        <h4>会诊日期</h4>
+    </div>
+    <div class="col-md-7  text-right">
+        <h5>{{$info.apply_date}}</h5>
+    </div>
+</div>
+<div class="row" style="margin-top:20px;margin-bottom:20px;">
+    <div class="col-md-3 col-md-offset-1">
+        {{if $info.sexual=="M"}}
+        <img style="width:60%" src="{{$rootpath}}/images/sex_M.png" />
+        {{else}}
+        <img style="width:60%" src="{{$rootpath}}/images/sex_F.png" />
+        {{/if}}
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-4">姓名：{{$info.name}}</div>
+            <div class="col-md-4">年龄：{{$info.age}}</div>
+            <div class="col-md-4">性别：{{if $info.sexual=="M"}}男{{else}}女{{/if}}</div>
+        </div>
+        <div class="row" style="margin-top:10px;">
+            <div class="col-lg-12">
+                初步诊断：
+            </div>
+            <div class="col-lg-11">
+                <textarea class="col-lg-12" readonly="readonly">{{$info.apply_first_result}}</textarea>
+            </div>
+        </div>
+    </div>
+</div>

@@ -83,26 +83,10 @@
                 </div>
             </div>
             {{else}}
-            <p style="margin-top:30px;margin-bottom:30px;">今日暂无会诊预约。</p>
+            <p style="margin-top:30px;margin-bottom:30px;padding-left:30px;">今日暂无会诊预约。</p>
             {{/if}}
         </div>
-        <div id="meetinginfo" class="frame" style="margin-top:20px;">
-            <div class="row">
-                <div class="col-md-3 col-md-offset-1">
-                   会诊日期
-                </div>
-                <div class="col-md-7  text-right">
-                    2013-11-10
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 col-md-offset-1">
-                    <img style="width:100%;" src="{{$rootpath}}/images/sex_M.png" />
-                </div>
-                <div class="col-md-7 col-md-pull-1">
-
-                </div>
-            </div>
+        <div id="meetinginfo" class="frame" style="margin-top:20px;" order_id="">
         </div>
     </div>
     <style>
@@ -165,7 +149,7 @@
 }
 
         </style>
-        <div id="meetingrecord" class="frame5" style="margin-top:30px;">
+        <div id="meetingrecord" class="frame5" style="margin-top:22px;">
             <div class="row">
                 <div class="col-md-10 text-center col-md-offset-1" style="margin-top:20px;margin-bottom:20px;">
                     <h4 class="title">会诊记录</h4>
@@ -179,6 +163,7 @@
 </div>
 <script>
     $(document).ready(function () {
+        $("#meetinginfo").hide();
         setInterval("setOrderQueue()", 1000);
         LoadSchedule();
     });
@@ -203,17 +188,32 @@
         var last = "";
         var pastcount = 0;
         var temp = "";
+        var order_id = "";
         $("#meetinglist .item").each(function () {
             var start = $(this).attr("starttime");
+            var oid = $(this).attr("oid");
             if (start > t) {
                 last = start;
+                order_id = oid;
                 return false;
             } else {
                 pastcount++;
                 temp += start;
             }
         });
-        $("#queuecount").text($("#meetinglist .item").length - pastcount );
+        $("#queuecount").text($("#meetinglist .item").length - pastcount);
+        var m_order_id = $("#meetinginfo").attr("order_id");
+        if (order_id == "") {
+            $("#meetinginfo").hide();
+        } else {
+            if (order_id != m_order_id) {
+                $("#meetinginfo").attr("order_id",order_id);
+                var json = { id: order_id };
+                $("#meetinginfo").load("{{$rootpath}}/User/meetingdetail.php", json, function (data) {
+                    $("#meetinginfo").show();
+                });
+            }
+        }
         if (last != "") {
             var last_t = last.split(":");
             var cur_t = rt.split(":");

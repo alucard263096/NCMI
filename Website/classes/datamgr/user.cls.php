@@ -71,7 +71,19 @@ order by o.meeting_time  ";
 
 		return $result;
 	}
+	
+	public function getMeetingCase($order_id){
+		$order_id=parameter_filter($order_id);
+		$sql="select o.id order_id,c.* from tb_order o
+inner join tb_member_case c on o.case_id=c.id
+where o.id=$order_id   ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
 
+
+
+		return $result;
+	}
  }
  
  $userMgr=UserMgr::getInstance();
