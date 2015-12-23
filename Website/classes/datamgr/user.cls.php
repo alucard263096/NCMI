@@ -51,6 +51,27 @@
 		return false;
 	}
 
+	public function getMeeting($doctor_id,$date){
+		$doctor_id=parameter_filter($doctor_id);
+		$loginname=parameter_filter($date);
+		$sql="select o.*,c.sexual from tb_order o
+inner join tb_member_case c on o.case_id=c.id
+where o.doctor_id=$doctor_id 
+and o.meeting_date='$date'
+order by o.meeting_time  ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+
+		for($i=0;$i<count($result);$i++){
+			$meeting_time_start=explode("-",$result[$i]["meeting_time"]);
+			$meeting_time_start=$meeting_time_start[0];
+			$result[$i]["meeting_time_start"]=$meeting_time_start;
+		}
+
+
+		return $result;
+	}
+
  }
  
  $userMgr=UserMgr::getInstance();

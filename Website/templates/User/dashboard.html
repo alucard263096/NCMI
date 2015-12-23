@@ -1,17 +1,17 @@
 {{include  file="$smarty_root/header.html" }}
 <style>
-    .title{
+    #upscoll .title{
         background-color:#4E719B;
             color:white;
     }
-        .title .welcome {
+    #upscoll     .title .welcome {
             padding-left:40px;
             margin-top:10px;
             margin-bottom:10px;
         }
 </style>
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12" id="upscoll">
         <div class="title">
             <div class="row">
                 <div class="col-md-8 welcome" >
@@ -56,53 +56,224 @@
             </div>
         </div>
     </div>
+    <style>
+        #meetinglist{
+            min-height:200px;
+        }
+    </style>
+    <div class="col-md-6">
+        <div id="meetinglist" class="frame" style="margin-top:10px;">
+            <h4 class="text-center bold">今日会诊病人列表</h4>
+            {{if $meetingcount>0}}
+            <div class="row" style="margin-top:30px;margin-bottom:30px;">
+                <div class="col-md-10 col-md-offset-1" >
+                    {{foreach from=$meetinglist item=rs}}
+                    <div class="col-lg-2 item" style="margin-left:0px;margin-right:0px;padding-left:3px;padding-right:3px;"
+                         id="meet_{{$rs.id}}" oid="{{$rs.id}}" starttime="{{$rs.meeting_time_start}}">
+                        <a href="#">
+                            {{if $rs.sexual=="M"}}
+                            <img style="width:100%;" src="{{$rootpath}}/images/sex_M.png" />
+                            {{else}}
+                            <img src="{{$rootpath}}/images/sex_F.png" />
+                            {{/if}}
+                            <p class="small text-center">{{$rs.meeting_time_start}}</p>
+                        </a>
+                    </div>
+                    {{/foreach}}
+                </div>
+            </div>
+            {{else}}
+            <p style="margin-top:30px;margin-bottom:30px;">今日暂无会诊预约。</p>
+            {{/if}}
+        </div>
+        <div id="meetinginfo" class="frame" style="margin-top:20px;">
+            <div class="row">
+                <div class="col-md-3 col-md-offset-1">
+                   会诊日期
+                </div>
+                <div class="col-md-7  text-right">
+                    2013-11-10
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-md-offset-1">
+                    <img style="width:100%;" src="{{$rootpath}}/images/sex_M.png" />
+                </div>
+                <div class="col-md-7 col-md-pull-1">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        #orderqueue {
+            font-weight:bold;
+        }
+        #orderqueue .title{
+            color:#3479D0;
+        }
+        #orderqueue .btn-success{
+            background-color:#8EBB43;
+            border-color:#8EBB43;
+        }
+#orderqueue .btn-success:hover,.btn-success:focus,.btn-success:active,.btn-success.active {
+  background-color: #7AA13A;
+  border-color: #7AA13A;
+}
+    </style>
+    <div class="col-md-3">
+        <div id="orderqueue" class="frame5" style="margin-top:10px;">
+            <div class="row title" style="margin-top:10px;margin-bottom:10px;">
+                <div class="col-md-10 col-md-offset-1 text-center">
+                    当前等待会诊人数：<span id="queuecount" style="color:red;">{{$meetingcount}}</span>
+                </div>
+                <div class="col-md-10 col-md-offset-1 text-center">
+                    Number of patients waiting online
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px;margin-bottom:10px;">
+                <div class="col-md-10 col-md-offset-1 text-center">
+                    <button class="btn btn-success btn-block"><i class="glyphicon glyphicon-list-alt"></i> &nbsp;打开视频节目/<br />Open Video Panel</button>
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px;margin-bottom:10px;">
+                <div class="col-md-12 text-center small">
+                    <p>下一次预约间隔时间：<br />
+                    Reminder time with next appointment：</p>
+                    <p id="remindertime">
+                        00:00:00
+                    </p>
+                </div>
+            </div>
+        </div>
+        <style>
+            #meetingrecord {
+                font-weight: bold;
+            }
+
+                #meetingrecord .title {
+                font-weight: bold;
+                    color: #3479D0;
+                }
+        #meetingrecord .btn-success{
+            background-color:#8EBB43;
+            border-color:#8EBB43;
+        }
+#meetingrecord .btn-success:hover,.btn-success:focus,.btn-success:active,.btn-success.active {
+  background-color: #7AA13A;
+  border-color: #7AA13A;
+}
+
+        </style>
+        <div id="meetingrecord" class="frame5" style="margin-top:30px;">
+            <div class="row">
+                <div class="col-md-10 text-center col-md-offset-1" style="margin-top:20px;margin-bottom:20px;">
+                    <h4 class="title">会诊记录</h4>
+                    <button class="btn btn-success btn-block" style="margin-top:10px;">今日会诊</button>
+                    <button class="btn btn-success btn-block" style="margin-top:10px;">预约名单</button>
+                    <button class="btn btn-success btn-block" style="margin-top:10px;">既往会诊记录</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     $(document).ready(function () {
-        function LoadSchedule(year,month) {
-            var json = {
-                year: year,
-                month: month
-            };
-            $("#scheduletable").load("{{$rootpath}}/User/schedule.php",json, function () {
-                $("#schedule #prev_month").click(function () {
-                    var year = $("#schedule").attr("year");
-                    var month = $("#schedule").attr("month");
-                    if (month == 1) {
-                        month = 12;
-                        year--;
-                    } else {
-                        month--;
-                    }
-                    LoadSchedule(year, month);
-                });
-                $("#schedule #next_month").click(function () {
-                    var year = $("#schedule").attr("year");
-                    var month = $("#schedule").attr("month");
-                    if (month == 12) {
-                        month = 1;
-                        year++;
-                    } else {
-                        month++;
-                    }
-                    LoadSchedule(year, month);
-                });
-                $("#schedule .meeting").click(function () {
-
-                    $("#schedule .meeting").removeClass("selected");
-                    $(this).addClass("selected");
-
-                    var year = $("#schedule").attr("year");
-                    var month = $("#schedule").attr("month");
-                    var day = $(this).text();
-                    var date = year + "-" + month + "-" + day;
-
-
-                });
-            });
-        }
+        setInterval("setOrderQueue()", 1000);
         LoadSchedule();
     });
+    Date.prototype.Format = function (fmt) { //author: meizz 
+        var o = {
+            "M+": this.getMonth() + 1, //月份 
+            "d+": this.getDate(), //日 
+            "h+": this.getHours(), //小时 
+            "m+": this.getMinutes(), //分 
+            "s+": this.getSeconds(), //秒 
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+            "S": this.getMilliseconds() //毫秒 
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+    function setOrderQueue() {
+        var t = new Date().Format("hh:mm");
+        var rt = new Date().Format("hh:mm:ss");
+        var last = "";
+        var pastcount = 0;
+        var temp = "";
+        $("#meetinglist .item").each(function () {
+            var start = $(this).attr("starttime");
+            if (start > t) {
+                last = start;
+                return false;
+            } else {
+                pastcount++;
+                temp += start;
+            }
+        });
+        $("#queuecount").text($("#meetinglist .item").length - pastcount );
+        if (last != "") {
+            var last_t = last.split(":");
+            var cur_t = rt.split(":");
+            var last_second = parseInt(last_t[0]) * 3600 + parseInt(last_t[1]) * 60;
+            var cur_second = parseInt(cur_t[0]) * 3600 + parseInt(cur_t[1]) * 60 + parseInt(cur_t[2]);
+            last_second = last_second - cur_second;
+            var h = parseInt(last_second / 3600);
+            last_second = last_second - h * 3600;
+            var m = parseInt(last_second / 60);
+            last_second = last_second - m * 60;
+            var s = last_second;
+            h = h.toString().length == 1 ? "0" + h : h;
+            m = m.toString().length == 1 ? "0" + m : m;
+            s = s.toString().length == 1 ? "0" + s : s;
+            $("#remindertime").text(h + ":" + m + ":" + s);
+        } else {
+            $("#remindertime").text("--:--:--");
+        }
+    }
+    function LoadSchedule(year, month) {
+        var json = {
+            year: year,
+            month: month
+        };
+        $("#scheduletable").load("{{$rootpath}}/User/schedule.php", json, function () {
+            $("#schedule #prev_month").click(function () {
+                var year = $("#schedule").attr("year");
+                var month = $("#schedule").attr("month");
+                if (month == 1) {
+                    month = 12;
+                    year--;
+                } else {
+                    month--;
+                }
+                LoadSchedule(year, month);
+            });
+            $("#schedule #next_month").click(function () {
+                var year = $("#schedule").attr("year");
+                var month = $("#schedule").attr("month");
+                if (month == 12) {
+                    month = 1;
+                    year++;
+                } else {
+                    month++;
+                }
+                LoadSchedule(year, month);
+            });
+            $("#schedule .meeting").click(function () {
+
+                $("#schedule .meeting").removeClass("selected");
+                $(this).addClass("selected");
+
+                var year = $("#schedule").attr("year");
+                var month = $("#schedule").attr("month");
+                var day = $(this).text();
+                var date = year + "-" + month + "-" + day;
+
+            });
+        });
+    }
 </script>
 
 {{include  file="$smarty_root/footer.html" }}

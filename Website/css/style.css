@@ -12,6 +12,9 @@ text-decoration: none;
 a:hover {
 text-decoration: none;
 }
+.bold{
+    font-weight:bold;
+}
 a:active {
 text-decoration: none;
 }
@@ -157,6 +160,12 @@ color: #aaa !important;
     color:#2468BF;
     font-weight:bold;
     font-size:16px;
+}
+.frame5{
+    background-color:#EFF5FF;
+    border: 1px solid transparent;
+    border-color:#D7D7D7;
+    border-radius:4px;
 }
 
 #pageer span{
