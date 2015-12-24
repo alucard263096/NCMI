@@ -122,7 +122,39 @@ where o.id=$order_id   ";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array($query); 
 
+		return $result;
+	}
+	
+	public function getCase($doctor_id,$case_id){
+		$case_id=parameter_filter($case_id);
+		$sql="select * from tb_member_case
+where id=$case_id and doctor_id=$doctor_id  ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+		$result["attachment"]=$this->getCaseAttachment($case_id);
+		return $result;
+	}
 
+	public function getCaseAttachment($case_id){
+		$case_id=parameter_filter($case_id);
+		$sql="select * from tb_member_case_attachment
+where case_id=$case_id   ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+
+		return $result;
+	}
+	public function updateCase($doctor_id,$case_id,$request){
+		$doctor_id=parameter_filter($doctor_id);
+		$case_id=parameter_filter($case_id);
+		$caution=parameter_filter($request["caution"]);
+		$solution=parameter_filter($request["solution"]);
+		$checking=parameter_filter($request["checking"]);
+		$result=parameter_filter($request["result"]);
+		$sql="update tb_member_case set caution='$caution',solution='$solution',checking='$checking',result='$result'
+		,status='F'
+where id=$case_id and doctor_id=$doctor_id  ";
+		$this->dbmgr->query($sql);
 
 		return $result;
 	}

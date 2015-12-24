@@ -24,6 +24,9 @@
         text-align:center;
         border-right: 1px solid #888;
         border-bottom: 1px solid #888;
+        max-width:150px;
+        padding-left:5px;
+        padding-right:5px;
     }
 </style>
 <div class="row">
@@ -53,9 +56,9 @@
                         <tr>
                             <th>会诊日期</th>
                             <th>患者姓名</th>
-                            <th>患者性别</th>
-                            <th>患者年龄</th>
-                            <th>会诊费用</th>
+                            <th>性别</th>
+                            <th>年龄</th>
+                            <th>费用</th>
                             <th>状态</th>
                             <th>主要诊断</th>
                             <th>病历详情</th>
@@ -90,13 +93,20 @@
                                 已完成
                                 {{/if}}
                             </td>
-                            <td>{{if $rs.status=='F'}}{{$rs.result}}{{else}}未会诊{{/if}}</td>
                             <td>
-                                <a href="{{$rootpath}}/Member/contract.php?id={{$rs.case_id}}">
-                                    {{if $rs.case_status=="M"}}
-                                    <span style="color:red;">待上传</span>
-                                    {{else}}
+                            {{if $rs.case_status=='F'}}
+                                {{$rs.result}}
+                            {{else}}未会诊
+                            {{/if}}</td>
+                            <td>
+                                <a href="{{$rootpath}}/User/contract.php?id={{$rs.case_id}}">
                                     查看
+                                </a>
+                                <a href="{{$rootpath}}/User/case.php?id={{$rs.case_id}}">
+                                    {{if $rs.case_status=="M"}}
+                                    <span style="color:red;">上传报告</span>
+                                    {{elseif  $rs.case_status=="F"}}
+                                    查看报告
                                     {{/if}}
                                 </a>
                             </td>

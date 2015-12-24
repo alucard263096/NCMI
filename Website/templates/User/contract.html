@@ -1,0 +1,285 @@
+{{include  file="$smarty_root/header.html" }}
+<link rel="stylesheet" media="screen" href="{{$rootpath}}/vendors/bootstrap-datepicker/css/datepicker.css">
+<link rel="stylesheet" media="screen" href="{{$rootpath}}/css/datepicker.fixes.css">
+<script type="text/javascript" src="{{$rootpath}}/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{$rootpath}}/vendors/html2canvas/dist/html2canvas.js"></script>
+<style>
+    #box {
+        min-height:320px;
+        background-color:#ffffff;
+        border:solid 1px #cccccc;
+        border-radius:4px;
+    }
+    #box .bar{
+        margin-top:5px;
+        margin-bottom:5px;
+        margin-left:15px;
+        margin-right:15px;
+        background-color:#89B0D8;
+        border:solid 1px #89B0D8;
+        border-radius:4px;
+        height:20px;
+        color:#ffffff
+    }
+    #box .bar .bartitle{
+        padding-left:25px;
+    }
+    #box .bar .dot{
+        background-color:#ffffff;
+        border:solid 1px #ffffff;
+        border-radius:10px;
+        height:10px;
+        width:10px;
+        color:#ffffff;
+        margin-top:4px;
+        margin-left:10px;
+        float:left;
+    }
+    #box .title{
+        font-size:20px;
+        font-weight:bold;
+        margin-top:20px;
+    }
+    #box #formtable{
+        margin-top:7px;
+        width:900px;
+        margin-left:15px;
+    }
+    #box #formtable input{
+        border:0px;
+        border-color:#ffffff;
+        text-align:center;
+    }
+        #box #formtable select {
+            border: 0px;
+            border-color: #ffffff;
+            text-align: center;
+        }
+        #box #formtable textarea {
+            border: 0px;
+            border-color: #ffffff;
+        }
+    #box #formtable td{
+        width:110px;
+        height:30px;
+    }
+    #box .fieldset{
+        margin-top:10px;
+    }
+        #box .fieldname,.field {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #box  select {
+            border: solid 1px #9DCDD2;
+        }
+        #box input {
+            padding-left: 5px;
+            width: 95%;
+            border: solid 1px #9DCDD2;
+        }
+        #box textarea {
+            padding-left: 5px;
+            width: 95%;
+            border: solid 1px #9DCDD2;
+        }
+        #box .result {
+            padding-left: 45px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        #box .content {
+            padding-left: 75px;
+            padding-right: 75px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        #box .uploadrow {
+            margin-left: 15px;
+            margin-top: 5px;
+        }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12 " style="margin-top: 10px; ">
+                <div id="box">
+                    <div class="row bar">
+                        <div class="dot"></div>
+                        <div class="small bartitle">家庭医生服务管理中心</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center title">
+                            远程会诊报告单
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-right small" style="padding-right:30px;">
+                            * 请真实填写报告单中的信息
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 10px;">
+                        <div class="col-md-12 text-center">
+                            <table id="formtable" border="1">
+                                <tr>
+                                    <td>会诊类别:</td>
+                                    <td>
+                                        单科会诊
+                                    </td>
+                                    <td>会诊方式:</td>
+                                    <td>
+                                        视频会诊
+                                    </td>
+                                    <td>专家要求:</td>
+                                    <td>
+                                        会诊方要求
+                                    </td>
+                                    <td>紧急程度:</td>
+                                    <td>
+                                        {{$info.urgent}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>联系人姓名:</td>
+                                    <td>{{$info.contact}}</td>
+                                    <td>联系电话:</td>
+                                    <td>{{$info.contact_tel}}
+                                    </td>
+                                    <td>联系地址:</td>
+                                    <td colspan="3">
+                                        {{$info.contact_address}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>会诊医院:</td>
+                                    <td>{{$info.apply_hospital}}</td>
+                                    <td>会诊科室:</td>
+                                    <td>
+                                        {{$info.apply_department}}
+                                    </td>
+                                    <td>会诊医生:</td>
+                                    <td >
+                                        {{$info.apply_doctor}}
+                                    </td>
+                                    <td>会诊日期:</td>
+                                    <td>
+                                        {{$info.apply_date}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>申请医院:</td>
+                                    <td>{{$doctor.hospital}}</td>
+                                    <td>申请科室:</td>
+                                    <td>
+                                        {{$doctor.department}}
+                                    </td>
+                                    <td>申请医生:</td>
+                                    <td>
+                                        {{$doctor.name}}
+                                    </td>
+                                    <td>申请日期:</td>
+                                    <td class="small">
+                                        {{$info.meeting_date}} <br />
+                                        {{$info.meeting_time}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>病人姓名:</td>
+                                    <td>{{$info.name}}</td>
+                                    <td>年龄:</td>
+                                    <td>
+                                        {{$info.age}}
+                                    </td>
+                                    <td>性别:</td>
+                                    <td>
+                                        {{if $info.sexual=="M"}}
+                                        男
+                                        {{else}}
+                                        女
+                                        {{/if}}
+                                    </td>
+                                    <td>联系电话:</td>
+                                    <td>
+                                        {{$info.tel}}
+                                    </td>
+                                </tr>
+                                <tr style="height:90px;">
+                                    <td >既往史:</td>
+                                    <td colspan="7">
+                                        {{$info.apply_history}}
+                                    </td>
+                                </tr>
+                                <tr style="height:90px;">
+                                    <td>现病情:</td>
+                                    <td colspan="7">
+                                        {{$info.apply_situation}}
+                                    </td>
+                                </tr>
+                                <tr style="height:90px;">
+                                    <td>化验结果:</td>
+                                    <td colspan="7">                                        
+                                        {{$info.apply_report}}
+                                    </td>
+                                </tr>
+                                <tr style="height:90px;">
+                                    <td>治疗经过:</td>
+                                    <td colspan="7">
+                                        {{$info.apply_procedure}}
+                                    </td>
+                                </tr>
+                                <tr style="height:90px;">
+                                    <td>初步诊断:</td>
+                                    <td colspan="7">
+                                        {{$info.apply_first_result}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 20px; margin-left: 15px;">
+                        <div class="col-md-12" id="uploadlist">
+                            <div class="row" >患者上传附件：</div>
+                            {{foreach from=$info.attachment item=atta }}
+                            <div class='row uploadrow'>
+                                <a href='{{$uploadpath}}/case/{{$atta.filesavename}}'>{{$atta.filename}}</a>
+                            </div>
+                            {{/foreach}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" style="margin-top:20px;">
+                <div class="row text-center">                                     
+                    {{if $info.status=='M'}}
+                    <button class="btn btn-success " id="btnReport">
+                        提交报告
+                    </button>
+                    {{elseif $info.status=='F'}}
+                    <button class="btn btn-success " id="btnReport">
+                        查看报告
+                    </button>
+                    {{/if}}                          
+                    <button class="btn btn-warning " id="btnReturn">&nbsp;返回&nbsp;</button>      
+                </div>
+                <div class="row  text-center" style="">
+                    <div class="col-md-12" style="color:red" id="tips">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        
+        $("#btnReturn").click(function () {
+            window.history.go(-1);
+        });
+        $("#btnReport").click(function () {
+            window.location.href = "{{$rootpath}}/User/case.php?id={{$info.id}}";
+        });
+
+    });
+</script>
+{{include  file="$smarty_root/footer.html" }}
