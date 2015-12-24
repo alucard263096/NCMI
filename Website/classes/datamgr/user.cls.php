@@ -71,6 +71,48 @@ order by o.meeting_time  ";
 
 		return $result;
 	}
+
+	public function getMeetingList($doctor_id,$from,$to,$page){
+		$startrow=($page-1)*18;
+		if($startrow>0){
+			//$startrow=$startrow-1;
+		}
+		$sql="select o.*,c.sexual,c.age,c.result,c.name,c.status case_status from tb_order o
+inner join tb_member_case c on o.case_id=c.id
+where o.doctor_id=$doctor_id and o.status<>'D' ";
+		if($from!=""){
+			$sql.=" and o.meeting_date>='$from'";
+		}
+		if($to!=""){
+			$sql.=" and o.meeting_date<='$to'";
+		}
+		$sql.=" order by o.meeting_date,o.meeting_time 
+		limit $startrow,15";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+
+
+		return $result;
+	}
+
+	public function getMeetingListPageCount($doctor_id,$from,$to){
+		$sql="select o.id from tb_order o
+inner join tb_member_case c on o.case_id=c.id
+where o.doctor_id=$doctor_id and o.status<>'D' ";
+		if($from!=""){
+			$sql.=" and o.meeting_date>='$from'";
+		}
+		if($to!=""){
+			$sql.=" and o.meeting_date<='$to'";
+		}
+
+		$sql="select sum(1) count from 
+		( $sql ) a";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+		return $result["count"];
+
+	}
 	
 	public function getMeetingCase($order_id){
 		$order_id=parameter_filter($order_id);

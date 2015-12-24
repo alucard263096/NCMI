@@ -1,0 +1,138 @@
+{{include  file="$smarty_root/header.html" }}
+<link rel="stylesheet" media="screen" href="{{$rootpath}}/vendors/bootstrap-datepicker/css/datepicker.css">
+<link rel="stylesheet" media="screen" href="{{$rootpath}}/css/datepicker.fixes.css">
+<script type="text/javascript" src="{{$rootpath}}/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<style>
+    
+    #list table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border-left: 1px solid #888;
+        border-top: 1px solid #888;
+        width:94%;
+        margin-left:3%;
+        background-color:#EAEFF4;
+    }
+   
+    #list tr {
+        height:30px;
+    }
+    #list th {
+        color:#106FFE;
+    }
+    #list th, td {
+        text-align:center;
+        border-right: 1px solid #888;
+        border-bottom: 1px solid #888;
+    }
+</style>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1" style="margin-top:20px;margin-bottom:20px;">
+        <div id="list" class="frame3" style="padding-top:10px;padding-bottom:20px;">
+            <div class="row">
+                <div class="col-md-12" style="padding-left:30px;">
+                    <h5 class="bold" style="">记录查询</h5>
+                </div>
+                <div class="col-md-2 col-md-offset-2" style="padding-top:3px;">
+                    查询日期:
+                </div>
+                <div class="col-md-2">
+                    <input type="text" readonly="readonly" style="width:100%;text-align:center;" class="datepickera" id="from" value="{{$from}}" />
+                </div>
+                <div class="col-md-1 text-center" style="padding-top:3px;">
+                    至
+                </div>
+                <div class="col-md-2">
+                    <input type="text" readonly="readonly" style="width:100%;text-align:center;" class="datepickera" id="to" value="{{$to}}" />
+                </div>
+                <div class="col-md-2 text-right">
+                    <button class="btn btn-xs btn-success" style="width:70%;" id="btnSearch">搜索</button>
+                </div>
+                <div class="col-md-12" style="margin-top:20px;">
+                    <table class="small">
+                        <tr>
+                            <th>会诊日期</th>
+                            <th>患者姓名</th>
+                            <th>患者性别</th>
+                            <th>患者年龄</th>
+                            <th>会诊费用</th>
+                            <th>状态</th>
+                            <th>主要诊断</th>
+                            <th>病历详情</th>
+                        </tr>
+                        {{foreach from=$list item=rs}}
+                        {{if $rs.id==""}}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {{else}}
+                        <tr>
+                            <td>{{$rs.meeting_date}}</td>
+                            <td>{{$rs.name}}</td>
+                            <td>{{if $rs.sexual=="M"}}男{{else}}女{{/if}}</td>
+                            <td>{{$rs.age}}</td>
+                            <td>{{$rs.price}}</td>
+                            <td>
+                                {{if $rs.status=='T'}}
+                                未支付
+                                {{elseif $rs.status=='A'}}
+                                已支付
+                                {{elseif $rs.status=='M'}}
+                                已会诊
+                                {{else}}
+                                已完成
+                                {{/if}}
+                            </td>
+                            <td>{{if $rs.status=='F'}}{{$rs.result}}{{else}}未会诊{{/if}}</td>
+                            <td>
+                                <a href="{{$rootpath}}/Member/contract.php?id={{$rs.case_id}}">
+                                    {{if $rs.case_status=="M"}}
+                                    <span style="color:red;">待上传</span>
+                                    {{else}}
+                                    查看
+                                    {{/if}}
+                                </a>
+                            </td>
+                        </tr>
+                        {{/if}}
+                        {{/foreach}}
+                    </table>
+                </div>
+            </div>
+            {{if $count>15 }}
+            <div class="row " style="margin-top:25px;" id="pageer">
+                <div class="col-md-6 col-md-offset-3 frame2 text-center ">
+                    <div class="row">
+                        <span class="col-md-3"><a href="{{$rootpath}}/User/meetinglist.php?from={{$form}}&to={{$to}}&page=1">首页</a></span>
+                        <span class="col-md-6">
+                            {{foreach from=$page_arr.pages item=rs}}
+                            <span><a {{if $rs==$current_page}}class ='selected' {{/if}} href="{{$rootpath}}/User/meetinglist.php?{{$form}}&to={{$to}}&page={{$rs}}">{{$rs}}</a></span>
+                            {{/foreach}}
+                        </span>
+                        <span class="col-md-3"><a href="{{$rootpath}}/User/meetinglist.php?from={{$form}}&to={{$to}}&page={{$page_arr.pagecount}}">末页</a></span>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.datepickera').datepicker({ format: "yyyy-mm-dd" });
+        $("#btnSearch").click(function () {
+            window.location.href = "{{$rootpath}}/User/meetinglist.php?from=" + $("#from").val()
+                + "&to=" + $("#to").val();
+        });
+    });
+</script>
+{{include  file="$smarty_root/footer.html" }}

@@ -263,4 +263,13 @@ function checkDataInList($arr,$val){
 	}
 	return false;
 }
+function is_date($date)
+{
+ if($date == date('Y-m-d H:i:s',strtotime($date))){
+  return true;
+ }else{
+  return false;
+ }
+ 
+}
 ?>

@@ -153,9 +153,9 @@
             <div class="row">
                 <div class="col-md-10 text-center col-md-offset-1" style="margin-top:20px;margin-bottom:20px;">
                     <h4 class="title">会诊记录</h4>
-                    <button class="btn btn-success btn-block" style="margin-top:10px;">今日会诊</button>
-                    <button class="btn btn-success btn-block" style="margin-top:10px;">预约名单</button>
-                    <button class="btn btn-success btn-block" style="margin-top:10px;">既往会诊记录</button>
+                    <button class="btn btn-success btn-block" style="margin-top:10px;" id="btnTodayMeeting">今日会诊</button>
+                    <button class="btn btn-success btn-block" style="margin-top:10px;" id="btnAfterMeeting">预约名单</button>
+                    <button class="btn btn-success btn-block" style="margin-top:10px;" id="btnBeforeMeeting">既往会诊记录</button>
                 </div>
             </div>
         </div>
@@ -166,7 +166,24 @@
         $("#meetinginfo").hide();
         setInterval("setOrderQueue()", 1000);
         LoadSchedule();
+        $("#btnTodayMeeting").click(function () {
+            var t = new Date().Format("yyyy-MM-dd");
+            openMeetingList(t, t);
+        });
+        $("#btnAfterMeeting").click(function () {
+            var curDate = new Date();
+            var t = new Date((curDate/1000+86400)*1000).Format("yyyy-MM-dd");
+            openMeetingList(t, "");
+        });
+        $("#btnBeforeMeeting").click(function () {
+            var curDate = new Date();
+            var t = new Date((curDate / 1000 - 86400) * 1000).Format("yyyy-MM-dd");
+            openMeetingList("", t);
+        });
     });
+    function openMeetingList(from, to) {
+        window.location.href = "{{$rootpath}}/User/meetinglist.php?from="+from+"&to="+to;
+    }
     Date.prototype.Format = function (fmt) { //author: meizz 
         var o = {
             "M+": this.getMonth() + 1, //月份 
