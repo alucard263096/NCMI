@@ -8,8 +8,14 @@
     #schedule .meeting{
         background:#FEE666;
     }
+    #schedule .vacation {
+        background: #B9AACA;
+    }
     #schedule .selected {
         background: #96DA8D;
+    }
+    #schedule .outday {
+        color:#C6D2DE;
     }
     #schedule .point{
         cursor:pointer;
@@ -36,7 +42,7 @@
     <tr class="trspace"></tr>
     <tr>
         {{foreach from=$rs item=day}}
-        <td class="{{$day.today}} {{$day.meeting}} {{$day.isday}} point">{{$day.day}}</td>
+        <td class="{{$day.today}} {{$day.meeting}} {{$day.isday}} {{$day.vacation}} point">{{$day.day}}</td>
         {{/foreach}}
     </tr>
     {{/foreach}}

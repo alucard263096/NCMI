@@ -20,6 +20,7 @@
   }
 
   $meetdates=$userMgr->getMeetingDateInMonth($user["id"],$year,$month);
+  $vacatopmdats=$userMgr->getVacation($user["id"],$year,$month);
 
   $firstday = "$year-$month-01";
   $dayofweek=date('w', strtotime("$firstday"));
@@ -47,12 +48,16 @@
 				}
 				$dt=array();
 				$dt["day"]=$value;
-				$dt["isday"]="isday";
+				strtotime(date("Y-m-d"))>
+				$dt["isday"]=strtotime(date("Y-m-d"))<strtotime(date("$year-$month-$value"))?"isday":"outday";
 				if(date("Y-m-d")=="$year-$month-$value"){
 					$dt["today"]="today";
 				}
-				if($userMgr->haveMeeting($meetdates,"$year-$month-$value")){
+				if($userMgr->inSchedule($meetdates,"$year-$month-$value","meeting_date")){
 					$dt["meeting"]="meeting";
+				}
+				if($userMgr->inSchedule($vacatopmdats,"$year-$month-$value","vacation")){
+					$dt["vacation"]="vacation";
 				}
 			}
 		}

@@ -1,0 +1,153 @@
+{{include  file="$smarty_root/header.html" }}
+<style>
+    #upscoll .title{
+        background-color:#4E719B;
+            color:white;
+    }
+    #upscoll     .title .welcome {
+            padding-left:40px;
+            margin-top:10px;
+            margin-bottom:10px;
+        }
+    #schedule td{
+        height:60px;
+    }
+    #schedule{
+        font-size:20px;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-12" id="upscoll">
+        <div class="title">
+            <div class="row">
+                <div class="col-md-8 welcome" >
+                    更新时间表/请假系统
+                </div>
+                <div class="col-md-4 welcome text-right" style="padding-right:20px;">
+                    <button class="btn btn-xs btn-default" id="btnVacation">请假/Leave</button>
+                    <button class="btn btn-xs btn-default" id="btnBack">返回/back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div style="margin-top:10px;" id="scheduletable">
+            
+        </div>
+        <div style="margin-top:50px;">
+            <div id="scheduledescrib" class="frame2 small" style="font-weight:bold;">
+                <div class="row" style="margin-top:20px;margin-bottom:20px;padding-left:30px;">
+                    <div class="col-md-1 " style="background-color:#5E8160">&nbsp;</div>
+                    <div class="col-md-2">
+                        当前日期<br />
+                        Today
+                    </div>
+                    <div class="col-md-1 " style="background-color:#96DA8D">&nbsp;</div>
+                    <div class="col-md-2">
+                        选中的日期<br />
+                        Selected Date
+                    </div>
+                    <div class="col-md-1 " style="background-color:#FEE666">&nbsp;</div>
+                    <div class="col-md-2">
+                        此日期有预约<br />
+                        Reserved Date
+                    </div>
+                    <div class="col-md-1 " style="background-color:#B9AACA">&nbsp;</div>
+                    <div class="col-md-2">
+                        此日期休假<br />
+                        Vacation Date
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var inctrl = false;
+    $(document).ready(function () {
+        LoadSchedule("", "");
+        $("#btnBack").click(function () {
+            window.history.go(-1);
+        });
+        $("#btnVacation").click(function () {
+            if ($("#schedule .selected").length == 0) {
+                alert("请选中你需要休假的日期");
+                return;
+            }
+            var year = $("#schedule").attr("year");
+            var month = $("#schedule").attr("month");
+            var days = "";
+            $("#schedule .selected").each(function () {
+                days += ","+$(this).text();
+            });
+            var json = {
+                action: "submit",
+                year: year,
+                month: month,
+                days:days
+            };
+            $.post("{{$rootpath}}/User/scheduleupdate.php", json, function (date) {
+                if (date == "RIGHT") {
+                    LoadSchedule(year, month);
+                } else {
+                    alert(date);
+                }
+            });
+        });
+    });
+    $(document).keydown(function (event) {
+        if (event.keyCode == 17) {
+            inctrl = true;
+        } 
+    });
+    $(document).keyup(function (event) {
+        if (event.keyCode == 17) {
+            inctrl = false;
+        }
+    });
+  
+    function LoadSchedule(year, month) {
+        var json = {
+            year: year,
+            month: month
+        };
+        $("#scheduletable").load("{{$rootpath}}/User/schedule.php", json, function () {
+            $("#schedule #prev_month").click(function () {
+                var year = $("#schedule").attr("year");
+                var month = $("#schedule").attr("month");
+                if (month == 1) {
+                    month = 12;
+                    year--;
+                } else {
+                    month--;
+                }
+                LoadSchedule(year, month);
+            });
+            $("#schedule #next_month").click(function () {
+                var year = $("#schedule").attr("year");
+                var month = $("#schedule").attr("month");
+                if (month == 12) {
+                    month = 1;
+                    year++;
+                } else {
+                    month++;
+                }
+                LoadSchedule(year, month);
+            });
+            $("#schedule .isday").click(function () {
+                if (!$(this).hasClass("meeting")) {
+                    if ($(this).hasClass("selected")) {
+                        $(this).removeClass("selected");
+                    } else {
+                        if (inctrl == false) {
+                            $("#schedule .isday").removeClass("selected");
+                        }
+                        $(this).addClass("selected");
+                    }
+                }
+            });
+        });
+    }
+</script>
+
+{{include  file="$smarty_root/footer.html" }}

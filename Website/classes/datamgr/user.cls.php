@@ -42,13 +42,22 @@
 		$result = $this->dbmgr->fetch_array_all($query); 
 		return $result;
 	}
-	public function haveMeeting($meetdates,$date){
-		for($i=0;$i<count($meetdates);$i++){
-			if(date('Y-m-d', strtotime($meetdates[$i]["meeting_date"]))==$date){
+	public function inSchedule($dates,$date,$col){
+		for($i=0;$i<count($dates);$i++){
+			if(date('Y-m-d', strtotime($dates[$i][$col]))==$date){
 				return true;
 			}
 		}
 		return false;
+	}
+	public function getVacation($doctor_id,$year,$month){
+		
+		$sql="select distinct vacation from tb_doctor_vacation 
+		where doctor_id=$doctor_id 
+		and ( vacation>='$year-$month-1' and vacation<=DATE_ADD('$year-$month-1',INTERVAL 1 MONTH) )";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
 	}
 
 	public function getMeeting($doctor_id,$date){
@@ -157,6 +166,33 @@ where id=$case_id and doctor_id=$doctor_id  ";
 		$this->dbmgr->query($sql);
 
 		return $result;
+	}
+	public function updateVacation($doctor_id,$year,$month,$days){
+		$doctor_id=parameter_filter($doctor_id);
+		$this->dbmgr->begin_trans();
+
+		$days=explode(",",$days);
+		foreach ($days as $day) {
+			if(trim($day)!=""){
+			$date="$year-$month-$day";
+			$date=parameter_filter($date);
+			
+			$sql="select 1 from tb_doctor_vacation where doctor_id=$doctor_id and vacation='$date'";
+			$query = $this->dbmgr->query($sql);
+			$result = $this->dbmgr->fetch_array_all($query);
+			if(count($result)>0){
+				$sql="delete from tb_doctor_vacation where doctor_id=$doctor_id and vacation='$date'";
+				$query = $this->dbmgr->query($sql);
+			}else{
+				$sql="insert into tb_doctor_vacation (doctor_id,vacation) values ($doctor_id,'$date')";
+				$this->dbmgr->query($sql);
+			}
+
+
+			}
+		}
+		$this->dbmgr->commit_trans();
+		return "RIGHT";
 	}
  }
  

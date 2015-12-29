@@ -18,10 +18,10 @@
                     欢迎您， {{$USER.name}}医师！
                 </div>
                 <div class="col-md-2 welcome">
-                    <button class="btn btn-xs btn-default">更新时间表/Update</button>
+                    <button class="btn btn-xs btn-default" id="btnUpdateSchedule">更新时间表/Update</button>
                 </div>
                 <div class="col-md-2 welcome">
-                    <button class="btn btn-xs btn-default">退出/Logout</button>
+                    <button class="btn btn-xs btn-default" id="btnLogout">退出/Logout</button>
                 </div>
             </div>
         </div>
@@ -51,6 +51,13 @@
                     <div class="col-md-9">
                         此日期有预约<br />
                         Reserved Date
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px;margin-bottom:20px;">
+                    <div class="col-md-1 col-md-offset-1" style="background-color:#B9AACA">&nbsp;</div>
+                    <div class="col-md-9">                        
+                        此日期休假<br />
+                        Vacation Date
                     </div>
                 </div>
             </div>
@@ -163,6 +170,12 @@
 </div>
 <script>
     $(document).ready(function () {
+        $("#btnUpdateSchedule").click(function () {
+            window.location.href = "{{$rootpath}}/User/scheduleupdate.php";
+        });
+        $("#btnLogout").click(function () {
+            window.location.href = "{{$rootpath}}/User/logout.php";
+        });
         $("#meetinginfo").hide();
         setInterval("setOrderQueue()", 1000);
         LoadSchedule();
