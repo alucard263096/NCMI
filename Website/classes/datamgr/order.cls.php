@@ -26,7 +26,9 @@
 	
 		$id=parameter_filter($id);
 
-		$sql="select * from tb_order where id=$id";
+		$sql="select o.*,d.name doctor_name from tb_order o
+		inner join tb_doctor d on o.doctor_id=d.id
+		 where o.id=$id";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array($query); 
 
@@ -38,6 +40,24 @@
 		$id=parameter_filter($id);
 
 		$sql="update tb_order set status='A' where id=$id";
+		$query = $this->dbmgr->query($sql);
+	}
+	public function updateMeetingInfo($id,$ret){
+		$meeting_id=parameter_filter($ret["id"]);
+		$meeting_number=parameter_filter($ret["number"]);
+		$meeting_organizerPwd=parameter_filter($ret["organizerPwd"]);
+		$meeting_attendeePwd=parameter_filter($ret["attendeePwd"]);
+		$meeting_effectiveDate=parameter_filter($ret["effectiveDate"]);
+		$meeting_invalidDate=parameter_filter($ret["invalidDate"]);
+		$meeting_joinUrl=parameter_filter($ret["joinUrl"]);
+
+		$sql="update tb_order set meeting_id='$meeting_id'
+		,meeting_number='$meeting_number'
+		,meeting_organizerPwd='$meeting_organizerPwd'
+		,meeting_attendeePwd='$meeting_attendeePwd'
+		,meeting_effectiveDate='$meeting_effectiveDate'
+		,meeting_invalidDate='$meeting_invalidDate'
+		,meeting_joinUrl='$meeting_joinUrl' where id=$id";
 		$query = $this->dbmgr->query($sql);
 	}
  }

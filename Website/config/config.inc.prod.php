@@ -47,4 +47,10 @@ $CONFIG['fileupload']['try_interval']		= "1";//second
 $CONFIG['excel']['version']	= "Excel2007";//2003:Excel5,2007:Excel2007
 
 
+
+#[Gensee]
+$CONFIG["gensee"]["site"]="jwyk.gensee.com";  
+$CONFIG["gensee"]["loginName"]="admin@jwyk.com";
+$CONFIG["gensee"]["password"]="mfg-19780425";
+$CONFIG["gensee"]["organizerPwd"]="888888";
 ?>

@@ -76,7 +76,7 @@
                 <div class="col-md-10 col-md-offset-1" >
                     {{foreach from=$meetinglist item=rs}}
                     <div class="col-lg-2 item" style="margin-left:0px;margin-right:0px;padding-left:3px;padding-right:3px;"
-                         id="meet_{{$rs.id}}" oid="{{$rs.id}}" starttime="{{$rs.meeting_time_start}}">
+                         id="meet_{{$rs.id}}" oid="{{$rs.id}}" starttime="{{$rs.meeting_time_start}}" joinUrl="{{$rs.meeting_joinUrl}}">
                         <a href="#">
                             {{if $rs.sexual=="M"}}
                             <img style="width:100%;" src="{{$rootpath}}/images/sex_M.png" />
@@ -124,7 +124,7 @@
             </div>
             <div class="row" style="margin-top:10px;margin-bottom:10px;">
                 <div class="col-md-10 col-md-offset-1 text-center">
-                    <button class="btn btn-success btn-block"><i class="glyphicon glyphicon-list-alt"></i> &nbsp;打开视频节目/<br />Open Video Panel</button>
+                    <button class="btn btn-success btn-block" id="btnOpenVideo"><i class="glyphicon glyphicon-list-alt"></i> &nbsp;打开视频会诊/<br />Open Video Panel</button>
                 </div>
             </div>
             <div class="row" style="margin-top:10px;margin-bottom:10px;">
@@ -169,6 +169,7 @@
     </div>
 </div>
 <script>
+    var joinUrl = "";
     $(document).ready(function () {
         $("#btnUpdateSchedule").click(function () {
             window.location.href = "{{$rootpath}}/User/scheduleupdate.php";
@@ -192,6 +193,12 @@
             var curDate = new Date();
             var t = new Date((curDate / 1000 - 86400) * 1000).Format("yyyy-MM-dd");
             openMeetingList("", t);
+        });
+        $("#btnOpenVideo").click(function () {
+            if (joinUrl.trim() == "") {
+                alert("当前暂无可用会诊");
+            }
+            window.open(joinUrl);
         });
     });
     function openMeetingList(from, to) {
@@ -225,6 +232,7 @@
             if (start > t) {
                 last = start;
                 order_id = oid;
+                joinUrl = $(this).attr("joinUrl");
                 return false;
             } else {
                 pastcount++;
@@ -259,8 +267,11 @@
             m = m.toString().length == 1 ? "0" + m : m;
             s = s.toString().length == 1 ? "0" + s : s;
             $("#remindertime").text(h + ":" + m + ":" + s);
+            $("#btnOpenVideo").removeClass("disabled");
         } else {
             $("#remindertime").text("--:--:--");
+            joinUrl = "";
+            $("#btnOpenVideo").addClass("disabled");
         }
     }
     function LoadSchedule(year, month) {

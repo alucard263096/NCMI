@@ -31,7 +31,7 @@
                     </div>
                     <div class="row " style="font-size: 120%;">
                         <div class="col-md-1 titleinfo text-right" style="padding-right:0px;">
-                            <i style="color: #639A3C" class="glyphicon glyphicon-exclamation-sign"></i>
+                            <i style="color: red" class="glyphicon glyphicon-remove"></i>
                         </div>
                         <div class="col-md-11 titleinfo">
                             &nbsp;预约信息
@@ -47,11 +47,11 @@
                         <div class="dothr col-md-12" style="width:94%;margin-left:3%;margin-right:3%"></div>
                     </div>
                     <div class="row titleinfo">
-                        <div class="col-md-12 text-center" style="color: #43A043">
-                            <h4 style="font-weight: bold;">支付成功！</h4>
+                        <div class="col-md-12 text-center" style="color: red">
+                            <h4 style="font-weight: bold;">{{$reason}}！</h4>
                         </div>
                         <div class="col-md-12 text-center titleinfo">
-                            请在预约时间段前15分钟登陆系统并进入视频模式，同时请保持邮件和手机号码畅通。
+                            {{$reason_message}}
                         </div>
                         <div class="col-md-1 col-md-offset-4 ">
                             <button class="btn btn-success" id="btnHome">返回首页</button>

@@ -215,6 +215,7 @@ where id=$doctor_id and status='A'
 			}
 			$ret[]=$tac;
 		}
+		//print_r($ret);
 		return $ret;
 	}
 	
