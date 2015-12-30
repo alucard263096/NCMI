@@ -48,15 +48,15 @@
 				}
 				$dt=array();
 				$dt["day"]=$value;
-				strtotime(date("Y-m-d"))>
+				$dday=strtotime(date("$year-$month-$value"));
 				$dt["isday"]=strtotime(date("Y-m-d"))<strtotime(date("$year-$month-$value"))?"isday":"outday";
 				if(date("Y-m-d")=="$year-$month-$value"){
 					$dt["today"]="today";
 				}
-				if($userMgr->inSchedule($meetdates,"$year-$month-$value","meeting_date")){
+				if($userMgr->inSchedule($meetdates,date("Y-m-d",$dday),"meeting_date")){
 					$dt["meeting"]="meeting";
 				}
-				if($userMgr->inSchedule($vacatopmdats,"$year-$month-$value","vacation")){
+				if($userMgr->inSchedule($vacatopmdats,date("Y-m-d",$dday),"vacation")){
 					$dt["vacation"]="vacation";
 				}
 			}

@@ -181,6 +181,8 @@ where id=$doctor_id and status='A'
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array($query); 
 
+		$vacations=$this->getVacation($doctor_id,$first_day);
+
 		$t_arr= Array();
 		$t_arr[]="m";
 		$t_arr[]="a";
@@ -205,6 +207,9 @@ where id=$doctor_id and status='A'
 				if(date("Y-m-d")<date("Y-m-d",strtotime($arr["day"]))){
 					$arr["active"]="Y";
 				}
+				if($this->inSchedule($vacations,$arr["day"],"vacation")){
+					$arr["onvacation"]="Y";
+				}
 				$arr["tac"]=$t;
 				$tac[]=$arr;
 			}
@@ -212,6 +217,26 @@ where id=$doctor_id and status='A'
 		}
 		return $ret;
 	}
+	
+	public function inSchedule($dates,$date,$col){
+		for($i=0;$i<count($dates);$i++){
+			if(date('Y-m-d', strtotime($dates[$i][$col]))==$date){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public function getVacation($doctor_id,$first_day){
+		
+		$sql="select distinct vacation from tb_doctor_vacation 
+		where doctor_id=$doctor_id 
+		and ( vacation>='$first_day' and vacation<=DATE_ADD('$first_day',INTERVAL 6 DAY) )";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
+	}
+
 	public function getMeetingTime($doctor_id,$date,$tac){
 		
 		$minute=0;

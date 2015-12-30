@@ -15,7 +15,11 @@
     <td style="color:red;">已约满</td>
     {{elseif $rs.dut>0&&$rs.dut>$rs.use}}
         {{if $rs.active=="Y"}}
-    <td class="canselectact" date="{{$rs.day}}" tac="{{$rs.tac}}"><b>{{$rs.use}}/{{$rs.dut}}人</b></td>
+            {{if $rs.onvacation=="Y"}}
+    <td class="expired">休假</td>
+            {{else}}
+    <td class="anselectact" date="{{$rs.day}}" tac="{{$rs.tac}}"><b>{{$rs.use}}/{{$rs.dut}}人</b></td>
+            {{/if}}
         {{else}}
     <td class="expired" >{{$rs.use}}/{{$rs.dut}}人</td>
         {{/if}}
@@ -30,8 +34,12 @@
     {{if $rs.dut>0&& $rs.dut<=$rs.use}}
     <td style="color:red;">已约满</td>
     {{elseif $rs.dut>0&&$rs.dut>$rs.use}}   
-        {{if $rs.active=="Y"}}
-    <td class="canselectact" date="{{$rs.day}}" tac="{{$rs.tac}}"><b>{{$rs.use}}/{{$rs.dut}}人</b></td>
+        {{if $rs.active=="Y"}}    
+            {{if $rs.onvacation=="Y"}}
+            <td class="expired">休假</td>
+            {{else}}
+            <td class="anselectact" date="{{$rs.day}}" tac="{{$rs.tac}}"><b>{{$rs.use}}/{{$rs.dut}}人</b></td>
+            {{/if}}
         {{else}}
     <td class="expired">{{$rs.use}}/{{$rs.dut}}人</td>
         {{/if}}
