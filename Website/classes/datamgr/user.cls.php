@@ -63,7 +63,7 @@
 	public function getMeeting($doctor_id,$date){
 		$doctor_id=parameter_filter($doctor_id);
 		$loginname=parameter_filter($date);
-		$sql="select o.*,c.sexual from tb_order o
+		$sql="select o.*,c.sexual,c.status case_status from tb_order o
 inner join tb_member_case c on o.case_id=c.id
 where o.doctor_id=$doctor_id 
 and o.meeting_date='$date'
@@ -162,6 +162,15 @@ where case_id=$case_id   ";
 		$result=parameter_filter($request["result"]);
 		$sql="update tb_member_case set caution='$caution',solution='$solution',checking='$checking',result='$result'
 		,status='F'
+where id=$case_id and doctor_id=$doctor_id  ";
+		$this->dbmgr->query($sql);
+
+		return $result;
+	}
+	public function updateCaseInMeeting($doctor_id,$case_id){
+		$doctor_id=parameter_filter($doctor_id);
+		$case_id=parameter_filter($case_id);
+		$sql="update tb_member_case set status='M'
 where id=$case_id and doctor_id=$doctor_id  ";
 		$this->dbmgr->query($sql);
 

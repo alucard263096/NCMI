@@ -45,19 +45,17 @@
 	public function updateMeetingInfo($id,$ret){
 		$meeting_id=parameter_filter($ret["id"]);
 		$meeting_number=parameter_filter($ret["number"]);
-		$meeting_organizerPwd=parameter_filter($ret["organizerPwd"]);
-		$meeting_attendeePwd=parameter_filter($ret["attendeePwd"]);
-		$meeting_effectiveDate=parameter_filter($ret["effectiveDate"]);
-		$meeting_invalidDate=parameter_filter($ret["invalidDate"]);
-		$meeting_joinUrl=parameter_filter($ret["joinUrl"]);
+		$meeting_organizerJoinUrl=parameter_filter($ret["organizerJoinUrl"]);
+		$meeting_organizerToken=parameter_filter($ret["organizerToken"]);
+		$meeting_panelistJoinUrl=parameter_filter($ret["panelistJoinUrl"]);
+		$meeting_panelistToken=parameter_filter($ret["panelistToken"]);
 
 		$sql="update tb_order set meeting_id='$meeting_id'
 		,meeting_number='$meeting_number'
-		,meeting_organizerPwd='$meeting_organizerPwd'
-		,meeting_attendeePwd='$meeting_attendeePwd'
-		,meeting_effectiveDate='$meeting_effectiveDate'
-		,meeting_invalidDate='$meeting_invalidDate'
-		,meeting_joinUrl='$meeting_joinUrl' where id=$id";
+		,meeting_organizerJoinUrl='$meeting_organizerJoinUrl'
+		,meeting_organizerToken='$meeting_organizerToken'
+		,meeting_panelistJoinUrl='$meeting_panelistJoinUrl'
+		,meeting_panelistToken='$meeting_panelistToken' where id=$id";
 		$query = $this->dbmgr->query($sql);
 	}
  }

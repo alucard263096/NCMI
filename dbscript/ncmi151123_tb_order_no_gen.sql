@@ -1,10 +1,11 @@
+CREATE DATABASE  IF NOT EXISTS `ncmi151123` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `ncmi151123`;
 -- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
 -- Host: www.myhkdoc.com    Database: ncmi151123
 -- ------------------------------------------------------
 -- Server version	5.6.21-enterprise-commercial-advanced-log
 
-use ncmi151123;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -24,10 +25,9 @@ DROP TABLE IF EXISTS `tb_order_no_gen`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tb_order_no_gen` (
-  `prefix` varchar(2) NOT NULL,
+  `prefix` varchar(2) DEFAULT NULL,
   `datemark` varchar(45) DEFAULT NULL,
-  `seq` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`prefix`)
+  `seq` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -37,7 +37,7 @@ CREATE TABLE `tb_order_no_gen` (
 
 LOCK TABLES `tb_order_no_gen` WRITE;
 /*!40000 ALTER TABLE `tb_order_no_gen` DISABLE KEYS */;
-INSERT INTO `tb_order_no_gen` VALUES ('PT','201512','7');
+INSERT INTO `tb_order_no_gen` VALUES ('PT','201512','8'),('PT','201601','3');
 /*!40000 ALTER TABLE `tb_order_no_gen` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-22 23:36:46
+-- Dump completed on 2016-01-05  1:19:07

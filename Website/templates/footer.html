@@ -30,5 +30,64 @@
                 </div>
             </div>
         </div>
+
+
+<div id="dialog_box" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog_boxtitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 id="dialog_boxtitle" class="modal-title">消息</h4>
+            </div>
+            <div class="modal-body">
+                <p id="dialog_boxmsg"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="dialog_boxBtnConfirm" class="btn btn-success">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function infoDialog(msg) {
+        $("#dialog_boxtitle").text("提示");
+        showDialog(msg);
+    }
+
+    function warningDialog(msg) {
+        $("#dialog_boxtitle").text("警告");
+        showDialog(msg);
+    }
+
+    function errorDialog(msg) {
+        $("#dialog_boxtitle").text("错误");
+        showDialog(msg);
+    }
+    function showDialog(msg) {
+        $("#dialog_boxBtnConfirm").hide();
+        $("#dialog_boxmsg").html(msg);
+        $("#dialog_box").modal('show');
+    }
+
+
+                    function confirmDialog(title, msg, confirmFunction) {
+
+                        $("#dialog_boxtitle").text(title);
+                        $("#dialog_boxmsg").html(msg);
+                        $("#dialog_boxBtnConfirm").unbind("click").click(function () {
+
+                            $("#dialog_box").modal('hide');
+                            confirmFunction();
+                        });
+                        $("#dialog_boxBtnConfirm").show();
+                        $("#dialog_box").modal("show");
+
+                    }
+
+</script>
+
+
+
     </body>
 </html>

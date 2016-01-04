@@ -15,42 +15,34 @@ class GenseeMgr
 	}
 
 	function createMeeting($doctor_name,$starttime,$endtime){
-	//subject String 会议名称（最长为 250）  
-	//organizerPwd String 组织者口令(如果没有由后台随即产生) 是 
-	//attendeePwd String 参加者口令（如果没有由后台随即产生） 是 
-	//effectiveDate String 生效时间（详见 3.3） 是 
-	//invalidDate String 失效时间（详见 3.3） 是 
-	//loginName String 登录名  password
-	$site=$this->site;
-	$loginName=$this->loginName;
-	$password=$this->password;
-	$organizerPwd=$this->organizerPwd;
 
-	$subject="视频会诊_".$doctor_name.$starttime;
-	$effectiveDate=date("Y-m-d h:i:s",strtotime($starttime)-60*1000*15);
-	$invalidDate=date("Y-m-d h:i:s",strtotime($endtime)+60*1000*15);
+		$site=$this->site;
+		$loginName=$this->loginName;
+		$password=$this->password;
+		$organizerPwd=$this->organizerPwd;
 
-	$url="http://$site/integration/site/mtg/created?loginName=$loginName&password=$password&organizerPwd=$organizerPwd";
-	$url.="&subject=$subject&effectiveDate=$effectiveDate&invalidDate=$invalidDate";
+		$subject="【视频会诊】".$doctor_name.$starttime;
+		$startTime=date("Y-m-d h:i:s",strtotime($starttime)-60*15);
+		$endTime=date("Y-m-d h:i:s",strtotime($endtime)+60*15);
+		$url="http://$site/integration/site/webcast/created?loginName=$loginName&password=$password&organizerPwd=$organizerPwd";
+		$url.="&subject=$subject&startTime=$startTime&endTime=$endTime";
+		$url.="&maxAttendees=2&opened=true&switchClient=true";
+		$url.="&realtime=true&organizerToken=888888";
+		//$url.="&subject=$subject&startTime=$startTime&endTime=$endTime";
+		//$url.="&subject=$subject&startTime=$startTime&endTime=$endTime";
+		//$url.="&subject=$subject&startTime=$startTime&endTime=$endTime";
+		$url=str_replace(" ", "%20", $url);
+		$str = file_get_contents("$url");
+		$ret=json_decode($str,true);
 
-	$str = file_get_contents("$url");
-	$ret=json_decode($str,true);
+		if($ret["code"]!="0"){
+			logger_mgr::logError("GENSEE create meeting,url:$url :$str");
+		}else{
+			logger_mgr::logDebug("GENSEE create meeting,url:$url :$str");
+		}
 
-	if($ret["code"]!="0"){
-		logger_mgr::logError("GENSEE create meeting,url:$url :$str");
-	}
-
-	//id String 会议室ID  
-	//number String 会议室编号  
-	//organizerPwd String 组织者口令  
-	//attendeePwd String 参加者口令  
-	//effectiveDate int 会议室生效日期（详见3.3） 是 
-	//invalidDate int 会议室失效日期（详见3.3） 是 
-	//joinUrl String 会议室URL  
-	//code String 返回结果代码（详情见3.5）  
-	//message String 结果说明 
 	
-	return $ret;
+		return $ret;
 
 	}
 

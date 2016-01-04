@@ -35,5 +35,18 @@
                 <textarea class="col-lg-12" readonly="readonly">{{$info.apply_first_result}}</textarea>
             </div>
         </div>
+        <div class="row" style="margin-top:10px;">
+            <div class="col-lg-11 text-right">
+                <button class="btn btn-default btn-xs" id="btnOpenCase" case_id="{{$info.id}}" >查看病历</button>
+            </div>
+        </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#btnOpenCase").click(function () {
+            var case_id = $(this).attr("case_id");
+            window.open("{{$rootpath}}/User/contract.php?id="+case_id);
+        });
+    });
+</script>

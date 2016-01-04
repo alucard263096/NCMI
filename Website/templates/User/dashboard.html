@@ -76,7 +76,7 @@
                 <div class="col-md-10 col-md-offset-1" >
                     {{foreach from=$meetinglist item=rs}}
                     <div class="col-lg-2 item" style="margin-left:0px;margin-right:0px;padding-left:3px;padding-right:3px;"
-                         id="meet_{{$rs.id}}" oid="{{$rs.id}}" starttime="{{$rs.meeting_time_start}}" joinUrl="{{$rs.meeting_joinUrl}}">
+                         id="meet_{{$rs.id}}" oid="{{$rs.id}}" cid="{{$rs.case_id}}" starttime="{{$rs.meeting_time_start}}" joinurl="{{$rs.meeting_organizerJoinUrl}}">
                         <a href="#">
                             {{if $rs.sexual=="M"}}
                             <img style="width:100%;" src="{{$rootpath}}/images/sex_M.png" />
@@ -85,6 +85,8 @@
                             {{/if}}
                             <p class="small text-center">{{$rs.meeting_time_start}}</p>
                         </a>
+                        <a class="text-center col-lg-12 small"  href="{{$rootpath}}/User/contract.php?id={{$rs.case_id}}" target="_blank">病历</a>
+                        <a class="text-center col-lg-12 small casewait hide" style="color:red;padding:0px;" href="{{$rootpath}}/User/case.php?id={{$rs.case_id}}" target="_blank">待上传</a>
                     </div>
                     {{/foreach}}
                 </div>
@@ -168,8 +170,11 @@
         </div>
     </div>
 </div>
+
 <script>
     var joinUrl = "";
+    var c_id = "";
+    var dialog_case_id = "";
     $(document).ready(function () {
         $("#btnUpdateSchedule").click(function () {
             window.location.href = "{{$rootpath}}/User/scheduleupdate.php";
@@ -179,7 +184,10 @@
         });
         $("#meetinginfo").hide();
         setInterval("setOrderQueue()", 1000);
+        setInterval("refreshOrderType()", 180000);
         LoadSchedule();
+        setOrderQueue();
+        refreshOrderType();
         $("#btnTodayMeeting").click(function () {
             var t = new Date().Format("yyyy-MM-dd");
             openMeetingList(t, t);
@@ -198,9 +206,15 @@
             if (joinUrl.trim() == "") {
                 alert("当前暂无可用会诊");
             }
+            dialog_case_id = cid;
+            confirmDialog("完成视频会诊", "如果你已经完成视频会诊，请点击确认按钮前往上传病例报告", gotoOpenReport);
             window.open(joinUrl);
         });
     });
+    function gotoOpenReport() {
+        var url = "{{$rootpath}}/User/case.php?setm=Y&id=" + dialog_case_id;
+        window.open(url);
+    }
     function openMeetingList(from, to) {
         window.location.href = "{{$rootpath}}/User/meetinglist.php?from="+from+"&to="+to;
     }
@@ -219,6 +233,19 @@
             if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     }
+    function refreshOrderType() {
+        $.post("{{$rootpath}}/User/notreportorder.php", function (data) {
+            var orderstrarr = data.split(",");
+            $("#meetinglist .casewait").addClass("hide");
+            for (i = 0; i < orderstrarr.length; i++) {
+                var order_id = orderstrarr[i];
+                if (order_id.trim() != "") {
+                    var idstr = "#meet_" + order_id + " .casewait";
+                    $(idstr).removeClass("hide");
+                }
+            }
+        });
+    }
     function setOrderQueue() {
         var t = new Date().Format("hh:mm");
         var rt = new Date().Format("hh:mm:ss");
@@ -233,6 +260,7 @@
                 last = start;
                 order_id = oid;
                 joinUrl = $(this).attr("joinUrl");
+                cid = $(this).attr("cid");
                 return false;
             } else {
                 pastcount++;
