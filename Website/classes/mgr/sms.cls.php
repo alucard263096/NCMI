@@ -77,7 +77,7 @@ class SmsMgr
 			 $str.= "dateCreated:".$smsmessage->dateCreated." ";
 			 $str.=  "smsMessageSid:".$smsmessage->smsMessageSid."";
 			 //TODO 添加成功处理逻辑
-			 logger_mgr::logDebug("sms :$str");
+			 logger_mgr::logInfo("sms :$str");
 			 //echo $str;
 			 return true;
 		 }
