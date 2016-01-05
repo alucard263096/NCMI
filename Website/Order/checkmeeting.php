@@ -18,7 +18,8 @@
   $meetinglist=$memberMgr->getMeeting($member["id"],$date);
   foreach($meetinglist as $val){
 	$order_date=$val["meeting_date"]." ".$val["meeting_time_start"];
-	if((strtotime($order_date)-time())/60<=15){
+	$int_time=(strtotime($order_date)-time())/60;
+	if($int_time<=15&&$int_time>0){
 		echo $val["meeting_panelistJoinUrl"];
 		exit;
 	}
