@@ -22,5 +22,8 @@ nytprof.out
 logs/
 templates_c/
 upload/
+packages/
+obj/
+bin/
 
 

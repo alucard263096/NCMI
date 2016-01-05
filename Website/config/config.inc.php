@@ -64,6 +64,6 @@ $CONFIG["sms"]["ServerIP"]="sandboxapp.cloopen.com";
 $CONFIG["sms"]["ServerPort"]="8883";
 $CONFIG["sms"]["SoftVersion"]="2013-12-26";
 $CONFIG["sms"]["timeout"]="30";//mins
-$CONFIG["sms"]["templeteid"]["bookingsuccess"]="35125";
+$CONFIG["sms"]["templeteid"]["bookingsuccess"]="58531";
 
 ?>
