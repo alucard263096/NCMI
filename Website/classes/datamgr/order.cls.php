@@ -26,7 +26,8 @@
 	
 		$id=parameter_filter($id);
 
-		$sql="select o.*,d.name doctor_name from tb_order o
+		$sql="select o.*,d.name doctor_name,c.tel mobile from tb_order o
+		inner join tb_member_case c on o.case_id=c.id
 		inner join tb_doctor d on o.doctor_id=d.id
 		 where o.id=$id";
 		$query = $this->dbmgr->query($sql);

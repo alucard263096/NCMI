@@ -162,7 +162,7 @@
                                     <td>联系人姓名:</td>
                                     <td><input type="text" class="notnull" id="contact" value="" /></td>
                                     <td>联系电话:</td>
-                                    <td><input type="text" class="notnull" id="contact_tel" value="" />
+                                    <td><input type="text" class="notnull mobile" id="contact_tel" value="" />
                                     </td>
                                     <td>联系地址:</td>
                                     <td colspan="3">
@@ -224,7 +224,7 @@
                                     </td>
                                     <td>联系电话:</td>
                                     <td>
-                                        <input type="text" class="notnull" id="tel" value="" />
+                                        <input type="text" class="notnull mobile" id="tel" value="" />
                                     </td>
                                 </tr>
                                 <tr style="height:90px;">
@@ -310,7 +310,21 @@
         });
 
         $("#btnSave").click(function () {
-            var allnotnull=true;
+            var allnotnull = true;
+
+            $("#box .mobile").each(function (index) {
+                if (validatemobile($(this).val()) == false) {
+                    allnotnull = false;
+                    $(this).css("border-bottom", "1px solid red");
+                } else {
+                    $(this).css("border-bottom", "0px solid red");
+                }
+            });
+
+            if (allnotnull == false) {
+                $("#tips").text("红色下划线处为手机号码，请正确填写");
+                return;
+            }
 
             $("#box .notnull").each(function (index) {
                 if($.trim($(this).val())==""){

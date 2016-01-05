@@ -10,6 +10,7 @@
   include ROOT.'/include/member.inc.php';
   require ROOT.'/classes/datamgr/order.cls.php';
   require ROOT.'/classes/mgr/gensee.cls.php';
+  require ROOT.'/classes/mgr/sms.cls.php';
   
   $action=$_REQUEST["action"];
 
@@ -31,6 +32,7 @@
 		$smarty->display(ROOT.'/templates/Order/fail.html');
 	  }else{
 		$orderMgr->updateMeetingInfo($id,$meetingret);
+		$smsMgr->SendQueryConfirm($info["mobile"],$info["doctor_name"],$info["meeting_date"]." ".$meeting_time[0]);
 		$smarty->display(ROOT.'/templates/Order/success.html');
 	  }
 

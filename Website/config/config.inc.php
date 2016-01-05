@@ -26,7 +26,7 @@ $CONFIG['error_handler'] ="E_ALL";
 
 #[Database]
 $CONFIG['database']['provider']	= 'mysql';  //mssql,sqlsrv
-$CONFIG['database']['host']		= 'localhost';  
+$CONFIG['database']['host']		= 'www.myhkdoc.com';  
 $CONFIG['database']['database']	= 'NCMI151123';  
 $CONFIG['database']['user']		= 'root';  
 $CONFIG['database']['psw']		= 'root'; 
@@ -52,5 +52,18 @@ $CONFIG["gensee"]["site"]="jwyk.gensee.com";
 $CONFIG["gensee"]["loginName"]="admin@jwyk.com";
 $CONFIG["gensee"]["password"]="mfg-19780425";
 $CONFIG["gensee"]["organizerPwd"]="888888";
+
+
+
+
+#[SMS]
+$CONFIG["sms"]["AccountSid"]="aaf98f894bfd8efd014c0c06c970099e";
+$CONFIG["sms"]["AccountToken"]="cdcb39a689d242f2af537b5ea4a86f61";
+$CONFIG["sms"]["AppId"]="8a48b5514fa577af014fa675e7840459";
+$CONFIG["sms"]["ServerIP"]="sandboxapp.cloopen.com";
+$CONFIG["sms"]["ServerPort"]="8883";
+$CONFIG["sms"]["SoftVersion"]="2013-12-26";
+$CONFIG["sms"]["timeout"]="30";//mins
+$CONFIG["sms"]["templeteid"]["bookingsuccess"]="35125";
 
 ?>
