@@ -7,7 +7,7 @@ $CONFIG['URL']="http://www.myhkdoc.com/NCMI";
 $CONFIG["SessionName"]="NCMI";
 
 $CONFIG['smarty']['rootpath']		= '/NCMI'; 
-$CONFIG['solution_configuration']='debug';
+$CONFIG['solution_configuration']='release';
 $CONFIG['server']		= 'windows';   //windows or linux
 
 #[Smarty config]
