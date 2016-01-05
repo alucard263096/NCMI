@@ -22,7 +22,7 @@
 	  $info=$orderMgr->getOrder($id);
 	  $orderMgr->updateOrderPayment($id);
 	  $meeting_time=explode("-",$info["meeting_time"]);
-	  $meetingret=$genseeMgr->createMeeting($doctor_name,$info["meeting_date"]." ".$meeting_time[0],$info["meeting_date"]." ".$meeting_time[1]);
+	  $meetingret=$genseeMgr->createMeeting($info["doctor_name"],$info["meeting_date"]." ".$meeting_time[0],$info["meeting_date"]." ".$meeting_time[1]);
 	  $smarty->assign("info",$info);
 	  if($meetingret["code"]!="0"){
 		

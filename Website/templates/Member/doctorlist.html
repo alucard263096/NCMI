@@ -44,13 +44,13 @@
         <div class="row " style="margin-top:25px;" id="pageer">
             <div class="col-md-6 col-md-offset-3 frame2 text-center ">
                 <div class="row">
-                    <span class="col-md-3"><a href="{{$rootpath}}/Member/followdoctorlist.php?search={{$searchkeyword}}&page=1">首页</a></span>
+                    <span class="col-md-3"><a href="{{$rootpath}}/Member/{{$pagename}}.php?search={{$searchkeyword}}&page=1">首页</a></span>
                     <span class="col-md-6">
                         {{foreach from=$page_arr.pages item=rs}}
-                        <span ><a {{if $rs==$current_page}}class='selected'{{/if}} href="{{$rootpath}}/Member/followdoctorlist.php?search={{$searchkeyword}}&page={{$rs}}">{{$rs}}</a></span>
+                        <span ><a {{if $rs==$current_page}}class='selected'{{/if}} href="{{$rootpath}}/Member/{{$pagename}}.php?search={{$searchkeyword}}&page={{$rs}}">{{$rs}}</a></span>
                         {{/foreach}}
                     </span>
-                    <span class="col-md-3"><a href="{{$rootpath}}/Member/followdoctorlist.php?search={{$searchkeyword}}&page={{$page_arr.pagecount}}">末页</a></span>
+                    <span class="col-md-3"><a href="{{$rootpath}}/Member/{{$pagename}}.php?search={{$searchkeyword}}&page={{$page_arr.pagecount}}">末页</a></span>
                 </div>
             </div>
         </div>

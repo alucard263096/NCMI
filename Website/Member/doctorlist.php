@@ -14,19 +14,18 @@
   $smarty->assign("searchkeyword",$search);
   
   $currentpage=getPageNumber();
-  $doctorlist=$doctorMgr->getFollowDoctorList($member["id"],$search,$currentpage);
+  $doctorlist=$doctorMgr->getOrderDoctorList($member["id"],$search,$currentpage);
   $smarty->assign("list",$doctorlist);
 
   
-  $doctorsum=$doctorMgr->getFollowDoctorListPageCount($member["id"],$search,$currentpage);
+  $doctorsum=$doctorMgr->getOrderDoctorListPageCount($member["id"],$search,$currentpage);
   $smarty->assign("doctor_count",$doctorsum);
   $smarty->assign("current_page",$currentpage);
   $smarty->assign("lastpage",$currentpage);
   $smarty->assign("page_arr",getPageNumberCodeArray($doctorsum,$currentpage,18));
 
-  
-	$smarty->assign("menuid","follow");
-	$smarty->assign("pagename","followdoctorlist");
+  $smarty->assign("menuid","doctor");
+  $smarty->assign("pagename","doctorlist");
   
   $smarty->display(ROOT.'/templates/Member/doctorlist.html');
   

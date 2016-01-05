@@ -733,10 +733,10 @@ now(),now(),'$summary','$contact','$apply_department','$apply_doctor','$apply_hi
 		$id=$this->dbmgr->getNewId("tb_order");
 		$order_no=$this->genOrderNo("PT");
 		$sql="insert into tb_order 
-		(id,case_id,price,submit_date,meeting_date,tac,status,
+		(id,member_id,case_id,price,submit_date,meeting_date,tac,status,
 		created_date,created_user,updated_date,updated_user,
 		order_no,doctor_id,meeting_time) values 
-		($id,$case_id,$price,now(),'$meeting_date','$tac','T',
+		($id,$member_id,$case_id,$price,now(),'$meeting_date','$tac','T',
 		now(),1,now(),1,
 		'$order_no',$doctor_id,'$meeting_time' )";
 		$this->dbmgr->query($sql);
@@ -769,6 +769,94 @@ now(),now(),'$summary','$contact','$apply_department','$apply_doctor','$apply_hi
 		}
 		return $prefix.$d.sprintf("%06d", $seq);
 
+	}
+
+	public function getOrderDoctor($member_id){
+		$sql="select distinct d.* from tb_doctor d
+inner join tb_order o on d.id=o.doctor_id
+where o.member_id=$member_id 
+order by d.name";
+		
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query);
+		return $result;
+		
+	}
+
+	
+	public function getBookingList($member_id,$doctor_id,$from,$to,$page){
+		$startrow=($page-1)*15;
+		if($startrow>0){
+			//$startrow=$startrow-1;
+		}
+		$sql="select distinct o.id,o.case_id,o.doctor_id,o.status,o.meeting_date,o.meeting_time
+		,o.meeting_panelistJoinUrl
+,c.status case_status,c.department,c.name
+,d.name doctor_name from tb_order o 
+inner join tb_member_case c on o.case_id=c.id
+inner join tb_doctor d on o.doctor_id=d.id
+where o.status<>'D' and o.member_id=$member_id ";
+		if($doctor_id!=""){
+			$doctor_id=$doctor_id+0;
+			$sql.=" and o.doctor_id=$doctor_id";
+		}
+		if($from!=""){
+			$sql.=" and o.meeting_date>='$from'";
+		}
+		if($to!=""){
+			$sql.=" and o.meeting_date<='$to'";
+		}
+		$sql.=" order by o.meeting_date desc,o.meeting_time desc
+		limit $startrow,15";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+
+
+		return $result;
+	}
+
+	public function getBookingListPageCount($member_id,$doctor_id,$from,$to){
+		$sql="select distinct o.id from tb_order o 
+inner join tb_member_case c on o.case_id=c.id
+inner join tb_doctor d on o.doctor_id=d.id
+where o.status<>'D' and o.member_id=$member_id ";
+		if($doctor_id!=""){
+			$doctor_id=$doctor_id+0;
+			$sql.=" and o.doctor_id=$doctor_id";
+		}
+		if($from!=""){
+			$sql.=" and o.meeting_date>='$from'";
+		}
+		if($to!=""){
+			$sql.=" and o.meeting_date<='$to'";
+		}
+
+		$sql="select sum(1) count from 
+		( $sql ) a";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+		return $result["count"];
+
+	}
+	
+	public function getMeeting($member_id,$date){
+		$member_id=parameter_filter($member_id);
+		$date=parameter_filter($date);
+		$sql="select o.*,c.sexual,c.status case_status from tb_order o
+inner join tb_member_case c on o.case_id=c.id
+where o.member_id=$member_id 
+and o.meeting_date='$date'
+order by o.meeting_time  ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+
+		for($i=0;$i<count($result);$i++){
+			$meeting_time_start=explode("-",$result[$i]["meeting_time"]);
+			$meeting_time_start=$meeting_time_start[0];
+			$result[$i]["meeting_time_start"]=$meeting_time_start;
+		}
+
+		return $result;
 	}
  }
  

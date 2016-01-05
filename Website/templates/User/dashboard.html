@@ -76,7 +76,8 @@
                 <div class="col-md-10 col-md-offset-1" >
                     {{foreach from=$meetinglist item=rs}}
                     <div class="col-lg-2 item" style="margin-left:0px;margin-right:0px;padding-left:3px;padding-right:3px;"
-                         id="meet_{{$rs.id}}" oid="{{$rs.id}}" cid="{{$rs.case_id}}" starttime="{{$rs.meeting_time_start}}" joinurl="{{$rs.meeting_organizerJoinUrl}}">
+                         id="meet_{{$rs.id}}" oid="{{$rs.id}}" cid="{{$rs.case_id}}" starttime="{{$rs.meeting_time_start}}"
+                         joinurl="{{$rs.meeting_panelistJoinUrl}}">
                         <a href="#">
                             {{if $rs.sexual=="M"}}
                             <img style="width:100%;" src="{{$rootpath}}/images/sex_M.png" />
@@ -85,7 +86,7 @@
                             {{/if}}
                             <p class="small text-center">{{$rs.meeting_time_start}}</p>
                         </a>
-                        <a class="text-center col-lg-12 small"  href="{{$rootpath}}/User/contract.php?id={{$rs.case_id}}" target="_blank">病历</a>
+                        <a class="text-center col-lg-12 small" href="{{$rootpath}}/User/contract.php?id={{$rs.case_id}}" target="_blank">病历</a>
                         <a class="text-center col-lg-12 small casewait hide" style="color:red;padding:0px;" href="{{$rootpath}}/User/case.php?id={{$rs.case_id}}" target="_blank">待上传</a>
                     </div>
                     {{/foreach}}

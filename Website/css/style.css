@@ -192,3 +192,6 @@ color: #aaa !important;
 .test{
     background-color:#ffd800;
 }
+.zeropadding{
+    padding:0px;
+}

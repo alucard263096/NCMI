@@ -116,7 +116,7 @@ inner join tb_category cat on cat.id=s.category_id ";
 	}
 	
 
-	public function getFollowDoctorList($member_id,$search,$page,$member_id){
+	public function getFollowDoctorList($member_id,$search,$page){
 		
 		$startrow=($page-1)*18;
 		if($startrow>0){
@@ -277,7 +277,47 @@ where id=$doctor_id and status='A'
 		}
 		return $ret;
 	}
+	
 
+	public function getOrderDoctorList($member_id,$search,$page){
+		
+		$startrow=($page-1)*18;
+		if($startrow>0){
+			//$startrow=$startrow-1;
+		}
+		
+		
+		$searchsql=$this->getDoctorListSearchCondition($search);
+		$realsql=$this->getDoctorListSearchSql();
+		$realsql="$realsql
+inner join tb_member_case mfd on mfd.doctor_id=d.id and mfd.member_id=$member_id";
+
+		$sql="$realsql
+ and $searchsql
+ where d.status='A'
+  order by d.seq
+		limit $startrow,18";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+
+		return $result;
+	}
+
+	public function getOrderDoctorListPageCount($member_id,$search){
+
+		$searchsql=$this->getDoctorListSearchCondition($search);
+		$realsql=$this->getDoctorListSearchSql();
+		$realsql="$realsql
+inner join tb_member_case mfd on mfd.doctor_id=d.id and mfd.member_id=$member_id";
+
+		$sql="select sum(1) doctor_count from 
+		( $realsql  
+ where d.status='A'
+ and $searchsql ) a";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+		return $result["doctor_count"];
+	}
  }
  
  $doctorMgr=DoctorMgr::getInstance();

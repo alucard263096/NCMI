@@ -1,0 +1,148 @@
+{{include  file="$smarty_root/header.html" }}
+<link rel="stylesheet" media="screen" href="{{$rootpath}}/vendors/bootstrap-datepicker/css/datepicker.css">
+<link rel="stylesheet" media="screen" href="{{$rootpath}}/css/datepicker.fixes.css">
+<script type="text/javascript" src="{{$rootpath}}/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<style>
+    #box{
+        min-height:540px;
+    }
+    #list table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border-left: 1px solid #888;
+        border-top: 1px solid #888;
+        width:94%;
+        margin-left:3%;
+    }
+   
+    #list tr {
+        height:30px;
+    }
+    #list th {
+        color:#106FFE;
+        background-color:#EAEFF4;
+    }
+    #list th, td {
+        text-align:center;
+        border-right: 1px solid #888;
+        border-bottom: 1px solid #888;
+        max-width:150px;
+        padding-left:5px;
+        padding-right:5px;
+    }
+    #list  td {
+        background-color:white;
+    }
+</style>
+<div class="row">
+    <div class="col-md-3 ">
+        {{include  file="$smarty_root/Member/menu.html" }}
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12 " id="box">
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-md-1" style="padding-top:2px;padding-left:20px;padding-right:0px;">医生</div>
+                    <div class="col-md-2 zeropadding">
+                        <select id="doctor_id">
+                            <option value="">--所有医生--</option>
+                            {{foreach from=$doctorlist item=rs}}
+                            <option value="{{$rs.id}}" {{if $rs.id==$doctor_id}}selected='selected' {{/if}} >{{$rs.name}}</option>
+                            {{/foreach}}
+                        </select>
+                    </div>
+                    <div class="col-md-1 zeropadding" style="padding-top:2px;"></div>
+                    <div class="col-md-1 zeropadding" style="padding-top:2px;">查询日期</div>
+                    <div class="col-md-2 ">
+                        <input type="text" readonly="readonly" style="width:100%;text-align:center;" class="datepickera" id="from" value="{{$from}}" />
+                    </div>
+                    <div class="col-md-1 zeropadding text-center" style="padding-top:2px;">到</div>
+                    <div class="col-md-2 ">
+                        <input type="text" readonly="readonly" style="width:100%;text-align:center;" class="datepickera" id="to" value="{{$to}}" />
+                    </div>
+                    <div class="col-md-2 " style="padding-top:2px;">
+                        <button class="btn btn-xs btn-success" style="width:70%;" id="btnSearch">搜索</button>
+                    </div>
+                </div>
+                <div id="list" class="row" style="margin-top:20px;">
+                    <table class="small">
+                        <tr>
+                            <th>预约日期</th>
+                            <th>预约时间</th>
+                            <th>预约科室</th>
+                            <th>预约医生</th>
+                            <th>预约人</th>
+                            <th>预约状态</th>
+                            <th>报告详情</th>
+                        </tr>
+                        {{foreach from=$list item=rs}}
+                        {{if $rs.id==""}}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {{else}}
+                        <tr>
+                            <td>{{$rs.meeting_date}}</td>
+                            <td>{{$rs.meeting_time}}</td>
+                            <td>{{$rs.department}}</td>
+                            <td>{{$rs.doctor_name}}</td>
+                            <td>{{$rs.name}}</td>
+                            <td>
+                                {{if $rs.status=="T"}}
+                                <a href="{{$rootpath}}/Order/payment.php?id={{$rs.id}}">立即支付</a>
+                                {{elseif $rs.status=="A"}}
+                                <a href="{{$rs.meeting_panelistJoinUrl}}" target="_blank">开始会诊</a>
+                                {{elseif $rs.status=="F"}}
+                                已完成
+                                {{/if}}
+                            </td>
+                            <td>
+                                {{if $rs.case_status=="T"||$rs.case_status=="A"}}
+                                <a href="{{$rootpath}}/Member/case.php?id={{$rs.case_id}}">查看报告</a>
+                                {{elseif $rs.case_status=="M"}}
+                                报告生成中
+                                {{else}}
+                                <a href="{{$rootpath}}/Member/case.php?id={{$rs.case_id}}">下载报告</a>
+                                {{/if}}
+                            </td>
+                        </tr>
+                        {{/if}}
+                        {{/foreach}}
+                    </table>
+                </div>
+            </div>
+        {{if $count>15 }}
+        <div class="row " style="margin-top:25px;" id="pageer">
+            <div class="col-md-6 col-md-offset-3 frame2 text-center ">
+                <div class="row">
+                    <span class="col-md-3"><a href="{{$rootpath}}/Member/bookinglist.php?doctor_id={{$doctor_id}}&from={{$from}}&to={{$to}}&page=1">首页</a></span>
+                    <span class="col-md-6">
+                        {{foreach from=$page_arr.pages item=rs}}
+                        <span ><a {{if $rs==$current_page}}class='selected'{{/if}} href="{{$rootpath}}/Member/bookinglist.php?doctor_id={{$doctor_id}}&from={{$from}}&to={{$to}}&page={{$rs}}">{{$rs}}</a></span>
+                        {{/foreach}}
+                    </span>
+                    <span class="col-md-3"><a href="{{$rootpath}}/Member/bookinglist.php?doctor_id={{$doctor_id}}&from={{$from}}&to={{$to}}&page={{$page_arr.pagecount}}">末页</a></span>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.datepickera').datepicker({ format: "yyyy-mm-dd" });
+        $("#btnSearch").click(function () {
+            window.location.href = "{{$rootpath}}/Member/bookinglist.php?from=" + $("#from").val()
+                + "&to=" + $("#to").val()
+                + "&doctor_id=" + $("#doctor_id").val();
+        });
+    });
+</script>
+{{include  file="$smarty_root/footer.html" }}

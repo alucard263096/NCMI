@@ -62,7 +62,7 @@
 
 	public function getMeeting($doctor_id,$date){
 		$doctor_id=parameter_filter($doctor_id);
-		$loginname=parameter_filter($date);
+		$date=parameter_filter($date);
 		$sql="select o.*,c.sexual,c.status case_status from tb_order o
 inner join tb_member_case c on o.case_id=c.id
 where o.doctor_id=$doctor_id 
@@ -82,7 +82,7 @@ order by o.meeting_time  ";
 	}
 
 	public function getMeetingList($doctor_id,$from,$to,$page){
-		$startrow=($page-1)*18;
+		$startrow=($page-1)*15;
 		if($startrow>0){
 			//$startrow=$startrow-1;
 		}
@@ -95,7 +95,7 @@ where o.doctor_id=$doctor_id and o.status<>'D' ";
 		if($to!=""){
 			$sql.=" and o.meeting_date<='$to'";
 		}
-		$sql.=" order by o.meeting_date,o.meeting_time 
+		$sql.=" order by o.meeting_date desc,o.meeting_time desc
 		limit $startrow,15";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
@@ -160,10 +160,15 @@ where case_id=$case_id   ";
 		$solution=parameter_filter($request["solution"]);
 		$checking=parameter_filter($request["checking"]);
 		$result=parameter_filter($request["result"]);
+		$this->dbmgr->begin_trans();
 		$sql="update tb_member_case set caution='$caution',solution='$solution',checking='$checking',result='$result'
 		,status='F'
 where id=$case_id and doctor_id=$doctor_id  ";
 		$this->dbmgr->query($sql);
+		$sql="update tb_order set status='F'
+where case_id=$case_id and doctor_id=$doctor_id  ";
+		$this->dbmgr->query($sql);
+		$this->dbmgr->commit_trans();
 
 		return $result;
 	}
