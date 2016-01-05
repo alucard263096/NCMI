@@ -27,7 +27,7 @@ class GenseeMgr
 		$url="http://$site/integration/site/webcast/created?loginName=$loginName&password=$password&organizerPwd=$organizerPwd";
 		$url.="&subject=$subject&startTime=$startTime&endTime=$endTime";
 		$url.="&opened=true&switchClient=true";
-		$url.="&realtime=true&organizerToken=888888&panelistToken=888888&attendeeToken=888888";
+		$url.="&realtime=true&organizerToken=333333&panelistToken=888888&attendeeToken=666666";
 		//$url.="&subject=$subject&startTime=$startTime&endTime=$endTime";
 		//$url.="&subject=$subject&startTime=$startTime&endTime=$endTime";
 		//$url.="&subject=$subject&startTime=$startTime&endTime=$endTime";
