@@ -55,7 +55,7 @@ inner join tb_college c on dp.college_id=c.id
 	}
 
 	public function getDoctorListSearchSql(){
-		$sql="select distinct d.id,d.name,d.photo,d.position
+		$sql="select distinct d.id,d.name,d.photo,d.position,h.name hospital,d.expert,dp.name department
 from tb_doctor d
 inner join tb_hospital h on d.hospital_id=h.id and h.status='A'
 inner join tb_department dp on d.department_id=dp.id and dp.status='A'
@@ -304,6 +304,49 @@ inner join tb_member_case mfd on mfd.doctor_id=d.id and mfd.member_id=$member_id
 	}
 
 	public function getOrderDoctorListPageCount($member_id,$search){
+
+		$searchsql=$this->getDoctorListSearchCondition($search);
+		$realsql=$this->getDoctorListSearchSql();
+		$realsql="$realsql
+inner join tb_member_case mfd on mfd.doctor_id=d.id and mfd.member_id=$member_id";
+
+		$sql="select sum(1) doctor_count from 
+		( $realsql  
+ where d.status='A'
+ and $searchsql ) a";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+		return $result["doctor_count"];
+	}
+
+
+	
+
+	public function getServiceDoctorList($member_id,$search,$page){
+		
+		$startrow=($page-1)*2;
+		if($startrow>0){
+			//$startrow=$startrow-1;
+		}
+		
+		
+		$searchsql=$this->getDoctorListSearchCondition($search);
+		$realsql=$this->getDoctorListSearchSql();
+		$realsql="$realsql
+inner join tb_member_case mfd on mfd.doctor_id=d.id and mfd.member_id=$member_id";
+
+		$sql="$realsql
+ and $searchsql
+ where d.status='A'
+  order by d.seq
+		limit $startrow,2";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+
+		return $result;
+	}
+
+	public function getServiceDoctorListPageCount($member_id,$search){
 
 		$searchsql=$this->getDoctorListSearchCondition($search);
 		$realsql=$this->getDoctorListSearchSql();
