@@ -66,4 +66,12 @@ $CONFIG["sms"]["SoftVersion"]="2013-12-26";
 $CONFIG["sms"]["timeout"]="30";//mins
 $CONFIG["sms"]["templeteid"]["bookingsuccess"]="58531";
 
+
+#[ALIPAY]
+$CONFIG["alipay"]["partner"]="2088911304846017";
+$CONFIG["alipay"]["seller_email"]="jwyk301@126.com";
+$CONFIG["alipay"]["key"]="q6c0lw514g7hk1mn41ivdjjtowqt3mfn";
+$CONFIG["alipay"]["notify_url"]=$CONFIG['URL']."/Order/notify.php";;
+$CONFIG["alipay"]["call_back_url"]=$CONFIG['URL']."/Order/success.php";
+
 ?>

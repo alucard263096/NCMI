@@ -1,0 +1,9 @@
+
+body{margin-top:48px; margin-bottom:0px;margin-left:0px;margin-right:0px;background-color:#F2F9FD;}
+td, font, form, textarea{font:12px verdana, arial;color:#5C5C5C;}
+img{border:0;}
+.maintable td{line-height:28px;border-bottom: 1px dashed #C7E2F8;}
+.box{background-color:#FFFFFF;border-width:1px;border-color:#617A89;border-style:solid;padding-bottom:5px;}
+.title{font-size:12px;font-family:verdana;color:#FFFFFF;background-color:#09C;padding-top:5px;padding-bottom:5px;padding-right:2px;padding-left:5px;border-width:0px;}
+.ohredb{color:#FF0000;}
+.ohblueb{color:#0000FF;}

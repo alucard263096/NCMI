@@ -25,9 +25,9 @@ namespace SCM
 from tb_order o
 inner join tb_doctor d on o.doctor_id=d.id
 inner join tb_member_case c on o.case_id=c.id
-where  IFNULL(o.send,'N')<>'Y'
-and concat( o.meeting_date,' ', reverse(substring_index(reverse(substring_index(o.meeting_time,'-',1)),'-',1)))>'{0}'
-and concat( o.meeting_date,' ', reverse(substring_index(reverse(substring_index(o.meeting_time,'-',1)),'-',1)))<'{1}' ", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), DateTime.Now.AddMinutes(17).ToString("yyyy-MM-dd HH:mm:ss"));
+where  IFNULL(o.send,'N')<>'Y'");
+//and concat( o.meeting_date,' ', reverse(substring_index(reverse(substring_index(o.meeting_time,'-',1)),'-',1)))>'{0}'
+//and concat( o.meeting_date,' ', reverse(substring_index(reverse(substring_index(o.meeting_time,'-',1)),'-',1)))<'{1}' ", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), DateTime.Now.AddMinutes(17).ToString("yyyy-MM-dd HH:mm:ss"));
                 DataTable dt = dbMgr.executeDataTable(sql);
                 int successCount=0;
                 foreach (DataRow dr in dt.Rows)
@@ -44,7 +44,7 @@ and concat( o.meeting_date,' ', reverse(substring_index(reverse(substring_index(
                         Console.WriteLine(format);
                         logInfo.Info(format);
                         string update = "update tb_order set send='Y' where id="+id;
-                        dbMgr.executeNoneQuery(sql);
+                        dbMgr.executeNoneQuery(update);
                         successCount++;
                     }
                     else

@@ -68,7 +68,7 @@
 <script>
     $(document).ready(function () {
         $("#btnSubmit").click(function () {
-            window.location.href = "{{$rootpath}}/Order/success.php?id={{$info.id}}";
+            window.location.href = "{{$rootpath}}/Order/alipay.php?id={{$info.id}}";
         });
         $("#btnGoCase").click(function () {
             window.location.href = "{{$rootpath}}/Member/case.php?id={{$info.case_id}}";
