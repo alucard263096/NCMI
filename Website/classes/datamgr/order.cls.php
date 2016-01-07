@@ -36,11 +36,25 @@
 		return $result;
 
 	}
+	public function getOrderByNo($order_no){
+	
+		$order_no=parameter_filter($order_no);
 
-	public function updateOrderPayment($id){
+		$sql="select o.*,d.name doctor_name,c.tel mobile from tb_order o
+		inner join tb_member_case c on o.case_id=c.id
+		inner join tb_doctor d on o.doctor_id=d.id
+		 where o.order_no='$order_no'";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+
+		return $result;
+
+	}
+
+	public function updateOrderPayment($id,$trade_no){
 		$id=parameter_filter($id);
-
-		$sql="update tb_order set status='A' where id=$id";
+		$trade_no=parameter_filter($trade_no);
+		$sql="update tb_order set status='A',trade_no='$trade_no' where id=$id";
 		$query = $this->dbmgr->query($sql);
 	}
 	public function updateMeetingInfo($id,$ret){

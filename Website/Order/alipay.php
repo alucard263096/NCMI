@@ -23,5 +23,5 @@
 	 $alipay=new AlipayMgr();
 	 $price=$info["price"];
 	 $price=0.01;
-	$alipay->submit($url,$info["order_no"],"视频会诊".$info["order_no"],$price,"");
+	$alipay->submit($url,$info["order_no"],"视频会诊".$info["order_no"],$price,$info["id"]);
 ?>

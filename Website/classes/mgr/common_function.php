@@ -32,7 +32,14 @@ function WindowRedirect($url)
 	echo "</script>";
 	exit();
 }
-
+function ArrayToString($arr){
+	$str="";
+	foreach($arr as $key=>$value){
+		$str.="<$key:$value>
+		";
+	}
+	return $str;
+}
 /*
  function name：remote_file_exists
  function：valid remote file is exists

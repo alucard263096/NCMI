@@ -19,12 +19,6 @@
 
 
   
-	  $id=$_REQUEST["id"];
-	  $info=$orderMgr->getOrder($id);
-	  $meeting_time=explode("-",$info["meeting_time"]);
-	  $smarty->assign("info",$info);
-
-	   if($info["status"]!="A"&&$info["status"]!="F"){
 
 
 
@@ -34,6 +28,14 @@
 		  $ret=$alipay->notify();
   
 		   logger_mgr::logInfo("notify alipay verify return ".ArrayToString($ret));
+
+		   
+	  $order_no=$ret["out_trade_no"];
+	  $trade_no=$ret["trade_no"];
+	  $info=$orderMgr->getOrderByNo($order_no);
+	  $id=$info["id"];
+	  $meeting_time=explode("-",$info["meeting_time"]);
+	  $smarty->assign("info",$info);
 
 			  if($ret["result"]!="SUCCESS"){
 					$smarty->assign("reason","付款失败");
@@ -55,13 +57,11 @@
 				 }
 			  }
 			  if($info["status"]!="A"){
-				$orderMgr->updateOrderPayment($id);
+				$orderMgr->updateOrderPayment($id,$trade_no);
 				$smsMgr->SendQueryConfirm($info["mobile"],$info["doctor_name"],$info["meeting_date"]." ".$meeting_time[0]);
 			  }
 
 
-
-	  }
 	  $smarty->display(ROOT.'/templates/Order/success.html');
 
 ?>
