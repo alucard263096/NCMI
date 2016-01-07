@@ -42,7 +42,6 @@
             <form action="{{$rootpath}}/Hospital/college.php">
                 <input type="text" class="col-md-3" name="search" placeholder="输入关键词搜索">
                 <button class="btn btn-default col-md-1" style="height:27px;padding-top:2px;width:50px;margin-left:9px;">搜索</button>
-                <input type="hidden" name="hospital_id" value="{{$hospital.id}}" />
             </form>
             {{if $searchkeyword!=""}}
             <span class="col-md-8" style="padding-top:2px;">当前搜索："{{$searchkeyword}}"</span>

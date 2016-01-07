@@ -136,7 +136,7 @@
 <script>
     $(document).ready(function () {
         $("#btnGoCollege").click(function () {
-            document.location.href = "{{$rootpath}}/Hospital/college.php?hospital_id={{$info.id}}";
+            document.location.href = "{{$rootpath}}/Hospital/college.php?search={{$info.name}}";
         });
         $("#btnBack").click(function () {
             history.go(-1);
