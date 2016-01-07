@@ -1,6 +1,6 @@
 <?php
 
-$servername  = '120.24.239.49';
+$servername  = 'www.myhkdoc.com';
 $dbname      = 'ncmi_welive';
 $dbusername  = 'root';
 $dbpassword  = 'root';
