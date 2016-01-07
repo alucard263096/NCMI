@@ -100,8 +100,8 @@ exit;
 		$verify_result = $alipayNotify->verifyReturn();
 		$ret=Array();
 
-		$ret["out_trade_no"]= $_GET['out_trade_no'];
-		$ret["trade_no"]= $_GET['trade_no'];
+		$ret["out_trade_no"]= $_REQUEST['out_trade_no'];
+		$ret["trade_no"]= $_REQUEST['trade_no'];
 
 		if($verify_result){
 			if($trade_status == 'TRADE_SUCCESS'
