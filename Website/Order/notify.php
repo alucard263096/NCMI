@@ -26,7 +26,7 @@
   logger_mgr::logInfo("notify alipay start :".$_SERVER["REQUEST_URI"]);
   logger_mgr::logInfo("notify alipay parameter".ArrayToString($_REQUEST));
   $alipay=new AlipayMgr();
-  $ret=$alipay->notify();
+  $ret=$alipay->callback();
    logger_mgr::logInfo("notify alipay verify return ".ArrayToString($ret));
 
 	  if($ret["result"]!="SUCCESS"){

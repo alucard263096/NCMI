@@ -102,7 +102,7 @@ exit;
 
 		$ret["out_trade_no"]= $_REQUEST['out_trade_no'];
 		$ret["trade_no"]= $_REQUEST['trade_no'];
-
+		$trade_status = $_REQUEST['trade_status'];
 		if($verify_result){
 			if($trade_status == 'TRADE_SUCCESS'
 				||$trade_status == 'TRADE_FINISHED'){
