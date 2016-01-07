@@ -21,5 +21,5 @@
 	  }
 	$url=$CONFIG['URL']."/Order/payment.php?id=".$info["id"];
 	 $alipay=new AlipayMgr();
-	$alipay->submit($url,$info["order_no"],"ÊÓÆµ»áÕï".$info["order_no"],$info["price"],"");
+	$alipay->submit($url,$info["order_no"],"è§†é¢‘ä¼šè¯Š".$info["order_no"],$info["price"],"");
 ?>
