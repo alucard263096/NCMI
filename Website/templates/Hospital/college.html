@@ -39,7 +39,7 @@
 
     <div class="col-md-9">
         <div class="row">
-            <form action="{{$rootpath}}/Hospital/hospitallist.php">
+            <form action="{{$rootpath}}/Hospital/college.php">
                 <input type="text" class="col-md-3" name="search" placeholder="输入关键词搜索">
                 <button class="btn btn-default col-md-1" style="height:27px;padding-top:2px;width:50px;margin-left:9px;">搜索</button>
                 <input type="hidden" name="hospital_id" value="{{$hospital.id}}" />
@@ -58,7 +58,7 @@
             <div class="col-md-12 hide" id="college_{{$rs.id}}">
                 {{foreach from=$rs.departments item=dep}}
                 <div class="col-md-2 itemup" style="margin-top:10px;">
-                    <div class="item"><a href="{{$rootpath}}/Doctor/doctorlist.php?search={{$hospital.name}}%20{{$dep.name}}">{{$dep.name}}</a></div>
+                    <div class="item"><a href="{{$rootpath}}/Doctor/doctorlist.php?search={{$dep.name}}">{{$dep.name}}</a></div>
                 </div>
                 {{/foreach}}
             </div>

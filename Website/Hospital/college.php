@@ -14,13 +14,8 @@
   $search=$_REQUEST["search"];
   $smarty->assign("searchkeyword",$search);
 
-  $hospital_id=$_REQUEST["hospital_id"];
-  $hospital_id=$hospital_id+0;
-
-  $hospital=$hospitalMgr->getHospital($hospital_id);
-  $smarty->assign("hospital",$hospital);
   
-  $collegelist=$collegeMgr->getCollegeList($hospital_id,$search);
+  $collegelist=$collegeMgr->getCollegeList($search);
   $smarty->assign("list",$collegelist);
   $smarty->assign("count",count($collegelist));
 
@@ -28,7 +23,7 @@
   $category=$categoryMgr->getCategoryWithSubCategory();
   //print_r($category);
   $smarty->assign("category",$category);
-  $smarty->assign("searchurl","/Hospital/college.php?hospital_id=$hospital_id&");
+  $smarty->assign("searchurl","/Hospital/college.php?");
 
   
   $smarty->display(ROOT.'/templates/Hospital/college.html');
