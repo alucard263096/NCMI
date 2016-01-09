@@ -8,10 +8,6 @@
   if($member!=null&&$member["id"]!=""){
 	$smarty->assign("MEMBER",$member);
 	$smarty->assign("LOGINED","Y");
-	if($member["is_verify"]!="Y"){
-		$email=$member["email"];
-		WindowRedirect($CONFIG['URL']."/Member/reg_sent.php?email=$email");
-	}
   }
   $user=$_SESSION[SESSIONNAME]["user"];
   if($user!=null&&$user["id"]!=""){
