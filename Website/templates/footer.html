@@ -97,9 +97,11 @@
     function MAIN_checkHaveMeeting() {
         $.post("{{$rootpath}}/Order/checkmeeting.php", function (data) {
             if (data != "") {
-                MAIN_meeting_link = data;
-                clearInterval(meetingtips);
-                confirmDialog("视频会诊提示", "你有一个视频会诊即将开始，点击确定立刻开始进行视频会诊", MAIN_gotoMeeting);
+                if (checkURL(data)) {
+                    MAIN_meeting_link = data;
+                    clearInterval(meetingtips);
+                    confirmDialog("视频会诊提示", "你有一个视频会诊即将开始，点击确定立刻开始进行视频会诊", MAIN_gotoMeeting);
+                }
             }
         });
     }
