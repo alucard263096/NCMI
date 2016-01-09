@@ -225,6 +225,13 @@
         $("#btnReturn").click(function () {
             window.location.href = "{{$rootpath}}/Member/filelist.php";
         });
+        $("#btnDownload").click(function () {
+            try{
+                window.print();
+            }catch(e){
+                alert(e.message);
+            }
+        });
         $("#btnAbandon").click(function () {
             var caselist = "{{$info.id}}";
 

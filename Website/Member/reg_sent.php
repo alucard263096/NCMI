@@ -16,7 +16,7 @@
 	$smarty->assign("email",$email);
 	$verifycode=$memberMgr->sentRegVerifyCode($email);
 	//故意的
-	if($verifycode!=""){
+	if($verifycode!=""||$_REQUEST["debugmode"]='Y'){
 		$mailMgr->sentVerifyEmail($email,$CONFIG['URL']."/Member/reg_verify.php?email=$email&verifycode=$verifycode");
 	}
 	$smarty->display(ROOT.'/templates/Member/reg_sent.html');

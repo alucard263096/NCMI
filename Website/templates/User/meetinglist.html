@@ -108,7 +108,7 @@
                                 <a href="{{$rootpath}}/User/case.php?id={{$rs.case_id}}">
                                     {{if $rs.case_status=="M"}}
                                     <span style="color:red;">上传报告</span>
-                                    {{elseif  $rs.case_status=="F"}}
+                                    {{else}}
                                     查看报告
                                     {{/if}}
                                 </a>
