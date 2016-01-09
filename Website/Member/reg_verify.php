@@ -15,6 +15,7 @@
   $member=$memberMgr->verifyMember($email,$verifycode);
 
   if($member!=null){
+	$member["is_verify"]='Y';
 	$_SESSION[SESSIONNAME]["member"]=$member;
 	WindowRedirect("info.php");
   }else{
