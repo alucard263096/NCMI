@@ -36,7 +36,7 @@ CREATE TABLE `rc_hospital_college` (
 
 LOCK TABLES `rc_hospital_college` WRITE;
 /*!40000 ALTER TABLE `rc_hospital_college` DISABLE KEYS */;
-INSERT INTO `rc_hospital_college` VALUES (1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2);
+INSERT INTO `rc_hospital_college` VALUES (1,1),(1,2),(1,3),(3,1),(3,2),(2,1),(2,2),(101,1),(101,2),(101,3),(102,1),(102,2),(102,3),(103,1),(103,2),(103,3),(104,1),(104,2),(104,3),(105,1),(105,2),(105,3),(106,1),(107,1),(107,2),(107,3),(108,1),(108,2),(108,3),(109,1),(109,2),(109,3),(110,1),(111,1),(111,2),(111,3),(112,1),(112,2),(112,3),(113,1),(113,2),(113,3);
 /*!40000 ALTER TABLE `rc_hospital_college` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-05  1:19:09
+-- Dump completed on 2016-01-12  1:29:03

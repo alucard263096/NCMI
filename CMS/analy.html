@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html class="bootstrap-admin-vertical-centered">
+<head>
+    <title>��ͥҽ������ϵͳ</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
+    <link rel="stylesheet" media="screen" href="css/bootstrap-theme.min.css">
+
+    <!-- Bootstrap Admin Theme -->
+    <link rel="stylesheet" media="screen" href="css/bootstrap-admin-theme.css">
+    <link rel="stylesheet" media="screen" href="vendors/selectize/dist/css/selectize.bootstrap3.css">
+
+    <!-- Custom styles -->
+    <style type="text/css">
+        .alert {
+            margin: 0 auto 20px;
+        }
+    </style>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+       <script type="text/javascript" src="js/html5shiv.js"></script>
+       <script type="text/javascript" src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="bootstrap-admin-without-padding">
+    <ul class="dropmenus" id="depart-level1-ul">
+        <li data-value="1" class="select-cur" data-child="14">内科</li>
+        <li data-value="15">外科</li>
+        <li data-value="37">妇产科</li>
+        <li data-value="47">儿科</li>
+        <li data-value="72">骨科</li>
+        <li data-value="80">口腔科</li>
+        <li data-value="90">眼科</li>
+        <li data-value="101">中医科</li>
+        <li data-value="127">精神心理科</li>
+        <li data-value="130">皮肤性病科</li>
+        <li data-value="134">传染病科</li>
+        <li data-value="137">整形科</li>
+        <li data-value="138">肿瘤科</li>
+        <li data-value="145">男科</li>
+        <li data-value="146">疼痛科</li>
+        <li data-value="147">耳鼻喉科</li>
+        <li data-value="148">预防保健科</li>
+        <li data-value="149">重症医学科</li>
+        <li data-value="150">康复科</li>
+        <li data-value="151">理疗科</li>
+        <li data-value="152">临床其它</li>
+        <li data-value="163">急诊科</li>
+        <li data-value="166">民族医学科</li>
+    </ul>
+    <ul class="dropmenus hide" data-value="1">
+        <li data-value="0" class="select-cur">全科</li>
+        <li data-value="2">心血管内科</li>
+        <li data-value="3">神经内科</li>
+        <li data-value="4">内分泌科</li>
+        <li data-value="5">呼吸内科</li>
+        <li data-value="6">消化内科</li>
+        <li data-value="7">肾脏内科</li>
+        <li data-value="8">过敏反应科</li>
+        <li data-value="9">老年病科</li>
+        <li data-value="10">风湿免疫科</li>
+        <li data-value="11">血液科</li>
+        <li data-value="13">感染科</li>
+        <li data-value="14">肝病科</li>
+    </ul>
+        <ul class="dropmenus hide" data-value="15">
+            <li data-value="0">全科</li>
+            <li data-value="16">泌尿外科</li>
+            <li data-value="17">乳腺外科</li>
+            <li data-value="18">神经外科</li>
+            <li data-value="19">心脏外科</li>
+            <li data-value="20">胸外科</li>
+            <li data-value="21">胃外科</li>
+            <li data-value="22">肠外科</li>
+            <li data-value="23">肝外科</li>
+            <li data-value="24">胆外科</li>
+            <li data-value="25">肛肠外科</li>
+            <li data-value="26">甲状腺外科</li>
+            <li data-value="27">血管外科</li>
+            <li data-value="28">头颈外科</li>
+            <li data-value="29">胰腺外科</li>
+            <li data-value="30">外伤科</li>
+            <li data-value="31">烧伤科</li>
+            <li data-value="32">手外科</li>
+            <li data-value="33">微创外科</li>
+            <li data-value="34">腔镜外科</li>
+            <li data-value="35">器官移植科</li>
+            <li data-value="36">PICC门诊</li>
+            <li data-value="161">麻醉科</li>
+        </ul>
+        <ul class="dropmenus hide" data-value="37">
+            <li data-value="0">全科</li>
+            <li data-value="38">妇科</li>
+            <li data-value="39">产科</li>
+            <li data-value="40">产前诊断科</li>
+            <li data-value="41">计划生育科</li>
+            <li data-value="42">妇泌尿科</li>
+            <li data-value="43">妇科内分泌</li>
+            <li data-value="44">妇科肿瘤</li>
+            <li data-value="45">生殖中心</li>
+            <li data-value="46">遗传科</li>
+        </ul>
+        <ul class="dropmenus hide" data-value="47">
+            <li data-value="0">全科</li>
+            <li data-value="48">小儿消化科</li>
+            <li data-value="49">小儿呼吸科</li>
+            <li data-value="50">小儿皮肤科</li>
+            <li data-value="51">儿童保健科</li>
+            <li data-value="52">新生儿科</li>
+            <li data-value="53">小儿骨科</li>
+            <li data-value="54">小儿心血管内科</li>
+            <li data-value="55">小儿免疫科</li>
+            <li data-value="56">小儿肾内科</li>
+            <li data-value="57">小儿血液科</li>
+            <li data-value="58">小儿内分泌科</li>
+            <li data-value="59">小儿感染科</li>
+            <li data-value="60">小儿神经内科</li>
+            <li data-value="61">小儿外科</li>
+            <li data-value="62">小儿心外科</li>
+            <li data-value="63">小儿胸外科</li>
+            <li data-value="64">小儿神经外科</li>
+            <li data-value="65">小儿整形科</li>
+            <li data-value="66">小儿泌尿科</li>
+            <li data-value="67">小儿耳鼻喉科</li>
+            <li data-value="68">小儿妇科</li>
+            <li data-value="69">儿童康复科</li>
+            <li data-value="70">小儿遗传病科</li>
+            <li data-value="71">小儿精神科</li>
+        </ul>
+        <ul class="dropmenus hide" data-value="72">
+            <li data-value="0">全科</li>
+            <li data-value="73">骨关节科</li>
+            <li data-value="74">脊柱外科</li>
+            <li data-value="75">足踝外科</li>
+            <li data-value="76">创伤骨科</li>
+            <li data-value="77">运动医学科</li>
+            <li data-value="78">矫形骨科</li>
+            <li data-value="79">骨肿瘤科</li>
+        </ul>
+        <ul class="dropmenus hide" data-value="80">
+            <li data-value="0">全科</li>
+            <li data-value="81">口腔修复科</li>
+            <li data-value="82">正畸科</li>
+            <li data-value="83">牙体牙髓科</li>
+            <li data-value="84">牙周科</li>
+            <li data-value="85">种植科</li>
+            <li data-value="86">口腔粘膜科</li>
+            <li data-value="87">口腔预防科</li>
+            <li data-value="88">颌面外科</li>
+            <li data-value="89">儿童口腔科</li>
+        </ul>
+        <ul class="dropmenus hide" data-value="90">
+            <li data-value="0">全科</li>
+            <li data-value="91">眼视光学科</li>
+            <li data-value="92">眼外伤科</li>
+            <li data-value="93">眼底科</li>
+            <li data-value="94">白内障科</li>
+            <li data-value="95">角膜科</li>
+            <li data-value="96">青光眼科</li>
+            <li data-value="97">眼肌科</li>
+            <li data-value="98">眼眶及肿瘤科</li>
+            <li data-value="99">眼整形科</li>
+            <li data-value="100">小儿眼科</li>
+        </ul>
+        <ul class="dropmenus hide" data-value="101">
+            <li data-value="0">全科</li>
+            <li data-value="102">中医心血管内科</li>
+            <li data-value="103">中医消化科</li>
+            <li data-value="104">中医呼吸科</li>
+            <li data-value="105">中医内分泌科</li>
+            <li data-value="106">中医皮肤科</li>
+            <li data-value="107">中医妇产科</li>
+            <li data-value="108">中西医结合科</li>
+            <li data-value="109">针灸科</li>
+            <li data-value="110">中医按摩科</li>
+            <li data-value="111">中医儿科</li>
+            <li data-value="112">中医男科</li>
+            <li data-value="113">中医肾脏内科</li>
+            <li data-value="114">中医神经内科</li>
+            <li data-value="115">中医肝病科</li>
+            <li data-value="116">中医免疫内科</li>
+            <li data-value="117">中医血液科</li>
+            <li data-value="118">中医老年病科</li>
+            <li data-value="119">中医感染内科</li>
+            <li data-value="120">中医肿瘤科</li>
+            <li data-value="121">中医乳腺外科</li>
+            <li data-value="122">中医肛肠科</li>
+            <li data-value="123">中医骨科</li>
+            <li data-value="124">中医五官科</li>
+            <li data-value="125">中医眼科</li>
+            <li data-value="126">中医精神科</li>
+        </ul>
+        <ul class="dropmenus hide" data-value="127">
+            <li data-value="0">全科</li>
+            <li data-value="128">心理咨询科</li>
+            <li data-value="129">精神科</li>
+        </ul>
+        <ul class="dropmenus hide" data-value="130">
+            <li data-value="0">全科</li>
+            <li data-value="131">皮肤科</li>
+            <li data-value="132">皮肤美容科</li>
+            <li data-value="133">性病科</li>
+        </ul>
+        <ul class="dropmenus hide" data-value="134">
+            <li data-value="0">全科</li>
+            <li data-value="135">结核病科</li>
+            <li data-value="136">艾滋病科</li>
+        </ul>
+        <ul class="dropmenus hide" data-value="138">
+            <li data-value="0">全科</li>
+            <li data-value="139">肿瘤内科</li>
+            <li data-value="140">肿瘤外科</li>
+            <li data-value="141">放疗科</li>
+            <li data-value="142">肿瘤妇科</li>
+            <li data-value="143">肿瘤康复科</li>
+            <li data-value="144">骨肿瘤</li>
+        </ul>
+        <ul class="dropmenus hide" data-value="152">
+            <li data-value="0">全科</li>
+            <li data-value="153">体检科</li>
+            <li data-value="154">营养科</li>
+            <li data-value="155">介入医学科</li>
+            <li data-value="156">碎石中心</li>
+            <li data-value="157">血透中心</li>
+            <li data-value="158">职业病科</li>
+            <li data-value="159">高压氧科</li>
+            <li data-value="160">地方病科</li>
+            <li data-value="162">核医学科</li>
+            <li data-value="164">超声</li>
+            <li data-value="165">医学影像科</li>
+            <li data-value="168">病理科</li>
+            <li data-value="169">药剂科</li>
+            <li data-value="170">其它</li>
+            <li data-value="171">检验科</li>
+            <li data-value="172">伽马刀</li>
+        </ul>
+        <ul class="dropmenus hide" data-value="166">
+            <li data-value="0">全科</li>
+            <li data-value="167">蒙医科</li>
+        </ul>
+    
+        <textarea id="result" rows="200" cols="200" ></textarea>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script>
+            var id = 101;
+            var sub_id = 101;
+            var content = "";
+            $("#depart-level1-ul li").each(function () {
+                var mainid = $(this).attr("data-value");
+                var college = $(this).text();
+                var sql = "INSERT INTO `ncmi151123`.`tb_college`(`id`,`created_date`,`created_user`,`updated_date`,`updated_user`,";
+                sql += "`name`,`seq`,`description`,`remarks`,`status`)";
+                sql += "VALUES";
+                sql += "(" + id.toString() + ",now(),1,now(),1,";
+                sql += "'" + college + "','" + id + "','','','A');\n";
+                content += sql;
+                $(".dropmenus[data-value='" + mainid + "'] li").each(function () {
+                    var department = $(this).text();
+                    sql = "INSERT INTO `ncmi151123`.`tb_department`(`id`,`created_date`,`created_user`,`updated_date`,`updated_user`,";
+                    sql += "`college_id`,`name`,`seq`,`description`,`remarks`,`status`)";
+                    sql += "VALUES";
+                    sql += "(" + sub_id.toString() + ",now(),1,now(),1,";
+                    sql += "" + id + ",'" + department + "','" + sub_id + "','','','A');\n";
+                    content += sql;
+                    sub_id++;
+                });
+                
+                id++;
+            });
+            $("#result").val(content);
+        </script>
+
+
+</body>
+</html>

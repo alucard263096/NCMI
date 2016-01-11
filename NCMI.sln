@@ -68,6 +68,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "documentation", "http://loc
 		SlnRelativePath = "documentation\"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportData", "ImportData\ImportData.csproj", "{F449E73A-2ECD-4771-AE22-F735CE97B1A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +92,10 @@ Global
 		{BC16BB53-0B95-4356-B85E-70CE686E92A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC16BB53-0B95-4356-B85E-70CE686E92A5}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{BC16BB53-0B95-4356-B85E-70CE686E92A5}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{F449E73A-2ECD-4771-AE22-F735CE97B1A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F449E73A-2ECD-4771-AE22-F735CE97B1A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F449E73A-2ECD-4771-AE22-F735CE97B1A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F449E73A-2ECD-4771-AE22-F735CE97B1A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

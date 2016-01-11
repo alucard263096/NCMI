@@ -36,7 +36,7 @@ CREATE TABLE `rc_department_subcategory` (
 
 LOCK TABLES `rc_department_subcategory` WRITE;
 /*!40000 ALTER TABLE `rc_department_subcategory` DISABLE KEYS */;
-INSERT INTO `rc_department_subcategory` VALUES (1,2),(1,3),(1,5),(2,1),(2,5),(3,3),(3,4),(5,2),(5,3),(4,2),(4,3),(4,5);
+INSERT INTO `rc_department_subcategory` VALUES (3,3),(3,4),(5,2),(5,3),(1,1),(1,2),(1,3),(1,4),(1,5),(2,1),(2,5),(4,1),(4,2),(4,3),(4,4),(4,5);
 /*!40000 ALTER TABLE `rc_department_subcategory` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-05  1:19:07
+-- Dump completed on 2016-01-12  1:29:01

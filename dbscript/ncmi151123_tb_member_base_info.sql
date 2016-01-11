@@ -43,7 +43,7 @@ CREATE TABLE `tb_member_base_info` (
 
 LOCK TABLES `tb_member_base_info` WRITE;
 /*!40000 ALTER TABLE `tb_member_base_info` DISABLE KEYS */;
-INSERT INTO `tb_member_base_info` VALUES (1,'蔡笋','440301198603247514','汉','1986-03-24','25547926','暗杀教室看的哈快睡觉的哈萨克接电话','53b4f5e091fcb8e1d28f17b30a4dc464.jpg');
+INSERT INTO `tb_member_base_info` VALUES (1,'蔡笋','440301198603247514','汉','1986-03-24','25547926','暗杀教室看的哈快睡觉的哈萨克接电话','53b4f5e091fcb8e1d28f17b30a4dc464.jpg'),(2,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `tb_member_base_info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-05  1:19:10
+-- Dump completed on 2016-01-12  1:29:04

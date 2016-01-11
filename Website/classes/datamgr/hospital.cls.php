@@ -73,10 +73,10 @@ inner join tb_department dp on c.id=dp.college_id and dp.status='A'
 inner join rc_department_subcategory rc_ds on dp.id=rc_ds.pid
 inner join tb_subcategory s on rc_ds.fid=s.id
 inner join tb_category cat on cat.id=s.category_id
-inner join tb_doctor d on h.id=d.hospital_id and d.status='A'
+left join tb_doctor d on h.id=d.hospital_id and d.status='A'
  where h.status='A' 
  and $searchsql
-  order by d.seq
+  order by h.seq
 		limit $startrow,9";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
@@ -105,7 +105,7 @@ inner join tb_department dp on c.id=dp.college_id and dp.status='A'
 inner join rc_department_subcategory rc_ds on dp.id=rc_ds.pid
 inner join tb_subcategory s on rc_ds.fid=s.id
 inner join tb_category cat on cat.id=s.category_id
-inner join tb_doctor d on h.id=d.hospital_id and d.status='A'
+left join tb_doctor d on h.id=d.hospital_id and d.status='A'
  where d.status='A'  
  and $searchsql ) a";
 		$query = $this->dbmgr->query($sql);

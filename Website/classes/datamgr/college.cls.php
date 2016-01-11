@@ -54,7 +54,7 @@ inner join tb_department d on c.id=d.college_id and d.status='A'
 inner join rc_department_subcategory rc_ds on d.id=rc_ds.pid 
 inner join tb_subcategory s on rc_ds.fid=s.id
 inner join tb_category cat on s.category_id=cat.id
-inner join tb_doctor dc on h.id=dc.hospital_id and dc.status='A'
+left join tb_doctor dc on h.id=dc.hospital_id and dc.status='A'
 where h.status='A' 
 and $searchsql
 order by c.seq ";
@@ -98,7 +98,7 @@ inner join tb_department d on c.id=d.college_id and d.status='A'
 inner join rc_department_subcategory rc_ds on d.id=rc_ds.pid 
 inner join tb_subcategory s on rc_ds.fid=s.id
 inner join tb_category cat on s.category_id=cat.id
-inner join tb_doctor dc on h.id=dc.hospital_id and dc.status='A'
+left join tb_doctor dc on h.id=dc.hospital_id and dc.status='A'
 where h.status='A' 
 and $searchsql
 order by c.seq ";
