@@ -63,7 +63,7 @@
             </div>
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-3 field  text-right"></div>
-                <div class="col-md-5 field small"><input type="checkbox" id="read" style="width:20px;" checked="checked" />我已经阅读并同意《用户注册协议》</div>
+                <div class="col-md-5 field small"><input type="checkbox" id="read" style="width:20px;" checked="checked" />我已经阅读并同意<a id="btnReadPrivacy" href="#">《用户注册协议》</a></div>
                 <div class="col-md-4  field tips small" id="readtips"></div>
             </div>
             <div class="row" style="margin-top:15px;">
@@ -79,6 +79,10 @@
     $(document).ready(function () {
         $("#verifypic").click(function () {
             $("#verifypic").attr("src", "{{$rootpath}}/verifycode.php?rn="+Math.random());
+        });
+        $("#btnReadPrivacy").click(function () {
+            window.open("{{$rootpath}}/text.php?code=reg_privacy", 'newwindow',
+                'width=600,height=600,  top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
         });
         $("#btnSubmit").click(function () {
                 var valid = true;

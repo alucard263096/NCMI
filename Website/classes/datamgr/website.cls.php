@@ -31,6 +31,16 @@
 		return $result;
 	}
 
+	public function getGeneralContext($code){
+
+		$code=parameter_filter($code);
+		$sql="select * from tb_general where index_key='$code' ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query);
+		
+		return $result["content"];
+	}
+
  }
  
  $websiteMgr=WebsiteMgr::getInstance();
