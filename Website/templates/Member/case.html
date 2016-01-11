@@ -129,18 +129,18 @@
                                 </tr>
                                 <tr>
                                     <td>患者姓名:</td>
-                                    <td><input type="text" class="notnull" id="name" value="{{$info.name}}" /></td>
+                                    <td>{{$info.name}}</td>
                                     <td>性别:</td>
                                     <td>{{if $info.sexual=='M' }}男{{else}}女{{/if}}</td>
                                     <td>申请年龄:</td>
                                     <td>{{$info.age}}</td>
                                 </tr>
                                 <tr>
-                                    <td>会诊类别：</td>
+                                    <td>会诊类别:</td>
                                     <td>{{$info.category}}</td>
-                                    <td>会诊方式：</td>
+                                    <td>会诊方式:</td>
                                     <td>{{$info.way}}</td>
-                                    <td>紧急程度：</td>
+                                    <td>紧急程度:</td>
                                     <td>{{$info.urgent}}</td>
                                 </tr>
                                 <tr>
@@ -225,12 +225,9 @@
         $("#btnReturn").click(function () {
             window.location.href = "{{$rootpath}}/Member/filelist.php";
         });
-        $("#btnDownload").click(function () {
-            try{
-                window.print();
-            }catch(e){
-                alert(e.message);
-            }
+        $("#btnPrint").click(function () {
+            window.open("{{$rootpath}}/Member/casedownload.php?id={{$info.id}}", 'newwindow',
+                '  top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
         });
         $("#btnAbandon").click(function () {
             var caselist = "{{$info.id}}";

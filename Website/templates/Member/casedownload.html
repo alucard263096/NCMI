@@ -1,0 +1,214 @@
+<html>
+<head>
+    <title>远程会诊报告单</title>
+</head>
+<body>
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border-left: 1px solid #888;
+            border-top: 1px solid #888;
+        }
+
+        th, td {
+            border-right: 1px solid #888;
+            border-bottom: 1px solid #888;
+            padding: 5px 15px;
+        }
+
+        #box {
+            min-height: 320px;
+            background-color: #ffffff;
+            border: solid 1px #cccccc;
+            border-radius: 4px;
+            width: 692px;
+        }
+
+            #box .bar {
+                margin-top: 5px;
+                margin-bottom: 5px;
+                margin-left: 15px;
+                margin-right: 15px;
+                
+                border: solid 1px #89B0D8;
+                border-radius: 4px;
+                height: 20px;
+                color: #ffffff;
+            }
+
+                #box .bar .bartitle {
+                    padding-left: 25px;
+                }
+
+                #box .bar .dot {
+                    background-color: #ffffff;
+                    border: solid 1px #ffffff;
+                    border-radius: 10px;
+                    height: 10px;
+                    width: 10px;
+                    color: #ffffff;
+                    margin-top: 4px;
+                    margin-left: 10px;
+                    float: left;
+                }
+
+            #box .title {
+                font-size: 20px;
+                font-weight: bold;
+                margin-top: 20px;
+            }
+
+            #box #formtable {
+                margin-top: 7px;
+                width: 660px;
+                margin-left: 15px;
+                text-align: center;
+            }
+
+                #box #formtable input {
+                    border: 0px;
+                    border-color: #ffffff;
+                    text-align: center;
+                }
+
+                #box #formtable select {
+                    border: 0px;
+                    border-color: #ffffff;
+                    text-align: center;
+                }
+
+                #box #formtable td {
+                    width: 110px;
+                    height: 30px;
+                }
+
+            #box .fieldset {
+                margin-top: 10px;
+            }
+
+            #box .fieldname, .field {
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+
+            #box input, select {
+                padding-left: 5px;
+                width: 80%;
+                border: solid 1px #9DCDD2;
+            }
+
+            #box .result {
+                padding-left: 15px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            #box .content {
+                padding-left: 45px;
+                padding-right: 75px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+
+    <div id="box">
+        <div class="row">
+            <div class="col-md-12 text-center title">
+                远程会诊报告单
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-right small" style="padding-right:30px;">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <table id="formtable">
+                    <tr>
+                        <td>申请单位:</td>
+                        <td colspan="3">{{$info.hospital}}</td>
+                        <td>申请日期:</td>
+                        <td>{{$info.meeting_date}}</td>
+                    </tr>
+                    <tr>
+                        <td>患者姓名:</td>
+                        <td>{{$info.name}}</td>
+                        <td>性别:</td>
+                        <td>{{if $info.sexual=='M' }}男{{else}}女{{/if}}</td>
+                        <td>申请年龄:</td>
+                        <td>{{$info.age}}</td>
+                    </tr>
+                    <tr>
+                        <td>会诊类别:</td>
+                        <td>{{$info.category}}</td>
+                        <td>会诊方式:</td>
+                        <td>{{$info.way}}</td>
+                        <td>紧急程度:</td>
+                        <td>{{$info.urgent}}</td>
+                    </tr>
+                    <tr>
+                        <td>专家要求:</td>
+                        <td colspan="3">{{$info.necessary}}</td>
+                        <td>会诊日期:</td>
+                        <td>{{$info.apply_date}}</td>
+                    </tr>
+                    <tr style="height:60px;">
+                        <td>初步诊断:</td>
+                        <td colspan="5">{{$info.apply_first_result}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align:left;">
+                            &nbsp;&nbsp;服务方医院: {{$info.apply_hospital}}
+                        </td>
+                        <td colspan="3" style="text-align:right">
+                            服务方科室: {{$info.apply_department}}&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-12 result" style="margin-top:20px;">
+                    病情分析
+                </div>
+                <div class="col-md-12  content">
+                    <p>{{$info.result}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 result">
+                    临床诊断
+                </div>
+                <div class="col-md-12  content">
+                    <p>{{$info.checking}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 result">
+                    治疗方案
+                </div>
+                <div class="col-md-12  content">
+                    <p>{{$info.solution}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 result">
+                    注意事项
+                </div>
+                <div class="col-md-12  content">
+                    <p>{{$info.caution}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.print();
+    </script>
+
+</body>
+</html>
