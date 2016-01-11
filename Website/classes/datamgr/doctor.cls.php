@@ -77,6 +77,8 @@ inner join tb_category cat on cat.id=s.category_id ";
 		$arrcol[]="c.name";
 		$arrcol[]="s.name";
 		$arrcol[]="cat.name";
+		$arrcol[]="h.level";
+		$arrcol[]="h.property";
 		$searchsql=splitCodition($arrcol,$search);
 
 		return $searchsql;

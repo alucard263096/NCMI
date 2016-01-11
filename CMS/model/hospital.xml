@@ -36,6 +36,16 @@
       <notnull>1</notnull>
     </field>
     <field>
+      <name>医院等级</name>
+      <key>level</key>
+      <type>text</type>
+    </field>
+    <field>
+      <name>医院性质</name>
+      <key>property</key>
+      <type>text</type>
+    </field>
+    <field>
       <name>地址</name>
       <key>address</key>
       <type>longtext</type>

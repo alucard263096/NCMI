@@ -62,6 +62,8 @@
 		$arrcol[]="c.name";
 		$arrcol[]="s.name";
 		$arrcol[]="cat.name";
+		$arrcol[]="h.level";
+		$arrcol[]="h.property";
 		$searchsql=splitCodition($arrcol,$search);
 		$sql="select distinct h.id,h.name,h.photo,h.shortname
 from  tb_hospital h 
@@ -92,6 +94,8 @@ inner join tb_doctor d on h.id=d.hospital_id and d.status='A'
 		$arrcol[]="c.name";
 		$arrcol[]="s.name";
 		$arrcol[]="cat.name";
+		$arrcol[]="h.level";
+		$arrcol[]="h.property";
 		$searchsql=splitCodition($arrcol,$search);
 		$sql="select sum(1) hospital_count from (select  distinct h.id
 from  tb_hospital h 

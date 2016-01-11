@@ -43,6 +43,8 @@ order by seq ";
 		$arrcol[]="dc.name";
 		$arrcol[]="h.name";
 		$arrcol[]="h.shortname";
+		$arrcol[]="h.level";
+		$arrcol[]="h.property";
 		$searchsql=splitCodition($arrcol,$search);
 		$sql="select distinct c.id,c.name from 
 tb_hospital h
@@ -85,6 +87,8 @@ order by c.seq ";
 		$arrcol[]="dc.name";
 		$arrcol[]="h.name";
 		$arrcol[]="h.shortname";
+		$arrcol[]="h.level";
+		$arrcol[]="h.property";
 		$searchsql=splitCodition($arrcol,$search);
 		$sql="select distinct d.id, d.college_id,d.name from 
 tb_hospital h
