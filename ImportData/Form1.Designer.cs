@@ -30,6 +30,7 @@
         {
             this.btnImportHospital = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.btnDoctor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnImportHospital
@@ -51,11 +52,22 @@
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
+            // btnDoctor
+            // 
+            this.btnDoctor.Location = new System.Drawing.Point(144, 13);
+            this.btnDoctor.Name = "btnDoctor";
+            this.btnDoctor.Size = new System.Drawing.Size(75, 23);
+            this.btnDoctor.TabIndex = 2;
+            this.btnDoctor.Text = "医生";
+            this.btnDoctor.UseVisualStyleBackColor = true;
+            this.btnDoctor.Click += new System.EventHandler(this.btnDoctor_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(779, 540);
+            this.Controls.Add(this.btnDoctor);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnImportHospital);
             this.Name = "Form1";
@@ -68,6 +80,7 @@
 
         private System.Windows.Forms.Button btnImportHospital;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button btnDoctor;
     }
 }
 

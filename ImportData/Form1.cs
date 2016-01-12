@@ -64,5 +64,64 @@ VALUES
             }
             return sb.ToString();
         }
+
+        private void btnDoctor_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog of = new OpenFileDialog();
+            if (of.ShowDialog() == DialogResult.OK)
+            {
+                string excelpath = of.FileName;
+                ExcelReader xlsReader = new ExcelReader(excelpath);
+                DataTable dt = xlsReader.GetDataTable("医生字典");
+                int id = 101;
+                StringBuilder sb = new StringBuilder();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    string seq = dr["医师代码"].ToString();
+                    string name = dr["医师姓名"].ToString();
+                    string sextual = dr["医师性别"].ToString();
+                    string birth = dr["出生年月"].ToString();
+                    string expert = dr["研究领域"].ToString();
+                    string department = dr["所在科室"].ToString();
+                    string hospital = dr["所在医院"].ToString();
+                    string content = convertContent(dr["简介（执业经历）"].ToString());
+
+                    string department_id = getIdFromName(department, "tb_department");
+                    string hospital_id = getIdFromName(hospital, "tb_hospital");
+
+                    string sql = string.Format(@"INSERT INTO `ncmi151123`.`tb_doctor`
+(`id`,`created_date`,`created_user`,`updated_date`,`updated_user`,
+`name`,`photo`,`hospital_id`,`department_id`,`status`,`seq`,`count`,`content`,
+`duty_mon_m`,`duty_mon_a`,`duty_tue_m`,`duty_tue_a`,`duty_wed_m`,`duty_wed_a`,`duty_thu_m`,`duty_thu_a`,
+`duty_fri_m`,`duty_fri_a`,`duty_sat_m`,`duty_sat_a`,`duty_sun_m`,`duty_sun_a`,`duty_notice`,
+`remarks`,`position`,`expert`,`sextual`,`price`,`loginname`)
+VALUES
+({0},now(),1,now(),1,
+'{1}','nophoto.png',{2},{3},'A','{4}',0,'{5}',
+8,6,8,6,8,6,8,6,8,6,8,6,8,6,''
+,'','主任医师','{6}','{7}',100,'no__{4}');
+;
+", id++, name, hospital_id, department_id, seq, content, expert,sextual);
+                    sb.AppendLine(sql);
+                }
+                richTextBox1.Text = sb.ToString();
+            }
+
+        }
+
+        private string getIdFromName(string name,string tablename)
+        {
+            DataBaseMgr mgr=new DataBaseMgr();
+            string sql = "select id from " + tablename + " where name='" + name + "'";
+            using (DataTable dt = mgr.executeDataTable(sql))
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    return Convert.ToString(dr["id"]);
+                }
+            }
+            return "0";
+        }
+
     }
 }
