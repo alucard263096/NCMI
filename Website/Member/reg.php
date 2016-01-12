@@ -17,7 +17,7 @@
 	$email=$_REQUEST["email"];
 	$password=$_REQUEST["password"];
 	$sexual=$_REQUEST["sexual"];
-	if($verifycode!=$_SESSION[SESSIONNAME]['verifycode']){
+	if(strtolower($verifycode)!=strtolower($_SESSION[SESSIONNAME]['verifycode'])){
 		echo "INVALID_VERIFYCODE";
 		exit;
 	}elseif($memberMgr->checkLoginNameUsed($loginname)){

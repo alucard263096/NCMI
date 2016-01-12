@@ -441,7 +441,7 @@ class XmlModel
 				$sql="delete from $relatetable where pid=$id";
 				$query = $dbMgr->query($sql);
 				$arr=explode(",",$request[$value["key"]]);
-				if(count($arr)>0){
+				if(count($arr)>0&&$request[$value["key"]]!=""){
 					$sql="insert into $relatetable (pid,fid) values";
 					$isfirst=1;
 					foreach($arr as $v){

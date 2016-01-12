@@ -50,7 +50,6 @@
       <condition>1=1 </condition>
       <displayinlist>1</displayinlist>
       <relatetable>rc_department_subcategory</relatetable>
-      <notnull>1</notnull>
     </field>
     <field>
       <name>备注</name>
