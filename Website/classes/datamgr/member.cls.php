@@ -56,8 +56,7 @@
 	public function sentRegVerifyCode($email){
 		$email=parameter_filter($email);
 		$sql="select * from tb_member where  email='$email' 
-		and ifnull(is_verify,'N')='N' 
-		and (ifnull(verifysent_date,'')='' or TO_DAYS(NOW()) - TO_DAYS(verifysent_date) > 5)";
+		and ifnull(is_verify,'N')='N' ";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query);
 
