@@ -38,7 +38,7 @@
 
 	public function getCategory(){
 	
-		$sql="select * from tb_category where status='A' order by seq ";
+		$sql="select * from tb_category where status='A' order by seq,id ";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
 		return $result;
@@ -49,7 +49,7 @@
 	
 		$sql="select tb_subcategory.* from tb_subcategory 
 		inner join tb_category on tb_category.id=tb_subcategory.category_id and tb_category.status='A' 
-		where tb_subcategory.status='A' order by tb_subcategory.seq ";
+		where tb_subcategory.status='A' order by tb_subcategory.seq,tb_subcategory.id ";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query);
 		

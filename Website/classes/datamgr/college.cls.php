@@ -47,15 +47,15 @@ order by seq ";
 		$arrcol[]="h.property";
 		$searchsql=splitCodition($arrcol,$search);
 		$sql="select distinct c.id,c.name from 
-tb_hospital h
-inner join rc_hospital_college rc_hc on h.id=rc_hc.pid
-inner join tb_college c on rc_hc.fid=c.id and c.status='A'
+ tb_college c 
 inner join tb_department d on c.id=d.college_id and d.status='A'
-inner join rc_department_subcategory rc_ds on d.id=rc_ds.pid 
-inner join tb_subcategory s on rc_ds.fid=s.id
-inner join tb_category cat on s.category_id=cat.id
+left join rc_department_subcategory rc_ds on d.id=rc_ds.pid 
+left join tb_subcategory s on rc_ds.fid=s.id
+left join tb_category cat on s.category_id=cat.id
+left join rc_hospital_college rc_hc on c.id=rc_hc.fid
+left join tb_hospital h on rc_hc.pid=h.id
 left join tb_doctor dc on h.id=dc.hospital_id and dc.status='A'
-where h.status='A' 
+where c.status='A' 
 and $searchsql
 order by c.seq ";
 
@@ -91,15 +91,15 @@ order by c.seq ";
 		$arrcol[]="h.property";
 		$searchsql=splitCodition($arrcol,$search);
 		$sql="select distinct d.id, d.college_id,d.name from 
-tb_hospital h
-inner join rc_hospital_college rc_hc on h.id=rc_hc.pid
-inner join tb_college c on rc_hc.fid=c.id and c.status='A'
+ tb_college c 
 inner join tb_department d on c.id=d.college_id and d.status='A'
-inner join rc_department_subcategory rc_ds on d.id=rc_ds.pid 
-inner join tb_subcategory s on rc_ds.fid=s.id
-inner join tb_category cat on s.category_id=cat.id
+left join rc_department_subcategory rc_ds on d.id=rc_ds.pid 
+left join tb_subcategory s on rc_ds.fid=s.id
+left join tb_category cat on s.category_id=cat.id
+left join rc_hospital_college rc_hc on c.id=rc_hc.fid
+left join tb_hospital h on rc_hc.pid=h.id
 left join tb_doctor dc on h.id=dc.hospital_id and dc.status='A'
-where h.status='A' 
+where c.status='A' 
 and $searchsql
 order by c.seq ";
 
