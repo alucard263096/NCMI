@@ -341,12 +341,12 @@
                 <div class="col-md-12">
                     {{foreach from=$hospital_list item=rs}}
                     <div class="col-md-2">
-                        <a href="{{$rootpath}}/Hospital/hospital.php?id={{$rs.id}}">
-                            <div class="row">
+                        <div class="row" style="margin-bottom:10px;" >
+                            <a href="{{$rootpath}}/Hospital/hospital.php?id={{$rs.id}}">
                                 <img class="col-md-12" src="{{$uploadpath}}/hospital/{{$rs.photo}}" />
-                            </div>
-                            <div class="row text-center" style="min-height:40px;margin-bottom:15px;">{{$rs.name}}</div>
-                        </a>
+                                <div class="col-md-12 text-center ">{{$rs.name}}</div>
+                            </a>
+                        </div>
                     </div>
                     {{/foreach}}
                 </div>

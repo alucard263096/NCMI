@@ -24,7 +24,7 @@
 	
 	public function getHospitalAll()
 	{
-		$sql="select * from tb_hospital where status='A' order by seq";
+		$sql="select * from tb_hospital where status='A' order by seq limit 0,7";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
 		return $result;
@@ -48,7 +48,7 @@
 	
 	public function getHospitalList($search,$page){
 		
-		$startrow=($page-1)*18;
+		$startrow=($page-1)*9;
 		if($startrow>0){
 			//$startrow=$startrow-1;
 		}
@@ -67,12 +67,12 @@
 		$searchsql=splitCodition($arrcol,$search);
 		$sql="select distinct h.id,h.name,h.photo,h.shortname
 from  tb_hospital h 
-inner join rc_hospital_college rc_hc on h.id=rc_hc.pid
-inner join tb_college c on rc_hc.fid=c.id and c.status='A'
-inner join tb_department dp on c.id=dp.college_id and dp.status='A'
-inner join rc_department_subcategory rc_ds on dp.id=rc_ds.pid
-inner join tb_subcategory s on rc_ds.fid=s.id
-inner join tb_category cat on cat.id=s.category_id
+left join rc_hospital_college rc_hc on h.id=rc_hc.pid
+left join tb_college c on rc_hc.fid=c.id and c.status='A'
+left join tb_department dp on c.id=dp.college_id and dp.status='A'
+left join rc_department_subcategory rc_ds on dp.id=rc_ds.pid
+left join tb_subcategory s on rc_ds.fid=s.id
+left join tb_category cat on cat.id=s.category_id
 left join tb_doctor d on h.id=d.hospital_id and d.status='A'
  where h.status='A' 
  and $searchsql
@@ -99,12 +99,12 @@ left join tb_doctor d on h.id=d.hospital_id and d.status='A'
 		$searchsql=splitCodition($arrcol,$search);
 		$sql="select sum(1) hospital_count from (select  distinct h.id
 from  tb_hospital h 
-inner join rc_hospital_college rc_hc on h.id=rc_hc.pid
-inner join tb_college c on rc_hc.fid=c.id and c.status='A'
-inner join tb_department dp on c.id=dp.college_id and dp.status='A'
-inner join rc_department_subcategory rc_ds on dp.id=rc_ds.pid
-inner join tb_subcategory s on rc_ds.fid=s.id
-inner join tb_category cat on cat.id=s.category_id
+left join rc_hospital_college rc_hc on h.id=rc_hc.pid
+left join tb_college c on rc_hc.fid=c.id and c.status='A'
+left join tb_department dp on c.id=dp.college_id and dp.status='A'
+left join rc_department_subcategory rc_ds on dp.id=rc_ds.pid
+left join tb_subcategory s on rc_ds.fid=s.id
+left join tb_category cat on cat.id=s.category_id
 left join tb_doctor d on h.id=d.hospital_id and d.status='A'
  where d.status='A'  
  and $searchsql ) a";

@@ -23,16 +23,18 @@
         </div>
         <div class="row" id="list">
             {{if $hospital_count>0}}
-            {{foreach from=$list item=rs}}
-            <a href="{{$rootpath}}/Hospital/hospital.php?id={{$rs.id}}">
-                <div class="col-md-4 text-center small Bold" style="margin-top:25px;">
-                    <div class="row">
-                        <img class="col-lg-8 col-md-offset-2" src="{{$uploadpath}}/hospital/{{$rs.photo}}" />
-                    </div>
-                    <div class="row">{{$rs.shortname}}</div>
+            <div class="col-lg-12">
+                {{foreach from=$list item=rs}}
+                <div class="col-md-4 text-center  Bold" style="margin-top:15px;">
+                    <a href="{{$rootpath}}/Hospital/hospital.php?id={{$rs.id}}">
+                        <div class="row" style="min-height:120px;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                            <img class="col-lg-12" src="{{$uploadpath}}/hospital/{{$rs.photo}}" style="min-height:80px;" />
+                            <div class="col-lg-12" style="margin-top:10px;">{{$rs.shortname}}</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            {{/foreach}}
+                {{/foreach}}
+            </div>
             {{else}}
             <div class="col-lg-12" style="margin-top:25px;">
                 没有找到相关的医院，请再准确您的关键字重新搜索。
