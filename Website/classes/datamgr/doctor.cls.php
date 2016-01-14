@@ -45,9 +45,9 @@
 		$id=parameter_filter($id);
 		$sql="select d.*,h.name hospital,c.name college,dp.name department 
 		from tb_doctor d
-inner join tb_hospital h on d.hospital_id=h.id 
-inner join tb_department dp on d.department_id=dp.id 
-inner join tb_college c on dp.college_id=c.id 
+left join tb_hospital h on d.hospital_id=h.id 
+left join tb_department dp on d.department_id=dp.id 
+left join tb_college c on dp.college_id=c.id 
 		where d.status='A' and d.id=$id ";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array($query); 
@@ -57,12 +57,12 @@ inner join tb_college c on dp.college_id=c.id
 	public function getDoctorListSearchSql(){
 		$sql="select distinct d.id,d.name,d.photo,d.position,h.name hospital,d.expert,dp.name department
 from tb_doctor d
-inner join tb_hospital h on d.hospital_id=h.id and h.status='A'
-inner join tb_department dp on d.department_id=dp.id and dp.status='A'
-inner join tb_college c on dp.college_id=c.id and c.status='A'
-inner join rc_department_subcategory rc_ds on dp.id=rc_ds.pid
-inner join tb_subcategory s on rc_ds.fid=s.id
-inner join tb_category cat on cat.id=s.category_id ";
+left join tb_hospital h on d.hospital_id=h.id and h.status='A'
+left join tb_department dp on d.department_id=dp.id and dp.status='A'
+left join tb_college c on dp.college_id=c.id and c.status='A'
+left join rc_department_subcategory rc_ds on dp.id=rc_ds.pid
+left join tb_subcategory s on rc_ds.fid=s.id
+left join tb_category cat on cat.id=s.category_id ";
 		
 		return $sql;
 	}
