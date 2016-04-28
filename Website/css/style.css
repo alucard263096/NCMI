@@ -85,6 +85,9 @@ color: #aaa !important;
 #logo img{
     width:80px;
 }
+#title img{
+    height:60px;
+}
 #menucenter .menuitem{
     width:96px;
     color:#2E6995;
